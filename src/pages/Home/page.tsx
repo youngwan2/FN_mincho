@@ -2,7 +2,7 @@
 export default function HomePage() {
     return (
         <>
-            <h1>열림</h1>
+            <h1>나중에 처리</h1>
             <p>fdgdfg</p>
         </>
     )

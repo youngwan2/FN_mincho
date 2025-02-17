@@ -1,5 +1,13 @@
+
+## 색상
+### 기본 색상
+- 기본 녹색: #05d182
+- 기본 녹색(호버): #07BD77
+
+- 기본 회색: #e6e7e9
+
 ##  레이아웃
-### 그리드 레이아웃
+### 그리드 레이아웃(tailwind 적용 전)
 - Root 레이아웃에 그리드를 적용하여 전체 페이지에 레아아웃을 적용하는 방식 적용
 ```css
 .root-layout {
@@ -366,4 +374,20 @@ const instance = axios.create();
 instance.interceptors.request.use(function () {
   /*...*/
 });
+```
+
+
+## 버튼 디자인
+### 타원형 버튼
+- 용도: 로그인과 회원가입 버튼
+- 스타일
+```javascript
+  <li title="회원가입" className="mx-2 border p-1 px-2 rounded-2xl w-[88px] text-center">
+      <Link to={"/signup"}>
+              <span>
+                회원가입
+              </span>
+      </Link>
+  </li>
+
 ```

@@ -1,5 +1,5 @@
 
-function HOME() {
+export default function HomePage() {
 
   return (
     <>
@@ -8,5 +8,3 @@ function HOME() {
     </>
   )
 }
-
-export default HOME
