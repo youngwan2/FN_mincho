@@ -1,50 +1,66 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
 ```
+ 비고) 작성된 내용은 예시이고 이후 변경 가능성 높음
+```
+# 🌿 민초 커뮤니티
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 📌 프로젝트 개요
+민간 약초에 대한 정보를 공유하고, 사용자들이 직접 약초 관련 경험을 나눌 수 있는 커뮤니티 웹사이트.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🎯 프로젝트 목적과 방향성
+**[목적]**  
+민간 약초에 대한 정보를 보다 체계적으로 정리하고, 사용자들이 신뢰할 수 있는 정보를 주고받을 수 있는 공간을 제공하는 것이 목표이다.  
+기존 약초 관련 커뮤니티들은 정보가 파편화되어 있거나 신뢰성이 낮은 경우가 많아 이를 보완하고자 함.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## 📅 개발 기간/유지보수
+- **개발 기간:** 2024년 2월 ~ (진행 중)
+- **유지보수:** 정식 출시 후 지속적인 업데이트 예정
+
+## 🔥 배포
+- **배포 과정:** _(배포 과정 문서 URL 추가)_
+- **웹사이트:** _(도메인 URL 추가)_
+
+## ⚙ 구현된 기능
+- **회원가입 및 로그인 (JWT 인증)**
+  - `accessToken`과 `refreshToken`을 활용한 인증
+  - 만료 시 자동 재발급 및 수동 갱신 기능 제공
+
+- **약초 정보 검색 및 조회**
+  - 다양한 카테고리로 약초 검색 가능
+  - 상세 페이지에서 약초의 효능, 사용법, 주의사항 확인
+
+- **사용자 게시판 및 댓글 기능**
+  - 약초 관련 경험, 질문, 노하우 공유 가능
+  - 댓글 및 대댓글 기능 제공
+
+- **북마크 기능**
+  - 관심 있는 약초를 북마크하여 쉽게 관리 가능
+
+- **AI 약초 추천 기능**
+  - 사용자가 입력한 증상이나 관심사를 바탕으로 적절한 약초 추천
+
+- **다크 모드 지원**
+  - 사용자의 환경에 맞춰 UI 변경 가능
+
+## 🧰 기술 스택
+- **프론트엔드**
+  - React 19
+  - TypeScript
+  - Zustand (전역 상태 관리)
+  - React Query (서버 상태 관리)
+  - Tailwind CSS
+
+- **백엔드**
+  - Spring Boot
+  - Spring Security
+  - JPA, MyBatis
+  - PostgreSQL
+
+- **기타**
+  - Vite (빌드 및 번들링)
+  - React Hook Form (폼 관리)
+  - AWS (배포 및 스토리지)
+  - GitHub Actions (CI/CD 자동화)
+
+## 🗂️ 프로젝트 구조
+```
 ```
