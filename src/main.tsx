@@ -7,6 +7,9 @@ import { Route } from 'react-router';
 import { Routes } from 'react-router';
 import HomePage from './pages/Home/page';
 import RootLayout from './components/layout/RootLayout';
+import LoginPage from './pages/Login/page';
+import AuthLayout from './components/layout/AuthLayout';
+import RegisterPage from './pages/Register/page';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -14,12 +17,12 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path='/' element={<RootLayout />}>
           <Route index element={<HomePage />} />
-          {/* <Route element={<AuthLayout />}>
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-          </Route> */}
+        </Route>
+        <Route path='/auth' element={<AuthLayout />}>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="signup" element={<RegisterPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )

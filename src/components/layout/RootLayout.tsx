@@ -1,17 +1,15 @@
-import styles from './RootLayout.module.css'
+import Header from './Header';
 import { Outlet } from "react-router";
 
 
 export default function RootLayout() {
     return (
-        <div className={styles['root-layout']}>
-            <header className={styles['header']}>
-                <h1>Mincho</h1>
-            </header>
-            <main className={styles['main']}>
+        <div className='max-w-[1240px] mx-auto h-auto' >
+            <Header/>
+            <main className='h-full w-full'>
                 <Outlet />
             </main>
-            <footer className={styles['footer']}>
+            <footer>
                 &copy; {new Date().getFullYear()} Mincho
             </footer>
         </div>
