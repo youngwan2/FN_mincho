@@ -1,4 +1,5 @@
 const config = {
+    
     theme: {
       extend: {
         colors: {
@@ -7,7 +8,7 @@ const config = {
           customGray: "#B0BEC5", // 새로운 색상 추가
         },
       },
-    },
+    }
   };
   
   export default config;
