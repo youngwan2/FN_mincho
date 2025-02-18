@@ -1,4 +1,4 @@
-import EmblaCarousel from "../components/carousel/EmblaCarousel";
+import EmblaCarousel from "../components/carousel/banner/EmblaCarousel";
 import { EmblaOptionsType } from 'embla-carousel'
 
 export default function Banner() {
@@ -9,7 +9,6 @@ export default function Banner() {
 
     return (
         <div className="h-[658px] w-full relative">
-            
             <EmblaCarousel slides={SLIDES} options={OPTIONS} />
             <div
                 className="absolute bottom-0 left-[50%] translate-x-[-50%] z-10">
