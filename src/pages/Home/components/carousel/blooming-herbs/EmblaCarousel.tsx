@@ -26,11 +26,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
  
   return (
-    <section className="w-full h-[550px] relative">
+    <section className="w-full h-[380px] relative">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((index) => (
-            <div className={`${index%2==0? 'mt-30':''}  md:w-[300px] w-xs ml-10 bg-amber-50 shrink-0 rounded-xl h-[300px]`} key={index}>
+            <div className={`${index%2==0? 'mt-15':''}  md:w-[300px] w-xs ml-10 bg-amber-50 shrink-0 rounded-xl h-[300px]`} key={index}>
               <div className="embla__slide__number">{index + 1}</div>
             </div>
           ))}
