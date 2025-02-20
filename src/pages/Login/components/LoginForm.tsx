@@ -3,14 +3,13 @@ import { Link, useNavigate } from "react-router"
 import { HiOutlineMail } from "react-icons/hi";
 import { IoLockOpenOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
-import { getInitialProfile, login } from "../../../service/auth";
+import {  login } from "../../../service/auth";
 import Submit from "../../Register/components/Submit";
 import { useUserStore } from "../../../store/loginState";
-import useAuth from "../../../hooks/useRedirection";
+import { getInitialProfile } from "../../../service/user";
 
 
 export default function LoginForm() {
-    useAuth();
 
     const router = useNavigate();
 
@@ -87,6 +86,7 @@ export default function LoginForm() {
 
                 </div>
             </div>
+
             {/* 이미지 섹션 */}
             <div className="md:w-[50%] md:h-full md:block hidden ">
                 <img className="w-full h-full rounded-2xl" src="https://picsum.photos/500/700"></img>

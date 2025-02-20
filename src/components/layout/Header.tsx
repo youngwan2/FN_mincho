@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import Profile from "../../pages/Home/components/Profile";
 
 export default function Header() {
 
@@ -24,9 +24,10 @@ export default function Header() {
                     <IoSearchOutline size={24} />
                 </button>
                 <ul className="flex mr-2.5">
+                    {/* 로그인 상태에 따른 UI 렌더링 다르게 */}
                     {
                         isLogin
-                            ? <li>로그인됨</li>
+                            ? <li><Profile /></li>
                             : <>
                                 <li title="로그인" className="mx-2 border p-1 px-2 border-[#e6e7e9] rounded-2xl w-[88px] text-center">
                                     <Link to={"/auth/login"}>
