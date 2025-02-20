@@ -1,4 +1,4 @@
-import { emailCheckFetch, getProfileFetch, loginFetch, registerFetch } from "../apis/auth";
+import { emailCheckFetch, loginFetch, registerFetch } from "../apis/auth";
 import { Email, LoginRequest, RegisterRequest } from "../types/auth.types";
 import { setToken } from "../utils/storage";
 
@@ -32,9 +32,3 @@ export const login = async (loginRequest: LoginRequest) => {
     setToken(rawToken.split(" ")[1])
 }
 
-/** 프로필 정보 요청*/
-export const getInitialProfile = async () => {
-    const data = await getProfileFetch();
-
-    return data
-}

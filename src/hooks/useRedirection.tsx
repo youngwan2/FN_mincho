@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { getToken } from "../utils/storage";
 import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
 
 
-export default function useAuth() {
+export default function useRedirection() {
     const router = useNavigate();
 
     useEffect(() => {
@@ -12,7 +11,6 @@ export default function useAuth() {
 
         // 비로그인 상태라면 로그인 페이지로
         if (!token) {
-            toast.info("로그인 후 이용해주세요.")
             router("/auth/login")
         }
 
