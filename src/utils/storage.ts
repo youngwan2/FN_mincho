@@ -7,7 +7,7 @@ export const getToken = () => {
         log.warn("빈 값이 반환되었습니다.")
         return null
     }
-    return token
+    return "Bearer "+token
 }
 
 export const setToken = (value: string) => {

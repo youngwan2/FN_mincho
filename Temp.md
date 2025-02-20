@@ -393,3 +393,6 @@ instance.interceptors.request.use(function () {
   </li>
 
 ```
+
+## 레퍼런스
+- zustand 미들웨어 영속성:  https://zustand.docs.pmnd.rs/middlewares/persist#persisting-a-state

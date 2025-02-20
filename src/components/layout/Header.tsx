@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 export default function Header() {
+
+    const isLogin = useAuth();
 
     return (
         <header className="p-4 bg-white flex justify-between">
@@ -20,20 +24,27 @@ export default function Header() {
                     <IoSearchOutline size={24} />
                 </button>
                 <ul className="flex mr-2.5">
-                    <li title="로그인" className="mx-2 border p-1 px-2 border-[#e6e7e9] rounded-2xl w-[88px] text-center">
-                        <Link to={"/auth/login"}>
-                            <span>
-                                로그인
-                            </span>
-                        </Link>
-                    </li>
-                    <li title="회원가입" className="mx-2  p-1 px-2 rounded-2xl w-[88px] text-center bg-[#05d182] text-white">
-                        <Link to={"/auth/signup"}>
-                            <span>
-                                회원가입
-                            </span>
-                        </Link>
-                    </li>
+                    {
+                        isLogin
+                            ? <li>로그인됨</li>
+                            : <>
+                                <li title="로그인" className="mx-2 border p-1 px-2 border-[#e6e7e9] rounded-2xl w-[88px] text-center">
+                                    <Link to={"/auth/login"}>
+                                        <span>
+                                            로그인
+                                        </span>
+                                    </Link>
+                                </li>
+                                <li title="회원가입" className="mx-2  p-1 px-2 rounded-2xl w-[88px] text-center bg-[#05d182] text-white">
+                                    <Link to={"/auth/signup"}>
+                                        <span>
+                                            회원가입
+                                        </span>
+                                    </Link>
+                                </li>
+                            </>
+                    }
+
                 </ul>
             </div>
         </header>
