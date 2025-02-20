@@ -1,14 +1,11 @@
 import { AxiosError } from "axios"
 import { apiRoutes } from "../config/api"
 import instance from "../config/axios"
-import { Email, RegisterRequest } from "../types/auth.types"
+import { Email, LoginRequest, RegisterRequest } from "../types/auth.types"
 import { toast } from "react-toastify"
 
 
-// 로그인 요청
-export const login = () => { }
-
-// 회원가입 요청
+/** 회원가입 요청*/
 export const registerFetch = async (registerRequest: RegisterRequest) => {
 
     const body = {
@@ -32,14 +29,12 @@ export const registerFetch = async (registerRequest: RegisterRequest) => {
 
         }
     }
-
 }
 
-// 이메일 중복 확인
+/** 이메일 중복 확인 */
 export const emailCheckFetch = async (email: Email) => {
 
     const body = JSON.stringify(email)
-
 
     try {
         await instance.post(apiRoutes.auth.checkEmail, body);
@@ -55,6 +50,65 @@ export const emailCheckFetch = async (email: Email) => {
         if (error instanceof Error) {
             alert("500: 네트워크 문제로 요청에 실패하였습니다.")
             return false
+        }
+    }
+}
+
+
+/** 로그인 요청 */
+export const loginFetch = async (loginRequest: LoginRequest) => {
+    const body = {
+        email: loginRequest.email,
+        password: loginRequest.password
+    }
+
+    try {
+        const response = await instance.post(
+            apiRoutes.auth.login,
+            JSON.stringify(body)
+        )
+
+        if (response?.status && response.status > 399) {
+            toast.error(response.status + ": 로그인에 실패하였습니다.")
+            throw new AxiosError("로그인에 실패하였습니다.", response.data.StatusCode || "UNKNOWN_ERROR")
+        }
+
+        return response
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            toast.error("에러: " + error.response?.data.message)
+            return error.response
+
+        } else {
+            toast.error("500: 네트워크 문제로 요청에 실패하였습니다.")
+
+
+        }
+    }
+}
+
+
+/** 유저 프로필 정보 요청*/
+export const getProfileFetch = async () => {
+    try {
+        const response = await instance.get(
+            apiRoutes.user.profile,
+        )
+
+        if (response?.status && response.status > 399) {
+            toast.error(response.status + ": 프로필 조회에 실패하였습니다.")
+            throw new AxiosError("프로필 조회에 실패하였습니다.", response.data.StatusCode || "UNKNOWN_ERROR")
+        }
+
+        return response.data
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            toast.error("에러: " + error.response?.data.message)
+            return error.response?.data
+
+        } else {
+            toast.error("500: 네트워크 문제로 요청에 실패하였습니다.")
+
         }
     }
 }

@@ -10,8 +10,8 @@ export const apiRoutes = {
         logout: baseUrl + '/users/logout',
         register: baseUrl + '/users/register',
         checkEmail: baseUrl + '/users/register/duplicate-check',
-        sendVerificationCode: baseUrl +'/users/send-verification-code',
-        checkVerificationCode: baseUrl +'/users/send-verification'
+        sendVerificationCode: baseUrl + '/users/send-verification-code',
+        checkVerificationCode: baseUrl + '/users/send-verification'
     },
     user: {
         profile: baseUrl + '/users/me',

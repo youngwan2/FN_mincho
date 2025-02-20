@@ -16,3 +16,8 @@ export interface RegisterRequest {
 export type Email = {
     email: string
 }
+
+export interface LoginRequest {
+    email:string;
+    password:string;
+}
