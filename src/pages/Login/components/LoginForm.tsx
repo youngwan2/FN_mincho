@@ -76,6 +76,9 @@ export default function LoginForm() {
                             />
                         </form>
 
+                        
+                        {/* 비밀번호 찾기   */}
+
                         {/* 회원가입 가이드 */}
                         <div className="mt-5 text-[14px]" >
                             <span>아직 회원이 아니신가요?</span>

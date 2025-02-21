@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from 'react';
 import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
 import { passwordConfirmValidator, validator } from '../utils/auth';
-import { emailCheck, register } from '../service/auth';
+import { emailCheck, register, sendVerificationCode, verificationCodeCheck } from '../service/auth';
 import { PAGE_URLs } from '../config/urls';
 
 interface FormErrors {
@@ -25,7 +25,9 @@ export const useRegisterForm = () => {
     const router = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false);
-    const [verificationCode, setVerificationCode] = useState(0);
+    const [isValidEmailMx, setIsValidEmailMx] = useState(false);
+    const [isValidVerificationCode, setIsValidVerificationCode] = useState(false);
+    const [verificationCode, setVerificationCode] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [_, setPasswordConfirm] = useState('');
@@ -38,22 +40,26 @@ export const useRegisterForm = () => {
         verificationCode: ''
     });
 
-    const isAction = !errors.email && !errors.emailCheck && !errors.password && !errors.passwordConfirm;
+
+
 
     /** 인증코드 상태저장 */
     const handleVerificationCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const code = e.target.value;
 
-        if (code.toString().length < AUTH_CODE_LENGTH) {
+        if (code.toString().length < AUTH_CODE_LENGTH || code.toString().length > AUTH_CODE_LENGTH) {
             setErrors(prev => ({
                 ...prev,
                 verificationCode: `인증코드는 ${AUTH_CODE_LENGTH} 자리이어야 합니다.`
             }))
-
             return;
         }
+        setErrors(prev => ({
+            ...prev,
+            verificationCode: ``
+        }))
 
-        setVerificationCode(Number(code))
+        setVerificationCode(code)
 
     }
 
@@ -104,37 +110,72 @@ export const useRegisterForm = () => {
 
 
 
-
-
     /** 이메일 중복 확인 */
     const handleEmailCheck = async () => {
+        const toastId = toast.loading("이메일 중복 확인중..")
         if (errors.email) {
             toast.info("이메일 유효성 통과 후 요청해주세요.");
             return;
         }
 
-        // 이메일 중복 
-        const checkResult = await emailCheck({ email });
-        setIsCheck(checkResult);
+        const success = await emailCheck({ email });
 
-        if (checkResult) {
-            toast.success("존재하지 않는 이메일 입니다.");
+        if (success) {
+            toast.dismiss(toastId)
+            toast.success("사용가능한 이메일입니다.")
         } else {
-            toast.error("존재하는 이메일 입니다.");
+            toast.dismiss(toastId)
         }
+        setIsCheck(success);
     };
 
     /** 이메일 인증번호 검증  */
-    const handleVerificationCodeCheck = () => {
+    const handleVerificationCodeCheck = async () => {
+        const toastId = toast.loading("인증번호 확인중..")
+        if (verificationCode.toString().length < AUTH_CODE_LENGTH) {
+            setErrors(prev => ({
+                ...prev,
+                verificationCode: `인증코드는 ${AUTH_CODE_LENGTH} 자리이어야 합니다.`
+            }))
+            return;
+        }
 
+        const success = await verificationCodeCheck(email, verificationCode);
 
+        if (success) {
+            setIsValidVerificationCode(true)
+            toast.dismiss(toastId)
+            toast.success("인증번호가 일치합니다.")
+        } else {
+            setIsValidVerificationCode(false)
+            toast.dismiss(toastId)
+        }
     }
 
-    /** 이메일 인증번호 발급  */
-    const handleSendVerificationCode = () => {
-        alert("발송된 번호: " + verificationCode)
+    /** 이메일 인증번호 발송 */
+    const handleSendVerificationCode = async () => {
 
+        const toastId = toast.loading("인증번호 발송중..")
+
+        if (errors.email) {
+            setErrors(prev => ({
+                ...prev,
+                verificationCode: `이메일 유효성 통과 후 요청해주세요.`
+            }))
+            return;
+        }
+        const success = await sendVerificationCode(email)
+        if (success) {
+            setIsValidEmailMx(true)
+            toast.dismiss(toastId)
+            toast.success("인증번호가 발송되었습니다.")
+        } else {
+            setIsValidEmailMx(false)
+            toast.dismiss(toastId)
+            toast.error("인증번호 발송에 실패하였습니다.");
+        }
     }
+
 
     /** 회원가입 요청 */
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -147,14 +188,18 @@ export const useRegisterForm = () => {
             password: formData.get('password') as string,
         };
 
-        const data =  await register(registerRequest);
+        const data = await register(registerRequest);
         setIsLoading(false)
 
         // 로그인 페이지로 리디렉션
         router(PAGE_URLs.LOGIN_URL)
-        
+
         return data;
     };
+
+
+    /** 유효성 검증이 모두 통과하면 isAction 이 true 가 되고 폼 전송 가능 */
+    const isAction = [!errors.email, !errors.emailCheck, !errors.password, !errors.passwordConfirm, isValidEmailMx, isValidVerificationCode].every(e => e);
 
     return {
         email,
@@ -163,12 +208,14 @@ export const useRegisterForm = () => {
         isAction,
         isLoading,
         isCheck,
+        isValidEmailMx,
+        isValidVerificationCode,
         handleEmailChange,
         handlePasswordChange,
         handlePasswordConfirmChange,
         handleVerificationCodeChange,
-        handleSendVerificationCode,
         handleVerificationCodeCheck,
+        handleSendVerificationCode,
         handleEmailCheck,
         handleSubmit
     };
