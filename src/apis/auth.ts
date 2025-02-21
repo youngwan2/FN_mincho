@@ -171,9 +171,4 @@ export const logoutFetch = async () => {
 
         }
     }
-
-<<<<<<< HEAD
 }
-=======
-
->>>>>>> 8e58feaec98f76322b128aca814c32182418e6cb

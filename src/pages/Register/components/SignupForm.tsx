@@ -1,7 +1,7 @@
 import { Link } from "react-router"
 import { HiOutlineMail } from "react-icons/hi";
 import { IoLockOpenOutline, IoLockClosedOutline } from "react-icons/io5";
-import Submit from "./Submit";
+import Submit from "../../../components/button/Submit";
 import { useRegisterForm } from "../../../hooks/useRegisterForm";
 
 /** TODO: 이메일 인증 번호 */
