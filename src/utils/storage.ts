@@ -14,3 +14,7 @@ export const setToken = (value: string) => {
     if (!value) return log.warn("값도 전달해주세요.")
     localStorage.setItem("accessToken", value)
 }
+
+export const removeToken = () => {
+    localStorage.removeItem("accessToken")
+}

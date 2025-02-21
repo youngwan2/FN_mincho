@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router"
 import { CiUser } from "react-icons/ci";
 import { IoMdLogOut } from "react-icons/io";
+import { logout } from "../../../service/auth";
 export default function DropdownMenu() {
 
     const router = useNavigate();
 
-    function logout() {
-        alert("로그아웃 처리")
+    function handleLogout() {
+        logout()
     }
 
     return (
@@ -17,7 +18,7 @@ export default function DropdownMenu() {
                     className="my-2 text-[14px] flex items-center hover:bg-[#F2F2F7] p-1 w-full">
                     <CiUser className="mr-2 " />마이페이지</button>
                 <button
-                    onClick={logout}
+                    onClick={handleLogout}
                     className="my-2 text-[14px] flex items-center hover:bg-[#F2F2F7] p-1 w-full">
                     <IoMdLogOut className="mr-2" />로그아웃</button>
             </div>

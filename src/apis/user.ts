@@ -2,13 +2,21 @@ import { toast } from "react-toastify"
 import { apiRoutes } from "../config/api"
 import instance from "../config/axios"
 import { AxiosError } from "axios"
+import { getToken } from "../utils/storage"
 
 
 /** 유저 프로필 정보 요청*/
 export const getProfileFetch = async () => {
+
+    const token = getToken();
     try {
         const response = await instance.get(
             apiRoutes.user.profile,
+            {
+                headers: {
+                    Authorization: `${token}`
+                }
+            }
         )
 
         if (response?.status && response.status > 399) {
