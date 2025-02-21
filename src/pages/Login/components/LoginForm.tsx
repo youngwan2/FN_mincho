@@ -50,8 +50,7 @@ export default function LoginForm() {
 
 
     return (
-        <div className="md:h-[80vh] md:flex-row items-center flex-col-reverse h-auto flex p-[20px] max-w-[1240px] w-full bg-white rounded-3xl">
-
+        <>
             {/* 로그인 폼 섹션 */}
             <div className="md:w-[50%] h-full mr-2 w-full text-center">
                 <div className="flex flex-col justify-center items-center mt-[7rem]">
@@ -86,11 +85,6 @@ export default function LoginForm() {
 
                 </div>
             </div>
-
-            {/* 이미지 섹션 */}
-            <div className="md:w-[50%] md:h-full md:block hidden ">
-                <img className="w-full h-full rounded-2xl" src="https://picsum.photos/500/700"></img>
-            </div>
-        </div>
+        </>
     )
 }

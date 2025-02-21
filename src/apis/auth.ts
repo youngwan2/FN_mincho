@@ -87,4 +87,35 @@ export const loginFetch = async (loginRequest: LoginRequest) => {
     }
 }
 
+/** 로그아웃 요청 */
+export const logoutFetch = async () => {
 
+    try {
+        const response = await instance.delete(
+            apiRoutes.auth.logout,
+            {
+                headers:{
+                    "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                }
+            }
+        )
+
+        if (response?.status && response.status > 399) {
+            toast.error(response.status + ": 로그아웃에 실패하였습니다.")
+            throw new AxiosError("로그아웃에 실패하였습니다.", response.data.StatusCode || "UNKNOWN_ERROR")
+        }
+
+        return response.data
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            toast.error("에러: " + error.response?.data.message)
+            return error.response
+
+        } else {
+            toast.error("500: 네트워크 문제로 요청에 실패하였습니다.")
+
+
+        }
+    }
+
+}

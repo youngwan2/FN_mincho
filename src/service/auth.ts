@@ -1,6 +1,6 @@
-import { emailCheckFetch, loginFetch, registerFetch } from "../apis/auth";
+import { emailCheckFetch, loginFetch, logoutFetch, registerFetch } from "../apis/auth";
 import { Email, LoginRequest, RegisterRequest } from "../types/auth.types";
-import { setToken } from "../utils/storage";
+import { removeToken, setToken } from "../utils/storage";
 
 
 
@@ -32,3 +32,12 @@ export const login = async (loginRequest: LoginRequest) => {
     setToken(rawToken.split(" ")[1])
 }
 
+/** 로그아웃 요청 */
+export const logout = async () => {
+
+    const data = await logoutFetch()
+    if (Number(data.status) == 200) {
+        location.reload() // 새로고침
+    }
+    removeToken(); // 액세스 토큰 제거
+}
