@@ -26,12 +26,13 @@ export const useRegisterForm = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [isValidEmailMx, setIsValidEmailMx] = useState(false);
+    const [isCheck, setIsCheck] = useState<boolean | undefined>(false);
+    const [isValidPassword, setIsValidPassword] = useState(false);
     const [isValidVerificationCode, setIsValidVerificationCode] = useState(false);
     const [verificationCode, setVerificationCode] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [_, setPasswordConfirm] = useState('');
-    const [isCheck, setIsCheck] = useState<boolean | undefined>(false);
+
     const [errors, setErrors] = useState<FormErrors>({
         email: '',
         password: '',
@@ -90,18 +91,9 @@ export const useRegisterForm = () => {
     /** 비밀번호 재확인 */
     const handlePasswordConfirmChange = (e: ChangeEvent<HTMLInputElement>) => {
         const confirmValue = e.target.value;
-        setPasswordConfirm(confirmValue);
-
-        const isValid = validator(confirmValue, 'PASSWORD');
-        if (!isValid) {
-            setErrors(prev => ({
-                ...prev,
-                passwordConfirm: '비밀번호 형식이 일치하지 않습니다.'
-            }));
-            return;
-        }
-
         const isValidPasswordConfirm = passwordConfirmValidator(password, confirmValue);
+
+        setIsValidPassword(isValidPasswordConfirm)
         setErrors(prev => ({
             ...prev,
             passwordConfirm: !isValidPasswordConfirm ? '비밀번호가 서로 일치하지 않습니다.' : ''
@@ -199,7 +191,7 @@ export const useRegisterForm = () => {
 
 
     /** 유효성 검증이 모두 통과하면 isAction 이 true 가 되고 폼 전송 가능 */
-    const isAction = [!errors.email, !errors.emailCheck, !errors.password, !errors.passwordConfirm, isValidEmailMx, isValidVerificationCode].every(e => e);
+    const isAction = [isCheck, isValidPassword, isValidEmailMx, isValidVerificationCode].every(e => e);
 
     return {
         email,

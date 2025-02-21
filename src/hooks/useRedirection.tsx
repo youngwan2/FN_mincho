@@ -9,9 +9,9 @@ export default function useRedirection() {
 
     useEffect(() => {
         const token = getToken();
-
+        const excludePath =location.pathname !== "/auth/signup" &&  location.pathname !== "/auth/find-password";
         // 비로그인 상태라면 로그인 페이지로
-        if (!token && location.pathname !== "/auth/signup") {
+        if (!token && excludePath ) {
             router("/auth/login")
         }
 

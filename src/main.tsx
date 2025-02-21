@@ -10,6 +10,7 @@ import RootLayout from './components/layout/RootLayout';
 import LoginPage from './pages/Login/page';
 import AuthLayout from './components/layout/AuthLayout';
 import RegisterPage from './pages/Register/page';
+import FindPasswordPage from './pages/FindPassword/page';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path='/auth' element={<AuthLayout />}>
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<RegisterPage />} />
+          <Route path="find-password" element={<FindPasswordPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
