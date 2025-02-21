@@ -3,13 +3,9 @@ import { HiOutlineMail } from "react-icons/hi";
 import { IoLockOpenOutline, IoLockClosedOutline } from "react-icons/io5";
 import Submit from "./Submit";
 import { useRegisterForm } from "../../../hooks/useRegisterForm";
-import { useState } from "react";
 
 /** TODO: 이메일 인증 번호 */
 export default function SignupForm() {
-
-
-    const [isSendAction, setIsSendAction] = useState(false);
 
     const {
         errors,

@@ -5,6 +5,8 @@ export default function LoginPage() {
 
     useRedirection();
 
+    useRedirection();
+
     return (
         <div className="md:h-[80vh] md:flex-row items-center flex-col-reverse h-auto flex p-[20px] max-w-[1240px] w-full bg-white rounded-3xl">
             <LoginForm />

@@ -9,7 +9,6 @@ import { getToken } from "../utils/storage"
 export const getProfileFetch = async () => {
 
     const token = getToken();
-    console.log("access:"+token)
     try {
         const response = await instance.get(
             apiRoutes.user.profile,
