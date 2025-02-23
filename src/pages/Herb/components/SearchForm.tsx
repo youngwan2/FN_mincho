@@ -14,10 +14,10 @@ export default function SearchForm() {
     }
 
     return (
-        <form className="md:flex-row flex-col flex items-center justify-center w-full " onSubmit={handleSubmit}>
+        <form className="md:flex-row md:gap-2 md:mt-0 mt-8 gap-3 flex-col flex items-center justify-center w-full  " onSubmit={handleSubmit}>
             <div className="flex items-center relative min-w-[150px] h-15 justify-center w-full">
                 <label htmlFor="herb-month">
-                    <IoCalendarOutline className=" mr-2 text-4xl" />
+                    <IoCalendarOutline className="md:block hidden mr-2 text-4xl" />
                 </label>
                 <select
                     id="herb-month"
@@ -34,7 +34,7 @@ export default function SearchForm() {
 
             <div className="md:ml-5 md:mt-0 mt-3 flex items-center relative min-w-[150px]  h-10 justify-center w-full">
                 <label htmlFor="herb-category" >
-                    <IoFolderOpenOutline className=" mr-2 text-4xl" />
+                    <IoFolderOpenOutline className="md:block hidden mr-2 text-4xl" />
                 </label>
                 <select
                     id="herb-category"

@@ -2,15 +2,20 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import Profile from "../../pages/Home/components/Profile";
+import Logo from "../icon/Logo";
 
 export default function Header() {
 
     const isLogin = useAuth();
 
     return (
-        <header className="bg-white flex justify-between h-30 items-center ">
+        <header className="bg-white flex justify-between h-40 items-center ">
             <div className="flex">
-                <h1 className="font-bold">민초</h1>
+                <h1 className="font-bold">
+                    <Link to={"/"}>
+                        <Logo />
+                    </Link>
+                </h1>
                 <nav className="ml-15">
                     <ul className="flex">
                         <li className="mx-3 font-semibold"><Link to={"/herbs"}>약초도감</Link></li>
