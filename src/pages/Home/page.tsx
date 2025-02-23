@@ -5,7 +5,6 @@ import TipCardSection from "./components/TipCardSection";
 
 export default function HomePage() {
 
-
     return (
         <>
             <Banner />
