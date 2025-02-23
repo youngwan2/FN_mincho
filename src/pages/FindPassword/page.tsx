@@ -1,6 +1,6 @@
 import { IoIosInformationCircleOutline } from "react-icons/io";
-import FindPasswordForm from "./components/FIndPasswordForm";
 import { Link } from "react-router";
+import FindPasswordForm from "./components/FindPasswordForm";
 
 
 export default function FindPasswordPage() {
