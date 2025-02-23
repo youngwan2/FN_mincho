@@ -4,12 +4,14 @@ import MostViewSection from "./components/MostViewSection";
 import TipCardSection from "./components/TipCardSection";
 
 export default function HomePage() {
+
+
     return (
         <>
-            <Banner/>
-            <MostViewSection/>
-            <BloomingHerbsSection/>
-            <TipCardSection/>
+            <Banner />
+            <MostViewSection />
+            <BloomingHerbsSection />
+            <TipCardSection />
         </>
     )
 }
