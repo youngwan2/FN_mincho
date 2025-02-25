@@ -26,7 +26,7 @@ export default function HerbDetailFooter({ herbId }: HerbDetailFooterProps) {
                         return (
 
                             <HerbItem key={herb.id}>
-                                <Link to={"/herbs/" + herb.id} className="h-auto hover:bg-primary-light-gray">
+                                <Link to={"/herbs/" + herb.id} className="h-auto ">
                                     <div>
                                         <img src={herb.imgUrl1} alt={herb.cntntsSj} className="w-full h-full rounded-[5px]" />
                                     </div>

@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 export default function RootLayout() {
     return (
-        <div className='max-w-[1240px] mx-auto h-auto font-prentendard px-10' >
+        <div className='md:px-10 px-5 max-w-[1240px] mx-auto h-auto font-prentendard' >
             <ToastContainer className={"z-[10000000000000000000000]"} />
             <Header />
 

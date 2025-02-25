@@ -16,7 +16,7 @@ export default function HerbDetailPage() {
     const { herb, isError, isLoading, status } = useHerbDetailGetQuery(herbId ? Number(herbId) : 1)
 
     const bannerImage = (herb?.imgUrls ?? [])[0]
-    const images = (herb?.imgUrls ?? [])
+    const images = (herb?.imgUrls ? herb.imgUrls : [])
 
     return (
         <section>
@@ -28,7 +28,7 @@ export default function HerbDetailPage() {
                 <InteractionPanel />
                 <HerbDetailContents herb={herb} />
             </HerbDetailBody>
-            <HerbDetailFooter herbId={Number(herbId)}/>
+            <HerbDetailFooter herbId={Number(herbId)} />
         </section>
     )
 }

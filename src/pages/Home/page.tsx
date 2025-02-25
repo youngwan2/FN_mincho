@@ -1,5 +1,5 @@
 import Banner from "./components/Banner";
-import BloomingHerbsSection from "./components/BloomingHerbsSection";
+import PreviewHerbsSection from "./components/PreviewHerbsSection";
 import MostViewSection from "./components/MostViewSection";
 import TipCardSection from "./components/TipCardSection";
 
@@ -9,7 +9,7 @@ export default function HomePage() {
         <>
             <Banner />
             <MostViewSection />
-            <BloomingHerbsSection />
+            <PreviewHerbsSection />
             <TipCardSection />
         </>
     )
