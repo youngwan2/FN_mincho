@@ -8,12 +8,12 @@ export default function MostViewSection() {
     const tempIndex2 = 2;
     const tempIndex3 = 3;
     return (
-        <section className='flex mt-15 p-10'>
+        <section className='md:p-10 md:flex-row flex-col flex mt-15 '>
             <div className='flex flex-col max-w-[30%]'>
                 <h2 className="text-4xl leading-13">사람들이 <br /> <strong> 많이 찾은 <br /> 약초</strong></h2>
-                <img src={map} alt="placeholder" />
+                <img src={map} alt="placeholder" className='md:block hidden' />
             </div>
-            <div className='w-full max-w-[60%] flex relative p-[40px] justify-around'>
+            <div className='w-full md:max-w-[60%] w-full flex relative p-[40px] justify-around'>
                 <ul className='flex flex-col max-w-[60%] flex-wrap'>
                     <li className='max-w-[150px] w-full flex items-center my-3'>
                         <CircleNumberIcon number={1} className={`${tempIndex == 1 ? 'bg-[#FFC44C]' : ''}  p-1 rounded-full w-[24px] h-[24px] flex items-center justify-center`} />

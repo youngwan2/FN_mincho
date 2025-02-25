@@ -16,3 +16,8 @@ export const getHerbDetailFetch = (url: string) => {
 export const getHerbsRandomFetch = (url: string) => {
     return instance.get(url)
 }
+
+/** 이달의 개화약초 */
+export const getHerbsBloomingFetch = (url: string) => {
+    return instance.get(url)
+}

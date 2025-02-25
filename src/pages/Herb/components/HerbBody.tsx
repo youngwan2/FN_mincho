@@ -23,7 +23,7 @@ export default function HerbBody({ herbs }: HerbBodyProps) {
                 {herbs.slice(3, herbs.length).map((herb) => {
                     return (
                         <HerbItem key={herb.id}>
-                            <Link to={""+herb.id} className="h-auto">
+                            <Link to={"" + herb.id} className="h-auto">
                                 <div>
                                     <img src={herb.imgUrl1} alt={herb.cntntsSj} className="w-full h-full rounded-[5px]" />
                                 </div>

@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getHerbDetail, getHerbRandom, getHerbs } from "../../service/herb"
+import { getHerbBlooming, getHerbDetail, getHerbRandom, getHerbs } from "../../service/herb"
 
 
 
@@ -61,5 +61,17 @@ export const useHerbRandomGetQuery = (herbId: number) => {
     const herbs = data?.data ?? []
     return { herbs, isLoading, isError, status }
 
+}
+
+/** 이달의 개화 약초 */
+export const useHerbBloomingGetQuery = (month: string) => {
+
+    const { data, isLoading, isError, status } = useQuery({
+        queryKey: queryKeys.herbs.getMonth(month),
+        queryFn: () => getHerbBlooming(month)
+    })
+
+    const herbs = data?.data ?? []
+    return { herbs, isLoading, isError, status }
 
 }
