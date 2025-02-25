@@ -5,7 +5,7 @@ import HerbBanner from "./components/HerbBanner";
 import HerbBody from "./components/HerbBody";
 import SearchForm from "./components/SearchForm";
 
-/** TODO: err */
+
 export default function HerbPage() {
 
 
@@ -30,6 +30,8 @@ export default function HerbPage() {
             <SearchForm />
             <HerbBanner herbs={herbs} />
             <HerbBody herbs={herbs} />
+
+            {/* 로딩체크 (임시) */}
             <button className="mx-auto " ref={ref}>
                 {isFetchingNextPage
                     ? 'Loading more...'

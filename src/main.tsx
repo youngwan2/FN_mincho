@@ -18,6 +18,7 @@ import AuthLayout from './components/layout/AuthLayout';
 import RegisterPage from './pages/Register/page';
 import FindPasswordPage from './pages/FindPassword/page';
 import HerbPage from './pages/Herb/page';
+import HerbDetailPage from './pages/HerbDetail/page';
 
 
 const queryClient = new QueryClient({
@@ -37,6 +38,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path='/' element={<RootLayout />}>
             <Route index element={<HomePage />} />
             <Route path="herbs" element={<HerbPage />} />
+            <Route path="herbs/:herbId" element={<HerbDetailPage />} />
           </Route>
           <Route path='/auth' element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />

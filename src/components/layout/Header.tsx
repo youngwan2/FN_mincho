@@ -3,13 +3,15 @@ import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import Profile from "../../pages/Home/components/Profile";
 import Logo from "../icon/Logo";
+import usePathType from "../../hooks/usePathType";
 
 export default function Header() {
 
     const isLogin = useAuth();
+    const isHerbDetailPage = usePathType();
 
     return (
-        <header className="bg-white flex justify-between h-40 items-center ">
+        <header className="bg-transparent flex justify-between h-40 items-center ">
             <div className="flex">
                 <h1 className="font-bold">
                     <Link to={"/"}>
@@ -18,9 +20,9 @@ export default function Header() {
                 </h1>
                 <nav className="ml-15">
                     <ul className="flex">
-                        <li className="mx-3 font-semibold"><Link to={"/herbs"}>약초도감</Link></li>
-                        <li className="mx-3 font-semibold"><Link to={"/herbs/season"}></Link>계절약초</li>
-                        <li className="mx-3 font-semibold"><Link to={"/community"}></Link> 커뮤니티</li>
+                        <li className={`mx-3 font-semibold ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link to={"/herbs"}>약초도감</Link></li>
+                        <li className={`mx-3 font-semibold ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link to={"/herbs/season"}></Link>계절약초</li>
+                        <li className={`mx-3 font-semibold ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link to={"/community"}></Link> 커뮤니티</li>
                     </ul>
                 </nav>
             </div>
@@ -34,7 +36,7 @@ export default function Header() {
                         isLogin
                             ? <li><Profile /></li>
                             : <>
-                                <li title="로그인" className="ml-2 border p-1 px-2 border-[#e6e7e9] rounded-2xl w-[88px] text-center">
+                                <li title="로그인" className="ml-2 border p-1 px-2 bg-white border-[#e6e7e9] rounded-2xl w-[88px] text-center">
                                     <Link to={"/auth/login"}>
                                         <span>
                                             로그인
@@ -50,7 +52,6 @@ export default function Header() {
                                 </li>
                             </>
                     }
-
                 </ul>
             </div>
         </header>

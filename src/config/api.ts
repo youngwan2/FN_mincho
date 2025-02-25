@@ -24,9 +24,11 @@ export const apiRoutes = {
     herb: {
         getAll: (page: number, size: number) => baseUrl + '/herbs?page=' + page + '&size=' + size,
         getById: (herbId: number) => baseUrl + `/herbs/${herbId}`,
+        getRandom: (herbId: number) => baseUrl + `/herbs/${herbId}/random`,
         create: baseUrl + '/herbs',
         update: (herbId: number) => baseUrl + `/herbs/${herbId}`,
         delete: (herbId: number) => baseUrl + `/herbs/${herbId}`
+
     },
     community: {
         post: {

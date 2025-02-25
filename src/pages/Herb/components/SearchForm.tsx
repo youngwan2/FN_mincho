@@ -22,10 +22,10 @@ export default function SearchForm() {
                 <select
                     id="herb-month"
                     className="outline-[#05d182] inline-block w-full p-3 border rounded-xl">
-                    <option value="" className="text-center" selected >개화시기</option>
+                    <option value="" className="text-center">개화시기</option>
                     {monthCategories.map(month => {
                         return (
-                            <option value={month}>{month}</option>
+                            <option key={month} value={month}>{month}</option>
                         )
                     })}
                 </select>
@@ -39,10 +39,10 @@ export default function SearchForm() {
                 <select
                     id="herb-category"
                     className="outline-[#05d182] inline-block min-w-[150px] w-full p-3 border rounded-xl">
-                    <option className="text-center" value="" selected>카테고리</option>
+                    <option className="text-center" value="">카테고리</option>
                     {herbCategories.map(category => {
                         return (
-                            <option value={category}>{category}</option>
+                            <option  key={category} value={category}>{category}</option>
                         )
 
                     })}
