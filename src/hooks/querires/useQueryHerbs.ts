@@ -1,9 +1,10 @@
-import { useInfiniteQuery } from "@tanstack/react-query"
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getHerbs } from "../../service/herb"
+import { getHerbDetail, getHerbRandom, getHerbs } from "../../service/herb"
 
 
 
+/** 허브 전체 정보 */
 export const useHerbsGetQuery = (size: number) => {
 
     const {
@@ -34,4 +35,31 @@ export const useHerbsGetQuery = (size: number) => {
         fetchNextPage,
         hasNextPage,
     }
+}
+
+/** 허브 세부 정보 */
+export const useHerbDetailGetQuery = (herbId: number) => {
+
+    const { data, isLoading, isError, status } = useQuery({
+        queryKey: queryKeys.herbs.getById(herbId),
+        queryFn: () => getHerbDetail(herbId)
+    })
+    const herb = data?.data ?? []
+    return { herb, isLoading, isError, status }
+}
+
+
+/** 허브 랜덤 정보 */
+export const useHerbRandomGetQuery = (herbId: number) => {
+
+    const { data, isLoading, isError, status } = useQuery({
+        queryKey: queryKeys.herbs.getRandom(herbId),
+        queryFn: () => getHerbRandom(herbId)
+    })
+
+
+    const herbs = data?.data ?? []
+    return { herbs, isLoading, isError, status }
+
+
 }

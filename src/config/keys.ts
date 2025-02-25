@@ -4,6 +4,7 @@
 export const queryKeys = {
     herbs: {
         getAll: (page: number, size: number) => ["herbs", page, size],
-        getDetail: (herbId: number) => ["herbs", herbId]
+        getById: (herbId: number) => ["herbs", herbId],
+        getRandom: (herbId: number) => ["herbs", "random", herbId]
     }
 }

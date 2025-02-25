@@ -18,7 +18,7 @@ export default function HerbBanner({ herbs }: HerbBannerProps) {
                 {
                     herbs.slice(herbs.length-3).map((herb) => {
                         return (
-                            <li className="w-full transition ">
+                            <li key={herb.id} className="w-full transition ">
                                 <Link to={""+herb.id} className="relative">
                                     <div className="w-full h-full grayscale-70 hover:grayscale-0 transition">
                                         <img src={herb.imgUrl1} alt={herb.cntntsSj}  className={"h-full w-full rounded-2xl"} height={450} width={300} />
