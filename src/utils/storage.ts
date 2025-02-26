@@ -2,20 +2,17 @@ import log from "loglevel"
 
 
 export const getToken = () => {
-    let hasToken = null;
-    for (let i = 0; i < 5; i++) {
-        hasToken = localStorage.key(i)?.includes("accessToken")
-    }
-
-    if (!hasToken) {
+    if (localStorage.getItem('accessToken') == null) {
         return
+    } else {
+        const token = localStorage.getItem("accessToken")
+
+        if (!token) {
+            log.warn("빈 값이 반환되었습니다.")
+            return null
+        }
+        return "Bearer " + token
     }
-    const token = localStorage.getItem("accessToken")
-    if (!token) {
-        log.warn("빈 값이 반환되었습니다.")
-        return null
-    }
-    return "Bearer " + token
 }
 
 export const setToken = (value: string) => {
