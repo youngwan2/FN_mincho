@@ -22,13 +22,12 @@ export default function Profile() {
 
     function handleDropdown() {
         setIsToggle(prev => !prev)
-        console.log(isToggle)
     }
 
 
 
     return (
-        <div className="flex">
+        <div className="flex relative">
             <img
                 src="https://picsum.photos/800/600"
                 alt="프로필 이미지"
