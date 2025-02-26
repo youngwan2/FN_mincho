@@ -1,8 +1,6 @@
 interface HerbBannerProps {
     herbs: Herb[]
 }
-import { IoSearchCircleSharp } from "react-icons/io5";
-
 import { Link } from "react-router";
 import HerbTitle from "./HerbTitle";
 import { Herb } from "../../../types/herb.types";
@@ -11,7 +9,7 @@ export default function HerbBanner({ herbs }: HerbBannerProps) {
     return (
         <section className="md:block hidden md:mt-18 mt-30 w-full h-150 ">
             <HerbTitle elementName={"h2"} className="text-[#333] text-3xl mb-2 font-black flex items-center">
-                <IoSearchCircleSharp className="text-2xl mr-1" />미리보기
+               미리보기
             </HerbTitle>
 
             <ul className="md:grid-cols-3 sm:grid-cols-2 grid-cols-1 grid h-full gap-5">

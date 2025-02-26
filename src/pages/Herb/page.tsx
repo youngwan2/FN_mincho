@@ -34,15 +34,15 @@ export default function HerbPage() {
             {/* 로딩체크 (임시) */}
             <button className="mx-auto " ref={ref}>
                 {isFetchingNextPage
-                    ? 'Loading more...'
+                    ? '가져오는 중...'
                     : hasNextPage
-                        ? 'Load Newer'
-                        : 'Nothing more to load'}
+                        ? '더보기'
+                        : '마지막'}
 
             </button>
             <div>
                 {isFetching && !isFetchingNextPage
-                    ? 'Background Updating...'
+                    ? '가져오는 중...'
                     : null}
             </div>
         </div>
