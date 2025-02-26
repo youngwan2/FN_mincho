@@ -5,8 +5,10 @@ export interface User {
     profile: Profile
 }
 
-export interface Profile {
-    avatarUrl: string;
+export interface AvatarUrl {
+    avatarUrl?: string;
+}
+export interface Profile extends AvatarUrl {
     nickname: string;
     introduction: string;
 }

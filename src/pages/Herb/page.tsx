@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useHerbsGetQuery } from "../../hooks/querires/useQueryHerbs";
+import { useHerbsGetQuery } from "../../hooks/queries/useQueryHerbs";
 import { useInView } from 'react-intersection-observer'
 import HerbBanner from "./components/HerbBanner";
 import HerbBody from "./components/HerbBody";

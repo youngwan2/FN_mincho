@@ -1,7 +1,7 @@
 import EmblaCarousel from "./carousel/blooming-herbs/EmblaCarousel"
 import { EmblaOptionsType } from 'embla-carousel'
 import MoreButton from "./MoreButton"
-import { useHerbsGetQuery } from "../../../hooks/querires/useQueryHerbs"
+import { useHerbsGetQuery } from "../../../hooks/queries/useQueryHerbs"
 import { useNavigate } from "react-router"
 
 

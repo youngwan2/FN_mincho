@@ -20,9 +20,9 @@ export default function Header() {
                 </h1>
                 <nav className="ml-15">
                     <ul className="flex">
-                        <li className={`mx-3 font-semibold ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link to={"/herbs"}>약초도감</Link></li>
-                        <li className={`mx-3 font-semibold ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link to={"/herbs/season"}></Link>계절약초</li>
-                        <li className={`mx-3 font-semibold ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link to={"/community"}></Link> 커뮤니티</li>
+                        <li className={`mx-3 font-semibold text-[18px] ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link  to={"/herbs"}>약초도감</Link></li>
+                        <li className={`mx-3 font-semibold text-[18px] ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link  to={"/herbs/season"}></Link>계절약초</li>
+                        <li className={`mx-3 font-semibold text-[18px] ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link  to={"/community"}></Link> 커뮤니티</li>
                     </ul>
                 </nav>
             </div>
@@ -36,14 +36,14 @@ export default function Header() {
                         isLogin
                             ? <li><Profile /></li>
                             : <>
-                                <li title="로그인" className="ml-2 border p-1 px-2 bg-white border-[#e6e7e9] rounded-2xl w-[88px] text-center">
+                                <li title="로그인" className="ml-2 border p-1 px-2 text-[18px] bg-white border-[#e6e7e9] rounded-2xl w-[88px] text-center">
                                     <Link to={"/auth/login"}>
                                         <span>
                                             로그인
                                         </span>
                                     </Link>
                                 </li>
-                                <li title="회원가입" className="ml-2  p-1 px-2 rounded-2xl w-[88px] text-center bg-[#05d182] text-white">
+                                <li title="회원가입" className="ml-2  p-1 px-2 text-[18px] rounded-2xl w-[88px] text-center bg-[#05d182] text-white">
                                     <Link to={"/auth/signup"}>
                                         <span>
                                             회원가입

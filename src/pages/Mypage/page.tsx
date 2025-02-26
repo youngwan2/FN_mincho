@@ -11,7 +11,7 @@ export default function Mypage() {
             {/* 마이페이지 헤더 */}
             <MypageHeader />
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
                 {/* 프로필 섹션 */}
                 <MypageProfile />
 
@@ -20,13 +20,11 @@ export default function Mypage() {
                     {/* 활동 통계 */}
                     <MypageAnalytics />
 
-
                     {/* 콘텐츠 목록 */}
                     <MypageContents />
 
-
                     {/* 설정 섹션 */}
-                    <MypageSettings />
+                    {/* <MypageSettings /> */}
                 </div>
             </div>
         </div>

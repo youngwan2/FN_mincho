@@ -1,47 +1,51 @@
 interface MypageProfileFormProps {
-    formData: ProfileFormData
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-    setFormData: React.Dispatch<React.SetStateAction<ProfileFormData>>
-    onOpenForm: () => void
-    errors: ProfileFormData
-    setErrors: React.Dispatch<React.SetStateAction<ProfileFormData>>
+    profileInfo: Profile
+    onFormToggle: () => void
+    profileMutate: UseMutateFunction<any, Error, Profile, unknown>
 }
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import PrimaryButton from "../../../components/button/PrimaryButton";
-import { ProfileFormData } from "../../../types/mypage.types";
+import { Profile } from "../../../types/user.types"
+import { profileFormValidateField } from "../../../utils/validator";
+import { UseMutateFunction } from "@tanstack/react-query";
 
-export default function MypageProfileForm({ setIsOpen, setFormData, formData, setErrors, errors, onOpenForm }: MypageProfileFormProps) {
+export default function MypageProfileForm({ profileInfo, onFormToggle, profileMutate }: MypageProfileFormProps) {
 
+    const [newProfileInfo, setNewProfileInfo] = useState({
+        nickname: '',
+        introduction: ''
+    })
 
+    const [formErrors, setFormErrors] = useState({
+        nickname: '',
+        introduction: ''
+    })
+
+    // 사용자 입력값 처리
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value } = e.currentTarget;
+
+        setNewProfileInfo(prev => ({
+            ...prev,
+            [name]: value
+        }));
+
+        setFormErrors(prev => ({
+            ...prev,
+            ...profileFormValidateField(name, value)
+        }));
     }
 
-
+    // 사용자 프로필 서버 전송
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        let newErrors = { nickname: "", description: "" };
 
-        if (!formData.nickname) {
-            newErrors.nickname = "닉네임을 입력해주세요.";
-        } else if (formData.nickname.length < 3) {
-            newErrors.nickname = "닉네임은 최소 3글자 이상이어야 합니다.";
-        }
+        profileMutate(newProfileInfo)
+        onFormToggle();
 
-        if (!formData.description) {
-            newErrors.description = "소개를 입력해주세요.";
-        } else if (formData.description.length < 10) {
-            newErrors.description = "소개는 최소 10글자 이상이어야 합니다.";
-        }
-
-        setErrors(newErrors);
-
-        if (!newErrors.nickname && !newErrors.description) {
-            setIsOpen(false); // 수정 완료 후 닫기
-        }
     }
+
     return (
         <form className="w-full" onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -49,29 +53,29 @@ export default function MypageProfileForm({ setIsOpen, setFormData, formData, se
                 <input
                     type="text"
                     name="nickname"
-                    value={formData.nickname}
+                    defaultValue={profileInfo.nickname || ''}
                     onChange={handleChange}
                     className="w-full border rounded px-3 py-2 text-gray-700 text-xl"
                 />
-                {errors.nickname && <p className="text-red-500 text-sm">{errors.nickname}</p>}
+                {profileInfo.nickname && <p className="text-red-500 text-sm">{formErrors.nickname}</p>}
             </div>
 
             <div className="mb-3 mt-5">
                 <label className="block text-gray-700 text-xl font-semibold mb-1">소개</label>
                 <textarea
                     rows={300}
-                    name="description"
-                    value={formData.description}
+                    name="introduction"
+                    defaultValue={profileInfo.introduction || ''}
                     onChange={handleChange}
-                    className="w-full border rounded px-3 py-2 text-gray-700 h-20 text-xl resize-none h-[30vh]"
+                    className="w-full border rounded px-3 py-2 text-gray-700 text-xl resize-none h-[30vh]"
                 />
-                {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
+                {profileInfo.introduction && <p className="text-red-500 text-sm">{formErrors.introduction}</p>}
             </div>
 
             <div className="flex justify-between">
                 <PrimaryButton
                     type="button"
-                    onClick={onOpenForm}
+                    onClick={onFormToggle}
                     className=" border border-gray-300 rounded bg-white text-gray-600"
                 >
                     취소
