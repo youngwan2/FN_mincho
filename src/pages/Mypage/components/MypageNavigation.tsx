@@ -17,7 +17,6 @@ export default function MypageNavigation({ onClickTaps, tabIndex }: MypageNaviga
         <div className="border-b border-gray-200">
             <div className="flex">
                 {tabs.map((tab, index) => {
-                    console.log(index, tabIndex)
                     return (
                         <button
                             key={tab.id}

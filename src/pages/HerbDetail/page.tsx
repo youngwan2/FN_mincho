@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useHerbDetailGetQuery } from "../../hooks/querires/useQueryHerbs";
+import { useHerbDetailGetQuery } from "../../hooks/queries/useQueryHerbs";
 import HerbDetailBanner from "./components/HerbDetailBanner";
 import HerbDetailBody from "./components/HerbDetailBody";
 import HerbDetailHeader from "./components/HerbDetailHeader";

@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useHerbRandomGetQuery } from "../../../hooks/querires/useQueryHerbs"
+import { useHerbRandomGetQuery } from "../../../hooks/queries/useQueryHerbs"
 import HerbItem from "../../Herb/components/HerbItem";
 import HerbList from "../../Herb/components/HerbList";
 import { Herb } from "../../../types/herb.types";

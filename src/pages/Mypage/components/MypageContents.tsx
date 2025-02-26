@@ -16,7 +16,7 @@ export default function MypageContents() {
 
     }
     return (
-        <div>
+        <div className="mt-10">
             {/* 네비게이션 탭 */}
             <MypageNavigation onClickTaps={onClickTaps} tabIndex={tapIndex} />
 
