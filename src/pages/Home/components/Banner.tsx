@@ -1,5 +1,4 @@
 import { useHerbBloomingGetQuery } from "../../../hooks/queries/useQueryHerbs";
-
 import EmblaCarousel from "../components/carousel/banner/EmblaCarousel";
 import Wave from "./carousel/banner/Wave";
 import LoadingSpinner from "../../../components/spinner/LoadingSpinner";
