@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import Profile from "../../pages/Home/components/Profile";
 import Logo from "../icon/Logo";
 import usePathType from "../../hooks/usePathType";
+import SearchIcon from "./SearchIcon";
 
 export default function Header() {
 
@@ -11,7 +12,7 @@ export default function Header() {
     const isHerbDetailPage = usePathType();
 
     return (
-        <header className="bg-transparent flex justify-between h-40 items-center ">
+        <header className="bg-transparent flex justify-between h-45 items-center">
             <div className="flex">
                 <h1 className="font-bold">
                     <Link to={"/"}>
@@ -20,39 +21,37 @@ export default function Header() {
                 </h1>
                 <nav className="ml-15">
                     <ul className="flex">
-                        <li className={`mx-3 font-semibold text-[18px] ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link  to={"/herbs"}>약초도감</Link></li>
-                        <li className={`mx-3 font-semibold text-[18px] ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link  to={"/herbs/season"}></Link>계절약초</li>
-                        <li className={`mx-3 font-semibold text-[18px] ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link  to={"/community"}></Link> 커뮤니티</li>
+                        <li className={`mx-3 font-bold text-[15px] ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link to={"/herbs"}>약초도감</Link></li>
+                        <li className={`mx-3 font-bold text-[15px] ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link to={"/herbs/season"}></Link>계절약초</li>
+                        <li className={`mx-3 font-bold text-[15px] ${isHerbDetailPage ? "text-white drop-shadow-[1px_1px_rgba(0,0,0,0.5)]" : ""}`}><Link to={"/community"}></Link> 커뮤니티</li>
                     </ul>
                 </nav>
             </div>
             <div className="flex">
-                <button>
-                    <IoSearchOutline size={24} />
-                </button>
-                <ul className="flex">
+                {/* <SearchIcon /> */}
+                <div className="flex">
                     {/* 로그인 상태에 따른 UI 렌더링 다르게 */}
                     {
                         isLogin
-                            ? <li><Profile /></li>
+                            ? <Profile />
                             : <>
-                                <li title="로그인" className="ml-2 border p-1 px-2 text-[18px] bg-white border-[#e6e7e9] rounded-2xl w-[88px] text-center">
+                                <div title="로그인" className="ml-2 border p-1 text-[15px] bg-white border-[#e6e7e9] rounded-2xl w-[88px] text-center">
                                     <Link to={"/auth/login"}>
                                         <span>
                                             로그인
                                         </span>
                                     </Link>
-                                </li>
-                                <li title="회원가입" className="ml-2  p-1 px-2 text-[18px] rounded-2xl w-[88px] text-center bg-[#05d182] text-white">
+                                </div>
+                                <div title="회원가입" className="ml-2  p-1 text-[15px] rounded-2xl w-[88px] text-center bg-[#05d182] text-white">
                                     <Link to={"/auth/signup"}>
                                         <span>
                                             회원가입
                                         </span>
                                     </Link>
-                                </li>
+                                </div>
                             </>
                     }
-                </ul>
+                </div>
             </div>
         </header>
     )

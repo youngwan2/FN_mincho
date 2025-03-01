@@ -14,6 +14,11 @@ export const queryKeys = {
         getAll: () => ["profile"],
         get: () => ["profile"],
         update: () => ["profile"]
-
-    }
+    },
+    // 북마크
+    herbBookmark: {
+        getAll: (page: number, size: number) => ["herbBookmark", page, size],
+        getByHerbId: (herbId: number) => ["herbBookmark", herbId],
+        update: (herbId: number) => ["herbBookmark", herbId],
+    },
 }

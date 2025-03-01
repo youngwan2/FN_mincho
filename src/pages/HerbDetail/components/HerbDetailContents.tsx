@@ -1,6 +1,7 @@
 import React from "react"
 import { HerbDetail } from "../../../types/herb.types"
 import HerbNotFoundCard from "../../../components/card/HerbNotFoundCard"
+import HerbDetailSubTitle from "./HerbDetailSubTitle"
 
 interface HerbDetailContentsProps {
 
@@ -9,23 +10,23 @@ interface HerbDetailContentsProps {
 
 export default function HerbDetailContents({ herb }: HerbDetailContentsProps) {
 
-    if(!herb || !herb.prvateTherpy){
-        return <HerbNotFoundCard/>
+    if (!herb || !herb.prvateTherpy) {
+        return <HerbNotFoundCard />
     }
     return (
-        <div className="w-full h-auto mt-8">
-            <div className="mt-5">
+        <div className="w-full h-auto mt-10 text-[#333] ">
+            <hr className="border-primary-gray" />
+            <div className="mt-12">
                 <p className=" text-[16px] flex flex-col items-start">
-                    <strong>
+                    <HerbDetailSubTitle>
                         사용부위
-                    </strong>
-
+                    </HerbDetailSubTitle>
                     {herb.useeRegn}
                 </p>
-                <p className=" text-[16px] flex flex-col items-start  mt-3">
-                    <strong>
+                <p className=" text-[16px] flex flex-col items-start  mt-8">
+                    <HerbDetailSubTitle>
                         민간용법
-                    </strong>
+                    </HerbDetailSubTitle>
                     {
                         herb.prvateTherpy.split('<br />').map((line, index) => (
                             <React.Fragment key={index}>
@@ -35,10 +36,10 @@ export default function HerbDetailContents({ herb }: HerbDetailContentsProps) {
                         ))
                     }
                 </p>
-                <p className=" text-[16px] flex flex-col items-start  mt-3">
-                    <strong>
+                <p className=" text-[16px] flex flex-col items-start  mt-8">
+                    <HerbDetailSubTitle>
                         형태
-                    </strong>
+                    </HerbDetailSubTitle>
                     {
                         herb.stle.split('<br />').map((line, index) => (
                             <React.Fragment key={index}>

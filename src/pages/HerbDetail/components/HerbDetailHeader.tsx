@@ -9,9 +9,10 @@ export default function HerbDetailHeader({ herb }: HerbDetailHeaderProps) {
     return (
         <div className="mt-5">
             {/* */}
-            <strong className="text-2xl font-semibold text-[#444]"> <span>{herb.hbdcNm}</span></strong>
-            <HerbTitle elementName={"h2"} className="text-4xl font-bold mt-3">
+
+            <HerbTitle elementName={"h2"} className="text-4xl font-bold">
                 {herb.cntntsSj}
+                <span className="text-2xl font-semibold text-[#444]">{herb.hbdcNm}</span>
             </HerbTitle>
             {/* 학명 */}
             <span className="bg-primary-green text-white text-[12px] rounded-[3px] px-2 py-1 mt-3">{herb.bneNm}</span>

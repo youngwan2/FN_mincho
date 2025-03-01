@@ -17,16 +17,16 @@ export default function Profile() {
     }
 
     return (
-        <div className="flex relative">
+        <div className="flex relative border rounded-2xl py-3 px-2 border-primary-dark-gray">
             <img
                 src={profileInfo.avatarUrl || "https://picsum.photos/800/600"}
                 alt="프로필 이미지"
-                className="rounded-2xl mr-1"
-                width={35}
-                height={35} />
-            <div className="flex">
+                className="rounded-full mr-1"
+                width={30}
+                height={30} />
+            <div className="flex ml-2">
                 <p>{profileInfo?.nickname || ''}</p>
-                <button onClick={handleDropdown} className="mx-1 cursor-pointer text-gray-700"><IoIosArrowDown className={`${isToggle ? " rotate-180" : "rotate-0"} transition-transform`} /></button>
+                <button onClick={handleDropdown} className="mx-2 cursor-pointer text-gray-700"><IoIosArrowDown className={`${isToggle ? " rotate-180" : "rotate-0"} transition-transform`} /></button>
             </div>
 
             {

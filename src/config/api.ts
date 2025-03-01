@@ -25,11 +25,18 @@ export const apiRoutes = {
         getAll: (page: number, size: number) => baseUrl + '/herbs?page=' + page + '&size=' + size,
         getById: (herbId: number) => baseUrl + `/herbs/${herbId}`,
         getRandom: (herbId: number) => baseUrl + `/herbs/${herbId}/random`,
-        create: baseUrl + '/herbs',
+        create: () => baseUrl + '/herbs',
         update: (herbId: number) => baseUrl + `/herbs/${herbId}`,
         delete: (herbId: number) => baseUrl + `/herbs/${herbId}`,
-        getByMonth:(month:string)=> baseUrl + `/herbs/blooming?month=${month}`
+        getByMonth: (month: string) => baseUrl + `/herbs/blooming?month=${month}`
 
+    },
+    herbBookmark: {
+        getAll: (page: number, size: number) => baseUrl + `/users/me/herbs/herb-bookmarks?page=${page}&size=${size}`,
+        create: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/herb-bookmarks`,
+        delete: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/herb-bookmarks`,
+        countByHerb: (herbId: number) => baseUrl + `/herbs/${herbId}/herb-bookmarks/count`,
+        countByUser: () => baseUrl + `/users/me/herbs/herb-bookmarks/count`
     },
     community: {
         post: {
@@ -40,4 +47,5 @@ export const apiRoutes = {
             delete: (postId: number) => baseUrl + `/community/posts/${postId}`,
         }
     },
+
 } as const

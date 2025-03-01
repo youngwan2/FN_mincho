@@ -15,8 +15,9 @@ export default function HerbDetailFooter({ herbId }: HerbDetailFooterProps) {
     const { herbs, isError, isLoading, status } = useHerbRandomGetQuery(herbId);
 
     return (
-        <div className="mt-20">
-            <HerbTitle elementName={"h2"} className="text-3xl font-black">
+        <div className="mt-15">
+            <hr className="border-primary-light-gray" />
+            <HerbTitle elementName={"h2"} className="text-4xl font-black mt-15">
                 이 약초들은 어떤가요?
             </HerbTitle>
 

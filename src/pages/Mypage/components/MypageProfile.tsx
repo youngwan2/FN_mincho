@@ -1,15 +1,16 @@
 import { useState } from "react";
 import MypageProfileForm from "./MypageProfileForm";
 import PrimaryButton from "../../../components/button/PrimaryButton";
-import MypageTitle from "./MyPageTitle";
+import MypageTitle from "./MypageTitle";
 import { useProfileGetQuery } from "../../../hooks/queries/useQueryProfile";
 import MypageProfileImage from "./MypageProfileImage";
 import { useUpdateProfileMutation } from "../../../hooks/mutations/useMutationMypage";
+import LoadingSpinner from "../../../components/spinner/LoadingSpinner";
 
 
 export default function MypageProfile() {
 
-    const { profileInfo, isError, isLoading, status } = useProfileGetQuery();
+    const { profileInfo, isError, isLoading } = useProfileGetQuery();
 
     const { mutate: profileMutate } = useUpdateProfileMutation()
 
@@ -22,12 +23,13 @@ export default function MypageProfile() {
     }
 
     return (
-        <div className="bg-gray-50 rounded-lg p-6 flex flex-col items-start lg:col-span-1">
+        <div className="bg-gray-50 rounded-lg p-6 flex flex-col items-start lg:col-span-1 relative">
             <MypageTitle text="프로필" />
 
             {/* 프로필 이미지 */}
             <MypageProfileImage profileImage="" />
-
+            {isLoading ? <LoadingSpinner /> : null}
+            {isError ? <p>프로필 정보 조회에 실패하였습니다.</p> : null}
             {isOpen ? (
                 // 프로필 수정 폼
                 <MypageProfileForm
