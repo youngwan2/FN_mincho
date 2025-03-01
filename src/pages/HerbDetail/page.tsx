@@ -14,6 +14,7 @@ import LoadingSpinner from "../../components/spinner/LoadingSpinner";
 export default function HerbDetailPage() {
 
     const { herbId } = useParams() ?? { herbId: 1 };
+    console.log("herbId:"+herbId)
     const { herb, isError, isLoading } = useHerbDetailGetQuery(herbId ? Number(herbId) : 1)
 
     const bannerImage = (herb?.imgUrls ?? [])[0]
@@ -34,9 +35,10 @@ export default function HerbDetailPage() {
 
             <HerbDetailBody>
                 <HerbDetailImages images={images} />
-                <InteractionPanel />
+                <InteractionPanel herb={herb} herbId={herbId} />
                 <HerbDetailContents herb={herb} />
             </HerbDetailBody>
+            
             <HerbDetailFooter herbId={Number(herbId)} />
         </section>
     )
