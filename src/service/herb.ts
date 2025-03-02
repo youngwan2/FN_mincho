@@ -1,12 +1,13 @@
 import { getHerbsBloomingFetch, getHerbsFetch, getHerbsRandomFetch } from "../apis/herb"
 import { apiRoutes } from "../config/api";
+import { HerbSearchCondition } from "../types/herb.types";
 
 
 
 /** 허브 전체 정보 */
-export const getHerbs = async (page: number, size: number) => {
+export const getHerbs = async (page: number, size: number, condition: HerbSearchCondition) => {
 
-    const { data } = await getHerbsFetch(apiRoutes.herb.getAll(page, size));
+    const { data } = await getHerbsFetch(apiRoutes.herb.getAll(page, size, condition));
     return data;
 
 }

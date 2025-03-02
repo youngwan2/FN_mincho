@@ -17,7 +17,7 @@ export default function Profile() {
     }
 
     return (
-        <div className="flex relative border rounded-2xl py-3 px-2 border-primary-dark-gray">
+        <div className="flex relative border rounded-2xl py-3 px-2 border-primary-dark-gray bg-[rgba(255,255,255,0.8)]">
             <img
                 src={profileInfo.avatarUrl || "https://picsum.photos/800/600"}
                 alt="프로필 이미지"

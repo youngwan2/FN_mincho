@@ -23,19 +23,25 @@ export default function HerbDetailContents({ herb }: HerbDetailContentsProps) {
                     </HerbDetailSubTitle>
                     {herb.useeRegn}
                 </p>
+
                 <p className=" text-[16px] flex flex-col items-start  mt-8">
                     <HerbDetailSubTitle>
                         민간용법
                     </HerbDetailSubTitle>
-                    {
-                        herb.prvateTherpy.split('<br />').map((line, index) => (
-                            <React.Fragment key={index}>
-                                {line.trim()}
-                                {index !== herb.prvateTherpy.split('<br />').length - 1 && <br />}
-                            </React.Fragment>
-                        ))
-                    }
+                    <pre className="whitespace-pre-wrap font-prentendard">
+                        {
+                            herb.prvateTherpy.replaceAll("<br />", "\n").replaceAll("- ", "\n").replaceAll("참고 :","(참고)").replaceAll("주의 :", "\n(주의)").replaceAll("□", "\n ■")
+                            // herb.prvateTherpy.split('<br />').map((line, index) => (
+                            //     <React.Fragment key={index}>
+                            //         {line.trim()}
+                            //         {index !== herb.prvateTherpy.split('<br />').length - 1 && <br />}
+                            //     </React.Fragment>
+                            // ))
+                        }
+
+                    </pre>
                 </p>
+
                 <p className=" text-[16px] flex flex-col items-start  mt-8">
                     <HerbDetailSubTitle>
                         형태
@@ -50,7 +56,7 @@ export default function HerbDetailContents({ herb }: HerbDetailContentsProps) {
                     }
                 </p>
             </div>
-        </div>
+        </div >
 
     )
 }

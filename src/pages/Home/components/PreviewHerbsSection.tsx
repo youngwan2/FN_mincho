@@ -10,7 +10,11 @@ export default function PreviewHerbsSection() {
 
     const navigate = useNavigate();
 
-    const { error, herbs, isFetching} = useHerbsGetQuery(5)
+    const { error, herbs, isFetching} = useHerbsGetQuery(5, {
+        bneNm:'',
+        month:'',
+        orderBy:''
+    })
     const OPTIONS: EmblaOptionsType = { dragFree: true }
     const SLIDES = herbs
 

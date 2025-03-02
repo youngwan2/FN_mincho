@@ -18,6 +18,12 @@ export interface HerbDetail {
     useeRegn: string; // 사용 부위
 }
 
+export interface HerbSearchCondition {
+    bneNm: string,
+    month: string,
+    orderBy: string
+}
+
 export enum Month {
     January = "1월",
     February = "2월",

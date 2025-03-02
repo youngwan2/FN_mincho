@@ -14,11 +14,8 @@ export function useCreateHerbBookmarkMutation() {
             return createHerbBookmark(bookmark, herbId)
         },
         onSuccess: (_data, variables) => {
+            toast.info("관심 약초에 추가하였습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.herbBookmark.update(variables.herbId) })
-        },
-        onError: (error) => {
-            // 에러가 발생했을 때 처리 (예: 에러 메시지 표시 등)
-            toast.error(error.message)
         }
     })
 }
@@ -32,11 +29,8 @@ export function useDeleteHerbBookmarkMutation() {
             return deleteHerbBookmark(herbId)
         },
         onSuccess: (_data, variables) => {
+            toast.info("관심 약초를 취소하였습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.herbBookmark.update(variables) })
-        },
-        onError: (error) => {
-            // 에러가 발생했을 때 처리 (예: 에러 메시지 표시 등)
-            console.error('Error adding todo:', error)
         }
     })
 }

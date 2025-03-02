@@ -1,26 +1,23 @@
 
 
-import { FormEvent } from "react";
+import { FormEventHandler } from "react";
 import Submit from "../../../components/button/Submit";
 import { herbCategories, monthCategories } from "../../../config/categories";
 import { IoCalendarOutline, IoFolderOpenOutline } from "react-icons/io5";
 
-export default function SearchForm() {
+export default function SearchForm({ onSubmit }: { onSubmit: FormEventHandler }) {
 
 
-    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-
-    }
 
     return (
-        <form className="md:flex-row md:gap-2 md:mt-0 mt-8 gap-3 flex-col flex items-center justify-center w-full  " onSubmit={handleSubmit}>
+        <form className="md:flex-row md:gap-2 md:mt-0 mt-8 gap-3 flex-col flex items-center justify-center w-full  " onSubmit={onSubmit}>
             <div className="flex items-center relative min-w-[150px] h-15 justify-center w-full">
                 <label htmlFor="herb-month">
                     <IoCalendarOutline className="md:block hidden mr-2 text-4xl" />
                 </label>
                 <select
                     id="herb-month"
+                    name="month"
                     className="outline-[#05d182] inline-block w-full p-3 border rounded-xl">
                     <option value="" className="text-center">개화시기</option>
                     {monthCategories.map(month => {
@@ -38,11 +35,12 @@ export default function SearchForm() {
                 </label>
                 <select
                     id="herb-category"
+                    name="bneNm"
                     className="outline-[#05d182] inline-block min-w-[150px] w-full p-3 border rounded-xl">
                     <option className="text-center" value="">카테고리</option>
                     {herbCategories.map(category => {
                         return (
-                            <option  key={category} value={category}>{category}</option>
+                            <option key={category} value={category}>{category}</option>
                         )
 
                     })}
