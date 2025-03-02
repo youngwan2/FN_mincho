@@ -14,7 +14,6 @@ import LoadingSpinner from "../../components/spinner/LoadingSpinner";
 export default function HerbDetailPage() {
 
     const { herbId } = useParams() ?? { herbId: 1 };
-    console.log("herbId:"+herbId)
     const { herb, isLoading } = useHerbDetailGetQuery(herbId ? Number(herbId) : 1)
 
     const bannerImage = (herb?.imgUrls ?? [])[Math.max(Number(herb?.imgUrl?.length ?? 0),0)]

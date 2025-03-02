@@ -23,7 +23,6 @@ export function useHerbBookmarkCountGetQuery(herbId: number) {
         queryFn: () => getCountHerbBookmark(herbId)
     })
 
-
     const bookmarkMetadata: BookmarkMetadata = data?.data?.data ?? { count: 0, isBookmarked: false }
 
     return { bookmarkMetadata, isLoading, isError, status }
