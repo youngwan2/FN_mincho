@@ -1,50 +1,68 @@
-import { useEffect } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useHerbsGetQuery } from "../../hooks/queries/useQueryHerbs";
 import { useInView } from 'react-intersection-observer'
 import HerbBanner from "./components/HerbBanner";
 import HerbBody from "./components/HerbBody";
 import SearchForm from "./components/SearchForm";
+import LoadingSpinner from "../../components/spinner/LoadingSpinner";
+import { HerbSearchCondition } from "../../types/herb.types";
 
 
 export default function HerbPage() {
-
-
     const { ref, inView } = useInView()
+
+    const [searchCondition, setSearchCondition] = useState<HerbSearchCondition>({
+        bneNm: '',
+        month: '',
+        orderBy: '',
+    })
+
+
     const {
-        status,
         herbs,
-        error,
         isFetching,
         isFetchingNextPage,
+        isError,
         fetchNextPage,
         hasNextPage,
-    } = useHerbsGetQuery(9);
+    } = useHerbsGetQuery(9, searchCondition);
+
+
+    // 필터 검색
+    const onSearchCondition = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const bneNm = formData.get("bneNm")?.toString() ?? ''
+        const month = formData.get("month")?.toString() ?? ''
+
+        setSearchCondition(prev => ({
+            ...prev,
+            bneNm,
+            month,
+        }))
+
+    }
 
     useEffect(() => {
-        fetchNextPage();
+        if (hasNextPage && !isError) {
+            fetchNextPage();
+        }
     }, [fetchNextPage, inView])
 
     return (
 
         <div className="h-auto">
-            <SearchForm />
+            <SearchForm onSubmit={onSearchCondition} />
             <HerbBanner herbs={herbs} />
             <HerbBody herbs={herbs} />
 
             {/* 로딩체크 (임시) */}
-            <button className="mx-auto " ref={ref}>
-                {isFetchingNextPage
-                    ? '가져오는 중...'
-                    : hasNextPage
-                        ? '더보기'
-                        : '마지막'}
-
-            </button>
-            <div>
-                {isFetching && !isFetchingNextPage
-                    ? '가져오는 중...'
-                    : null}
-            </div>
+            <button className={`border-primary-dark-gray text-primary-dark-gray mx-auto border py-2 px-4 rounded-[3px] flex justify-center mt-10 invisible`} ref={ref} />
+            {
+                isFetching && isFetchingNextPage
+                    ? <LoadingSpinner fixed={true} />
+                    : null
+            }
         </div>
     )
 }

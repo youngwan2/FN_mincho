@@ -12,7 +12,7 @@ interface HerbDetailFooterProps {
 
 export default function HerbDetailFooter({ herbId }: HerbDetailFooterProps) {
 
-    const { herbs, isError, isLoading, status } = useHerbRandomGetQuery(herbId);
+    const { herbs} = useHerbRandomGetQuery(herbId);
 
     return (
         <div className="mt-15">
@@ -25,16 +25,15 @@ export default function HerbDetailFooter({ herbId }: HerbDetailFooterProps) {
                 <HerbList>
                     {herbs.map((herb: Herb) => {
                         return (
-
                             <HerbItem key={herb.id}>
                                 <Link to={"/herbs/" + herb.id} className="h-auto ">
                                     <div>
-                                        <img src={herb.imgUrl1} alt={herb.cntntsSj} className="w-full h-full rounded-[5px]" />
+                                        <img src={herb.imgUrl1} alt={herb.cntntsSj} className="w-full h-[200px] rounded-[5px]" />
                                     </div>
                                     <div className="flex flex-col items-start p-2 h-auto">
                                         <strong className="text-[18px]">{herb.cntntsSj}</strong>
-                                        <span className=" text-[12px]">2월 ~ 6월</span>
-                                        <span className="bg-primary-green text-white text-[12px] rounded-[3px] px-2">{herb.bneNm}</span>
+                                        <span className="text-[13px]">{herb.hbdcNm}</span>
+                                        <span className="bg-primary-green text-white text-[12px] rounded-[3px] px-2 mt-2">{herb.bneNm}</span>
                                     </div>
                                 </Link>
                             </HerbItem>

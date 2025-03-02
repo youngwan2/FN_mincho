@@ -50,7 +50,7 @@ export default function InteractionPanel({ herb, herbId }: InteractionPanelProps
     }
 
     return (
-        <div className="flex gap-3 p-2 mt-5">
+        <div className="flex gap-3 p-2 mt-5 z-50">
             <button title="좋아요" className="hover:cursor-pointer text-3xl flex items-center mr-2"><IoHeartOutline /><span>0</span> </button>
             <button title="공유하기" className="hover:cursor-pointer text-3xl flex items-center mr-2"><IoShareOutline /><span>0</span> </button>
 

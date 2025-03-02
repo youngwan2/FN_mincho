@@ -5,7 +5,7 @@ interface HerbDetailBodyProps {
 
 export default function HerbDetailBody({children }: HerbDetailBodyProps) {
   return (
-    <div className="min-h-[768px]">
+    <div className="min-h-[768px] relative">
       {children}
     </div>
   )

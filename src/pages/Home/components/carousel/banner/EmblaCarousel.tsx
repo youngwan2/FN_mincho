@@ -63,7 +63,7 @@ export default function EmblaCarousel({ slides, options, month }: PropType) {
           <div className="embla__viewport z-1" ref={emblaRef}>
             <div className="embla__container">
               {slides.map((herb) => (
-                <div className="embla__slide " key={herb.id}>
+                <div className="embla__slide " key={herb?.id}>
                   <div className="embla__slide__number w-full h-full ">
                     <img src={herb.imgUrl1} width={innerWidth} height={600} className='w-full h-full' />
                   </div>

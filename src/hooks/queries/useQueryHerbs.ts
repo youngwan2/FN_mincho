@@ -1,23 +1,26 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
 import { getHerbBlooming, getHerbDetail, getHerbRandom, getHerbs } from "../../service/herb"
+import { HerbSearchCondition } from "../../types/herb.types"
 
 
 
 /** 허브 전체 정보 */
-export const useHerbsGetQuery = (size: number) => {
+export const useHerbsGetQuery = (size: number, condition:HerbSearchCondition) => {
 
     const {
         status,
         data,
         error,
+        isError,
         isFetching,
+        isPending,
         isFetchingNextPage,
         fetchNextPage,
         hasNextPage
     } = useInfiniteQuery({
-        queryKey: queryKeys.herbs.getAll(0, size),
-        queryFn: ({ pageParam }) => getHerbs(pageParam, size),
+        queryKey: queryKeys.herbs.getAll(0, size, condition),
+        queryFn: ({ pageParam }) => getHerbs(pageParam, size, condition),
         initialPageParam: 0,
         // getPreviousPageParam: (firstData: any) => firstData.previousId ?? undefined,
         getNextPageParam: (lastData: any) => lastData.nextPage ?? undefined
@@ -30,7 +33,9 @@ export const useHerbsGetQuery = (size: number) => {
         status,
         herbs: flattedData,
         error,
+        isError,
         isFetching,
+        isPending,
         isFetchingNextPage,
         fetchNextPage,
         hasNextPage,
@@ -52,14 +57,14 @@ export const useHerbDetailGetQuery = (herbId: number) => {
 /** 허브 랜덤 정보 */
 export const useHerbRandomGetQuery = (herbId: number) => {
 
-    const { data, isLoading, isError, status } = useQuery({
+    const { data, isPending, isError, status } = useQuery({
         queryKey: queryKeys.herbs.getRandom(herbId),
         queryFn: () => getHerbRandom(herbId)
     })
 
 
     const herbs = data?.data ?? []
-    return { herbs, isLoading, isError, status }
+    return { herbs, isPending, isError, status }
 
 }
 
