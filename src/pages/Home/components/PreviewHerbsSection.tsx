@@ -3,6 +3,7 @@ import { EmblaOptionsType } from 'embla-carousel'
 import MoreButton from "./MoreButton"
 import { useHerbsGetQuery } from "../../../hooks/queries/useQueryHerbs"
 import { useNavigate } from "react-router"
+import LoadingSpinner from "../../../components/spinner/LoadingSpinner"
 
 
 export default function PreviewHerbsSection() {
@@ -10,7 +11,7 @@ export default function PreviewHerbsSection() {
 
     const navigate = useNavigate();
 
-    const { error, herbs, isFetching} = useHerbsGetQuery(5, {
+    const { herbs, isFetching} = useHerbsGetQuery(5, {
         bneNm:'',
         month:'',
         orderBy:''
@@ -25,6 +26,7 @@ export default function PreviewHerbsSection() {
                 <MoreButton onClick={()=> navigate("/herbs")}/>
             </div>
             <div className="md:max-w-[80%] md:mt-0 mt-10 w-full z-10">
+                {isFetching && <LoadingSpinner/>}
                 <EmblaCarousel herbs={SLIDES} options={OPTIONS} />
             </div>
             <div className='top-[-30px] left-0 absolute w-full h-[300px] bg-[#F2F2F7] z-0'></div>

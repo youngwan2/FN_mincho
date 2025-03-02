@@ -40,6 +40,11 @@ export const apiRoutes = {
         countByHerb: (herbId: number) => baseUrl + `/herbs/${herbId}/herb-bookmarks/count`,
         countByUser: () => baseUrl + `/users/me/herbs/herb-bookmarks/count`
     },
+    herbLike:{
+        count:(herbId:number)=> baseUrl +`/herbs/${herbId}/likes`,
+        create: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/likes`,
+        delete: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/likes`,
+    },
     community: {
         post: {
             get: (page: number, size: number) => baseUrl + '/community/posts?page=' + page + '&size=' + size,

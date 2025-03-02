@@ -5,7 +5,7 @@ import { HerbSearchCondition } from "../types/herb.types";
 export const queryKeys = {
     // 허브 
     herbs: {
-        getAll: (page: number, size: number, condition:HerbSearchCondition) => ["herbs", page, size, condition],
+        getAll: (page: number, size: number, condition: HerbSearchCondition) => ["herbs", page, size, condition],
         getById: (herbId: number) => ["herbs", herbId],
         getRandom: (herbId: number) => ["herbs", "random", herbId],
         getMonth: (month: string) => ["herbs", "blooming", month]
@@ -22,4 +22,9 @@ export const queryKeys = {
         getByHerbId: (herbId: number) => ["herbBookmark", herbId],
         update: (herbId: number) => ["herbBookmark", herbId],
     },
+    // 좋아요
+    herbLike: {
+        update: (herbId: number) => ["herbLike", herbId],
+        getAll: (herbId: number) => ["herbLike", herbId]
+    }
 }
