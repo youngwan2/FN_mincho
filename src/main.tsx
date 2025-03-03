@@ -20,6 +20,7 @@ import FindPasswordPage from './pages/FindPassword/page';
 import HerbPage from './pages/Herb/page';
 import HerbDetailPage from './pages/HerbDetail/page';
 import Mypage from './pages/Mypage/page';
+import CommunityPage from './pages/Community/page';
 
 
 const queryClient = new QueryClient({
@@ -41,6 +42,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="herbs" element={<HerbPage />} />
             <Route path="herbs/:herbId" element={<HerbDetailPage />} />
             <Route path="users/me" element={<Mypage/>}/>
+            <Route path="community" element={<CommunityPage/>}/>
           </Route>
           <Route path='/auth' element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />

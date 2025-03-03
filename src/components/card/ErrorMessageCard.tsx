@@ -7,7 +7,7 @@ interface ErrorMessageCardProps {
 
 export default function ErrorMessageCard({ icon, text }: ErrorMessageCardProps) {
   return (
-    <div className="">
+    <div className="mt-5">
       {icon}
       {text}
     </div>

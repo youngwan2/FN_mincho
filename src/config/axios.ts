@@ -22,7 +22,8 @@ instance.interceptors.request.use(function(request){
 // 응답 인터셉터
 instance.interceptors.response.use(function (response) {
 
-  const rawToken = response?.headers['Authorization'] as string
+  const rawToken = response.headers['authorization'] as string
+
   if(!rawToken) return response;
 
   setToken(rawToken.split(" ")[1])
