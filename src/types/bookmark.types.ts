@@ -1,11 +1,16 @@
 
 
 export interface Bookmark {
-    herbName: string
+    id: number
     url: string
 }
 
+export interface BookmarkInfo {
+    count: number
+    bookmarks: Bookmark[]
+}
+
 export interface BookmarkMetadata {
-    count:number;
-    isBookmarked:boolean;
+    count: number;
+    isBookmarked: boolean;
 }

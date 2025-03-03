@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
 import { getCountHerbBookmark, getHerbBookmark } from "../../service/bookmark"
-import { BookmarkMetadata } from "../../types/bookmark.types"
+import { BookmarkInfo, BookmarkMetadata } from "../../types/bookmark.types"
 
 
 
@@ -12,7 +12,9 @@ export function useHerbBookmarkGetQuery(page: number, size: number) {
         queryFn: () => getHerbBookmark(page, size)
     })
 
-    return { data, isLoading, isError, status }
+    const bookmarkInfo: BookmarkInfo = data?.data ?? { count: 0, bookmarks: [] }
+
+    return { bookmarkInfo, isLoading, isError, status }
 }
 
 

@@ -40,19 +40,17 @@ export const apiRoutes = {
         countByHerb: (herbId: number) => baseUrl + `/herbs/${herbId}/herb-bookmarks/count`,
         countByUser: () => baseUrl + `/users/me/herbs/herb-bookmarks/count`
     },
-    herbLike:{
-        count:(herbId:number)=> baseUrl +`/herbs/${herbId}/likes`,
+    herbLike: {
+        count: (herbId: number) => baseUrl + `/herbs/${herbId}/likes`,
         create: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/likes`,
         delete: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/likes`,
     },
-    community: {
-        post: {
-            get: (page: number, size: number) => baseUrl + '/community/posts?page=' + page + '&size=' + size,
-            getById: (herbId: number) => baseUrl + `/community/posts/${herbId}`,
-            create: baseUrl + '/community/posts',
-            update: (postId: number) => baseUrl + `/community/posts/${postId}`,
-            delete: (postId: number) => baseUrl + `/community/posts/${postId}`,
-        }
-    },
+    posts: {
+        getAll: (page: number, size: number) => baseUrl + '/community/posts?page=' + page + '&size=' + size,
+        getById: (postId: number) => baseUrl + `/community/posts/${postId}`,
+        create: baseUrl + '/community/posts',
+        update: (postId: number) => baseUrl + `/community/posts/${postId}`,
+        delete: (postId: number) => baseUrl + `/community/posts/${postId}`,
+    }
 
 } as const

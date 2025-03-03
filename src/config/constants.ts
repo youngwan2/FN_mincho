@@ -1,4 +1,4 @@
-import { Post } from "../types/community.types";
+import { Post } from "../types/post.types";
 
  // 게시글 데이터
  export const posts: Post[] = [
