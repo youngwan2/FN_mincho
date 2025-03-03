@@ -13,7 +13,7 @@ export default function HerbBanner({ herbs}: HerbBannerProps) {
                 미리보기
             </HerbTitle>
 
-            {!herbs && <ErrorMessageCard icon={"11"} text="조회된 허브 데이터가 없습니다." />}
+            {herbs.length<1 && <ErrorMessageCard text="조회된 미리보기가 없습니다." />}
             <ul className="md:grid-cols-3 sm:grid-cols-2 grid-cols-1 grid h-full gap-5">
                 {
                     herbs.slice(herbs.length - 3).map((herb) => {

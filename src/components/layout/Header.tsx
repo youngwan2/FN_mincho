@@ -18,8 +18,8 @@ export default function Header() {
                 <nav className="ml-15">
                     <ul className="flex">
                         <li className={`mx-3 font-bold text-[15px]`}><Link to={"/herbs"}>약초도감</Link></li>
-                        <li className={`mx-3 font-bold text-[15px]`}><Link to={"/herbs/season"}></Link>계절약초</li>
-                        <li className={`mx-3 font-bold text-[15px]`}><Link to={"/community"}></Link> 커뮤니티</li>
+                        <li className={`mx-3 font-bold text-[15px]`}><Link to={"/herbs/season"}>추천약초</Link></li>
+                        <li className={`mx-3 font-bold text-[15px]`}><Link to={"/community"}>커뮤니티</Link></li>
                     </ul>
                 </nav>
             </div>
