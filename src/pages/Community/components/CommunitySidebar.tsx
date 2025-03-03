@@ -9,7 +9,7 @@ interface CommunitySidebarProps {
 export default function CommunitySidebar({ activeCategory, onClick }: CommunitySidebarProps) {
 
     return (
-        <div className="w-64 bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="w-64 bg-white rounded-lg shadow-sm overflow-hidden">
             <div className="bg-[#05D182] text-white p-4 font-semibold">
                 카테고리
             </div>

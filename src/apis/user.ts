@@ -39,3 +39,6 @@ export const updateProfileFetch = async (profile: Profile) => {
         }
     }
 }
+
+
+/** 사용자가 작성한 게시글 목록*/

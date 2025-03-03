@@ -26,5 +26,10 @@ export const queryKeys = {
     herbLike: {
         update: (herbId: number) => ["herbLike", herbId],
         getAll: (herbId: number) => ["herbLike", herbId]
+    },
+    // 게시글
+    posts: {
+        getAll: (page: number, size: number) => ["posts", page, size],
+        getByPostId: (postId: number) => ["posts", postId]
     }
 }

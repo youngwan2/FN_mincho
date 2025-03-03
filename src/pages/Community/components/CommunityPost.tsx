@@ -9,7 +9,7 @@ import CommunityPostList from "./CommunityPostList";
 
 export default function CommunityPost({ activeCategory }: CommunityPostProps) {
     return (
-        <div className="flex-1 bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="flex-1 bg-white rounded-lg shadow-sm overflow-hidden">
             <div className="flex justify-between items-center p-4 border-b border-gray-200">
                 <h2 className="font-semibold text-2xl">
                     {communityCategories.find(cat => cat.id === activeCategory)?.name || '전체 글'}
@@ -23,7 +23,7 @@ export default function CommunityPost({ activeCategory }: CommunityPostProps) {
             <CommunityPostList posts={posts} />
 
             {/* 페이지네이션 */}
-            <div className="flex justify-center my-6">
+            <div className="flex justify-center my-12">
                 <ul className="flex">
                     <li className="mx-1">
                         <a href="#" className="inline-block px-3 py-1 border border-gray-300 rounded-md">
