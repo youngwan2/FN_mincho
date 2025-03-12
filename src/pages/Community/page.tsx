@@ -5,7 +5,7 @@ import CommunityHeader from "./components/CommunityHeader";
 import CommunitySidebar from "./components/CommunitySidebar";
 import CommunityPost from "./components/CommunityPost";
 import CommunityBody from "./components/CommunityBody";
-import { usePostStatisticsGetQuery } from "../../hooks/queries/useQueryPosts";
+import { usePostsGetQuery, usePostStatisticsGetQuery } from "../../hooks/queries/useQueryPosts";
 
 const pageSize = 10
 export default function CommunityPage() {
@@ -15,10 +15,13 @@ export default function CommunityPage() {
     const [activeCategory, setActiveCategory] = useState<string>('info');
 
 
-    const {categoryInfos} = usePostStatisticsGetQuery(page, pageSize)
+    const { categoryInfos } = usePostStatisticsGetQuery(page, pageSize)
+    const conditions = {
+        orderBy: 'asc',
+        category: activeCategory
 
-
-
+    }
+    const { posts, isError, isLoading } = usePostsGetQuery(page, pageSize, conditions)
 
     const onCategoryHandler = (categoryId: string) => {
         setActiveCategory(categoryId)
@@ -36,7 +39,7 @@ export default function CommunityPage() {
                     <CommunitySidebar activeCategory={activeCategory} categoryInfos={categoryInfos} onClick={onCategoryHandler} />
 
                     {/* 게시판 내용 */}
-                    <CommunityPost activeCategory={activeCategory} />
+                    <CommunityPost activeCategory={activeCategory} categoryInfos={categoryInfos} posts={posts} isLoading={isLoading} />
                 </CommunityBody>
             </div>
         </div>

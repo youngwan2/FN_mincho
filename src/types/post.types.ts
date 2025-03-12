@@ -21,7 +21,9 @@ export interface Post {
     category: string;
     categoryType: 'notice' | 'info' | 'free' | 'question' | 'share';
     title: string;
-    author: string;
+    author: {
+        nickname: string
+    };
     date: string;
     commentCount: number;
     viewCount: number;

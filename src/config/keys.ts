@@ -30,6 +30,6 @@ export const queryKeys = {
     posts: {
         getAll: (page: number, size: number) => ["posts", page, size],
         getByPostId: (postId: number) => ["posts", postId],
-        getStatistics: (page: number, size: number) => ["posts", page, size]
+        getStatistics: (page: number, size: number) => ["posts","statistics", page, size]
     }
 }
