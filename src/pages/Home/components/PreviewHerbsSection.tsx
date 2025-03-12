@@ -11,7 +11,7 @@ export default function PreviewHerbsSection() {
 
     const navigate = useNavigate();
 
-    const { herbs, isFetching} = useHerbsGetQuery(5, {
+    const { herbs, isFetching, isError} = useHerbsGetQuery(5, {
         bneNm:'',
         month:'',
         orderBy:''
@@ -25,7 +25,7 @@ export default function PreviewHerbsSection() {
                 <h2 className="text-4xl  leading-13">약초도감 <br /> <strong>미리보기</strong></h2>
                 <MoreButton onClick={()=> navigate("/herbs")}/>
             </div>
-            <div className="md:max-w-[80%] md:mt-0 mt-10 w-full z-10">
+            <div className={`${isError ? '' :'' } md:max-w-[80%] md:mt-0 mt-10 w-full z-10 relative` }>
                 {isFetching && <LoadingSpinner/>}
                 <EmblaCarousel herbs={SLIDES} options={OPTIONS} />
             </div>

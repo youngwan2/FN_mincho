@@ -1,7 +1,6 @@
 import { HerbSearchCondition } from "../types/herb.types";
 
 
-
 export const queryKeys = {
     // 허브 
     herbs: {
@@ -30,6 +29,7 @@ export const queryKeys = {
     // 게시글
     posts: {
         getAll: (page: number, size: number) => ["posts", page, size],
-        getByPostId: (postId: number) => ["posts", postId]
+        getByPostId: (postId: number) => ["posts", postId],
+        getStatistics: (page: number, size: number) => ["posts", page, size]
     }
 }

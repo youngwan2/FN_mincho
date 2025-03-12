@@ -32,3 +32,9 @@ export const deletePostFetch = (url: string) => {
     return instance.delete(url)
 
 }
+
+/** 카테고리별 게시글 통계 */
+export const getPostStatisticsFetch = (url: string) => {
+    return instance.get(url)
+
+}

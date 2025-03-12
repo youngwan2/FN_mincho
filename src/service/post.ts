@@ -1,4 +1,4 @@
-import { createPostFetch, deletePostFetch, getPostDetailFetch, getPostsFetch, updatePostFetch } from "../apis/post";
+import { createPostFetch, deletePostFetch, getPostDetailFetch, getPostsFetch, getPostStatisticsFetch, updatePostFetch } from "../apis/post";
 import { apiRoutes } from "../config/api";
 import { PostRequest, PostSearchCondition } from "../types/post.types";
 
@@ -33,4 +33,11 @@ export const updatePost = async (postId: number, post: PostRequest) => {
 export const deletePost = async (postId: number) => {
     const url = apiRoutes.posts.delete(postId)
     return await deletePostFetch(url);
+}
+
+/** 카테고리별 게시글 통계 */
+export const getPostStatistics = async () => {
+    const url = apiRoutes.posts.statistics()
+    return await getPostStatisticsFetch(url)
+
 }

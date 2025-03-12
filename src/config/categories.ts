@@ -1,4 +1,3 @@
-import { Category } from "../types/post.types";
 
 
 export const herbCategories = [
@@ -16,11 +15,3 @@ export const monthCategories = [
   "7월", "8월", "9월", "10월", "11월", "12월"
 ];
 
-    // 카테고리 데이터
-export const communityCategories: Category[] = [
-      { id: 'all', name: '전체 글', count: 489 },
-      { id: 'notice', name: '공지사항', count: 23 },
-      { id: 'info', name: '정보 공유', count: 156 },
-      { id: 'free', name: '자유게시판', count: 215 },
-      { id: 'question', name: '질문 & 답변', count: 67 },
-  ];
