@@ -5,7 +5,7 @@ import { PostRequest, PostSearchCondition } from "../types/post.types";
 
 /** 게시글 전체 조회 */
 export const getPosts = async (page: number, size: number, condition: PostSearchCondition) => {
-    const { data } = await getPostsFetch(apiRoutes.posts.getAll(page, size), condition);
+    const { data } = await getPostsFetch(apiRoutes.posts.getAll(page, size, condition));
     return data;
 }
 

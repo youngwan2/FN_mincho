@@ -1,13 +1,11 @@
 import instance from "../config/axios"
-import { PostRequest, PostSearchCondition } from "../types/post.types"
+import { PostRequest } from "../types/post.types"
 
 
 
 /** 게시글 조회 요청 */
-export const getPostsFetch = (url: string, condition: PostSearchCondition) => {
-    return instance.get(url, {
-        data: condition
-    })
+export const getPostsFetch = (url: string) => {
+    return instance.get(url)
 }
 
 /** 게시글 상세 조회 요청 */

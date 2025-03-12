@@ -1,4 +1,5 @@
 import { HerbSearchCondition } from "../types/herb.types"
+import { PostSearchCondition } from "../types/post.types"
 
 export const baseUrl = 'http://localhost:8080/api/v1'
 
@@ -46,12 +47,12 @@ export const apiRoutes = {
         delete: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/likes`,
     },
     posts: {
-        getAll: (page: number, size: number) => baseUrl + '/community/posts?page=' + page + '&size=' + size,
+        getAll: (page: number, size: number, condition: PostSearchCondition) => baseUrl + '/community/posts?page=' + page + '&size=' + size + '&category=' + condition.category+'&',
         getById: (postId: number) => baseUrl + `/community/posts/${postId}`,
         create: baseUrl + '/community/posts',
         update: (postId: number) => baseUrl + `/community/posts/${postId}`,
         delete: (postId: number) => baseUrl + `/community/posts/${postId}`,
-        statistics: ()=> baseUrl +`/community/statistics/posts`
+        statistics: () => baseUrl + `/community/statistics/posts`
     }
 
 } as const

@@ -6,15 +6,14 @@ import { PostSearchCondition } from "../../types/post.types"
 
 // 게시글 전체 조회
 export const usePostsGetQuery = (page: number, size: number, condition: PostSearchCondition) => {
-
-    const { data, isLoading, isError, status } = useQuery({
+    const { data, isPending, isError, status } = useQuery({
         queryKey: queryKeys.posts.getAll(page, size),
         queryFn: () => getPosts(page, size, condition),
         placeholderData: keepPreviousData
     })
-    console.log("게시글: " + data)
-    const posts = data?.data ?? []
-    return { posts, isLoading, isError, status }
+    console.log("게시글 목록: " + data)
+    const posts = data?.data?.posts ?? []
+    return { posts, isLoading: isPending, isError, status }
 }
 
 // 게시글 상세 조회
