@@ -51,6 +51,7 @@ export const apiRoutes = {
         create: baseUrl + '/community/posts',
         update: (postId: number) => baseUrl + `/community/posts/${postId}`,
         delete: (postId: number) => baseUrl + `/community/posts/${postId}`,
+        statistics: ()=> baseUrl +`/community/statistics/posts`
     }
 
 } as const

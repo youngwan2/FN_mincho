@@ -9,9 +9,9 @@ export type Category = {
 
 // 추가 포스트
 export interface PostRequest {
-    category:'notice' | 'info' | 'free' | 'question' | 'share';
-    title:string;
-    author:string;
+    category: 'notice' | 'info' | 'free' | 'question' | 'share';
+    title: string;
+    author: string;
 }
 
 
@@ -19,7 +19,7 @@ export interface PostRequest {
 export interface Post {
     id: number;
     category: string;
-    categoryType:'notice' | 'info' | 'free' | 'question' | 'share' ;
+    categoryType: 'notice' | 'info' | 'free' | 'question' | 'share';
     title: string;
     author: string;
     date: string;
@@ -33,4 +33,11 @@ export interface PostSearchCondition {
     orderBy: string;
     category: string
 
+}
+
+
+// 카테고리 타입
+export interface PostStatistics {
+    category: string
+    count: number
 }

@@ -21,7 +21,7 @@ export default function HerbBody({ herbs }: HerbBodyProps) {
                 sort={<HerbSort />}
             />
             <HerbList>
-                {herbs.slice(3, herbs.length).length<1 && <ErrorMessageCard text="조회된 약초 목록이 없습니다."/>}
+                {herbs.slice(0, herbs.length).length<1 && <ErrorMessageCard text="조회된 약초 목록이 없습니다."/>}
                 {herbs.slice(0, herbs.length).map((herb) => {
                     return (
                         <HerbItem key={herb.id}>

@@ -21,6 +21,7 @@ import HerbPage from './pages/Herb/page';
 import HerbDetailPage from './pages/HerbDetail/page';
 import Mypage from './pages/Mypage/page';
 import CommunityPage from './pages/Community/page';
+import ErrorMessageCard from './components/card/ErrorMessageCard';
 
 
 const queryClient = new QueryClient({
@@ -37,14 +38,14 @@ createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <Routes>
-          <Route path='/' element={<RootLayout />}>
+          <Route path='/' element={<RootLayout />} errorElement={<ErrorMessageCard/>}>
             <Route index element={<HomePage />} />
             <Route path="herbs" element={<HerbPage />} />
             <Route path="herbs/:herbId" element={<HerbDetailPage />} />
             <Route path="users/me" element={<Mypage/>}/>
             <Route path="community" element={<CommunityPage/>}/>
           </Route>
-          <Route path='/auth' element={<AuthLayout />}>
+          <Route path='/auth' element={<AuthLayout />}  errorElement={<ErrorMessageCard/>}>
             <Route path="login" element={<LoginPage />} />
             <Route path="signup" element={<RegisterPage />} />
             <Route path="find-password" element={<FindPasswordPage />} />

@@ -74,10 +74,10 @@ export default function EmblaCarousel({ slides, options, month }: PropType) {
 
           {/* 슬라이드 컨텐츠 */}
           <div className='z-50 absolute right-[15%] top-[10%]'>
-            <span className='p-1 px-2 rounded-2xl bg-[#05D182] text-white'>{"'" + month + "'에 개화하는 약초"}</span>
+            <span className='p-1 px-2 rounded-2xl bg-[#05D182] text-white'>{ month + "에 개화하는 약초"}</span>
             <h2 className='text-5xl font-bold text-white mt-3'>{slides[currentSlideIndex]?.cntntsSj || ''}
               <span className='text-3xl ml-1 text-primary-gray'>
-                {`${slides[currentSlideIndex]?.hbdcNm}`}
+                {`${slides[currentSlideIndex]?.hbdcNm || ''}`}
               </span>
             </h2>
           </div>
