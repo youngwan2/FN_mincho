@@ -2,15 +2,15 @@ interface CommunityPostProps {
     activeCategory: string
     categoryInfos: PostStatistics[]
     posts:Post[]
-    isLoading:boolean
+    postFetchState: PostFetchState
 }
 
 import PrimaryButton from "../../../components/button/PrimaryButton";
-import { Post, PostStatistics } from "../../../types/post.types";
+import { Post, PostFetchState, PostStatistics } from "../../../types/post.types";
 import { getCategoryName } from "../../../utils/formatter";
 import CommunityPostList from "./CommunityPostList";
 
-export default function CommunityPost({ activeCategory, categoryInfos, posts, isLoading}: CommunityPostProps) {
+export default function CommunityPost({ activeCategory, categoryInfos, posts, postFetchState}: CommunityPostProps) {
 
 
     return (
@@ -25,7 +25,7 @@ export default function CommunityPost({ activeCategory, categoryInfos, posts, is
             </div>
 
             {/* 게시글 목록 */}
-            <CommunityPostList posts={posts} isLoading={isLoading} />
+            <CommunityPostList posts={posts} postFetchState={postFetchState} />
 
             {/* 페이지네이션 */}
             <div className="flex justify-center my-12">

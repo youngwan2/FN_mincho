@@ -43,3 +43,11 @@ export interface PostStatistics {
     category: string
     count: number
 }
+
+
+// 포스트 페치 상태
+export interface PostFetchState {
+    isError: boolean
+    isLoading: boolean
+    status: string
+}

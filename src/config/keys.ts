@@ -1,4 +1,5 @@
 import { HerbSearchCondition } from "../types/herb.types";
+import { PostSearchCondition } from "../types/post.types";
 
 
 export const queryKeys = {
@@ -28,8 +29,8 @@ export const queryKeys = {
     },
     // 게시글
     posts: {
-        getAll: (page: number, size: number) => ["posts", page, size],
+        getAll: (page: number, size: number, condition: PostSearchCondition) => ["posts", page, size, condition],
         getByPostId: (postId: number) => ["posts", postId],
-        getStatistics: (page: number, size: number) => ["posts","statistics", page, size]
+        getStatistics: (page: number, size: number) => ["posts", "statistics", page, size]
     }
 }
