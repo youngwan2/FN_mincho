@@ -30,16 +30,16 @@ export default function CommunitySidebar({ activeCategory, categoryInfos, onClic
 
 
                     return (
-                        <li
-                            key={categoryId}
-                            className={`flex justify-between items-center p-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50
+                            <li
+                                key={categoryId}
+                                className={`flex justify-between items-center p-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50
                                         ${activeCategory === categoryInfo.category ? 'border-l-4 border-l-[#05D182] font-semibold' : ''}`}
-                            onClick={() => onClick(categoryInfo.category)}>
-                            <span>{categoryName}</span>
-                            <span className={`px-2 py-1 rounded-full text-xs ${activeCategory === categoryId ? 'bg-[#05D182] text-white' : 'bg-gray-200 text-gray-700'}  `}>
-                                {count}
-                            </span>
-                        </li>
+                                onClick={() => onClick(categoryInfo.category)}>
+                                <span>{categoryName}</span>
+                                <span className={`px-2 py-1 rounded-full text-xs ${activeCategory === categoryId ? 'bg-[#05D182] text-white' : 'bg-gray-200 text-gray-700'}  `}>
+                                    {count}
+                                </span>
+                            </li>
                     )
                 }
 

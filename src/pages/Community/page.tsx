@@ -1,18 +1,17 @@
-// interface pageProps { }
-
 import { useState } from "react";
 import CommunityHeader from "./components/CommunityHeader";
 import CommunitySidebar from "./components/CommunitySidebar";
 import CommunityPost from "./components/CommunityPost";
 import CommunityBody from "./components/CommunityBody";
 import { usePostsGetQuery, usePostStatisticsGetQuery } from "../../hooks/queries/useQueryPosts";
+import { PostFetchState } from "../../types/post.types";
 
 const pageSize = 10
 export default function CommunityPage() {
 
     const [page, setPage] = useState(0);
     // 현재 선택된 카테고리 상태
-    const [activeCategory, setActiveCategory] = useState<string>('info');
+    const [activeCategory, setActiveCategory] = useState<string>('free');
 
 
     const { categoryInfos } = usePostStatisticsGetQuery(page, pageSize)
@@ -21,7 +20,13 @@ export default function CommunityPage() {
         category: activeCategory
 
     }
-    const { posts, isError, isLoading } = usePostsGetQuery(page, pageSize, conditions)
+    const { posts, isError, isLoading, status } = usePostsGetQuery(page, pageSize, conditions)
+
+    const postFetchState:PostFetchState = {
+        isError,
+        isLoading,
+        status
+    }
 
     const onCategoryHandler = (categoryId: string) => {
         setActiveCategory(categoryId)
@@ -39,7 +44,7 @@ export default function CommunityPage() {
                     <CommunitySidebar activeCategory={activeCategory} categoryInfos={categoryInfos} onClick={onCategoryHandler} />
 
                     {/* 게시판 내용 */}
-                    <CommunityPost activeCategory={activeCategory} categoryInfos={categoryInfos} posts={posts} isLoading={isLoading} />
+                    <CommunityPost postFetchState={postFetchState} activeCategory={activeCategory} categoryInfos={categoryInfos} posts={posts} />
                 </CommunityBody>
             </div>
         </div>
