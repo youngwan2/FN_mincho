@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
 import { getPostDetail, getPosts, getPostStatistics } from "../../service/post"
-import { PostSearchCondition } from "../../types/post.types"
+import { PostSearchCondition, PostStatistics } from "../../types/post.types"
 
 
 // 게시글 전체 조회
@@ -33,7 +33,7 @@ export const usePostStatisticsGetQuery = (page: number, size: number) => {
         queryKey: queryKeys.posts.getStatistics(page, size),
         queryFn: () => getPostStatistics()
     })
-    const categoryInfos = data?.data?.data ?? []
+    const categoryInfos: PostStatistics[] = data?.data?.data ?? []
     return { categoryInfos, isLoading: isPending, isError, status }
 }
 
