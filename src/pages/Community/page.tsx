@@ -10,14 +10,10 @@ import { PostFetchState, PostStatistics } from "../../types/post.types";
 
 const pageSize = 10
 export default function CommunityPage() {
-<<<<<<< HEAD
     const [query, setQuery] = useState({
         type: '',
         value: ''
     })
-=======
-
->>>>>>> 6aa429912039f9fbfaddb9c6ade3952093d11b7c
     const [currentPage, setCurrentPage] = useState(0);
     // 현재 선택된 카테고리 상태
     const [activeCategory, setActiveCategory] = useState<string>('free');
@@ -87,10 +83,7 @@ export default function CommunityPage() {
 }
 
 
-<<<<<<< HEAD
 // 전체 아이템 개수 계산
-=======
->>>>>>> 6aa429912039f9fbfaddb9c6ade3952093d11b7c
 function calculateTotalItems(categoryInfos: PostStatistics[]) {
 
     let totalItems = 0;
