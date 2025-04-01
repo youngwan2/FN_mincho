@@ -16,7 +16,7 @@ export interface PostRequest {
 
 
 // 포스트
-export interface Post {
+export interface Post  {
     id: number;
     category: string;
     categoryType: 'notice' | 'info' | 'free' | 'question' | 'share';
@@ -24,15 +24,23 @@ export interface Post {
     author: {
         nickname: string
     };
-    date: string;
+    createdAt: string;
     commentCount: number;
     viewCount: number;
     likeCount: number;
 };
 
+// 포스트 상세
+export interface PostDetail extends Post {
+    contents?:string
+}
+
+
 // 포스트 검색 조건
 export interface PostSearchCondition {
-    orderBy: string;
+    order: string;
+    sort:string
+    query?:string | null
     category: string
 
 }

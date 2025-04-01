@@ -27,7 +27,7 @@ instance.interceptors.response.use(function (response) {
   if(!rawToken) return response;
 
   setToken(rawToken.split(" ")[1])
-
+ 
   return response;
 
 }, function (error) {

@@ -1,4 +1,5 @@
-import  { EmptyItemMessageCard } from "../../../components/card/ErrorMessageCard"
+import { Link } from "react-router"
+import { EmptyItemMessageCard } from "../../../components/card/ErrorMessageCard"
 import StaticLoadingSpinner from "../../../components/spinner/StaticLoadingSpinner"
 import { Post, PostFetchState } from "../../../types/post.types"
 
@@ -8,7 +9,7 @@ interface CommunityPostListProps {
 }
 
 export default function CommunityPostList({ posts, postFetchState }: CommunityPostListProps) {
-    const { isError, isLoading, status } = postFetchState
+    const { isError, isLoading } = postFetchState
     return (
         <ul className="relative min-h-104">
             {isLoading
@@ -17,6 +18,8 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                     ? <li><EmptyItemMessageCard /></li>
                     : posts.map((post) => (
                         <li key={post.id} className="flex items-center p-4 border-b border-gray-100 hover:bg-gray-50">
+
+                            {/* 카테고리 */}
                             <div className={`
                             min-w-24 mr-4 px-3 py-1 rounded-full text-center text-xl text-white
                             ${post.category === 'notice' ? 'bg-red-500' : ''}
@@ -27,17 +30,21 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                                 {post.category}
                             </div>
 
+                            {/* 타이틀 */}
                             <div className="flex-1">
-                                <div className="font-medium mb-1 hover:text-[#05D182] cursor-pointer">
-                                    {post.title}
-                                </div>
-                                <div className="flex text-xl text-gray-500">
-                                    <div className="mr-3">{post.author.nickname}</div>
-                                    <div className="mr-3">{post.date}</div>
-                                    {/* <div className="text-[#05D182] font-medium">댓글 {post.commentCount}</div> */}
-                                </div>
+                                <Link to={`/community/${post.id}`}>
+                                    <div className="font-medium mb-1 hover:text-[#05D182] cursor-pointer">
+                                        {post.title}
+                                    </div>
+                                    <div className="flex text-xl text-gray-500">
+                                        <div className="mr-3">{post.author?.nickname}</div>
+                                        <div className="mr-3">{post.date}</div>
+                                        {/* <div className="text-[#05D182] font-medium">댓글 {post.commentCount}</div> */}
+                                    </div>
+                                </Link>
                             </div>
 
+                            {/* 조회수/추천 */}
                             <div className="text-center min-w-16">
                                 {/* <div className="text-xl text-gray-500">조회 {post.viewCount}</div> */}
                                 <div className="text-xl text-gray-500">추천 {post.likeCount}</div>

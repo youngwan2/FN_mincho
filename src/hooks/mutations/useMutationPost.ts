@@ -2,11 +2,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../config/keys";
 import { toast } from "react-toastify";
 import { createPost, deletePost, updatePost } from "../../service/post";
-import { PostRequest } from "../../types/post.types";
+import { PostRequest, PostSearchCondition } from "../../types/post.types";
 
 
 /** 게시글 추가 */
-export function useCreatePostMutation() {
+export function useCreatePostMutation(condition:PostSearchCondition) {
     const queryClient = useQueryClient()
 
     return useMutation({
@@ -15,13 +15,13 @@ export function useCreatePostMutation() {
         },
         onSuccess: () => {
             toast.info("게시글을 추가하였습니다.")
-            queryClient.invalidateQueries({ queryKey: queryKeys.posts.getAll(0, 5) })
+            queryClient.invalidateQueries({ queryKey: queryKeys.posts.getAll(0, 5, condition) })
         }
     })
 }
 
 /** 게시글 수정 */
-export function useUpdatePostMutation() {
+export function useUpdatePostMutation(condition:PostSearchCondition) {
     const queryClient = useQueryClient()
 
     return useMutation({
@@ -30,13 +30,13 @@ export function useUpdatePostMutation() {
         },
         onSuccess: () => {
             toast.info("게시글을 삭제하였습니다.")
-            queryClient.invalidateQueries({ queryKey: queryKeys.posts.getAll(0, 5) })
+            queryClient.invalidateQueries({ queryKey: queryKeys.posts.getAll(0, 5, condition) })
         }
     })
 }
 
 /** 게시글 삭제 */
-export function useDeletePostMutation() {
+export function useDeletePostMutation(condition:PostSearchCondition) {
     const queryClient = useQueryClient()
 
     return useMutation({
@@ -45,7 +45,7 @@ export function useDeletePostMutation() {
         },
         onSuccess: () => {
             toast.info("게시글을 삭제하였습니다.")
-            queryClient.invalidateQueries({ queryKey: queryKeys.posts.getAll(0, 5) })
+            queryClient.invalidateQueries({ queryKey: queryKeys.posts.getAll(0, 5, condition) })
         }
     })
 }
