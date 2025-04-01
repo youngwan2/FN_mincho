@@ -1,3 +1,4 @@
+import { GetCommentFetchParams } from "../types/comment.types";
 import { HerbSearchCondition } from "../types/herb.types";
 import { PostSearchCondition } from "../types/post.types";
 
@@ -34,6 +35,10 @@ export const queryKeys = {
         getStatistics: (page: number, size: number) => ["posts", "statistics", page, size]
     },
     postLike: {
-        update:(postId:number)=> ["posts",postId]
+        update: (postId: number) => ["posts", postId]
+    },
+    comments: {
+        getAll: ({ page, size, postId, sortby }: GetCommentFetchParams) => ["comments", page, size, postId, sortby],
+        update: ({ page, size, postId, sortby }: GetCommentFetchParams) => ["comments", page, size, postId, sortby]
     }
 }

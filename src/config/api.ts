@@ -46,25 +46,29 @@ export const apiRoutes = {
         create: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/likes`,
         delete: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/likes`,
     },
-    // page=0&size=15&category=free&sort=id&order=desc&query=
     posts: {
         getAll: (page: number, size: number, condition: PostSearchCondition) => {
             return baseUrl + '/community/posts?page=' + page +
                 '&size=' + size +
                 '&category=' + condition.category +
-                '&order=' + condition.order+
-                '&sort=' + condition.sort+
+                '&order=' + condition.order +
+                '&sort=' + condition.sort +
                 '&query=' + condition.query
 
         },
         getById: (postId: number) => baseUrl + `/community/posts/${postId}`,
-        create: baseUrl + '/community/posts',
+        create: () => baseUrl + '/community/posts',
         update: (postId: number) => baseUrl + `/community/posts/${postId}`,
         delete: (postId: number) => baseUrl + `/community/posts/${postId}`,
         statistics: () => baseUrl + `/community/statistics/posts`
     },
     postLike: {
-        update: (postId:number)=> baseUrl + `/community/posts/${postId}/like`
+        update: (postId: number) => baseUrl + `/community/posts/${postId}/likes`
+    },
+    comments: {
+        getAll: ({ page, size, sortby, postId }: { page: number, size: number, sortby: string, postId: number }) => baseUrl + `/community/posts/${postId}/comments?page=${page}&size=${size}&sortby=${sortby}`,
+        update: (postId: number) => baseUrl + `/community/posts/${postId}/comments`,
+        delete: (postId: number) => baseUrl + `/community/posts/${postId}/comments`
     }
 
 } as const

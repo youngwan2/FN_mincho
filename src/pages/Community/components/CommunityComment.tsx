@@ -4,9 +4,6 @@ import { IoAdd, IoThumbsUp } from "react-icons/io5";
 
 interface CommunityCommentProps {
     postId:number
-
-
-
  }
   
 export default function CommunityComment({postId}:CommunityCommentProps) {
