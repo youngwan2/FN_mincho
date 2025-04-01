@@ -46,13 +46,25 @@ export const apiRoutes = {
         create: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/likes`,
         delete: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/likes`,
     },
+    // page=0&size=15&category=free&sort=id&order=desc&query=
     posts: {
-        getAll: (page: number, size: number, condition: PostSearchCondition) => baseUrl + '/community/posts?page=' + page + '&size=' + size + '&category=' + condition.category+'&',
+        getAll: (page: number, size: number, condition: PostSearchCondition) => {
+            return baseUrl + '/community/posts?page=' + page +
+                '&size=' + size +
+                '&category=' + condition.category +
+                '&order=' + condition.order+
+                '&sort=' + condition.sort+
+                '&query=' + condition.query
+
+        },
         getById: (postId: number) => baseUrl + `/community/posts/${postId}`,
         create: baseUrl + '/community/posts',
         update: (postId: number) => baseUrl + `/community/posts/${postId}`,
         delete: (postId: number) => baseUrl + `/community/posts/${postId}`,
         statistics: () => baseUrl + `/community/statistics/posts`
+    },
+    postLike: {
+        update: (postId:number)=> baseUrl + `/community/posts/${postId}/like`
     }
 
 } as const

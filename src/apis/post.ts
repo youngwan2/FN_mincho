@@ -36,3 +36,8 @@ export const getPostStatisticsFetch = (url: string) => {
     return instance.get(url)
 
 }
+
+/** 게시글 좋아요 수정 */
+export const updatePostLikeFetch = (url:string) => {
+    return instance.post(url)
+}

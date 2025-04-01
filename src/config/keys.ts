@@ -32,5 +32,8 @@ export const queryKeys = {
         getAll: (page: number, size: number, condition: PostSearchCondition) => ["posts", page, size, condition],
         getByPostId: (postId: number) => ["posts", postId],
         getStatistics: (page: number, size: number) => ["posts", "statistics", page, size]
+    },
+    postLike: {
+        update:(postId:number)=> ["posts",postId]
     }
 }
