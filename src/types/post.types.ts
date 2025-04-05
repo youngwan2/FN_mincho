@@ -7,19 +7,22 @@ export type Category = {
 };
 
 
+// 포스트 카테고리
+export type CategoryType = 'notice' | 'info' | 'free' | 'question'
 // 추가 포스트
 export interface PostRequest {
-    category: 'notice' | 'info' | 'free' | 'question' | 'share';
+    category: CategoryType
+    contents: string
     title: string;
-    author: string;
+
 }
 
 
 // 포스트
-export interface Post  {
+export interface Post {
     id: number;
     category: string;
-    categoryType: 'notice' | 'info' | 'free' | 'question' | 'share';
+    categoryType: CategoryType
     title: string;
     author: {
         nickname: string
@@ -32,15 +35,15 @@ export interface Post  {
 
 // 포스트 상세
 export interface PostDetail extends Post {
-    contents?:string
+    contents?: string
 }
 
 
 // 포스트 검색 조건
 export interface PostSearchCondition {
     order: string;
-    sort:string
-    query?:string | null
+    sort: string
+    query?: string | null
     category: string
 
 }

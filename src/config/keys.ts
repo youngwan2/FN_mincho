@@ -23,22 +23,25 @@ export const queryKeys = {
         getByHerbId: (herbId: number) => ["herbBookmark", herbId],
         update: (herbId: number) => ["herbBookmark", herbId],
     },
-    // 좋아요
+    // 약초 좋아요
     herbLike: {
         update: (herbId: number) => ["herbLike", herbId],
         getAll: (herbId: number) => ["herbLike", herbId]
     },
     // 게시글
     posts: {
+        update:()=>["posts"],
         getAll: (page: number, size: number, condition: PostSearchCondition) => ["posts", page, size, condition],
         getByPostId: (postId: number) => ["posts", postId],
         getStatistics: (page: number, size: number) => ["posts", "statistics", page, size]
     },
+    // 게시글 좋아요
     postLike: {
         update: (postId: number) => ["posts", postId]
     },
+    // 댓글
     comments: {
-        getAll: ({ page, size, postId, sortby }: GetCommentFetchParams) => ["comments", page, size, postId, sortby],
-        update: ({ page, size, postId, sortby }: GetCommentFetchParams) => ["comments", page, size, postId, sortby]
+        getAll: ({ page, size, postId, sortby }: GetCommentFetchParams) => ["comments",postId, page, size, sortby],
+        update: (postId: number) => ["comments", postId]
     }
 }

@@ -1,6 +1,6 @@
 import { createCommentFetch, deleteCommentFetch, getCommentsFetch, updateCommentFetch } from "../apis/comment"
 import { apiRoutes } from "../config/api"
-import { CommentRequest } from "../types/comment.types"
+import { CommentCreateRequest, CommentUpdateRequest } from "../types/comment.types"
 
 
 
@@ -12,20 +12,20 @@ export const getComments = async ({ page, size, sortby, postId }: { page: number
 
 
 /** 댓글 추가 */
-export const createComment = async (postId: number, comment:CommentRequest) => {
-    const url = apiRoutes.comments.update(postId)
+export const createComment = async (postId: number, comment: CommentCreateRequest) => {
+    const url = apiRoutes.comments.create(postId, comment.parentCommentId || -999)
     return await createCommentFetch(url, comment)
 }
 
 /** 댓글 수정 */
-export const updateComment = async (postId: number, comment:CommentRequest) => {
-    const url = apiRoutes.comments.update(postId)
+export const updateComment = async (commentId:number,  comment: CommentUpdateRequest) => {
+    const url = apiRoutes.comments.update(commentId)
     return await updateCommentFetch(url, comment)
 }
 
 /** 댓글 삭제 */
-export const deleteComment = async (postId: number) => {
-    const url = apiRoutes.comments.delete(postId)
+export const deleteComment = async (commentId: number) => {
+    const url = apiRoutes.comments.delete(commentId)
     return await deleteCommentFetch(url)
 }
 
