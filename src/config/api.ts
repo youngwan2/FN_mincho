@@ -67,8 +67,9 @@ export const apiRoutes = {
     },
     comments: {
         getAll: ({ page, size, sortby, postId }: { page: number, size: number, sortby: string, postId: number }) => baseUrl + `/community/posts/${postId}/comments?page=${page}&size=${size}&sortby=${sortby}`,
-        update: (postId: number) => baseUrl + `/community/posts/${postId}/comments`,
-        delete: (postId: number) => baseUrl + `/community/posts/${postId}/comments`
+        create: (postId: number, commentId: number) => baseUrl + `/community/posts/${postId}/comments/${commentId || 0}`,
+        update: (commentId: number) => baseUrl + `/community/comments/${commentId}`,
+        delete: (commentId: number) => baseUrl + `/community/comments/${commentId}`
     }
 
 } as const

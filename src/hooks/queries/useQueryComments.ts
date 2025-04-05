@@ -4,15 +4,16 @@ import { getComments } from "../../service/comment"
 import { GetCommentFetchParams } from "../../types/comment.types"
 
 /** 유저 댓글 조회 */
-export const useProfileGetQuery = ({ page, size, sortby, postId }: GetCommentFetchParams) => {
+export const useCommentGetQuery = ({ page, size, sortby, postId }: GetCommentFetchParams) => {
 
     const { data, isLoading, isError, status } = useQuery({
-        queryKey: queryKeys.profile.get(),
+        queryKey: queryKeys.comments.getAll({page, size, sortby, postId}),
         queryFn: () => getComments({ page, size, sortby, postId })
     })
 
+    const commentInfo = data?.data?.data ?? []
 
-    const commentInfo = data?.data ?? []
+
     return { commentInfo, isLoading, isError, status }
 
 }

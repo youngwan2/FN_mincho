@@ -1,26 +1,28 @@
-// interface pageProps { }
-
 import { useState } from "react";
 import { IoArrowBack, IoSearch, IoThumbsUp } from "react-icons/io5";
 import { IoMdMore } from "react-icons/io";
 import { useParams } from "react-router";
 import { usePostDetailGetQuery } from "../../hooks/queries/useQueryPosts";
-import CommunityComment from "../Community/components/CommunityComment";
+import CommunityComment from "./components/comment/CommunityComment";
 import { useTogglePostLikeMutation } from "../../hooks/mutations/useMutationPostLike";
+import { useCommentGetQuery } from "../../hooks/queries/useQueryComments";
 
 
+const PAGE_SIZE = 10;
 export default function CommunityDetailPage() {
 
-
+  const [page, setPage] = useState(0)
   const { postId } = useParams();
 
-  const { isLoading, post, status } = usePostDetailGetQuery(Number(postId) || 0);
-  const {mutate:postLikeMutate} = useTogglePostLikeMutation(Number(postId) || 0);
-  const [activeTab, setActiveTab] = useState('comments');
+  // 데이터 페칭
+  const { isLoading: detailLoading, post, status: detailStatus } = usePostDetailGetQuery(Number(postId) || 0);
+  const { commentInfo, isError: commentIsError, isLoading: commentLoading, status: commentStatus } = useCommentGetQuery({ page, size: PAGE_SIZE, postId: Number(postId) || 0, sortby: 'desc' })
 
+  // 뮤테이션
+  const { mutate: postLikeMutate } = useTogglePostLikeMutation(Number(postId) || 0);
 
   // 좋아요 토글
-  function handleLikeToggle(){
+  function handleLikeToggle() {
     postLikeMutate(Number(postId) || 0);
   }
 
@@ -65,7 +67,7 @@ export default function CommunityDetailPage() {
         </div>
 
         {/* 댓글 */}
-        <CommunityComment postId={Number(postId)} />
+        <CommunityComment postId={Number(postId)} comments={commentInfo?.comments || []} totalCount={commentInfo?.totalCount || 0} />
       </div>
     </div>
   );

@@ -23,6 +23,7 @@ import Mypage from './pages/Mypage/page';
 import CommunityPage from './pages/Community/page';
 import ErrorMessageCard from './components/card/ErrorMessageCard';
 import CommunityDetailPage from './pages/CommunityDetail/page';
+import CommunityEditorPage from './pages/CommunityEditor/page';
 
 
 const queryClient = new QueryClient({
@@ -44,7 +45,10 @@ createRoot(document.getElementById('root')!).render(
             <Route path="herbs" element={<HerbPage />} />
             <Route path="herbs/:herbId" element={<HerbDetailPage />} />
             <Route path="users/me" element={<Mypage/>}/>
-            <Route path="community" element={<CommunityPage/>}/>
+            <Route path="community">
+              <Route index element={<CommunityPage/>}/>
+              <Route path='write' element={<CommunityEditorPage/>} />
+            </Route>
             <Route path='community/:postId' element={<CommunityDetailPage/>}/>
           </Route>
           <Route path='/auth' element={<AuthLayout />}  errorElement={<ErrorMessageCard/>}>
