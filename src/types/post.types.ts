@@ -29,6 +29,7 @@ export interface Post {
     };
     createdAt: string;
     commentCount: number;
+    isMine?: boolean;
     viewCount: number;
     likeCount: number;
 };

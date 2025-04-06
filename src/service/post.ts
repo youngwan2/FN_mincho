@@ -18,7 +18,7 @@ export const getPostDetail = async (postId: number) => {
 
 /** 게시글 추가 */
 export const createPost = async (post: PostRequest) => {
-    const url = apiRoutes.posts.create
+    const url = apiRoutes.posts.create()
     return await createPostFetch(url, post)
 }
 

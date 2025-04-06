@@ -1,88 +1,102 @@
-import { useQuill } from "react-quilljs";
-
-import "quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
-import { useCreatePostMutation } from "../../../hooks/mutations/useMutationPost";
-import { CategoryType, PostRequest } from "../../../types/post.types";
+import { useNavigate } from "react-router";
+import QuillEditor from "./QuillEditor";
 
+import { useCreatePostMutation, useUpdatePostMutation } from "../../../hooks/mutations/useMutationPost";
+import { CategoryType, PostRequest, PostDetail } from "../../../types/post.types";
 
-export default function CommunityEditor() {
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [category, setCategory] = useState("");
-    const { quill, quillRef } = useQuill({ placeholder: "여러분의 지식을 공유해보세요!" });
+interface CommunityEditorProps {
+    post?: PostDetail
+    formType: "create" | "update" | "detail"
+}
 
-    const { mutate: createPostMutate } = useCreatePostMutation();
+export default function CommunityEditor({ post, formType }: CommunityEditorProps) {
+    const isDetail = formType === 'detail';
 
+    const [title, setTitle] = useState(post?.title ?? "");
+    const [contents, setContents] = useState(post?.contents ?? "");
+    const [category, setCategory] = useState(post?.categoryType ?? "");
 
-    // 게시글 등록
-    const handleSubmit = async () => {
+    const { mutate: createPostMutate, isSuccess: createIsSuccess } = useCreatePostMutation();
+    const { mutate: updatePostMutate, isSuccess: updateIsSuccess } = useUpdatePostMutation();
+    const navigate = useNavigate();
 
-        if (category === "") {
-            alert("카테고리를 선택해주세요")
-            return
+    const handleSubmit = () => {
+        if (!category) {
+            alert("카테고리를 선택해주세요");
+            return;
         }
 
-        const post: PostRequest = {
-            title: title,
-            contents: content,
+        const newPost: PostRequest = {
+            title,
+            contents,
             category: category as CategoryType,
+        };
+
+        if (formType === "update" && post) {
+            updatePostMutate({ postId: post.id, post: newPost });
+        } else {
+            createPostMutate({ post: newPost });
         }
-
-        createPostMutate({ post })
-
     };
 
-
     useEffect(() => {
-        if (quill) {
-            quill.on('text-change', () => {
-                setContent(quillRef.current.firstChild.innerHTML)
-            });
-
+        if (createIsSuccess || updateIsSuccess) {
+            navigate("/community");
         }
-    }, [quill]);
+    }, [createIsSuccess, updateIsSuccess]);
 
     return (
-        <div className="w-full mx-auto py-4 h-[100vh] mt-10 ">
-            {/* 제목 */}
+        <div className="w-full mx-auto py-4 mt-5 h-auto">
+            {isDetail ? (
+                <h2 className="text-4xl font-bold mb-6">{post?.title}</h2>
+            ) : (
+                <>
+                    <div>
+                        <label>제목</label>
+                        <input
+                            type="text"
+                            className="w-full mb-4 p-2 border border-gray-300 rounded"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </div>
+                    <div className="pt-3">
+                        <label>카테고리</label>
+                        <select
+                            value={category}
+                            onChange={(e) => setCategory(e.currentTarget.value)}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        >
+                            <option value="">=선택=</option>
+                            <option value="info">정보공유</option>
+                            <option value="free">자유</option>
+                            <option value="question">질문&응답</option>
+                        </select>
+                    </div>
+                </>
+            )}
+
+            {/* 에디터 */}
             <div>
-                <label>제목</label>
-                <input
-                    type="text"
-                    placeholder="제목을 입력하세요"
-                    className="w-full mb-4 p-2 border border-gray-300 rounded"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                {!isDetail && (
+                    <div className="pb-2 flex justify-between items-center pt-8">
+                        <p>내용</p>
+                        <button
+                            onClick={handleSubmit}
+                            className="cursor-pointer bg-primary-green text-white px-4 py-1 rounded hover:bg-hover-primary-green"
+                        >
+                            저장하기
+                        </button>
+                    </div>
+                )}
+                <QuillEditor
+                    key={formType} // formType 바뀌면 에디터 리셋됨
+                    content={post?.contents}
+                    isDetail={isDetail}
+                    onChange={setContents}
                 />
             </div>
-
-            {/* 카테고리 */}
-            <div className=" pt-3">
-                <label>카테고리</label>
-                <select onChange={(e) => setCategory(e.currentTarget.value)} className="w-full p-2 border border-gray-300 rounded">
-                    <option defaultChecked value="">=선택=</option>
-                    <option value="info">정보공유</option>
-                    <option value="free">자유</option>
-                    <option value="question">질문&응답</option>
-                    <option value="question">질문&응답</option>
-                </select>
-            </div>
-
-
-            {/* 내용 */}
-            <div className="w-full h-[500px] pt-10">
-                <div className="pb-2 flex justify-between items-center">
-                    <p>내용</p>
-                    <button
-                        onClick={handleSubmit}
-                        className="cursor-pointer bg-primary-green text-white px-4 py-1 rounded hover:bg-hover-primary-green"
-                    >
-                        저장하기
-                    </button>
-                </div>
-                <div ref={quillRef} />
-            </div>
         </div>
-    )
+    );
 }
