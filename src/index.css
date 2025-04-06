@@ -1,38 +1,42 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
+.ql-container {
+  border: none !important;
+  .ql-editor {
+    line-height: 1.6;
+  }
+}
 
 @font-face {
-	font-family: Pretendard;       
-	src: url("./assets/fonts/Pretendard-Regular.woff");
-  }
+  font-family: Pretendard;
+  src: url('./assets/fonts/Pretendard-Regular.woff');
+}
 
-  table {
-	border-collapse: collapse;
-	border-spacing: 0;
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 @theme {
-	--font-size-16px:16px;
-	--font-prentendard: Pretendard,"sans-serif";
-	--color-primary-green: #05d182;
-	--color-hover-primary-green: #07BD77;
-	--color-primary-gray:#e6e7e9;
-	--color-primary-light-gray: #F2F2F7;
-	--color-primary-dark-gray:#D3D3D3;
-  }
+  --font-size-16px: 16px;
+  --font-prentendard: Pretendard, 'sans-serif';
+  --color-primary-green: #05d182;
+  --color-hover-primary-green: #07bd77;
+  --color-primary-gray: #e6e7e9;
+  --color-primary-light-gray: #f2f2f7;
+  --color-primary-dark-gray: #d3d3d3;
+}
 
-  
 @media (max-width: 768px) {
-	html {
-		font-size: 14px;
-		/* 태블릿 */
-	}
+  html {
+    font-size: 14px;
+    /* 태블릿 */
+  }
 }
 
 @media (max-width: 480px) {
-	html {
-		font-size: 12px;
-		/* 모바일 */
-	}
+  html {
+    font-size: 12px;
+    /* 모바일 */
+  }
 }
-

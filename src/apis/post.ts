@@ -21,7 +21,7 @@ export const createPostFetch = (url: string, post: PostRequest) => {
 
 /** 게시글 수정 */
 export const updatePostFetch = (url: string, post: PostRequest) => {
-    return instance.put(url, post)
+    return instance.patch(url, post)
 
 }
 

@@ -41,7 +41,7 @@ export function useUpdatePostMutation() {
             return updatePost(postId, post)
         },
         onSuccess: () => {
-            toast.info("게시글을 삭제하였습니다.")
+            toast.info("게시글을 수정하였습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.posts.update(), exact: false })
         },
         onError: (error) => {
