@@ -70,6 +70,9 @@ export const apiRoutes = {
         create: (postId: number, commentId: number) => baseUrl + `/community/posts/${postId}/comments/${commentId || 0}`,
         update: (commentId: number) => baseUrl + `/community/comments/${commentId}`,
         delete: (commentId: number) => baseUrl + `/community/comments/${commentId}`
-    }
+    },
+    statistics: {
+        getAll: () => baseUrl + '/users/me/stats',
+    },
 
 } as const

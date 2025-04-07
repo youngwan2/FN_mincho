@@ -1,4 +1,4 @@
-import { getProfileFetch, updateProfileFetch } from "../apis/user";
+import { getProfileFetch, getUserStatsFetch, updateProfileFetch } from "../apis/user";
 import { Profile } from "../types/user.types";
 
 
@@ -10,7 +10,15 @@ export const getInitialProfile = async () => {
 }
 
 /** 프로필 수정 요청*/
-export const updateProfile = async (profile:Profile) => {
+export const updateProfile = async (profile: Profile) => {
     const data = await updateProfileFetch(profile);
     return data
+}
+
+
+/** 마이페이지| 유저 통계 */
+export const getUserStats = async () => {
+    const data = await getUserStatsFetch();
+    return data
+
 }

@@ -30,7 +30,7 @@ export const queryKeys = {
     },
     // 게시글
     posts: {
-        update:()=>["posts"],
+        update: () => ["posts"],
         getAll: (page: number, size: number, condition: PostSearchCondition) => ["posts", page, size, condition],
         getByPostId: (postId: number) => ["posts", postId],
         getStatistics: (page: number, size: number) => ["posts", "statistics", page, size]
@@ -41,7 +41,11 @@ export const queryKeys = {
     },
     // 댓글
     comments: {
-        getAll: ({ page, size, postId, sortby }: GetCommentFetchParams) => ["comments",postId, page, size, sortby],
+        getAll: ({ page, size, postId, sortby }: GetCommentFetchParams) => ["comments", postId, page, size, sortby],
         update: (postId: number) => ["comments", postId]
-    }
+    },
+    // 통계
+    statistics: {
+        getAll: () => ["comments", "herbBookmark", "posts"],
+    },
 }
