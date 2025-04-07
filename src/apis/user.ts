@@ -41,4 +41,17 @@ export const updateProfileFetch = async (profile: Profile) => {
 }
 
 
-/** 사용자가 작성한 게시글 목록*/
+/** 마이페이지| 유저 통계 */
+export const getUserStatsFetch = async () => {
+    try {
+        const response = await instance.get(
+            apiRoutes.statistics.getAll()
+        )
+        return response.data
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            return error.response?.data
+
+        }
+    }
+}
