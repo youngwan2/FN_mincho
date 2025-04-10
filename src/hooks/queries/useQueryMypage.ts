@@ -10,8 +10,6 @@ export const useUserStatsGetQuery = () => {
     const { data, isPending, isError, status } = useQuery({
         queryKey: queryKeys.statistics.getAll(),
         queryFn: () => getUserStats(),
-
-        retry: 0,
     })
 
     const stats: UserStats = data

@@ -1,3 +1,4 @@
+import { useUserStatsGetQuery } from "../../hooks/queries/useQueryMypage";
 import MypageAnalytics from "./components/MypageAnalytics";
 import MypageContents from "./components/MypageContents";
 import MypageHeader from "./components/MypageHeader"
@@ -6,6 +7,10 @@ import MypageSettings from "./components/MypageSettings";
 
 
 export default function Mypage() {
+
+    const { stats, isLoading } = useUserStatsGetQuery();
+
+
     return (
         <div className="bg-white min-h-screen p-6">
             {/* 마이페이지 헤더 */}
@@ -18,10 +23,10 @@ export default function Mypage() {
                 {/* 활동 통계 및 게시물 섹션 */}
                 <div className="lg:col-span-2 space-y-6">
                     {/* 활동 통계 */}
-                    <MypageAnalytics />
+                    <MypageAnalytics stats={stats} isLoading={isLoading} />
 
                     {/* 콘텐츠 목록 */}
-                    <MypageContents />
+                    <MypageContents stats={stats} />
 
                     {/* 설정 섹션 */}
                     {/* <MypageSettings /> */}

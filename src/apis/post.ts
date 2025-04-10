@@ -41,3 +41,9 @@ export const getPostStatisticsFetch = (url: string) => {
 export const updatePostLikeFetch = (url:string) => {
     return instance.post(url)
 }
+
+
+/** 사용자별 게시글 */
+export const getPostsByUserFetch = (url:string) => {
+    return instance.get(url)
+}

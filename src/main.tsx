@@ -8,6 +8,7 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import '../src/assets/styles/fonts.css'
+import 'react-loading-skeleton/dist/skeleton.css'
 import './index.css'
 import { Route } from 'react-router';
 import { Routes } from 'react-router';

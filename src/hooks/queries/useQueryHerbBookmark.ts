@@ -6,10 +6,12 @@ import { BookmarkInfo, BookmarkMetadata } from "../../types/bookmark.types"
 
 
 /** 북마크 목록 조회(개수 포함) */
-export function useHerbBookmarkGetQuery(page: number, size: number) {
+export function useHerbBookmarkGetQuery(page: number, size: number, enabled?: boolean) {
     const { data, isLoading, isError, status } = useQuery({
         queryKey: queryKeys.herbBookmark.getAll(page, size),
-        queryFn: () => getHerbBookmark(page, size)
+        queryFn: () => getHerbBookmark(page, size),
+        enabled
+
     })
 
     const bookmarkInfo: BookmarkInfo = data?.data ?? { count: 0, bookmarks: [] }

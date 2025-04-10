@@ -63,3 +63,11 @@ export interface PostFetchState {
     isLoading: boolean
     status: string
 }
+
+
+// 마이페이지 사용자 포스트
+export interface MypagePost {
+    id: number;
+    title: string;
+    createdAt: string;
+}
