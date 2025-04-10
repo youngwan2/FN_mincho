@@ -1,21 +1,32 @@
-// interface MypagePostProps { }
-
 import { useNavigate } from "react-router";
 import MypageViewButton from "./MypageViewButton";
+import { usePostsByUserGetQuery } from "../../../hooks/queries/useQueryPosts";
+import { useState } from "react";
+import Pagination from "../../../components/pagination/Pagination";
 
-export default function MypagePost() {
+
+interface MypagePostProps {
+    totalCount: number
+    enabled: boolean
+}
+
+const PAGE_SIZE = 5;
+export default function MypagePost({ totalCount, enabled }: MypagePostProps) {
     const navigate = useNavigate();
+
+    const [page, setPage] = useState(0)
+
+
+    const { posts, isLoading, isError } = usePostsByUserGetQuery(page, PAGE_SIZE, enabled)
+
 
     function handleNavigate(path: string) {
         navigate(path)
     }
 
 
-    const posts: any[] = [
-        { id: 1, title: "라벤더 재배 팁", date: "2023-06-01", link: "/posts/1" },
-        { id: 2, title: "민트 활용법 공유", date: "2023-05-28" },
-        { id: 3, title: "로즈마리 효능에 대해", date: "2023-05-20" },
-    ];
+
+    // TODO: 로딩 스피너 추가해야 함
     return (
         <div className="bg-gray-50 rounded-lg">
             {posts.map((post, index) => (
@@ -27,12 +38,13 @@ export default function MypagePost() {
                     {/* 콘텐츠 정보 */}
                     <div>
                         <h3 className="text-2xl font-medium text-gray-800">{post.title}</h3>
-                        <p className="text-xl text-gray-500">{post.date}</p>
+                        <p className="text-xl text-gray-500">{post.createdAt}</p>
                     </div>
                     {/* 페이지 이동 버튼 */}
                     <MypageViewButton onNavigate={() => handleNavigate("/")} />
                 </div>
             ))}
+            <Pagination perPage={PAGE_SIZE} totalPage={Math.ceil(totalCount / PAGE_SIZE)} onPageChange={({ selected }: { selected: number }) => setPage(selected)} />
         </div>
     )
 }

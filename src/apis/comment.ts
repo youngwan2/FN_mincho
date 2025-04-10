@@ -25,3 +25,9 @@ export const deleteCommentFetch = (url: string) => {
 
 }
 
+
+/** 사용자별 댓글 조회 */
+export const CommentByUserFetch = (url: string) => {
+    return instance.get(url)
+
+}

@@ -1,4 +1,4 @@
-import { createPostFetch, deletePostFetch, getPostDetailFetch, getPostsFetch, getPostStatisticsFetch, updatePostFetch, updatePostLikeFetch } from "../apis/post";
+import { createPostFetch, deletePostFetch, getPostDetailFetch, getPostsByUserFetch, getPostsFetch, getPostStatisticsFetch, updatePostFetch, updatePostLikeFetch } from "../apis/post";
 import { apiRoutes } from "../config/api";
 import { PostRequest, PostSearchCondition } from "../types/post.types";
 
@@ -44,7 +44,13 @@ export const getPostStatistics = async () => {
 
 
 /** 게시글 좋아요 수정 */
-export const updatePostLike = async ( postId:number) => {
+export const updatePostLike = async (postId: number) => {
     const url = apiRoutes.postLike.update(postId)
     return await updatePostLikeFetch(url)
+}
+
+/** 마이페이지 | 사용자별 게시글 */
+export const getPostsByUser = async (page: number, size: number) => {
+    const url = apiRoutes.posts.byUser(page, size)
+    return await getPostsByUserFetch(url)
 }

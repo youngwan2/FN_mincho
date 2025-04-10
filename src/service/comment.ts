@@ -18,7 +18,7 @@ export const createComment = async (postId: number, comment: CommentCreateReques
 }
 
 /** 댓글 수정 */
-export const updateComment = async (commentId:number,  comment: CommentUpdateRequest) => {
+export const updateComment = async (commentId: number, comment: CommentUpdateRequest) => {
     const url = apiRoutes.comments.update(commentId)
     return await updateCommentFetch(url, comment)
 }
@@ -29,3 +29,8 @@ export const deleteComment = async (commentId: number) => {
     return await deleteCommentFetch(url)
 }
 
+/** 사용자별 댓글 조회 */
+export const getCommentsByUser = async (page: number, size: number) => {
+    const url = apiRoutes.comments.byUser(page, size)
+    return await getCommentsFetch(url)
+}

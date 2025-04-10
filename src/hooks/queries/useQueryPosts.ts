@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getPostDetail, getPosts, getPostStatistics } from "../../service/post"
-import { PostDetail, PostSearchCondition, PostStatistics } from "../../types/post.types"
+import { getPostDetail, getPosts, getPostsByUser, getPostStatistics } from "../../service/post"
+import { MypagePost, PostDetail, PostSearchCondition, PostStatistics } from "../../types/post.types"
 
 
 // 게시글 전체 조회
@@ -37,3 +37,15 @@ export const usePostStatisticsGetQuery = (page: number, size: number) => {
     return { categoryInfos, isLoading: isPending, isError, status }
 }
 
+/** 마이페이지 */
+// 사용자 게시글 조회
+export const usePostsByUserGetQuery = (page: number, size: number, enabled: boolean) => {
+    const { data, isPending, isError, status } = useQuery({
+        queryKey: queryKeys.posts.byUser(page, size, enabled),
+        queryFn: () => getPostsByUser(page, size),
+        enabled
+
+    })
+    const posts: MypagePost[] = data?.data ?? []
+    return { posts, isLoading: isPending, isError, status }
+}

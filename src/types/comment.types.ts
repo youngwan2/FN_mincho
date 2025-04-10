@@ -19,7 +19,7 @@ export interface Comment {
     nickname: string | null
     createdAt: string;
     updatedAt: string
-    isMine:boolean
+    isMine: boolean
     replies: Comment[]
 
 }
@@ -40,4 +40,12 @@ export interface CommentCreateRequest {
 /** 댓글 수정*/
 export interface CommentUpdateRequest {
     contents: string
+}
+
+
+/** 마이페이지 | 사용자 댓글  */
+export interface MypageComment {
+    id: number;
+    contents: string;
+    createdAt: string;
 }
