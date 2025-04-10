@@ -15,8 +15,6 @@ export default function MypageComment({ enabled, totalCount }: MypageCommentProp
 
   const { comments, isLoading, isError } = useCommentsByUserGetQuery(page, PAGE_SIZE, enabled)
 
-  console.log("마이페이지 댓글:", comments)
-
 
   // TODO: 로딩 스피너 추가해야 함
   return (
