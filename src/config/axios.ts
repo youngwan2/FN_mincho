@@ -1,6 +1,6 @@
 import axios from "axios";
 import { baseUrl } from "./api";
-import { getToken, setToken } from "../utils/storage";
+import { getToken, removeToken, setToken } from "../utils/storage";
 import { toast } from "react-toastify";
 
 // axios 인스턴스를 만들 때 구성 기본 값 설정
@@ -13,8 +13,8 @@ const instance = axios.create({
 });
 
 // 요청 인터셉터
-instance.interceptors.request.use(function(request){
-  request.headers['Authorization'] = getToken(); 
+instance.interceptors.request.use(function (request) {
+  request.headers['Authorization'] = getToken();
 
   return request;
 })
@@ -24,22 +24,25 @@ instance.interceptors.response.use(function (response) {
 
   const rawToken = response.headers['authorization'] as string
 
-  if(!rawToken) return response;
+  if (!rawToken) return response;
 
   setToken(rawToken.split(" ")[1])
- 
+
   return response;
 
 }, function (error) {
   // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
   // 응답 오류가 있는 작업 수행
-  
 
-  if(error.status === 409){
+
+  if (error.status === 409) {
     toast("이미 처리된 요청입니다.")
   }
+  if (error.status === 403) {
+    removeToken()
+  }
 
-  
+
   return Promise.reject(error);
 });
 

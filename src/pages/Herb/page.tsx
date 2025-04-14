@@ -6,6 +6,7 @@ import HerbBody from "./components/HerbBody";
 import SearchForm from "./components/SearchForm";
 import LoadingSpinner from "../../components/spinner/LoadingSpinner";
 import { HerbSearchCondition } from "../../types/herb.types";
+import { toast } from "react-toastify";
 
 
 export default function HerbPage() {
@@ -13,6 +14,7 @@ export default function HerbPage() {
 
     const [searchCondition, setSearchCondition] = useState<HerbSearchCondition>({
         bneNm: '',
+        search: '',
         month: '',
         orderBy: '',
     })
@@ -44,6 +46,9 @@ export default function HerbPage() {
     }
 
     useEffect(() => {
+        if (herbs.length < 9) {
+            return
+        } // 9 개 미만이면 더 이상 없다는 의미이므로 추가 페치 x
         if (hasNextPage && !isError) {
             fetchNextPage();
         }

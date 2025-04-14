@@ -31,10 +31,10 @@ export default function MypageContents({stats}:MypageContents) {
 
             {/* 콘텐츠 */}
             {tapIndex === 0
-                ? <MypagePost enabled={tapIndex === 0} totalCount={stats.postCount} />
+                ? <MypagePost enabled={tapIndex === 0} totalCount={stats?.postCount} />
                 : tapIndex === 1
-                    ? <MypageComment enabled={tapIndex === 1} totalCount={stats.commentCount} />
-                    : <MypageFavoriteHerb enabled={tapIndex === 2} totalCount={stats.bookmarkCount} />}
+                    ? <MypageComment enabled={tapIndex === 1} totalCount={stats?.commentCount} />
+                    : <MypageFavoriteHerb enabled={tapIndex === 2} totalCount={stats?.bookmarkCount} />}
 
         </div>
     )

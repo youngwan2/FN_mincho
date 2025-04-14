@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCommentsByUserGetQuery } from "../../../hooks/queries/useQueryComments";
 import Pagination from "../../../components/pagination/Pagination";
+import LoadingSpinner from "../../../components/spinner/LoadingSpinner";
 
 interface MypageCommentProps {
   enabled: boolean
@@ -19,7 +20,7 @@ export default function MypageComment({ enabled, totalCount }: MypageCommentProp
   // TODO: 로딩 스피너 추가해야 함
   return (
     <div className="bg-gray-50 rounded-lg">
-      {comments.map((comment, index) => {
+      {isLoading ? <LoadingSpinner /> :comments.map((comment, index) => {
         return (
           <div
             key={comment.id}

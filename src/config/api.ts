@@ -31,7 +31,8 @@ export const apiRoutes = {
         create: () => baseUrl + '/herbs',
         update: (herbId: number) => baseUrl + `/herbs/${herbId}`,
         delete: (herbId: number) => baseUrl + `/herbs/${herbId}`,
-        getByMonth: (month: string) => baseUrl + `/herbs/blooming?month=${month}`
+        getByMonth: (month: string) => baseUrl + `/herbs/blooming?month=${month}`,
+        recommend: (message: string) => baseUrl + `/herbs/recommend?message=${message}`
 
     },
     herbBookmark: {

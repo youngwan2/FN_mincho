@@ -1,12 +1,12 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getHerbBlooming, getHerbDetail, getHerbRandom, getHerbs } from "../../service/herb"
-import { HerbSearchCondition } from "../../types/herb.types"
+import { getHerbBlooming, getHerbDetail, getHerbRandom, getHerbRecommend, getHerbs } from "../../service/herb"
+import { HerbSearchCondition, RecommendHerbResponse } from "../../types/herb.types"
 
 
 
 /** 허브 전체 정보 */
-export const useHerbsGetQuery = (size: number, condition:HerbSearchCondition) => {
+export const useHerbsGetQuery = (size: number, condition: HerbSearchCondition) => {
 
     const {
         status,
@@ -45,12 +45,12 @@ export const useHerbsGetQuery = (size: number, condition:HerbSearchCondition) =>
 /** 허브 세부 정보 */
 export const useHerbDetailGetQuery = (herbId: number) => {
 
-    const { data, isLoading, isError, status } = useQuery({
+    const { data, isPending, isError, status } = useQuery({
         queryKey: queryKeys.herbs.getById(herbId),
         queryFn: () => getHerbDetail(herbId)
     })
     const herb = data?.data ?? []
-    return { herb, isLoading, isError, status }
+    return { herb, isLoading: isPending, isError, status }
 }
 
 
@@ -71,12 +71,26 @@ export const useHerbRandomGetQuery = (herbId: number) => {
 /** 이달의 개화 약초 */
 export const useHerbBloomingGetQuery = (month: string) => {
 
-    const { data, isLoading, isError, status } = useQuery({
+    const { data, isPending, isError, status } = useQuery({
         queryKey: queryKeys.herbs.getMonth(month),
         queryFn: () => getHerbBlooming(month)
     })
 
     const herbs = data?.data ?? []
-    return { herbs, isLoading, isError, status }
+    return { herbs, isLoading: isPending, isError, status }
+
+}
+
+/** 약초 추천 */
+export const useHerbRecommendGetQuery = (message: string) => {
+
+    const { data, isLoading, isError, status, isSuccess } = useQuery({
+        queryKey: queryKeys.herbs.getRecommend(message),
+        queryFn: () => getHerbRecommend(message),
+        enabled: message.length >= 4 ? true : false
+    })
+
+    const recommendList:RecommendHerbResponse = data ?? []
+    return { recommendList, isLoading, isError, status, isSuccess }
 
 }

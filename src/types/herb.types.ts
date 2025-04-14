@@ -19,9 +19,10 @@ export interface HerbDetail {
 }
 
 export interface HerbSearchCondition {
-    bneNm: string,
-    month: string,
-    orderBy: string
+    bneNm: string;
+    search: string;
+    month: string;
+    orderBy: string;
 }
 
 export enum Month {
@@ -37,4 +38,21 @@ export enum Month {
     October = "10월",
     November = "11월",
     December = "12월",
+}
+
+// 추천 약초 목록
+export interface RecommendHerbs {
+    answer: string;
+    herbName: string;
+    id: string;
+    priority: string; // 우선 순위
+    url: string;
+}
+
+// 추천 약초 응답
+export interface RecommendHerbResponse {
+    answer?:string
+    sender: string;
+    recommendHerbs: RecommendHerbs[];
+    createdAt: string;
 }

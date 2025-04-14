@@ -21,3 +21,8 @@ export const getHerbsRandomFetch = (url: string) => {
 export const getHerbsBloomingFetch = (url: string) => {
     return instance.get(url)
 }
+
+/** 추천 약초 */
+export const getHerbRecommendFetch=(url:string) => {
+    return instance.get(url)
+}
