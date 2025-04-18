@@ -12,7 +12,7 @@
 기존 약초 관련 커뮤니티들은 정보가 파편화되어 있거나 신뢰성이 낮은 경우가 많아 이를 보완하고자 함.
 
 ## 📅 개발 기간/유지보수
-- **개발 기간:** 2024년 2월 ~ (진행 중)
+- **개발 기간:** 2024년 2월 22일 ~ (진행중)
 - **유지보수:** 정식 출시 후 지속적인 업데이트 예정
 
 ## 🔥 배포
@@ -37,30 +37,86 @@
 
 - **AI 약초 추천 기능**
   - 사용자가 입력한 증상이나 관심사를 바탕으로 적절한 약초 추천
+  - PostgreSQL의 PGVector를 통해 코사인 유사도 검색을 수행하고, RAG 기반으로 보다 정확한 정보를 사용자에게 제공
 
 - **다크 모드 지원**
   - 사용자의 환경에 맞춰 UI 변경 가능
 
 ## 🧰 기술 스택
-- **프론트엔드**
-  - React 19
-  - TypeScript
-  - Zustand (전역 상태 관리)
-  - React Query (서버 상태 관리)
-  - Tailwind CSS
+| 구분 | 기술 스택 | 비고 |
+|--------------|--------------|--------------|
+| **Frontend** | `React 19` | 19버전부터 forwardRef 불필요 |
+|              | `TypeScript` | 정적 타입을 통해 안정성 향상 및 개발 생산성 증가 |
+|              | `Zustand` | 간단하고 가벼운 전역 상태 관리 라이브러리 |
+|              | `React Query` | 비동기 서버 상태 관리, 캐싱 및 자동 리페치 처리 |
+|              | `Tailwind CSS` | 유틸리티 기반 CSS 프레임워크로 빠른 UI 개발 가능 |
+| **Backend**  | `Spring Boot` | 안정적인 웹 애플리케이션 개발을 위한 백엔드 프레임워크 |
+|              | `Spring Security` | 인증, 인가 및 보안 기능 구현 |
+|              | `Spring AI` | OpenAI 기반 LLM과의 통합 및 AI 기능 개발 |
+|              | `OpenAI Embedding` | 사용자 입력 임베딩을 통한 유사도 검색 기반 추천 기능 |
+|              | `JPA`, `QueryDSL` | 객체-관계 매핑 및 타입 안전한 동적 쿼리 작성 |
+|              | `PostgreSQL (PGVector)` | 벡터 데이터 저장 및 유사도 기반 질의 처리 |
+| **ETC**      | `Vite` | 빠른 번들링 및 개발 환경 제공 |
+|              | `React Hook Form` | 폼 상태 및 유효성 검사 간편 처리 |
+|              | `AWS` | 배포, S3 스토리지, RDS 등 클라우드 인프라 운영 |
+|              | `GitHub Actions` | CI/CD 자동화로 빌드, 테스트, 배포 효율화 |
 
-- **백엔드**
-  - Spring Boot
-  - Spring Security
-  - JPA, MyBatis
-  - PostgreSQL
-
-- **기타**
-  - Vite (빌드 및 번들링)
-  - React Hook Form (폼 관리)
-  - AWS (배포 및 스토리지)
-  - GitHub Actions (CI/CD 자동화)
 
 ## 🗂️ 프로젝트 구조
 ```
+📦 src/
+ ┣ 📂apis               # Axios 기반 API 호출 함수 모음
+ ┣ 📂assets             # 정적 파일(이미지, 폰트, 스타일)
+ ┃ ┣ 📂fonts
+ ┃ ┣ 📂styles
+ ┃ ┃ ┗ 📜fonts.css
+ ┃ ┣ 📜home-map.png
+ ┃ ┣ 📜plant.png
+ ┃ ┗ 📜wave.svg
+ ┣ 📂components         # 공통 UI 컴포넌트 (재사용성 높은 요소들)
+ ┃ ┣ 📂button           # 버튼 UI 모음
+ ┃ ┣ 📂card             # 메시지/결과 카드
+ ┃ ┣ 📂carousel         # 이미지 슬라이더
+ ┃ ┣ 📂editor           # 커뮤니티 글 작성 등 에디터
+ ┃ ┣ 📂icon             # 아이콘 컴포넌트 (ex. Logo)
+ ┃ ┣ 📂layout           # 레이아웃 관련 구성 요소
+ ┃ ┣ 📂pagination       # 페이지네이션 컴포넌트
+ ┃ ┗ 📂spinner          # 로딩 스피너
+ ┣ 📂config             # API 설정, 상수값, 엔드포인트
+ ┃ ┣ 📜api.ts
+ ┃ ┣ 📜axios.ts
+ ┃ ┣ 📜categories.ts
+ ┃ ┣ 📜constants.ts
+ ┃ ┣ 📜keys.ts
+ ┃ ┗ 📜urls.ts
+ ┣ 📂hooks              # 커스텀 훅
+ ┃ ┣ 📂mutations        # POST, PUT, DELETE 관련 훅
+ ┃ ┣ 📂queries          # GET 관련 훅
+ ┃ ┣ 📜useAuth.ts       # 인증 관련 훅
+ ┃ ┣ 📜usePathType.ts   # 경로 기반 조건 분기
+ ┃ ┣ 📜useRedirection.tsx
+ ┃ ┗ 📜useRegisterForm.ts
+ ┣ 📂pages              # 라우팅 되는 페이지 UI 구성
+ ┃ ┣ 📂Home             # 홈 페이지
+ ┃ ┣ 📂Herb             # 약초 리스트
+ ┃ ┣ 📂HerbDetail       # 약초 상세 페이지
+ ┃ ┣ 📂HerbRecommend    # 추천 결과 페이지
+ ┃ ┣ 📂Community        # 커뮤니티 목록
+ ┃ ┣ 📂CommunityDetail  # 게시글 상세 + 댓글
+ ┃ ┣ 📂CommunityEditor  # 글쓰기 페이지
+ ┃ ┣ 📂Login            # 로그인
+ ┃ ┣ 📂Register         # 회원가입
+ ┃ ┣ 📂FindPassword     # 비밀번호 찾기
+ ┃ ┗ 📂Mypage           # 마이페이지
+ ┣ 📂service            # API 서비스 레이어 (비즈니스 로직)
+ ┣ 📂store              # 전역 상태 관리 (ex. 로그인 상태)
+ ┃ ┣ 📂types
+ ┃ ┗ 📜loginState.ts
+ ┣ 📂types              # 전역 타입 정의 (TS 인터페이스/타입)
+ ┣ 📂utils              # 공통 유틸 함수 모음
+ ┣ 📜App.tsx            # 라우팅/공통 레이아웃 설정
+ ┣ 📜index.css          # 전역 CSS
+ ┣ 📜main.tsx           # 진입점
+ ┗ 📜vite-env.d.ts      # Vite용 타입 정의
+
 ```
