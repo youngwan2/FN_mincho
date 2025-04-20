@@ -1,11 +1,15 @@
 import { IoMdMore } from "react-icons/io";
+
 import TimeAgo from "react-timeago"
-import { Comment, CommentCreateRequest, CommentUpdateRequest } from "../../../../types/comment.types";
-import { useCreateCommentMutation, useDeleteCommentMutation, useUpdateCommentMutation } from "../../../../hooks/mutations/useMutationComment";
-import { FormEvent, useState } from "react";
+
 import CommentSubmitForm from "./CommentSubmitForm";
 import CommentDropdown from "./CommentDropdown";
 import CommentEditForm from "./CommentEditForm";
+
+import { Comment, CommentCreateRequest, CommentUpdateRequest } from "../../../../types/comment.types";
+import { useCreateCommentMutation, useDeleteCommentMutation, useUpdateCommentMutation } from "../../../../hooks/mutations/useMutationComment";
+import { FormEvent, useState } from "react";
+
 import { toast } from "react-toastify";
 
 interface CommunityCommentProps {
@@ -39,7 +43,6 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
 
   // 댓글 삭제
   function handleDeleteComment(commentId: number) {
-    console.log(commentId)
     commentDeleteMutate(commentId)
     setIsOpen(false)
   }

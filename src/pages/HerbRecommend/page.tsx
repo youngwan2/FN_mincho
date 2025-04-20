@@ -68,6 +68,7 @@ export default function HerbRecommendPage() {
 
       if (inputRef.current) {
         inputRef.current.value = '';
+        setInput('')
       }
       setMessages(prev => ([
         ...prev,
