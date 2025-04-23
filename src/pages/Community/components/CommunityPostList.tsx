@@ -1,7 +1,7 @@
 import { Link } from "react-router"
 import { EmptyItemMessageCard } from "../../../components/card/ErrorMessageCard"
-import StaticLoadingSpinner from "../../../components/spinner/StaticLoadingSpinner"
 import { Post, PostFetchState } from "../../../types/post.types"
+import Skeleton from 'react-loading-skeleton'
 
 interface CommunityPostListProps {
     posts: Post[]
@@ -10,10 +10,43 @@ interface CommunityPostListProps {
 
 export default function CommunityPostList({ posts, postFetchState }: CommunityPostListProps) {
     const { isError, isLoading } = postFetchState
+
+    // 로딩 스켈레톤 렌더링 함수
+    const renderSkeletonItems = () => {
+        return Array(5).fill(0).map((_, index) => (
+            <li key={`skeleton-${index}`} className="flex items-center p-4 border-b border-gray-100">
+                {/* 카테고리 스켈레톤 */}
+                <div className="min-w-24 mr-4">
+                    <Skeleton width={80} height={32} borderRadius={20} />
+                </div>
+
+                {/* 타이틀 스켈레톤 */}
+                <div className="flex-1">
+                    <div className="font-medium mb-1">
+                        <Skeleton width="80%" height={24} />
+                    </div>
+                    <div className="flex text-xl text-gray-500">
+                        <div className="mr-3">
+                            <Skeleton width={80} height={20} />
+                        </div>
+                        <div className="mr-3">
+                            <Skeleton width={120} height={20} />
+                        </div>
+                    </div>
+                </div>
+
+                {/* 조회수/추천 스켈레톤 */}
+                <div className="text-center min-w-16">
+                    <Skeleton width={60} height={20} />
+                </div>
+            </li>
+        ))
+    }
+
     return (
         <ul className="relative min-h-104">
             {isLoading
-                ? <StaticLoadingSpinner size={25} />
+                ? renderSkeletonItems()
                 : isError
                     ? <li><EmptyItemMessageCard /></li>
                     : posts.map((post) => (
@@ -34,12 +67,11 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                             <div className="flex-1">
                                 <Link to={`/community/${post.id}`}>
                                     <div className="font-medium mb-1 hover:text-[#05D182] cursor-pointer">
-                                        {post.title}
+                                        <span className="p-1 px-2 bg-gray-200 rounded-xl mr-2">{post.id}</span> {post.title}
                                     </div>
-                                    <div className="flex text-xl text-gray-500">
-                                        <div className="mr-3">{post.author?.nickname}</div>
-                                        <div className="mr-3">{post.date}</div>
-                                        {/* <div className="text-[#05D182] font-medium">댓글 {post.commentCount}</div> */}
+                                    <div className="flex text-xl text-gray-500 pl-15">
+                                        <div className="mr-3">{post.nickname || '익명'}</div>
+                                        <div className="mr-3">{post.createdAt ? new Date(post.createdAt).toLocaleString() : null}</div>
                                     </div>
                                 </Link>
                             </div>

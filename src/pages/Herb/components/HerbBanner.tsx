@@ -1,20 +1,23 @@
-interface HerbBannerProps {
-    herbs: Herb[]
-}
+
 import { Link } from "react-router";
 import HerbTitle from "./HerbTitle";
 import { Herb } from "../../../types/herb.types";
-import ErrorMessageCard from "../../../components/card/ErrorMessageCard";
+import Skeleton from "react-loading-skeleton";
 
-export default function HerbBanner({ herbs}: HerbBannerProps) {
+interface HerbBannerProps {
+    herbs: Herb[]
+    isLoading?: boolean;
+}
+
+export default function HerbBanner({ herbs, isLoading }: HerbBannerProps) {
     return (
-        <section className="md:block hidden md:mt-18 mt-30 w-full h-150 ">
+        <section className="md:block hidden md:mt-18 mt-30 w-full">
             <HerbTitle elementName={"h2"} className="text-[#333] text-3xl mb-2 font-black flex items-center">
                 미리보기
             </HerbTitle>
 
-            {herbs.length<1 && <ErrorMessageCard text="조회된 미리보기가 없습니다." />}
-            <ul className="md:grid-cols-3 sm:grid-cols-2 grid-cols-1 grid h-full gap-5">
+            {isLoading && <Skeleton borderRadius={5} height={380} count={3} containerClassName="flex gap-5" />}
+            <ul className="md:grid-cols-3 sm:grid-cols-2 grid-cols-1 grid gap-5 h-auto ">
                 {
                     herbs.slice(herbs.length - 3).map((herb) => {
                         return (

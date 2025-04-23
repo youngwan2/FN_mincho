@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import { HerbDetail } from "../../../types/herb.types"
 import HerbTitle from "../../Herb/components/HerbTitle"
 
@@ -6,8 +7,18 @@ interface HerbDetailHeaderProps {
 }
 
 export default function HerbDetailHeader({ herb }: HerbDetailHeaderProps) {
+
+    const divRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (divRef.current) {
+            divRef.current.scrollIntoView({behavior:'smooth', block:'nearest'})
+        }
+
+    }, [herb.id])
+
     return (
-        <div className="mt-5">
+        <div className="mt-5" ref={divRef}>
             {/* */}
 
             <HerbTitle elementName={"h2"} className="text-4xl font-bold">

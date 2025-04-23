@@ -1,5 +1,10 @@
-const config = {
+import tailwindcssanimated from "tailwindcss-animated";
+import type { Config } from "tailwindcss";
+const config:Config = {
     
+  plugins: [
+    tailwindcssanimated
+  ],
     theme: {
       extend: {
         colors: {
@@ -8,7 +13,8 @@ const config = {
           customGray: "#B0BEC5", // 새로운 색상 추가
         },
       },
-    }
+    },
+
   };
   
   export default config;

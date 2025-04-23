@@ -26,10 +26,10 @@ export default function SignupForm() {
 
 
     return (
-        <div className="md:h-[90vh] md:flex-row items-center flex-col-reverse h-auto flex p-[20px] max-w-[1240px] w-full bg-white rounded-3xl">
+        <div className="md:h-[90vh] md:flex-row items-center flex-col-reverse h-auto flex p-[20px] max-w-[1240px] w-full bg-white rounded-3xl ">
 
             {/* 회원가입 폼 섹션 */}
-            <div className="md:w-[50%] h-full mr-2 w-full text-center">
+            <div className="md:w-[50%] h-full mr-2 w-full text-center  animate-fade-down">
                 <div className="md:mt-[4rem] mt-2 flex flex-col justify-center items-center">
                     <h2 className="text-3xl font-bold">회원등록</h2>
                     <form className="mt-13 w-full max-w-[70%]" onSubmit={handleSubmit} >

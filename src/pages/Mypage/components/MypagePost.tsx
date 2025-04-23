@@ -3,6 +3,7 @@ import MypageViewButton from "./MypageViewButton";
 import { usePostsByUserGetQuery } from "../../../hooks/queries/useQueryPosts";
 import { useState } from "react";
 import Pagination from "../../../components/pagination/Pagination";
+import LoadingSpinner from "../../../components/spinner/LoadingSpinner";
 
 
 interface MypagePostProps {
@@ -29,7 +30,8 @@ export default function MypagePost({ totalCount, enabled }: MypagePostProps) {
     // TODO: 로딩 스피너 추가해야 함
     return (
         <div className="bg-gray-50 rounded-lg">
-            {posts.map((post, index) => (
+
+            {isLoading ? <LoadingSpinner /> : posts.map((post, index) => (
                 <div
                     key={post.id}
                     className={`p-4 flex justify-between items-center ${index < posts.length - 1 ? "border-b border-gray-200" : ""

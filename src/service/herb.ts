@@ -1,4 +1,4 @@
-import { getHerbsBloomingFetch, getHerbsFetch, getHerbsRandomFetch } from "../apis/herb"
+import { getHerbRecommendFetch, getHerbsBloomingFetch, getHerbsFetch, getHerbsRandomFetch } from "../apis/herb"
 import { apiRoutes } from "../config/api";
 import { HerbSearchCondition } from "../types/herb.types";
 
@@ -29,6 +29,13 @@ export const getHerbRandom = async (herbId: number) => {
 /** 이달의 개화 약초 */
 export const getHerbBlooming = async (month: string) => {
     const { data } = await getHerbsBloomingFetch(apiRoutes.herb.getByMonth(month));
+
+    return data;
+}
+
+/** 추천 약초 */
+export const getHerbRecommend = async (message:string) => {
+    const {data} = await getHerbRecommendFetch(apiRoutes.herb.recommend(message))
 
     return data;
 }

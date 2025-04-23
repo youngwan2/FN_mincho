@@ -22,7 +22,7 @@ export default function CommunityPage() {
     const { categoryInfos } = usePostStatisticsGetQuery(currentPage, pageSize)
     const conditions = {
         order: 'desc',
-        sort: 'id',
+        sort: '',
         category: activeCategory,
         queryType: query.type,
         query: query.value
@@ -51,7 +51,14 @@ export default function CommunityPage() {
     const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        const query = formData.get("query")
+        const type = formData.get("type")?.toString() ?? ''
+        const query = formData.get("query")?.toString() ?? ''
+
+        setQuery(prev => ({
+            ...prev,
+            type: type,
+            value: query
+        }))
     }
 
     // 페이지 변경 함수

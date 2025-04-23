@@ -3,6 +3,7 @@ import { useHerbBookmarkGetQuery } from "../../../hooks/queries/useQueryHerbBook
 import { IoEye } from "react-icons/io5";
 import { Link } from "react-router";
 import Pagination from "../../../components/pagination/Pagination";
+import LoadingSpinner from "../../../components/spinner/LoadingSpinner";
 
 interface MypageFavoriteHerbProps {
   enabled: boolean
@@ -20,7 +21,7 @@ export default function MypageFavoriteHerb({ enabled, totalCount }: MypageFavori
 
   return (
     <div className="bg-gray-50 rounded-lg">
-      {bookmarkInfo.bookmarks.map((bookmark, index) => (
+      {isLoading ? <LoadingSpinner /> : bookmarkInfo.bookmarks.map((bookmark, index) => (
         <div
           key={bookmark.id}
           className={`p-4 flex justify-between items-center ${index < bookmarkInfo.bookmarks.length - 1 ? "border-b border-gray-200" : ""

@@ -24,9 +24,7 @@ export interface Post {
     category: string;
     categoryType: CategoryType
     title: string;
-    author: {
-        nickname: string
-    };
+    nickname: string
     createdAt: string;
     commentCount: number;
     isMine?: boolean;
@@ -44,6 +42,7 @@ export interface PostDetail extends Post {
 export interface PostSearchCondition {
     order: string;
     sort: string
+    queryType?: string
     query?: string | null
     category: string
 
