@@ -13,8 +13,7 @@ export const useHerbsGetQuery = (size: number, condition: HerbSearchCondition) =
         data,
         error,
         isError,
-        isFetching,
-        isPending,
+        isLoading,
         isFetchingNextPage,
         fetchNextPage,
         hasNextPage
@@ -28,14 +27,15 @@ export const useHerbsGetQuery = (size: number, condition: HerbSearchCondition) =
 
 
     const flattedData = data?.pages ? data.pages.map((page) => page.herbs).flat() : []
-
+    const totalCount: number = data?.pages ? data.pages[0].totalCount : 0
+    
     return {
         status,
         herbs: flattedData,
+        totalCount,
         error,
         isError,
-        isFetching,
-        isPending,
+        isLoading,
         isFetchingNextPage,
         fetchNextPage,
         hasNextPage,
@@ -90,7 +90,7 @@ export const useHerbRecommendGetQuery = (message: string) => {
         enabled: message.length >= 4 ? true : false
     })
 
-    const recommendList:RecommendHerbResponse = data ?? []
+    const recommendList: RecommendHerbResponse = data ?? []
     return { recommendList, isLoading, isError, status, isSuccess }
 
 }

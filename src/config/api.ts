@@ -54,6 +54,7 @@ export const apiRoutes = {
                 '&category=' + condition.category +
                 '&order=' + condition.order +
                 '&sort=' + condition.sort +
+                '&queryType=' + condition.queryType +
                 '&query=' + condition.query
 
         },

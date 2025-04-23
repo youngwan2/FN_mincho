@@ -22,6 +22,7 @@ export interface HerbSearchCondition {
     bneNm: string;
     search: string;
     month: string;
+    sort:string;
     orderBy: string;
 }
 

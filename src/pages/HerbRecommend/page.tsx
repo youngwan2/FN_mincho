@@ -20,10 +20,6 @@ export default function HerbRecommendPage() {
 
   const [message, setMessage] = useState('');
   const { recommendList, isLoading, isError, isSuccess, status } = useHerbRecommendGetQuery(message)
-
-
-  console.log(isLoading, recommendList, isError, isSuccess, status)
-
   const [messages, setMessages] = useState<RecommendHerbResponse[]>([
     {
       answer:
@@ -101,7 +97,7 @@ export default function HerbRecommendPage() {
             <div>
               <h2 className="font-bold text-2xl">약초 추천 서비스</h2>
               <p className="text-xl text-white/80">자연의 치유력을 경험하세요</p>
-              
+
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -120,7 +116,7 @@ export default function HerbRecommendPage() {
         <div className="h-[400px] overflow-y-auto p-4 bg-gray-50">
           <div className="space-y-4">
             {messages.map((message, index) => (
-              <div key={index} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"} transition-all`} ref={messagesEndRef}>
+              <div key={index} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"} transition-all animate-fade-down`} ref={messagesEndRef}>
                 <div
                   className={`flex items-start gap-3 max-w-[85%] ${message.sender === "user" ? "flex-row-reverse" : ""}`}
                 >

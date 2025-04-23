@@ -10,7 +10,7 @@ interface CommunityPostListProps {
 
 export default function CommunityPostList({ posts, postFetchState }: CommunityPostListProps) {
     const { isError, isLoading } = postFetchState
-    
+
     // 로딩 스켈레톤 렌더링 함수
     const renderSkeletonItems = () => {
         return Array(5).fill(0).map((_, index) => (
@@ -67,12 +67,11 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                             <div className="flex-1">
                                 <Link to={`/community/${post.id}`}>
                                     <div className="font-medium mb-1 hover:text-[#05D182] cursor-pointer">
-                                        {post.title}
+                                        <span className="p-1 px-2 bg-gray-200 rounded-xl mr-2">{post.id}</span> {post.title}
                                     </div>
-                                    <div className="flex text-xl text-gray-500">
-                                        <div className="mr-3">{post.author?.nickname}</div>
-                                        <div className="mr-3">{post.createdAt}</div>
-                                        {/* <div className="text-[#05D182] font-medium">댓글 {post.commentCount}</div> */}
+                                    <div className="flex text-xl text-gray-500 pl-15">
+                                        <div className="mr-3">{post.nickname || '익명'}</div>
+                                        <div className="mr-3">{post.createdAt ? new Date(post.createdAt).toLocaleString() : null}</div>
                                     </div>
                                 </Link>
                             </div>

@@ -52,7 +52,7 @@ export default function LoginForm() {
     return (
         <>
             {/* 로그인 폼 섹션 */}
-            <div className="md:w-[50%] h-full mr-2 w-full text-center">
+            <div className="md:w-[50%] h-full mr-2 w-full text-center animate-fade-down ">
                 <div className="flex flex-col justify-center items-center mt-[7rem]">
                     <h2 className="text-3xl font-bold">Welcome! MinCho</h2>
                     <p className="mt-2">민간 약초 커뮤니티, 민초에 오신 것을 환영합니다.</p>

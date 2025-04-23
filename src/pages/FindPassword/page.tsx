@@ -5,7 +5,7 @@ import FindPasswordForm from "./components/FindPasswordForm";
 
 export default function FindPasswordPage() {
     return (
-        <div className="items-center flex-col justify-center h-[55vh] flex p-[10px] max-w-[512px] w-full bg-white rounded-3xl">
+        <div className="items-center flex-col justify-center h-[55vh] flex p-[10px] max-w-[512px] w-full bg-white rounded-3xl  animate-fade-down">
             <h2 className="text-4xl font-bold">비밀번호 찾기</h2>
             <div className=" mt-10 px-27  ">
                 <div className="flex items-center text-[14px] bg-[#f7f7f7] rounded-xl p-3">

@@ -29,6 +29,8 @@ export default function HerbDetailBanner({ image }: HerbDetailBannerProps) {
                     style={{ backgroundImage: `url('${image}')`, transform: `translateY(${scrollY}px)` }}
                     className={`bg-cover w-full h-[612px] absolute left-0 top-0 z-[-1] `}>
 
+                      <div className="w-full h-full backdrop-grayscale-90   absolute left-0 bottom-0 z-[-1]"></div>  
+
                 </div>
                 <div className=" w-full h-[150px] bg-white absolute left-0 bottom-[-20%] z-[10]"></div>
             </div>

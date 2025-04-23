@@ -15,7 +15,7 @@ export default function RootLayout() {
 
             </div>
 
-            <footer className="bg-[#05D182] text-white py-6 mt-30 h-60">
+            <footer className="bg-[#0c9e66] text-white py-6 mt-30 h-60">
                 <div className="container mx-auto text-center pt-15">
                     <p className="text-2xl">
                         &copy; {new Date().getFullYear()} Mincho
