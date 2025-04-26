@@ -30,7 +30,7 @@ export const updateProfileFetch = async (profile: Profile) => {
         )
 
         const data = response.data;
-        console.log(data)
+        return data
 
     } catch (error) {
         if (error instanceof AxiosError) {
@@ -39,6 +39,36 @@ export const updateProfileFetch = async (profile: Profile) => {
         }
     }
 }
+
+/** 프로필 이미지 수정 */
+export const updateProfileImageFetch = async (formData: FormData) => {
+    try {
+        const response = await instance.patch(
+            apiRoutes.user.profileImage,
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+
+        )
+
+        // 업로드 성공 유무 체크
+        if (response.status > 399) {
+            return false
+        } else {
+            return true
+        }
+
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            return false
+
+        }
+    }
+}
+
 
 
 /** 마이페이지| 유저 통계 */
