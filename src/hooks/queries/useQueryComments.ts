@@ -24,7 +24,8 @@ export const useCommentsByUserGetQuery = (page: number, size: number, enabled: b
     const { data, isPending, isError, status } = useQuery({
         queryKey: queryKeys.comments.byUser(page, size, enabled),
         queryFn: () => getCommentsByUser(page, size),
-        enabled
+        enabled,
+
     })
 
     const comments: MypageComment[] = data?.data ?? []

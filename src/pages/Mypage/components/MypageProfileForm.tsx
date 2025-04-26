@@ -55,7 +55,7 @@ export default function MypageProfileForm({ profileInfo, onFormToggle, profileMu
                     name="nickname"
                     defaultValue={profileInfo.nickname || ''}
                     onChange={handleChange}
-                    className="w-full border rounded px-3 py-2 text-gray-700 text-xl"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-700 text-xl focus:outline-hover-primary-green"
                 />
                 {profileInfo.nickname && <p className="text-red-500 text-sm">{formErrors.nickname}</p>}
             </div>
@@ -67,7 +67,7 @@ export default function MypageProfileForm({ profileInfo, onFormToggle, profileMu
                     name="introduction"
                     defaultValue={profileInfo.introduction || ''}
                     onChange={handleChange}
-                    className="w-full border rounded px-3 py-2 text-gray-700 text-xl resize-none h-[30vh]"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-700 text-xl resize-none h-[30vh] focus:outline-hover-primary-green"
                 />
                 {profileInfo.introduction && <p className="text-red-500 text-sm">{formErrors.introduction}</p>}
             </div>

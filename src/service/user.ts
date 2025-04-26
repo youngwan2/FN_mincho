@@ -1,4 +1,4 @@
-import { getProfileFetch, getUserStatsFetch, updateProfileFetch } from "../apis/user";
+import { getProfileFetch, getUserStatsFetch, updateProfileFetch, updateProfileImageFetch } from "../apis/user";
 import { Profile } from "../types/user.types";
 
 
@@ -13,6 +13,12 @@ export const getInitialProfile = async () => {
 export const updateProfile = async (profile: Profile) => {
     const data = await updateProfileFetch(profile);
     return data
+}
+
+/** 프로필 이미지 수정 요청 */
+export const updateProfileImage = async (formData: FormData) => {
+    const success = await updateProfileImageFetch(formData);
+    return success
 }
 
 

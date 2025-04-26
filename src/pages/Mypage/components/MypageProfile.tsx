@@ -27,7 +27,7 @@ export default function MypageProfile() {
             <MypageTitle text="프로필" />
 
             {/* 프로필 이미지 */}
-            <MypageProfileImage profileImage="" />
+            <MypageProfileImage profileImage={profileInfo.avatarUrl} />
             {isLoading ? <LoadingSpinner /> : null}
             {isError ? <p>프로필 정보 조회에 실패하였습니다.</p> : null}
             {isOpen ? (

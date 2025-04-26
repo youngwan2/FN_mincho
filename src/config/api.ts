@@ -15,6 +15,7 @@ export const apiRoutes = {
     },
     user: {
         profile: baseUrl + '/users/me',
+        profileImage: baseUrl + '/users/me/upload',
         getById: baseUrl + '/users/me',
         update: baseUrl + '/users/me',
         delete: baseUrl + '/users/me',

@@ -10,22 +10,36 @@ interface MypageFavoriteHerbProps {
   totalCount: number
 }
 
-
 const PAGE_SIZE = 5;
+
 export default function MypageFavoriteHerb({ enabled, totalCount }: MypageFavoriteHerbProps) {
 
   const [page, setPage] = useState(0)
 
   const { bookmarkInfo, isLoading, isError } = useHerbBookmarkGetQuery(page, PAGE_SIZE, enabled)
 
+  // 로딩 상태 처리
+  if (isLoading) {
+    return <LoadingSpinner />
+  }
+
+  // 에러 상태 처리
+  if (isError) {
+    return <p className="text-center text-xl text-red-500 p-10">데이터를 불러오는 데 오류가 발생했습니다.</p>
+  }
+
+  // 데이터가 없을 때 처리
+  if (bookmarkInfo.bookmarks.length === 0) {
+    return <p className="text-center text-xl text-gray-500 p-10">관심 약초가 없습니다.</p>;
+  }
 
   return (
     <div className="bg-gray-50 rounded-lg">
-      {isLoading ? <LoadingSpinner /> : bookmarkInfo.bookmarks.map((bookmark, index) => (
+      {/* 데이터가 없을 때 처리 */}
+      {bookmarkInfo.bookmarks.map((bookmark, index) => (
         <div
           key={bookmark.id}
-          className={`p-4 flex justify-between items-center ${index < bookmarkInfo.bookmarks.length - 1 ? "border-b border-gray-200" : ""
-            }`}
+          className={`p-4 flex justify-between items-center min-h-[150px] ${index < bookmarkInfo.bookmarks.length - 1 ? "border-b border-gray-200" : ""}`}
         >
           {/* 콘텐츠 정보 */}
           <div>
@@ -35,12 +49,12 @@ export default function MypageFavoriteHerb({ enabled, totalCount }: MypageFavori
               <p className="text-xl text-gray-600">{bookmark.hbdcNm}</p>
             </div>
             <p className="text-xl text-gray-500">{new Date(bookmark.createdAt).toLocaleString()}</p>
-
           </div>
           {/* 바로가기 아이콘 */}
-          <Link title="콘텐츠 바로가기" className="flex items-center  gap-3 hover:text-hover-primary-green" to={bookmark.url}><IoEye />보기</Link>
+          <Link title="콘텐츠 바로가기" className="flex items-center gap-3 hover:text-hover-primary-green" to={bookmark.url}><IoEye />보기</Link>
         </div>
-      ))}
+      ))
+      }
       <Pagination perPage={PAGE_SIZE} onPageChange={({ selected }: { selected: number }) => setPage(selected)} totalPage={Math.ceil(totalCount / PAGE_SIZE)} />
     </div>
   )
