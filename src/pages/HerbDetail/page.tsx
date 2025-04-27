@@ -8,16 +8,16 @@ import InteractionPanel from "./components/InteractionPanel";
 import HerbDetailContents from "./components/HerbDetailContents";
 import HerbDetailFooter from "./components/HerbDetailFooter";
 import LoadingSpinner from "../../components/spinner/LoadingSpinner";
+import { IoEye } from "react-icons/io5";
 
-
-/**TODO: 데이터 상태에 따라 분기처리 해야 함 */
 export default function HerbDetailPage() {
 
     const { herbId } = useParams() ?? { herbId: 1 };
     const { herb, isLoading } = useHerbDetailGetQuery(herbId ? Number(herbId) : 1)
 
-    const bannerImage = (herb?.imgUrls ?? [])[Math.max(Number(herb?.imgUrl?.length ?? 0),0)]
+    const bannerImage = (herb?.imgUrls ?? [])[Math.max(Number(herb?.imgUrl?.length ?? 0), 0)]
     const images = (herb?.imgUrls ? herb.imgUrls : [])
+
 
     return (
         <section>
@@ -34,10 +34,13 @@ export default function HerbDetailPage() {
 
             <HerbDetailBody>
                 <HerbDetailImages images={images} />
-                <InteractionPanel herb={herb} herbId={herbId} />
+                <div className="flex items-center justify-between relative z-50 ">
+                    <InteractionPanel herb={herb} herbId={herbId} />
+                    <span title="조회수" className="gap-2 text-3xl flex items-center mr-2"><IoEye />{herb?.viewCount || 0} </span>
+                </div>
                 <HerbDetailContents herb={herb} />
             </HerbDetailBody>
-            
+
             <HerbDetailFooter herbId={Number(herbId)} />
         </section>
     )

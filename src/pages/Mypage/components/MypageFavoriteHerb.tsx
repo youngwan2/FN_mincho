@@ -39,7 +39,7 @@ export default function MypageFavoriteHerb({ enabled, totalCount }: MypageFavori
       {bookmarkInfo.bookmarks.map((bookmark, index) => (
         <div
           key={bookmark.id}
-          className={`p-4 flex justify-between items-center min-h-[150px] ${index < bookmarkInfo.bookmarks.length - 1 ? "border-b border-gray-200" : ""}`}
+          className={`p-4 flex justify-between items-center min-h-[100px] ${index < bookmarkInfo.bookmarks.length - 1 ? "border-b border-gray-200" : ""}`}
         >
           {/* 콘텐츠 정보 */}
           <div>

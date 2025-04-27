@@ -1,21 +1,25 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../config/keys";
-import { Bookmark } from "../../types/bookmark.types";
 import { createHerbBookmark, deleteHerbBookmark } from "../../service/bookmark";
-import { toast } from "react-toastify";
+import { AxiosError } from "axios";
+import { showToast } from "../../components/toast/CustomToast";
+import { handleError } from "../../config/error";
 
 
 /** 북마크 추가 */
-export function useCreateHerbBookmarkMutation() {
+export function useCreateHerbBookmarkMutation(): UseMutationResult<any, AxiosError, any> {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: ({ bookmark, herbId }: { bookmark: Bookmark, herbId: number }) => {
+        mutationFn: ({ bookmark, herbId }: { bookmark: { herbName: string, url: string }, herbId: number }) => {
             return createHerbBookmark(bookmark, herbId)
         },
         onSuccess: (_data, variables) => {
-            toast.info("관심 약초에 추가하였습니다.")
+            showToast.info("관심 약초에 추가하였습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.herbBookmark.update(variables.herbId) })
+        },
+        onError: (error) => {
+            handleError(error)
         }
     })
 }
@@ -29,8 +33,11 @@ export function useDeleteHerbBookmarkMutation() {
             return deleteHerbBookmark(herbId)
         },
         onSuccess: (_data, variables) => {
-            toast.info("관심 약초를 취소하였습니다.")
+            showToast.info("관심 약초를 취소하였습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.herbBookmark.update(variables) })
+        },
+        onError: (error) => {
+            handleError(error)
         }
     })
 }

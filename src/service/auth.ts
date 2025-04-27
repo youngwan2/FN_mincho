@@ -1,4 +1,5 @@
-import { emailCheckFetch, loginFetch, logoutFetch, registerFetch, sendVerificationCodeFetch, verificationCodeCheckFetch } from "../apis/auth";
+import { deleteUserFetch, emailCheckFetch, loginFetch, logoutFetch, registerFetch, sendVerificationCodeFetch, verificationCodeCheckFetch } from "../apis/auth";
+import { apiRoutes } from "../config/api";
 import { Email, LoginRequest, RegisterRequest } from "../types/auth.types";
 import { removeToken, setToken } from "../utils/storage";
 
@@ -52,4 +53,13 @@ export const sendVerificationCode = async (email: string) => {
 export const verificationCodeCheck = async (email: string, code: string) => {
     const success = await verificationCodeCheckFetch(email, code)
     return success
+}
+
+
+/** 회원탈퇴 */
+export const deleteUser = async () => {
+    const url = apiRoutes.auth.delete
+    const success = await deleteUserFetch(url);
+    return success
+
 }

@@ -5,9 +5,9 @@ export interface Bookmark {
     url: string
     cntntsSj: string
     bneNm: string;
-    hbdcNm:string
-    createdAt:string
-    
+    hbdcNm: string
+    createdAt: string
+
 }
 
 export interface BookmarkInfo {

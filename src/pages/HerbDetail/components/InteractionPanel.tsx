@@ -1,4 +1,4 @@
-import { IoShareOutline, IoHeart, IoHeartOutline, IoBookmarkOutline, IoBookmark } from "react-icons/io5";
+import { IoShareOutline, IoHeart, IoHeartOutline, IoBookmarkOutline } from "react-icons/io5";
 import { useHerbBookmarkCountGetQuery } from "../../../hooks/queries/useQueryHerbBookmark";
 import { useCreateHerbBookmarkMutation, useDeleteHerbBookmarkMutation } from "../../../hooks/mutations/useMutationHerbBookmark";
 import { Herb } from "../../../types/herb.types";
@@ -26,7 +26,6 @@ export default function InteractionPanel({ herb, herbId }: InteractionPanelProps
 
     // 좋아요 핸들
     const handleLike = () => {
-        console.log("dfdsfds" + herbLikeMetadata.isLiked)
         if (herbLikeMetadata.isLiked === false) {
 
             addLike()
@@ -78,7 +77,7 @@ export default function InteractionPanel({ herb, herbId }: InteractionPanelProps
     }
 
     return (
-        <div className="flex gap-3 p-2 mt-5 z-50">
+        <div className="flex gap-3 p-2 mt-5">
             <button
                 onClick={handleLike}
                 title="좋아요"

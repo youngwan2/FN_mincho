@@ -172,3 +172,8 @@ export const logoutFetch = async () => {
         }
     }
 }
+
+/** 회원탈퇴 요청 */
+export const deleteUserFetch = async (url: string) => {
+    return await instance.delete(url)
+}

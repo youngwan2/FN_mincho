@@ -29,7 +29,7 @@ export default function Mypage() {
                     <MypageContents stats={stats} />
 
                     {/* 설정 섹션 */}
-                    {/* <MypageSettings /> */}
+                    <MypageSettings />
                 </div>
             </div>
         </div>

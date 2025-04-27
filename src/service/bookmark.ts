@@ -1,12 +1,9 @@
 import { createHerbBookmarkFetch, deleteHerbBookmarkFetch, getCountHerbBookmarkFetch, getHerbBookmarkFetch } from "../apis/bookmark"
 import { apiRoutes } from "../config/api"
-import { Bookmark } from "../types/bookmark.types"
-
-
 
 
 /** 허브 북마크 추가 */
-export const createHerbBookmark = async (bookmark: Bookmark, herbId: number) => {
+export const createHerbBookmark = async (bookmark: { herbName: string, url: string }, herbId: number) => {
     const url = apiRoutes.herbBookmark.create(herbId)
     return await createHerbBookmarkFetch(url, bookmark)
 }

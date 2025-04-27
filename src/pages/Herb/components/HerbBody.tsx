@@ -64,17 +64,17 @@ export default function HerbBody({ herbs, totalCount = 0, isLoading = false, onS
                                     <div>
                                         {
                                             // 이미지 로드 전 까지 보여줄 플레이스 홀더(스켈레톤)
-                                            !loaded[index] && <Skeleton className="h-[240px] rounded-2xl" /> 
+                                            !loaded[index] && <Skeleton className="h-[240px] rounded-2xl" />
                                         }
                                         <img
                                             src={herb.imgUrl1}
                                             alt={herb.cntntsSj}
-                                            onError={(e)=>{
+                                            onError={(e) => {
                                                 e.currentTarget.onerror = null;
                                                 e.currentTarget.src = noImage;
 
                                             }}
-                                            className= {`${!loaded[index] ? 'hidden opacity-0' :'opacity-100 block'}  w-full h-[250px] rounded-[5px]`}
+                                            className={`${!loaded[index] ? 'hidden opacity-0' : 'opacity-100 block'}  w-full h-[250px] rounded-[5px]`}
                                             onLoad={() => handleLoaded(index)}
                                             height={250}
                                             width={250}
@@ -82,10 +82,15 @@ export default function HerbBody({ herbs, totalCount = 0, isLoading = false, onS
 
 
                                     </div>
-                                    <div className="flex flex-col items-start p-2 h-auto">
-                                        <strong className="text-[18px]">{herb.cntntsSj}</strong>
-                                        <span className=" text-[12px]">{herb.hbdcNm}</span>
-                                        <span className="bg-primary-green text-white text-[12px] rounded-[3px] px-2 mt-2">{herb.bneNm}</span>
+                                    <div className="flex flex-col items-start p-2 h-auto mt-3">
+                                        <div className="flex items-center">
+                                            <strong className="text-3xl">{herb.cntntsSj}
+
+                                            </strong>
+                                            <span className="pl-2 text-xl">{herb.hbdcNm}</span>
+                                        </div>
+
+                                        <span className="bg-hover-primary-green text-white text-[14px] rounded-[3px] px-2 mt-2">{herb.bneNm}</span>
                                     </div>
                                 </Link>
                             </HerbItem>

@@ -1,13 +1,14 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../config/keys";
 import { toast } from "react-toastify";
 import { createPost, deletePost, updatePost } from "../../service/post";
 import { PostRequest } from "../../types/post.types";
 import { AxiosError } from "axios";
+import { handleError } from "../../config/error";
 
 
 /** 게시글 추가 */
-export function useCreatePostMutation() {
+export function useCreatePostMutation(): UseMutationResult<any, AxiosError, any> {
     const queryClient = useQueryClient()
 
     return useMutation({
@@ -19,15 +20,7 @@ export function useCreatePostMutation() {
             queryClient.invalidateQueries({ queryKey: queryKeys.posts.update(), exact: false })
         },
         onError: (error) => {
-            if (error instanceof AxiosError) {
-                if (error.response?.status === 401 || error.response?.status === 403) {
-                    toast.error("로그인 후 이용 가능합니다. ")
-                }
-
-                if (error.response?.status === 500) {
-                    toast.error("현재 서버측 문제로 요청처리가 불가능합니다. 나중에 다시시도 해주세요.")
-                }
-            }
+            handleError(error)
         }
     })
 }
@@ -45,15 +38,7 @@ export function useUpdatePostMutation() {
             queryClient.invalidateQueries({ queryKey: queryKeys.posts.update(), exact: false })
         },
         onError: (error) => {
-            if (error instanceof AxiosError) {
-                if (error.response?.status === 401 || error.response?.status === 403) {
-                    toast.error("로그인 후 이용 가능합니다. ")
-                }
-
-                if (error.response?.status === 500) {
-                    toast.error("현재 서버측 문제로 요청처리가 불가능합니다. 나중에 다시시도 해주세요.")
-                }
-            }
+            handleError(error)
         }
     })
 }
@@ -71,16 +56,7 @@ export function useDeletePostMutation() {
             queryClient.invalidateQueries({ queryKey: queryKeys.posts.update(), exact: false })
         },
         onError: (error) => {
-            if (error instanceof AxiosError) {
-                if (error.response?.status === 401 || error.response?.status === 403) {
-                    toast.error("로그인 후 이용 가능합니다. ")
-                }
-
-                if (error.response?.status === 500) {
-                    toast.error("현재 서버측 문제로 요청처리가 불가능합니다. 나중에 다시시도 해주세요.")
-                }
-            }
+            handleError(error)
         }
-
     })
 }

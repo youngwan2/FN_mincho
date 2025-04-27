@@ -1,7 +1,7 @@
 import { HerbSearchCondition } from "../types/herb.types"
 import { PostSearchCondition } from "../types/post.types"
 
-export const baseUrl = 'http://localhost:8080/api/v1'
+export const baseUrl = import.meta.env.MODE === 'development' ? 'http://localhost:8080/api/v1' : 'http://localhost:8080/api/v1'
 
 
 export const apiRoutes = {
@@ -11,7 +11,8 @@ export const apiRoutes = {
         register: baseUrl + '/users/register',
         checkEmail: baseUrl + '/users/register/duplicate-check',
         sendVerificationCode: baseUrl + '/users/send-verification-code',
-        checkVerificationCode: baseUrl + '/users/send-verification'
+        checkVerificationCode: baseUrl + '/users/send-verification',
+        delete: baseUrl + '/users/me/entire'
     },
     user: {
         profile: baseUrl + '/users/me',

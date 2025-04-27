@@ -1,8 +1,8 @@
-import {  useRef, useState } from "react"
-import { IoIosArrowDown } from "react-icons/io";
+import { useRef, useState } from "react"
 import { type Profile } from "../../../types/user.types"
 import DropdownMenu from "./DropdownMenu";
 import { useProfileGetQuery } from "../../../hooks/queries/useQueryProfile";
+import noProfile from '../../../assets/noImage.png'
 
 export default function Profile() {
 
@@ -19,21 +19,19 @@ export default function Profile() {
 
 
     return (
-        <div onClick={handleDropdown} className="hover:bg-gray-200 cursor-pointer flex relative border rounded-2xl py-3 px-2 border-primary-dark-gray bg-[rgba(255,255,255,0.8)]">
+        <div onClick={handleDropdown} className="bg-gray-200 cursor-pointer flex relative border rounded-full w-[40px] h-[40px]  border-primary-dark-gray">
             <img
-                src={profileInfo.avatarUrl || "https://picsum.photos/800/600"}
+                src={profileInfo.avatarUrl}
                 alt="프로필 이미지"
-                className="rounded-full mr-1"
-                width={30}
-                height={30} />
-            <div className="flex ml-2">
-                <p>{profileInfo?.nickname || ''}</p>
-                <button className="mx-2 text-gray-700"><IoIosArrowDown className={`${isToggle ? " rotate-180" : "rotate-0"} transition-transform`} /></button>
-            </div>
+                onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = noProfile;
+                }}
+                className="rounded-full mr-1 w-[40px] h-[40px] object-contain"
+                width={40}
+                height={40} />
 
-            {
-                isToggle ? <DropdownMenu ref={dropdownRef}/> : null
-            }
+            <DropdownMenu ref={dropdownRef} isToggle={isToggle} />
         </div>
     )
 }

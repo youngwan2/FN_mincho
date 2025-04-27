@@ -21,7 +21,7 @@ table {
 @theme {
   --font-size-16px: 16px;
   --font-prentendard: Pretendard, 'sans-serif';
-  --color-primary-green: #05d182;
+  --color-primary-green: #00c471;
   --color-hover-primary-green: #07bd77;
   --color-primary-gray: #e6e7e9;
   --color-primary-light-gray: #f2f2f7;
@@ -30,7 +30,7 @@ table {
 
 @media (max-width: 768px) {
   html {
-    font-size: 14px;
+    font-size: 15px;
     /* 태블릿 */
   }
 }
