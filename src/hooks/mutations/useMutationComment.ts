@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../config/keys";
 import { createComment, deleteComment, updateComment } from "../../service/comment";
 import { toast } from "react-toastify";
@@ -8,7 +8,7 @@ import { AxiosError } from "axios";
 
 
 /** 댓글 추가 */
-export function useCreateCommentMutation(postId: number) {
+export function useCreateCommentMutation(postId: number): UseMutationResult<any, AxiosError, any> {
     const queryClient = useQueryClient()
 
     return useMutation({
@@ -38,7 +38,7 @@ export function useUpdateCommentMutation(postId: number) {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: ({ commentId, comment }: {commentId:number, comment: CommentUpdateRequest }) => {
+        mutationFn: ({ commentId, comment }: { commentId: number, comment: CommentUpdateRequest }) => {
             return updateComment(commentId, comment);
         },
         onSuccess: () => {

@@ -46,7 +46,7 @@ export default function MypageProfile() {
                     <PrimaryButton
                         type="button"
                         onClick={onOpenForm}
-                        className="text-gray-600 border border-gray-300 rounded px-4 py-2 text-xl hover:bg-primary-light-gray"
+                        className="text-gray-600 border border-gray-300 bg-white rounded px-4 py-2 text-xl hover:bg-primary-light-gray"
                     >
                         프로필 수정
                     </PrimaryButton>

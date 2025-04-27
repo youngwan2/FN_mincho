@@ -9,6 +9,7 @@ import { useTogglePostLikeMutation } from "../../hooks/mutations/useMutationPost
 import { useCommentGetQuery } from "../../hooks/queries/useQueryComments";
 import CommunityEditor from "../CommunityEditor/components/CommunityEditor";
 import { useDeletePostMutation } from "../../hooks/mutations/useMutationPost";
+import noProfile from '../../assets/profile.png'
 
 const PAGE_SIZE = 10;
 export default function CommunityDetailPage() {
@@ -68,7 +69,13 @@ export default function CommunityDetailPage() {
           {detailLoading ? (
             <Skeleton circle width={40} height={40} className="mr-3" />
           ) : (
-            <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+            <div className="w-[40px] h-[40px] mr-2">
+              <img className="w-[40px] h-[40px] object-contain rounded-full border border-gray-300" src={post.author.profileImage} alt="사용자 프로필 이미지" onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = noProfile
+
+              }} />
+            </div>
           )}
           <div className="w-full">
             <div className="flex justify-between">
@@ -133,10 +140,10 @@ export default function CommunityDetailPage() {
                 </div>
               </div>
             ) : (
-              <CommunityComment 
-                postId={Number(postId)} 
-                comments={commentInfo?.comments || []} 
-                totalCount={commentInfo?.totalCount || 0} 
+              <CommunityComment
+                postId={Number(postId)}
+                comments={commentInfo?.comments || []}
+                totalCount={commentInfo?.totalCount || 0}
               />
             )}
           </>

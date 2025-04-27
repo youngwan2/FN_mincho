@@ -43,7 +43,7 @@ export default function MypagePost({ totalCount, enabled }: MypagePostProps) {
             {posts.map((post, index) => (
                 <div
                     key={post.id}
-                    className={`p-4 flex justify-between items-center min-h-[150px] ${index < posts.length - 1 ? "border-b border-gray-200" : ""}`}
+                    className={`p-4 flex justify-between items-center min-h-[60px] ${index < posts.length - 1 ? "border-b border-gray-200" : ""}`}
                 >
                     {/* 콘텐츠 정보 */}
                     <div>
@@ -51,7 +51,7 @@ export default function MypagePost({ totalCount, enabled }: MypagePostProps) {
                         <p className="text-xl text-gray-500">{new Date(post.createdAt).toLocaleString()}</p>
                     </div>
                     {/* 페이지 이동 버튼 */}
-                    <MypageViewButton onNavigate={() => handleNavigate(`/posts/${post.id}`)} />
+                    <MypageViewButton onNavigate={() => handleNavigate(`/community/${post.id}`)} />
                 </div>
             ))}
             <Pagination perPage={PAGE_SIZE} totalPage={Math.ceil(totalCount / PAGE_SIZE)} onPageChange={({ selected }: { selected: number }) => setPage(selected)} />

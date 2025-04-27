@@ -12,7 +12,7 @@ const MAX_PROFILE_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB
 
 export default function MypageProfileImage({ profileImage }: MypageProfileImageProps) {
     const [previewImage, setPreviewImage] = useState<string | undefined>(profileImage);
-    const [file, setFile] = useState('');
+    const [_, setFile] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     // 파일 선택 시 미리보기 설정
@@ -78,7 +78,7 @@ export default function MypageProfileImage({ profileImage }: MypageProfileImageP
                 onClick={handleProfileClick}
             >
                 <img
-                    src={previewImage || noImage}
+                    src={previewImage || profileImage}
                     onError={(e) => {
                         e.currentTarget.src = noImage;
                     }}
@@ -109,7 +109,7 @@ export default function MypageProfileImage({ profileImage }: MypageProfileImageP
                             }
                         }}
                         type="button"
-                        className="flex items-center gap-2 px-5 py-2 rounded-xl text-gary-700 border border-gray-600 bg-white transition-colors duration-200 text-xl hover:bg-gray-100 cursor-pointer"
+                        className="flex items-center gap-2 px-5 py-2 rounded-xl text-gary-700 border border-gray-300 bg-white transition-colors duration-200 text-xl hover:bg-gray-100 cursor-pointer"
                     >
                         <FaTrash className="text-gray-700" />
                         삭제

@@ -1,10 +1,15 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProfile } from "../../service/user";
 import { Profile } from "../../types/user.types";
 import { queryKeys } from "../../config/keys";
+import { AxiosError } from "axios";
+import { handleError } from "../../config/error";
+import { useNavigate } from "react-router";
+import { deleteUser, logout } from "../../service/auth";
+import { showToast } from "../../components/toast/CustomToast";
 
 
-export function useUpdateProfileMutation() {
+export function useUpdateProfileMutation(): UseMutationResult<Profile, AxiosError, Profile> {
     const queryClient = useQueryClient()
 
     return useMutation({
@@ -15,9 +20,25 @@ export function useUpdateProfileMutation() {
             queryClient.invalidateQueries({ queryKey: queryKeys.profile.update() })
         },
         onError: (error) => {
-            // 에러가 발생했을 때 처리 (예: 에러 메시지 표시 등)
-            console.error('Error adding todo:', error)
+            handleError(error)
         }
 
     })
+}
+
+// 회원탈퇴
+export function useDeleteUserMutation() {
+    const navigate = useNavigate();
+
+    return useMutation({
+        mutationFn: deleteUser,
+        onSuccess: () => {
+            showToast.success("회원 탈퇴가 완료되었습니다.");
+            logout()
+            navigate("/"); // 홈으로 이동
+        },
+        onError: (error) => {
+            handleError(error)
+        }
+    });
 }

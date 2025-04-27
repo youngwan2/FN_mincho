@@ -24,7 +24,10 @@ export interface Post {
     category: string;
     categoryType: CategoryType
     title: string;
-    nickname: string
+    author: {
+        nickname: string
+        profileImage: string
+    }
     createdAt: string;
     commentCount: number;
     isMine?: boolean;

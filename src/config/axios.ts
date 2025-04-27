@@ -39,6 +39,7 @@ instance.interceptors.response.use(function (response) {
     toast("이미 처리된 요청입니다.")
   }
   if (error.status === 403) {
+    window.location.href = "/"
     removeToken()
   }
 
@@ -46,4 +47,6 @@ instance.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
 
+
 export default instance;
+

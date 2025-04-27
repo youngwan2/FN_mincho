@@ -11,18 +11,18 @@ import { PostFetchState, PostStatistics } from "../../types/post.types";
 const pageSize = 10
 export default function CommunityPage() {
     const [query, setQuery] = useState({
-        type: '',
+        type: 'content',
         value: ''
     })
     const [currentPage, setCurrentPage] = useState(0);
     // 현재 선택된 카테고리 상태
-    const [activeCategory, setActiveCategory] = useState<string>('free');
+    const [activeCategory, setActiveCategory] = useState<string>('notice');
 
 
     const { categoryInfos } = usePostStatisticsGetQuery(currentPage, pageSize)
     const conditions = {
-        order: 'desc',
-        sort: '',
+        order: 'post_id',
+        sort: 'desc',
         category: activeCategory,
         queryType: query.type,
         query: query.value
@@ -35,6 +35,7 @@ export default function CommunityPage() {
         isLoading,
         status
     }
+
 
     // 페이지네이션 메타데이터
     const totalItems = calculateTotalItems(categoryInfos)

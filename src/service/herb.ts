@@ -34,8 +34,9 @@ export const getHerbBlooming = async (month: string) => {
 }
 
 /** 추천 약초 */
-export const getHerbRecommend = async (message:string) => {
-    const {data} = await getHerbRecommendFetch(apiRoutes.herb.recommend(message))
+export const getHerbRecommend = async (message: string) => {
+    const { data } = await getHerbRecommendFetch(apiRoutes.herb.recommend(message))
 
     return data;
 }
+

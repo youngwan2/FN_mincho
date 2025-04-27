@@ -6,7 +6,7 @@ export default function RootLayout() {
     return (
         <div>
             <div className='md:px-10 px-5 max-w-[1240px] mx-auto h-auto font-prentendard' >
-                <CustomToastContainer/>
+                <CustomToastContainer />
                 <Header />
 
                 <main className='h-auto w-full'>
@@ -15,7 +15,7 @@ export default function RootLayout() {
 
             </div>
 
-            <footer className="bg-[#0c9e66] text-white py-6 mt-30 h-60">
+            <footer className="bg-[#303740] text-white py-6 mt-30 h-60">
                 <div className="container mx-auto text-center pt-15">
                     <p className="text-2xl">
                         &copy; {new Date().getFullYear()} Mincho

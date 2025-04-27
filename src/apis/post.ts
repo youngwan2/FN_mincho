@@ -1,3 +1,4 @@
+import axios from "axios"
 import instance from "../config/axios"
 import { PostRequest } from "../types/post.types"
 
@@ -5,12 +6,12 @@ import { PostRequest } from "../types/post.types"
 
 /** 게시글 조회 요청 */
 export const getPostsFetch = (url: string) => {
-    return instance.get(url)
+    return axios.get(url)
 }
 
 /** 게시글 상세 조회 요청 */
 export const getPostDetailFetch = (url: string) => {
-    return instance.get(url)
+    return axios.get(url)
 }
 
 
@@ -33,17 +34,17 @@ export const deletePostFetch = (url: string) => {
 
 /** 카테고리별 게시글 통계 */
 export const getPostStatisticsFetch = (url: string) => {
-    return instance.get(url)
+    return axios.get(url)
 
 }
 
 /** 게시글 좋아요 수정 */
-export const updatePostLikeFetch = (url:string) => {
+export const updatePostLikeFetch = (url: string) => {
     return instance.post(url)
 }
 
 
 /** 사용자별 게시글 */
-export const getPostsByUserFetch = (url:string) => {
+export const getPostsByUserFetch = (url: string) => {
     return instance.get(url)
 }
