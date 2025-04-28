@@ -35,24 +35,32 @@
 - **RAG 기반 AI 약초 추천 기능**
   - 사용자가 입력한 증상이나 관심사를 바탕으로 적절한 약초 추천
   - PostgreSQL의 PGVector를 통해 코사인 유사도 검색을 수행하고, RAG 기반으로 보다 정확한 정보를 사용자에게 제공
+    ![image](https://github.com/user-attachments/assets/1b41c9d1-ed7f-4c5d-8248-2b330aab3db1)
 
+    
+- **SSE 기반 알림 기능**
+  - 댓글 알림, 공지사항 알림이 존재하면 해당 알림을 실시간으로 확인할 수 있음
+  - 알림 내역 관리를 위해 별도 알림 UI 추가(리액트 쿼리의 뮤테이션을 적용하여 변경사항 즉시 반영)
+    - 별도로 사용자 경험 고려하여 useInfinitiQuery 기반의 무한 스크롤 적용
+    ![image](https://github.com/user-attachments/assets/58331e6a-ba91-4d20-be74-c4ab8ee4561a)
+
+    
 
 ## 🧰 기술 스택
 | 구분 | 기술 스택 | 비고 |
 |--------------|--------------|--------------|
 | **Frontend** | `React 19` | 19버전부터 forwardRef 불필요 |
-|              | `TypeScript` | 정적 타입을 통해 안정성 향상 및 개발 생산성 증가 |
-|              | `Zustand` | 간단하고 가벼운 전역 상태 관리 라이브러리 |
+|              | `TypeScript` | 정적 타입 |
+|              | `Zustand` | 클라이언트 전역 상태 |
 |              | `React Query` | 비동기 서버 상태 관리, 캐싱 및 자동 리페치 처리 |
-|              | `Tailwind CSS` | 유틸리티 기반 CSS 프레임워크로 빠른 UI 개발 가능 |
-| **Backend**  | `Spring Boot` | 안정적인 웹 애플리케이션 개발을 위한 백엔드 프레임워크 |
-|              | `Spring Security` | 인증, 인가 및 보안 기능 구현 |
+|              | `Tailwind CSS` | 유틸리티 기반 CSS 프레임워크 |
+| **Backend**  | `Spring Boot` | 자바기반 백엔드 프레임워크 |
+|              | `Spring Security` | 인증, 인가 및 보안 필터 프레임워크 |
 |              | `Spring AI` | OpenAI 기반 LLM과의 통합 및 AI 기능 개발 |
 |              | `OpenAI Embedding` | 사용자 입력 임베딩을 통한 유사도 검색 기반 추천 기능 |
 |              | `JPA`, `QueryDSL` | 객체-관계 매핑 및 타입 안전한 동적 쿼리 작성 |
 |              | `PostgreSQL (PGVector)` | 벡터 데이터 저장 및 유사도 기반 질의 처리 |
 | **ETC**      | `Vite` | 빠른 번들링 및 개발 환경 제공 |
-|              | `React Hook Form` | 폼 상태 및 유효성 검사 간편 처리 |
 |              | `AWS` | 배포, S3 스토리지, RDS 등 클라우드 인프라 운영 |
 |              | `GitHub Actions` | CI/CD 자동화로 빌드, 테스트, 배포 효율화 |
 
