@@ -9,6 +9,7 @@ interface CommentEditFormProps {
 
 export default function CommentEditForm({ handleSubmitComment, setSelectedCommentIndex, setIsEdit, placeholder = undefined, initialText }: CommentEditFormProps) {
 
+
     function handleToggle() {
         setSelectedCommentIndex(0)
         setIsEdit(false)

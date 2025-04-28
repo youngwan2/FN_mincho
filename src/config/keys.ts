@@ -10,7 +10,8 @@ export const queryKeys = {
         getById: (herbId: number) => ["herbs", herbId],
         getRandom: (herbId: number) => ["herbs", "random", herbId],
         getMonth: (month: string) => ["herbs", "blooming", month],
-        getRecommend:(message:string)=> ["message", message]
+        getRecommend: (message: string) => ["message", message],
+        getRealtimeMostView: () => ["herbs"]
     },
     // 프로필
     profile: {
@@ -52,4 +53,10 @@ export const queryKeys = {
     statistics: {
         getAll: () => ["comments", "herbBookmark", "posts"],
     },
+    // 알림
+    notifications: {
+        getAll: (page: number, size: number) => ["notifications", page, size],
+        update: () => ["notifications"],
+        delete: () => ["notifications"]
+    }
 }

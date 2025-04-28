@@ -1,6 +1,5 @@
 import { IoMdMore } from "react-icons/io";
 
-import TimeAgo from "react-timeago"
 
 import CommentSubmitForm from "./CommentSubmitForm";
 import CommentDropdown from "./CommentDropdown";
@@ -11,6 +10,7 @@ import { useCreateCommentMutation, useDeleteCommentMutation, useUpdateCommentMut
 import { FormEvent, useState } from "react";
 
 import { toast } from "react-toastify";
+import CustomTimeAgo from "../../../../components/CustomTimeAgo";
 
 interface CommunityCommentProps {
   postId: number
@@ -65,6 +65,7 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
     }
 
     commentCreateMutate({ comment: data })
+    return true
   }
 
   // 댓글 수정
@@ -78,7 +79,7 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
       contents,
     }
 
-    commentUpdateMutate({commentId, comment: data })
+    commentUpdateMutate({ commentId, comment: data })
     setIsEdit(false)
   }
 
@@ -99,7 +100,7 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
             <div className="w-8 h-8 bg-gray-200 rounded-full mr-3"></div>
             <div className="flex-grow">
               <h3 className={comment.isDeleted ? 'text-gray-500 font-bold text-[15px]' : 'font-bold text-[15px]'} >{comment.nickname || '익명의민초'}</h3>
-              <p className="text-xl text-gray-500"><TimeAgo date={comment.createdAt} /></p>
+              <p className="text-xl text-gray-500"><CustomTimeAgo date={comment.createdAt} /></p>
             </div>
 
             {/* 드롭 다운(수정/삭제) */}
@@ -135,7 +136,7 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
                   <div className="w-8 h-8 bg-gray-200 rounded-full mr-3"></div>
                   <div className="flex-grow">
                     <h3 className={reply.isDeleted ? 'text-gray-500 font-bold text-[15px]' : 'font-bold text-[15px]'} >{reply.nickname || '익명의민초'}</h3>
-                    <p className="text-xl text-gray-500"><TimeAgo date={reply.createdAt} /></p>
+                    <p className="text-xl text-gray-500"><CustomTimeAgo date={reply.createdAt} /></p>
                   </div>
 
                   {/* 드롭다운 */}

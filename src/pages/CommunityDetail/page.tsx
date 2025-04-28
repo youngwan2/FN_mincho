@@ -15,7 +15,7 @@ const PAGE_SIZE = 10;
 export default function CommunityDetailPage() {
 
   const navigate = useNavigate();
-  const [page, setPage] = useState(0)
+  const [page, _] = useState(0)
   const [formType, setFormType] = useState<"create" | "update" | "detail">("detail")
   const { postId } = useParams();
 

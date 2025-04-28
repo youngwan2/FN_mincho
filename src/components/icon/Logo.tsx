@@ -1,6 +1,6 @@
 // interface LogoProps { }
 
-export default function Logo({ color }: { color?: string }) {
+export default function Logo() {
     return (
         <svg width="80" height="24" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" >
             <rect width="80" height="24" rx="5" fill="url(#pattern0_13_14)" />

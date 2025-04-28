@@ -35,7 +35,7 @@ export default function MypageComment({ enabled, totalCount }: MypageCommentProp
       {comments.map((comment, index) => (
         <div
           key={comment.id}
-          className={`p-4 flex justify-between items-center min-h-[150px] ${index < comments.length - 1 ? "border-b border-gray-200" : ""}`}
+          className={`p-4 flex justify-between items-center min-h-[60px] ${index < comments.length - 1 ? "border-b border-gray-200" : ""}`}
         >
           {/* 콘텐츠 정보 */}
           <div>

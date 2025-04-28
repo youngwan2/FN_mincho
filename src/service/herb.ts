@@ -1,4 +1,4 @@
-import { getHerbRecommendFetch, getHerbsBloomingFetch, getHerbsFetch, getHerbsRandomFetch } from "../apis/herb"
+import { getHerbMostViewFetch, getHerbRecommendFetch, getHerbsBloomingFetch, getHerbsFetch, getHerbsRandomFetch } from "../apis/herb"
 import { apiRoutes } from "../config/api";
 import { HerbSearchCondition } from "../types/herb.types";
 
@@ -40,3 +40,9 @@ export const getHerbRecommend = async (message: string) => {
     return data;
 }
 
+/** 사람들이 많이 조회하는 약초 */
+export const getHerbMostView = async () => {
+    const { data } = await getHerbMostViewFetch(apiRoutes.herb.mostview())
+
+    return data;
+}

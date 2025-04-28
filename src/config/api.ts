@@ -34,7 +34,8 @@ export const apiRoutes = {
         update: (herbId: number) => baseUrl + `/herbs/${herbId}`,
         delete: (herbId: number) => baseUrl + `/herbs/${herbId}`,
         getByMonth: (month: string) => baseUrl + `/herbs/blooming?month=${month}`,
-        recommend: (message: string) => baseUrl + `/herbs/recommend?message=${message}`
+        recommend: (message: string) => baseUrl + `/herbs/recommend?message=${message}`,
+        mostview: () => baseUrl + `/herbs/realtime-mostview`
 
     },
     herbBookmark: {
@@ -80,5 +81,13 @@ export const apiRoutes = {
     statistics: {
         getAll: () => baseUrl + '/users/me/stats',
     },
+    sse: {
+        connect: () => baseUrl + `/notification/subscribe`
+    },
+    notifications: {
+        getAll: (page: number, size: number) => baseUrl + `/notifications?page=${page}&size=${size}`,
+        markAsRead: (id: number) => baseUrl + `/notifications/read/${id}`,
+        delete: (ids: number[]) => baseUrl + `/notifications/select?ids=${ids}`
+    }
 
 } as const

@@ -1,4 +1,4 @@
-import { IoNotificationsOutline, IoHeartOutline, IoSettingsOutline, IoChevronForwardOutline, IoExit } from "react-icons/io5";
+import { IoWalk } from "react-icons/io5";
 import MypageTitle from "./MypageTitle";
 import { useDeleteUserMutation } from "../../../hooks/mutations/useMutationMypage";
 
@@ -38,10 +38,10 @@ export default function MypageSettings() {
 
                 {/* 계정 설정 */}
                 <div className="flex items-center justify-between p-3">
-                    <button className="flex items-center text-gray-700 cursor-pointer border border-red-300 p-2 rounded-xl" onClick={handleDeleteClick}
+                    <button className="flex items-center text-gray-700 cursor-pointer border border-red-100 p-2 py-5 rounded-[3px] w-full justify-between hover:bg-red-100" onClick={handleDeleteClick}
                     >
-                        <IoExit size={22} className="text-red-700 mr-3" />
-                        <span className="text-2xl font-medium text-red-700">회원 탈퇴</span>
+                        <IoWalk size={22} className="text-red-400" />
+                        <span className="text-2xl font-medium text-red-400">회원 탈퇴</span>
                     </button>
                 </div>
             </div>

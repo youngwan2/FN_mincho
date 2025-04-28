@@ -18,6 +18,7 @@ export function useCreateCommentMutation(postId: number): UseMutationResult<any,
         onSuccess: () => {
             toast.info("댓글이 추가되었습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.comments.update(postId), exact: false })
+            queryClient.invalidateQueries({ queryKey: queryKeys.notifications.update(), exact: false })
         },
         onError: (error) => {
             if (error instanceof AxiosError) {
