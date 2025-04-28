@@ -1,8 +1,12 @@
+import useSSE from '../../hooks/useSSE';
 import { CustomToastContainer } from '../toast/CustomToast';
 import Header from './Header';
 import { Outlet } from "react-router";
 
 export default function RootLayout() {
+
+    useSSE(); // SSE 연결
+
     return (
         <div>
             <div className='md:px-10 px-5 max-w-[1240px] mx-auto h-auto font-prentendard' >

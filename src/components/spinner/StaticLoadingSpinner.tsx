@@ -5,7 +5,7 @@ interface LoadingSpinnerProps {
     fixed?: boolean
 }
 
-export default function StaticLoadingSpinner({ size = 50 }: LoadingSpinnerProps) {
+export default function StaticLoadingSpinner({ size = 25 }: LoadingSpinnerProps) {
     return (
         <div className={`flex flex-col justify-center items-center z-10 w-full `}>
             <MoonLoader
@@ -13,7 +13,7 @@ export default function StaticLoadingSpinner({ size = 50 }: LoadingSpinnerProps)
                 size={size}
                 aria-label="Loading Spinner"
             />
-            <p className="mt-5">최신 목록을 불러오는 중입니다.</p>
+            <p className="mt-5">이전 알림 조회중..</p>
         </div>
     )
 }

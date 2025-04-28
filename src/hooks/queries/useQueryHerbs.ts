@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getHerbBlooming, getHerbDetail, getHerbRandom, getHerbRecommend, getHerbs } from "../../service/herb"
+import { getHerbBlooming, getHerbDetail, getHerbMostView, getHerbRandom, getHerbRecommend, getHerbs } from "../../service/herb"
 import { HerbSearchCondition, RecommendHerbResponse } from "../../types/herb.types"
 
 
@@ -28,7 +28,7 @@ export const useHerbsGetQuery = (size: number, condition: HerbSearchCondition) =
 
     const flattedData = data?.pages ? data.pages.map((page) => page.herbs).flat() : []
     const totalCount: number = data?.pages ? data.pages[0].totalCount : 0
-    
+
     return {
         status,
         herbs: flattedData,
@@ -94,3 +94,22 @@ export const useHerbRecommendGetQuery = (message: string) => {
     return { recommendList, isLoading, isError, status, isSuccess }
 
 }
+
+
+
+
+/** 사람들이 많이 찾은 약초 */
+
+export const useHerbMostViewGetQuery = () => {
+
+    const { data, isLoading, isError } = useQuery({
+        queryKey: queryKeys.herbs.getRealtimeMostView(),
+        queryFn: () => getHerbMostView(),
+        refetchInterval: 5000,
+    })
+
+
+    const herbs: { id: number, herbName: string, viewCount: number }[] = data?.data ?? []
+    return { herbs, isLoading, isError }
+}
+

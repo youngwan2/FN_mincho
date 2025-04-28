@@ -19,7 +19,7 @@ export default function HerbRecommendPage() {
 
 
   const [message, setMessage] = useState('');
-  const { recommendList, isLoading, isError, isSuccess, status } = useHerbRecommendGetQuery(message)
+  const { recommendList, isLoading, isSuccess } = useHerbRecommendGetQuery(message)
   const [messages, setMessages] = useState<RecommendHerbResponse[]>([
     {
       answer:

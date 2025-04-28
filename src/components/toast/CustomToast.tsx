@@ -1,7 +1,8 @@
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer, ToastContentProps } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaSeedling, FaExclamationTriangle, FaTimesCircle } from 'react-icons/fa';
 import { GiHerbsBundle } from 'react-icons/gi';
+import { Link } from 'react-router';
 
 // 약초 커뮤니티 테마 색상
 const HERBAL_COLORS = {
@@ -127,17 +128,6 @@ export const showToast = {
     },
 };
 
-// 토스트 팝업에 사용할 약초 모티브 배경 SVG 컴포넌트
-const HerbBackgroundSVG = () => (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute right-2 bottom-2 opacity-10">
-        <path d="M20 5C18 5 16 7 16 9C16 11 18 15 20 15C22 15 24 11 24 9C24 7 22 5 20 5Z" fill="currentColor" />
-        <path d="M20 15V25M16 20H24" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-        <path d="M10 10C8 10 6 12 6 14C6 16 8 20 10 20C12 20 14 16 14 14C14 12 12 10 10 10Z" fill="currentColor" fillOpacity="0.6" />
-        <path d="M10 20V30M6 25H14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.6" />
-        <path d="M30 15C28 15 26 17 26 19C26 21 28 25 30 25C32 25 34 21 34 19C34 17 32 15 30 15Z" fill="currentColor" fillOpacity="0.6" />
-        <path d="M30 25V35M26 30H34" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.6" />
-    </svg>
-);
 
 // 메인 ToastContainer 컴포넌트
 export const CustomToastContainer = () => {
@@ -166,3 +156,40 @@ const CloseButton = ({ closeToast }: { closeToast: () => void }) => (
         <LeafIcon />
     </button>
 );
+
+
+
+// 메시지 수신
+export const receivedMessage = (link: string, title: string, content: string) => {
+    toast((closeToast) => SplitButtons(closeToast, link, title, content), {
+        autoClose: false,
+        closeButton: false,
+        closeOnClick: false,
+        className: 'p-0 w-[400px] border border-gray-200',
+        ariaLabel: 'Message received',
+        hideProgressBar: true
+    })
+}
+
+
+function SplitButtons({ closeToast }: ToastContentProps, link: string, title: string, content: string) {
+    return (
+        <div className="grid grid-cols-[1fr_1px_80px] w-full">
+            <div className="flex flex-col p-4">
+                <h3 className="text-zinc-800 text-3xl font-semibold">{title || '메시지 알림'}</h3>
+                <p className="text-2xl pt-3">{content || '메시지가 도착 하였습니다. 확인 하시겠나요?'}</p>
+            </div>
+            <div className="bg-zinc-900/20 h-full" />
+            <div className="grid grid-rows-[1fr_1px_1fr] h-full">
+                <Link
+                    to={link}
+                    onClick={closeToast}
+                    className="block text-primary-green  cursor-pointer w-full text-center">
+                    이동
+                </Link>
+                <div className="bg-zinc-900/20 w-full" />
+                <button className='cursor-pointer' onClick={closeToast}>닫기</button>
+            </div>
+        </div>
+    );
+}
