@@ -28,8 +28,8 @@ export const getHerbRecommendFetch = (url: string) => {
     return axios.get(url)
 }
 
-
 /** 사람들이 많이 찾는 약초 */
 export const getHerbMostViewFetch = (url: string) => {
     return axios.get(url)
 }
+

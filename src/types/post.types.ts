@@ -25,6 +25,7 @@ export interface Post {
     categoryType: CategoryType
     title: string;
     nickname?: string
+
     author: {
         nickname: string
         profileImage: string

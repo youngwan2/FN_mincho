@@ -40,9 +40,11 @@ export const getHerbRecommend = async (message: string) => {
     return data;
 }
 
+
 /** 사람들이 많이 조회하는 약초 */
 export const getHerbMostView = async () => {
     const { data } = await getHerbMostViewFetch(apiRoutes.herb.mostview())
 
     return data;
 }
+
