@@ -27,7 +27,7 @@ export const apiRoutes = {
         }
     },
     herb: {
-        getAll: (page: number, size: number, condition: HerbSearchCondition) => baseUrl + `/herbs?page=${page}&size=${size}&bneNm=${condition.bneNm}&month=${condition.month}&orderBy=${condition.orderBy}`,
+        getAll: (page: number, size: number, condition: HerbSearchCondition) => baseUrl + `/herbs?page=${page}&size=${size}&bneNm=${condition.bneNm}&month=${condition.month}&orderBy=${condition.orderBy}&sort=${condition.sort}&cntntsSj=${condition.cntntsSj}`,
         getById: (herbId: number) => baseUrl + `/herbs/${herbId}`,
         getRandom: (herbId: number) => baseUrl + `/herbs/${herbId}/random`,
         create: () => baseUrl + '/herbs',

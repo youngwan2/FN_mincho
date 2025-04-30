@@ -21,7 +21,7 @@ export default function Profile() {
     return (
         <div onClick={handleDropdown} className="bg-gray-200 cursor-pointer flex relative border rounded-full w-[40px] h-[40px]  border-primary-dark-gray">
             <img
-                src={profileInfo.avatarUrl}
+                src={profileInfo.avatarUrl || noProfile}
                 alt="프로필 이미지"
                 onError={(e) => {
                     e.currentTarget.onerror = null;

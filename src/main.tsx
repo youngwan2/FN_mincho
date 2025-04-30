@@ -26,6 +26,7 @@ import ErrorMessageCard from './components/card/ErrorMessageCard';
 import CommunityDetailPage from './pages/CommunityDetail/page';
 import CommunityEditorPage from './pages/CommunityEditor/page';
 import HerbRecommendPage from './pages/HerbRecommend/page';
+import OAuthSuccessPage from './pages/OAuthSuccess/page';
 
 
 const queryClient = new QueryClient({
@@ -42,19 +43,21 @@ createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <Routes>
-          <Route path='/' element={<RootLayout />} errorElement={<ErrorMessageCard/>}>
+
+          <Route path='/' element={<RootLayout />} errorElement={<ErrorMessageCard />}>
             <Route index element={<HomePage />} />
+            <Route path='/auth/oauth-success' element={<OAuthSuccessPage />} ></Route>
             <Route path="herbs" element={<HerbPage />} />
             <Route path="herbs/:herbId" element={<HerbDetailPage />} />
             <Route path="chat/herbs-recommend" element={<HerbRecommendPage />}></Route>
-            <Route path="users/me" element={<Mypage/>}/>
+            <Route path="users/me" element={<Mypage />} />
             <Route path="community">
-              <Route index element={<CommunityPage/>}/>
-              <Route path='write' element={<CommunityEditorPage/>} />
+              <Route index element={<CommunityPage />} />
+              <Route path='write' element={<CommunityEditorPage />} />
             </Route>
-            <Route path='community/:postId' element={<CommunityDetailPage/>}/>
+            <Route path='community/:postId' element={<CommunityDetailPage />} />
           </Route>
-          <Route path='/auth' element={<AuthLayout />}  errorElement={<ErrorMessageCard/>}>
+          <Route path='/auth' element={<AuthLayout />} errorElement={<ErrorMessageCard />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="signup" element={<RegisterPage />} />
             <Route path="find-password" element={<FindPasswordPage />} />

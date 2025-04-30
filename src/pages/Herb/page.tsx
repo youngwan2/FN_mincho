@@ -14,8 +14,9 @@ export default function HerbPage() {
         bneNm: '',
         search: '',
         month: '',
-        sort:'asc',
+        sort: 'asc',
         orderBy: '',
+        cntntsSj: ''
     })
 
 
@@ -32,9 +33,8 @@ export default function HerbPage() {
     // 정렬 조건 변경
     // sort: 'asc' | 'desc' (오름차순, 내림차순)
     // orderBy: 'bneNm' | 'cntntsSj' (학명, 한글 이름)
-    const onSort=(sort:string, orderBy:string)=>{
+    const onSort = (sort: string, orderBy: string) => {
 
-        console.log(sort, orderBy)
         setSearchCondition(prev => ({
             ...prev,
             sort: sort,

@@ -82,6 +82,45 @@ const allSuggestions = [
   "감정 기복 완화에 좋은 약초",
   "혈당 조절을 돕는 약초",
   "몸속 독소 배출에 좋은 약초",
+  "식욕 부진 개선에 좋은 약초",
+  "소변 이상 증상 완화 약초",
+  "심장 건강에 좋은 약초",
+  "신경 안정에 도움 되는 약초",
+  "혈관 건강을 위한 약초",
+  "손발 저림 완화에 좋은 약초",
+  "신진대사 촉진에 좋은 약초",
+  "운동 후 회복에 도움 되는 약초",
+  "체지방 감소를 돕는 약초",
+  "여름철 땀 조절에 좋은 약초",
+  "겨울철 면역력 강화에 좋은 약초",
+  "아이 성장 발달에 좋은 약초",
+  "갱년기 여성 호르몬 균형에 좋은 약초",
+  "남성 건강을 위한 약초",
+  "혈중 중성지방 관리에 좋은 약초",
+  "간단히 차로 마시기 좋은 약초",
+  "산후 회복에 좋은 약초",
+  "수험생 집중력 강화 약초",
+  "스트레스성 탈모 예방 약초",
+  "아토피 피부 완화에 도움 되는 약초",
+  "입덧 완화에 좋은 약초",
+  "운전 중 졸음 방지에 좋은 약초",
+  "아침 활력을 높여주는 약초",
+  "야근 후 피로 회복에 좋은 약초",
+  "밤 늦게까지 공부할 때 좋은 약초",
+  "기력 저하 방지에 좋은 약초",
+  "카페인 대체용으로 좋은 약초",
+  "과민성 대장 증후군 완화 약초",
+  "장 누수 증후군 예방에 좋은 약초",
+  "목소리 보호에 좋은 약초",
+  "날씨 변화에 강해지는 약초",
+  "피부 트러블 예방에 좋은 약초",
+  "정신적 긴장 완화에 좋은 약초",
+  "자주 붓는 체질을 위한 약초",
+  "간단히 우려 마시기 좋은 약초",
+  "일교차로 인한 감기 예방 약초",
+  "아토피 체질 개선에 도움 되는 약초",
+  "수술 후 회복을 돕는 약초",
+  "면역력 저하로 인한 질병 예방 약초"
 ];
 
 function getRandomSuggestions(list: string[], count: number) {
@@ -113,7 +152,7 @@ export default function SuggestionBox({ setInput }: { setInput: (text: string) =
 
       <ul className="flex pl-5 space-y-1 text-gray-700 gap-2  flex-wrap">
         {suggestions.map((item, idx) => (
-          <li onClick={()=> setInput(item)} className="border border-gray-200 p-1 px-3 rounded-2xl hover:bg-gray-100 cursor-pointer" key={idx}>{item}</li>
+          <li onClick={() => setInput(item)} className="border border-gray-200 p-1 px-3 rounded-2xl hover:bg-gray-100 cursor-pointer" key={idx}>{item}</li>
         ))}
       </ul>
 

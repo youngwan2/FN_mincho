@@ -2,7 +2,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { queryKeys } from "../../config/keys";
 import { updatePostLike } from "../../service/post";
-import { AxiosError } from "axios";
+
+import { handleError } from "../../config/error";
 
 
 
@@ -17,13 +18,10 @@ export function useTogglePostLikeMutation(postId: number) {
         onSuccess: () => {
             toast.info("좋아요를 추가하였습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.postLike.update(postId) })
+            queryClient.invalidateQueries({ queryKey: queryKeys.statistics.getAll(), exact: false })
         },
         onError(error) {
-            if (error instanceof AxiosError) {
-                const message = error.response?.data.message
-
-                toast.error(message)
-        }
+            handleError(error)
         },
     })
 }

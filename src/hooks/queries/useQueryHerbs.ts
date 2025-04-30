@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
 import { getHerbBlooming, getHerbDetail, getHerbMostView, getHerbRandom, getHerbRecommend, getHerbs } from "../../service/herb"
-import { HerbSearchCondition, RecommendHerbResponse } from "../../types/herb.types"
+import { HerbDetail, HerbSearchCondition, RecommendHerbResponse } from "../../types/herb.types"
 
 
 
@@ -49,7 +49,7 @@ export const useHerbDetailGetQuery = (herbId: number) => {
         queryKey: queryKeys.herbs.getById(herbId),
         queryFn: () => getHerbDetail(herbId)
     })
-    const herb = data?.data ?? []
+    const herb: HerbDetail = data?.data ?? []
     return { herb, isLoading: isPending, isError, status }
 }
 

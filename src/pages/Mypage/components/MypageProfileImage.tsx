@@ -15,6 +15,8 @@ export default function MypageProfileImage({ profileImage }: MypageProfileImageP
     const [_, setFile] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
+    const imgRef = useRef<HTMLImageElement>(null)
+
     // 파일 선택 시 미리보기 설정
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -28,8 +30,10 @@ export default function MypageProfileImage({ profileImage }: MypageProfileImageP
 
         if (file) {
             const imageUrl = URL.createObjectURL(file);
-            setPreviewImage(imageUrl);
-
+            if (imgRef.current) {
+                imgRef.current.src = imageUrl
+            }
+            setPreviewImage(imageUrl)
             showToast.info("미리보기 이미지가 설정되었습니다.")
         }
     };
@@ -66,8 +70,13 @@ export default function MypageProfileImage({ profileImage }: MypageProfileImageP
 
     // 업로드 취소
     const handleCancel = () => {
-        setPreviewImage(undefined)
-        setFile('')
+
+        if (fileInputRef.current) {
+            fileInputRef.current.value = ''
+            setPreviewImage(undefined)
+            setFile('')
+        }
+
 
     }
 
@@ -78,7 +87,8 @@ export default function MypageProfileImage({ profileImage }: MypageProfileImageP
                 onClick={handleProfileClick}
             >
                 <img
-                    src={previewImage || profileImage}
+                    ref={imgRef}
+                    src={profileImage || previewImage || noImage}
                     onError={(e) => {
                         e.currentTarget.src = noImage;
                     }}

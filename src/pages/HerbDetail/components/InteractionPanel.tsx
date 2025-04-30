@@ -1,13 +1,13 @@
 import { IoShareOutline, IoHeart, IoHeartOutline, IoBookmarkOutline } from "react-icons/io5";
 import { useHerbBookmarkCountGetQuery } from "../../../hooks/queries/useQueryHerbBookmark";
 import { useCreateHerbBookmarkMutation, useDeleteHerbBookmarkMutation } from "../../../hooks/mutations/useMutationHerbBookmark";
-import { Herb } from "../../../types/herb.types";
+import { Herb, HerbDetail } from "../../../types/herb.types";
 import { useCreateHerbLikeMutation, useDeleteHerbLikeMutation } from "../../../hooks/mutations/useMutationHerbLike";
 import { useCountHerbLikeGetQuery } from "../../../hooks/queries/useQueryHerbLike";
 
 
 interface InteractionPanelProps {
-    herb: Herb
+    herb: HerbDetail
     herbId?: string
 }
 
