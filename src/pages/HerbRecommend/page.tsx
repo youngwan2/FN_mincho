@@ -8,7 +8,6 @@ import { RecommendHerbResponse } from "../../types/herb.types"
 import SuggestionBox from "./components/SuggestionBox"
 import { Link } from "react-router"
 import PulseSpinner from "../../components/spinner/PulseSpinner"
-import { IoWarning } from "react-icons/io5"
 
 
 export default function HerbRecommendPage() {

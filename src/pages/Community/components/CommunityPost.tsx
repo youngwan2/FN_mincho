@@ -10,11 +10,12 @@ interface CommunityPostProps {
     categoryInfos: PostStatistics[]
     posts: Post[]
     postFetchState: PostFetchState
+    itemCount: number
 }
 
 
 
-export default function CommunityPost({ activeCategory, categoryInfos, posts, postFetchState }: CommunityPostProps) {
+export default function CommunityPost({ activeCategory, categoryInfos, posts, postFetchState, itemCount }: CommunityPostProps) {
 
     const navigate = useNavigate();
 
@@ -23,8 +24,9 @@ export default function CommunityPost({ activeCategory, categoryInfos, posts, po
             <div className="flex justify-between items-center p-4 border-b border-gray-200">
                 <h2 className="font-semibold text-2xl">
                     {getCategoryName(categoryInfos, activeCategory)}
+                    <span>{`(${itemCount})`}</span>
                 </h2>
-                <PrimaryButton onClick={()=> navigate("/community/write") } type="button" className="bg-[#05D182] text-white px-4 py-2 rounded-md hover:bg-hover-primary-green">
+                <PrimaryButton onClick={() => navigate("/community/write")} type="button" className="bg-[#05D182] text-white px-4 py-2 rounded-md hover:bg-hover-primary-green">
                     글쓰기
                 </PrimaryButton>
             </div>

@@ -10,7 +10,7 @@ export default function PreviewHerbsSection() {
 
     const navigate = useNavigate();
 
-    const { herbs, isLoading, isError } = useHerbsGetQuery(5, {
+    const { herbs, isError } = useHerbsGetQuery(5, {
         bneNm: '',
         month: '',
         orderBy: '',
