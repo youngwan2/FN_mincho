@@ -17,6 +17,7 @@ export function useCreateHerbLikeMutation(): UseMutationResult<any, AxiosError, 
         onSuccess: (_data, variables) => {
             showToast.info("좋아요를 반영하였습니다.");
             queryClient.invalidateQueries({ queryKey: queryKeys.herbLike.update(variables) });
+            queryClient.invalidateQueries({ queryKey: queryKeys.statistics.getAll(), exact: false })
         },
         onError: (error) => {
             handleError(error);
@@ -35,6 +36,7 @@ export function useDeleteHerbLikeMutation() {
         onSuccess: (_data, variables) => {
             showToast.info("좋아요를 취소하였습니다.");
             queryClient.invalidateQueries({ queryKey: queryKeys.herbLike.update(variables) });
+            queryClient.invalidateQueries({ queryKey: queryKeys.statistics.getAll(), exact: false })
         },
         onError: (error) => {
             handleError(error);

@@ -8,6 +8,7 @@ import { RecommendHerbResponse } from "../../types/herb.types"
 import SuggestionBox from "./components/SuggestionBox"
 import { Link } from "react-router"
 import PulseSpinner from "../../components/spinner/PulseSpinner"
+import { IoWarning } from "react-icons/io5"
 
 
 export default function HerbRecommendPage() {
@@ -84,12 +85,19 @@ export default function HerbRecommendPage() {
       {/* 페이지 헤더 */}
       <div className="py-10">
         <h1 className="text-5xl font-bold py-2">약초 추천 서비스</h1>
-        <p>증상이나 원하는 효능을 알려주시면, 적합한 약초와 활용법을 민초에서 보유하고 있는 약초정보를 기반으로 추천해드립니다.</p>
+        <p> 증상이나 원하는 효능을 알려주시면, 적합한 약초와 활용법을 민초에서 보유하고 있는 약초정보를 기반으로 추천해드립니다.</p>
+        <ul className="border border-gray-300 rounded-sm p-5 mt-5">
+          <li className="font-bold text-2xl mb-3 text-red-500">주의사항 안내(필독)</li>
+          <li>① 추천된 약초 정보는 <a className="border-b border-green-400 hover:text-gray-700" href="https://www.nongsaro.go.kr/portal/ps/psz/psza/contentMain.ps?menuId=PS04103&pageUnit=8" target="_blank">농사로(https://www.nongsaro.go.kr/)</a> 민간약초 컨텐츠에 근거합니다.</li>
+          <li>② 사이트 운영자가 별도로 조사한 데이터 또한 DB에 관리되어 추천 서비스에 활용될 수 있습니다.</li>
+          <li>③ 앞서 ①, ②항을 고려하여 추천된 약초를 참고하시되, 정확한 복용 방법은 <mark className="bg-amber-100 px-2 rounded-md">전문가 상담</mark>이 필수입니다.</li>
+        </ul>
       </div>
+
       <div className="flex flex-col w-full rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-white">
 
         {/* 채팅창 헤더 */}
-        <div className="bg-gradient-to-r from-[#05D182] to-[#04b873] text-white p-3 flex items-center justify-between">
+        <div className="bg-hover-primary-green text-white p-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="bg-white/20 p-1.5 rounded-full">
               <GiHerbsBundle className="w-4 h-4" />
@@ -109,11 +117,11 @@ export default function HerbRecommendPage() {
 
         {/* Community Stats */}
         <div className="bg-gray-50 px-4 py-2 flex items-center justify-end text-xs text-gray-500 border-b border-gray-200">
-          <div className="text-[#05D182] text-xl font-medium animate-pulse">상태: ● (이용가능) </div>
+          <div className="text-hover-primary-green text-xl font-medium animate-pulse">상태: ● (이용가능) </div>
         </div>
 
         {/* 메시지 내역 */}
-        <div className="h-[400px] overflow-y-auto p-4 bg-gray-50">
+        <div className="h-[500px] overflow-y-auto p-4 bg-gray-50">
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div key={index} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"} transition-all animate-fade-down`} ref={messagesEndRef}>
@@ -121,7 +129,7 @@ export default function HerbRecommendPage() {
                   className={`flex items-start gap-3 max-w-[85%] ${message.sender === "user" ? "flex-row-reverse" : ""}`}
                 >
                   {message.sender === "bot" ? (
-                    <div className="w-8 h-8 rounded-full bg-[#05D182] flex items-center justify-center text-white text-sm font-medium shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-hover-primary-green flex items-center justify-center text-white text-sm font-medium shrink-0">
                       <GiHerbsBundle className="w-4 h-4" />
                     </div>
                   ) : (
@@ -184,7 +192,7 @@ export default function HerbRecommendPage() {
         </div>
 
         {/* 입력 폼 */}
-        <div className="border-t border-gray-200 p-3 py-6 bg-white">
+        <div className="border-t border-gray-300 p-3 py-6 bg-white">
           <form
             className="flex w-full items-center space-x-2 py-5"
             onSubmit={(e) => {
@@ -202,15 +210,15 @@ export default function HerbRecommendPage() {
               placeholder="증상이나 원하는 효능을 입력하세요..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 px-3 py-7 bg-gray-100 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#05D182]/30 text-gray-700 text-2xl"
+              className="flex-1 px-3 py-7 bg-gray-700 border-0 max-w-[90%] rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 text-white text-2xl"
             />
 
             <button
               type="submit"
-              className="cursor-pointer bg-[#05D182] hover:bg-[#05D182]/90 text-white p-2 rounded-full transition-colors"
+              className="cursor-pointer hover:bg-gray-700 bg-gray-800 text-white px-3 py-6 rounded-lg transition-colors"
               disabled={!input.trim()}
             >
-              <FiSend className="h-6 w-6" />
+              <FiSend className="h-10 w-18" />
               <span className="sr-only">전송</span>
             </button>
           </form>

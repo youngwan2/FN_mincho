@@ -38,7 +38,8 @@ instance.interceptors.response.use(function (response) {
   if (error.status === 409) {
     toast("이미 처리된 요청입니다.")
   }
-  if (error.status === 403) {
+  if (error.status === 401) {
+    console.error(error)
     window.location.href = "/"
     removeToken()
   }

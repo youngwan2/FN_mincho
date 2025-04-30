@@ -17,6 +17,7 @@ export function useCreateHerbBookmarkMutation(): UseMutationResult<any, AxiosErr
         onSuccess: (_data, variables) => {
             showToast.info("관심 약초에 추가하였습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.herbBookmark.update(variables.herbId) })
+            queryClient.invalidateQueries({ queryKey: queryKeys.statistics.getAll(), exact: false })
         },
         onError: (error) => {
             handleError(error)
@@ -35,6 +36,7 @@ export function useDeleteHerbBookmarkMutation() {
         onSuccess: (_data, variables) => {
             showToast.info("관심 약초를 취소하였습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.herbBookmark.update(variables) })
+            queryClient.invalidateQueries({ queryKey: queryKeys.statistics.getAll(), exact: false })
         },
         onError: (error) => {
             handleError(error)

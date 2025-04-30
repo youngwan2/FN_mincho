@@ -22,12 +22,12 @@ export default function MypageComment({ enabled, totalCount }: MypageCommentProp
 
   // 에러 발생 시 처리
   if (isError) {
-    return <p className="text-center text-xl text-red-500 p-10">댓글을 불러오는 데 오류가 발생했습니다.</p>;
+    return <p className="text-center text-2xl text-red-500 p-10">댓글을 불러오는 데 오류가 발생했습니다.</p>;
   }
 
   // 데이터가 없을 때 처리
   if (comments.length === 0) {
-    return <p className="text-center text-xl text-gray-500 p-10">댓글이 없습니다.</p>;
+    return <p className="text-center text-2xl text-gray-500 p-10">댓글이 없습니다.</p>;
   }
 
   return (

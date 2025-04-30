@@ -25,12 +25,12 @@ export default function MypageFavoriteHerb({ enabled, totalCount }: MypageFavori
 
   // 에러 상태 처리
   if (isError) {
-    return <p className="text-center text-xl text-red-500 p-10">데이터를 불러오는 데 오류가 발생했습니다.</p>
+    return <p className="text-center text-2xl text-red-500 p-10">데이터를 불러오는 데 오류가 발생했습니다.</p>
   }
 
   // 데이터가 없을 때 처리
   if (bookmarkInfo.bookmarks.length === 0) {
-    return <p className="text-center text-xl text-gray-500 p-10">관심 약초가 없습니다.</p>;
+    return <p className="text-center text-2xl text-gray-500 p-10">관심 약초가 없습니다.</p>;
   }
 
   return (

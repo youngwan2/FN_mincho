@@ -28,8 +28,9 @@ export const queryKeys = {
     },
     // 약초 좋아요
     herbLike: {
+        getAll: (herbId: number) => ["herbLike", herbId],
         update: (herbId: number) => ["herbLike", herbId],
-        getAll: (herbId: number) => ["herbLike", herbId]
+
     },
     // 게시글
     posts: {
