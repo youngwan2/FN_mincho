@@ -8,6 +8,7 @@ interface QuillEditorProps {
     onChange: (html: string) => void;
 }
 
+// 이슈 레퍼런스: https://github.com/gtgalone/react-quilljs/issues/94
 export default function QuillEditor({ content, isDetail, onChange }: QuillEditorProps) {
     const { quill, quillRef } = useQuill({
         modules: {
@@ -44,7 +45,7 @@ export default function QuillEditor({ content, isDetail, onChange }: QuillEditor
     }, [quill, content, isDetail]);
 
     return (
-        <div className={`${isDetail ? 'h-auto pt-4' : 'border h-auto border-gray-300'}`}>
+        <div className={`${isDetail ? 'h-auto pt-4' : 'border h-auto min-h-[350px] border-gray-300'}`}>
             <div ref={quillRef} className="w-full" />
         </div>
     );

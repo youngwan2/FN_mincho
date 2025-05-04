@@ -2,7 +2,7 @@ import { AxiosError } from "axios"
 import { apiRoutes } from "../config/api"
 import instance from "../config/axios"
 import { Email, LoginRequest, RegisterRequest } from "../types/auth.types"
-import { toast } from "react-toastify"
+import { showToast } from "../components/toast/CustomToast"
 
 
 /** 회원가입 요청*/
@@ -22,10 +22,10 @@ export const registerFetch = async (registerRequest: RegisterRequest) => {
         return response.data
     } catch (error) {
         if (error instanceof AxiosError) {
-            toast.error(error.status + ":" + error.response?.data.message)
+            showToast.error(error.response?.data.message)
 
         } else {
-            toast.error("500: 네트워크 문제로 요청에 실패하였습니다.")
+            showToast.error("서버 측 문제로 요청에 실패하였습니다.")
 
         }
     }
@@ -42,10 +42,10 @@ export const emailCheckFetch = async (email: Email) => {
 
     } catch (error) {
         if (error instanceof AxiosError) {
-            toast.error(error.status + ":" + error.response?.data.message)
+            showToast.error(error.response?.data.message)
 
         } else {
-            toast.error("500: 네트워크 문제로 요청에 실패하였습니다.")
+            showToast.error("서버 측 문제로 요청에 실패하였습니다.")
 
         }
 
@@ -74,21 +74,21 @@ export const loginFetch = async (loginRequest: LoginRequest) => {
         return response
     } catch (error) {
         if (error instanceof AxiosError) {
-            toast.error(error.status + ":" + error.response?.data.message)
+            showToast.error(error.response?.data.message)
             return error.response
 
         } else {
-            toast.error("500: 네트워크 문제로 요청에 실패하였습니다.")
+            showToast.error("서버 측 문제로 요청에 실패하였습니다.")
 
         }
     }
 }
 
 /** 이메일 인증 번호 전송 요청 */
-export const sendVerificationCodeFetch = async (email: string) => {
+export const sendVerificationCodeFetch = async (email: string, type: 'register' | 'reset') => {
     try {
         const response = await instance.post(
-            apiRoutes.auth.sendVerificationCode,
+            apiRoutes.auth.sendVerificationCode(type),
             {
                 email: email
             }
@@ -101,10 +101,17 @@ export const sendVerificationCodeFetch = async (email: string) => {
         return true
     } catch (error) {
         if (error instanceof AxiosError) {
-            toast.error(error.status + ":" + error.response?.data.message)
+            if (error.status === 400) {
+                if (typeof error.response?.data.message === 'string') {
+                    showToast.error(error.response?.data.message)
+                } else {
+                    showToast.error("잘못된 요청입니다. 이메일 형식을 확인 후 다시시도 해주세요.")
+                }
+            }
+
 
         } else {
-            toast.error("500: 네트워크 문제로 요청에 실패하였습니다.")
+            showToast.error("서버 측 문제로 요청에 실패하였습니다.")
         }
         return false
     }
@@ -113,13 +120,13 @@ export const sendVerificationCodeFetch = async (email: string) => {
 
 
 /** 이메일 인증번호 검증 요청 */
-export const verificationCodeCheckFetch = async (email: string, code: string) => {
+export const verificationCodeCheckFetch = async (email: string, code: string, type: 'register' | 'reset') => {
     try {
         const response = await instance.post(
-            apiRoutes.auth.checkVerificationCode,
+            apiRoutes.auth.checkVerificationCode(type),
             {
                 email,
-                code
+                code,
             }
         )
 
@@ -130,10 +137,16 @@ export const verificationCodeCheckFetch = async (email: string, code: string) =>
         return true
     } catch (error) {
         if (error instanceof AxiosError) {
-            toast.error(error.status + ":" + error.response?.data.message)
+            if (error.status === 400) {
+                if (typeof error.response?.data.message === 'string') {
+                    showToast.error(error.response?.data.message)
+                } else {
+                    showToast.error("잘못된 요청입니다. 인증번호 형식을 확인 후 다시시도 해주세요.")
+                }
+            }
 
         } else {
-            toast.error("500: 네트워크 문제로 요청에 실패하였습니다.")
+            showToast.error("서버 측 문제로 요청에 실패하였습니다.")
         }
 
         return false
@@ -155,18 +168,18 @@ export const logoutFetch = async () => {
         )
 
         if (response?.status && response.status > 399) {
-            toast.error(response.status + ": 로그아웃에 실패하였습니다.")
+            showToast.error("로그아웃에 실패하였습니다.")
             throw new AxiosError("로그아웃에 실패하였습니다.", response.data.StatusCode || "UNKNOWN_ERROR")
         }
 
         return response.data
     } catch (error) {
         if (error instanceof AxiosError) {
-            toast.error("에러: " + error.response?.data.message)
+            showToast.error(error.response?.data.message)
             return error.response
 
         } else {
-            toast.error("500: 네트워크 문제로 요청에 실패하였습니다.")
+            showToast.error("서버 측 문제로 요청에 실패하였습니다.")
 
 
         }

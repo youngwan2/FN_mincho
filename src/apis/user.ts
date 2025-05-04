@@ -2,6 +2,9 @@ import { apiRoutes } from "../config/api"
 import instance from "../config/axios"
 import { AxiosError } from "axios"
 import { Profile } from "../types/user.types"
+import { UpdatePasswordRequest } from "../types/auth.types"
+import { showToast } from "../components/toast/CustomToast"
+import { handleError } from "../config/error"
 
 
 /** 유저 프로필 정보 요청*/
@@ -85,3 +88,28 @@ export const getUserStatsFetch = async () => {
         }
     }
 }
+
+
+/** 비밀번호 변경 요청 */
+export const updatePasswordFetch = async (
+    passwordData: UpdatePasswordRequest
+) => {
+    try {
+        const response = await instance.patch(apiRoutes.user.updatePassword, passwordData);
+
+        // 200~299: 성공
+        if (response.status > 199 && response.status < 300) {
+            showToast.success('비밀번호가 성공적으로 변경되었습니다.');
+        }
+        if (response.status > 399) {
+            throw new AxiosError("잘못된 요청입니다.")
+        }
+
+        return true;
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            // 예외 상태 코드별 처리
+            throw new AxiosError(error.response?.data.message)
+        }
+    }
+};

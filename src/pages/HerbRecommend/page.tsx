@@ -159,7 +159,7 @@ export default function HerbRecommendPage() {
                             <div className="">
                               <p>{recommend.answer}</p>
                               <div className="w-full flex justify-end">
-                                <Link className="text-right text-hover-primary-green border-b border-primary-green hover:border-hover-primary-green max-w-[60px]" to={recommend.url}>상세보기</Link>
+                                <Link target="_blank" className="text-right text-hover-primary-green border-b border-primary-green hover:border-hover-primary-green max-w-[60px]" to={recommend.url}>상세보기</Link>
                               </div>
                             </div>
                           </div>

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { baseUrl } from "./api";
 import { getToken, removeToken, setToken } from "../utils/storage";
-import { toast } from "react-toastify";
 
 // axios 인스턴스를 만들 때 구성 기본 값 설정
 const instance = axios.create({
@@ -35,14 +34,15 @@ instance.interceptors.response.use(function (response) {
   // 응답 오류가 있는 작업 수행
 
 
-  if (error.status === 409) {
-    toast("이미 처리된 요청입니다.")
-  }
   if (error.status === 401) {
     console.error(error)
-    window.location.href = "/"
     removeToken()
   }
+  if (error.status === 403) {
+    console.error(error)
+    removeToken()
+  }
+
 
 
   return Promise.reject(error);

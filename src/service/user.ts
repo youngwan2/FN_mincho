@@ -1,5 +1,7 @@
-import { getProfileFetch, getUserStatsFetch, updateProfileFetch, updateProfileImageFetch } from "../apis/user";
+import { getProfileFetch, getUserStatsFetch, updatePasswordFetch, updateProfileFetch, updateProfileImageFetch } from "../apis/user";
+import { UpdatePasswordRequest } from "../types/auth.types";
 import { Profile } from "../types/user.types";
+import { logout } from "./auth";
 
 
 /** 프로필 정보 요청*/
@@ -27,4 +29,13 @@ export const getUserStats = async () => {
     const data = await getUserStatsFetch();
     return data
 
+}
+
+/** 비밀번호 변경 */
+export const updatePassword = async (passwordData: UpdatePasswordRequest) => {
+    const success = await updatePasswordFetch(passwordData);
+    if (success) {
+        logout();
+    }
+    return success
 }

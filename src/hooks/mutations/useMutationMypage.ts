@@ -1,5 +1,5 @@
 import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateProfile } from "../../service/user";
+import { updatePassword, updateProfile } from "../../service/user";
 import { Profile } from "../../types/user.types";
 import { queryKeys } from "../../config/keys";
 import { AxiosError } from "axios";
@@ -7,8 +7,10 @@ import { handleError } from "../../config/error";
 import { useNavigate } from "react-router";
 import { deleteUser, logout } from "../../service/auth";
 import { showToast } from "../../components/toast/CustomToast";
+import { UpdatePasswordRequest } from "../../types/auth.types";
 
 
+// 프로필 수정
 export function useUpdateProfileMutation(): UseMutationResult<Profile, AxiosError, Profile> {
     const queryClient = useQueryClient()
 
@@ -42,3 +44,22 @@ export function useDeleteUserMutation() {
         }
     });
 }
+
+// 비밀번호 재설정 훅 추가
+export const useResetPasswordMutation = () => {
+    return useMutation({
+        mutationFn: (passwordData: UpdatePasswordRequest) => updatePassword(passwordData),
+        onError: (error) => {
+            if (error instanceof AxiosError) {
+                const message = error.message
+                if (message) {
+                    showToast.error(message)
+
+                } else {
+                    handleError(error)
+                }
+            }
+        },
+    }
+    );
+};
