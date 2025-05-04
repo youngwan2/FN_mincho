@@ -1,4 +1,4 @@
-import { IoAlertCircle, IoArrowForwardCircle, IoMail } from 'react-icons/io5';
+import { IoAlertCircle, IoMail } from 'react-icons/io5';
 import { Link } from 'react-router';
 
 interface Props {

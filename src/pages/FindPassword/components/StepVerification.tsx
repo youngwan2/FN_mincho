@@ -1,4 +1,4 @@
-import { IoAlertCircle, IoArrowForwardCircle, IoHandRight, IoKey } from 'react-icons/io5';
+import { IoAlertCircle, IoKey } from 'react-icons/io5';
 
 interface Props {
     email: string;

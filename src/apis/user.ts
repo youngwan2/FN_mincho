@@ -4,7 +4,6 @@ import { AxiosError } from "axios"
 import { Profile } from "../types/user.types"
 import { UpdatePasswordRequest } from "../types/auth.types"
 import { showToast } from "../components/toast/CustomToast"
-import { handleError } from "../config/error"
 
 
 /** 유저 프로필 정보 요청*/

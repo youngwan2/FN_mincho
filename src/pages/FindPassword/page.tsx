@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import StepIndicator from './components/StepIndicator';
 import StepEmailInput from './components/StepEmailInput';
 import StepVerification from './components/StepVerification';
