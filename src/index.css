@@ -28,16 +28,32 @@ table {
   --color-primary-dark-gray: #d3d3d3;
 }
 
-@media (max-width: 768px) {
-  html {
-    font-size: 15px;
-    /* 태블릿 */
-  }
+
+/* 에디터  */
+.tiptap{
+  padding: 8px;
+  min-height: 500px;
+  outline: none;
 }
 
-@media (max-width: 480px) {
-  html {
-    font-size: 12px;
-    /* 모바일 */
-  }
+/* 제목 스타일 */
+.tiptap h1 {
+  font-size: 2rem;     /* Tailwind의 text-2xl */
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.tiptap h2 {
+  font-size: 1.5rem;   /* Tailwind의 text-xl */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.tiptap h3 {
+  font-size: 1.25rem;  /* Tailwind의 text-lg */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
 }

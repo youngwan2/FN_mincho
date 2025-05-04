@@ -1,20 +1,25 @@
-import tailwindcssanimated from "tailwindcss-animated";
 import type { Config } from "tailwindcss";
-const config: Config = {
+import tailwindcssanimated from "tailwindcss-animated";
+import typography from "@tailwindcss/typography";
 
+
+const config: Config = {
   plugins: [
-    tailwindcssanimated
+    tailwindcssanimated,
+    typography,
+  ],
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",  // 꼭 이 부분 포함!
   ],
   theme: {
     extend: {
       colors: {
         primary: "#00c471",
         secondary: "#9333EA",
-        customGray: "#B0BEC5", // 새로운 색상 추가
+        customGray: "#B0BEC5",
       },
     },
   },
-
 };
 
 export default config;

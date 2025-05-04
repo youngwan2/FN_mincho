@@ -17,14 +17,14 @@ export default function HerbBanner({ herbs, isLoading }: HerbBannerProps) {
             </HerbTitle>
 
             {isLoading && <Skeleton borderRadius={5} height={380} count={3} containerClassName="flex gap-5" />}
-            <ul className="md:grid-cols-3 sm:grid-cols-2 grid-cols-1 grid gap-5 h-auto ">
+            <ul className="md:grid-cols-3 sm:grid-cols-2 grid-cols-1 grid gap-5 h-auto max-h-[350px] ">
                 {
                     herbs.slice(herbs.length - 3).map((herb) => {
                         return (
                             <li key={herb.id} className="w-full transition ">
                                 <Link to={"" + herb.id} className="relative">
-                                    <div className="w-full h-full grayscale-70 hover:grayscale-0 transition">
-                                        <img src={herb.imgUrl1} alt={herb.cntntsSj} className={"h-full w-full rounded-2xl"} height={450} width={300} />
+                                    <div className="w-full h-full grayscale-70 hover:grayscale-0 transition overflow-hidden">
+                                        <img src={herb.imgUrl1} alt={herb.cntntsSj} className={"h-full w-full rounded-2xl hover:scale-120 transition-transform"} height={450} width={300} />
                                     </div>
                                     <div className="absolute bottom-0 flex flex-col p-3 text-white">
                                         <span className="bg-primary-green text-white text-2xl p-0.5 px-2  rounded-[3px]">{herb.bneNm}</span>

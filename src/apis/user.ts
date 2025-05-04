@@ -112,3 +112,22 @@ export const updatePasswordFetch = async (
         }
     }
 };
+
+/** 유저 로그인 상태 */
+export const getLoginStatusFetch = async () => {
+
+    try {
+        const response = await instance.get(apiRoutes.user.loginStatus);
+
+        // 200~299: 성공
+        if (response.status > 199 && response.status < 300) {
+            console.log(response)
+            return response.data
+        } else {
+            return false;
+        }
+
+    } catch (error) {
+        return false
+    }
+}

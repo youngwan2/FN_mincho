@@ -85,8 +85,8 @@ export default function HerbRecommendPage() {
       <div className="py-10">
         <h1 className="text-5xl font-bold py-2">약초 추천 서비스</h1>
         <p> 증상이나 원하는 효능을 알려주시면, 적합한 약초와 활용법을 민초에서 보유하고 있는 약초정보를 기반으로 추천해드립니다.</p>
-        <ul className="border border-gray-300 rounded-sm p-5 mt-5">
-          <li className="font-bold text-2xl mb-3 text-red-500">주의사항 안내(필독)</li>
+        <ul className="border border-gray-200 rounded-md p-5 mt-10 text-gray-800">
+          <li className="font-bold text-2xl mb-3 text-red-500">💬 주의사항 안내(필독)</li>
           <li>① 추천된 약초 정보는 <a className="border-b border-green-400 hover:text-gray-700" href="https://www.nongsaro.go.kr/portal/ps/psz/psza/contentMain.ps?menuId=PS04103&pageUnit=8" target="_blank">농사로(https://www.nongsaro.go.kr/)</a> 민간약초 컨텐츠에 근거합니다.</li>
           <li>② 사이트 운영자가 별도로 조사한 데이터 또한 DB에 관리되어 추천 서비스에 활용될 수 있습니다.</li>
           <li>③ 앞서 ①, ②항을 고려하여 추천된 약초를 참고하시되, 정확한 복용 방법은 <mark className="bg-amber-100 px-2 rounded-md">전문가 상담</mark>이 필수입니다.</li>
@@ -120,7 +120,7 @@ export default function HerbRecommendPage() {
         </div>
 
         {/* 메시지 내역 */}
-        <div className="h-[500px] overflow-y-auto p-4 bg-gray-50">
+        <div className="h-[560px] overflow-y-auto p-4 bg-gray-50">
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div key={index} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"} transition-all animate-fade-down`} ref={messagesEndRef}>
@@ -209,15 +209,15 @@ export default function HerbRecommendPage() {
               placeholder="증상이나 원하는 효능을 입력하세요..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 px-3 py-7 bg-gray-700 border-0 max-w-[90%] rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 text-white text-2xl"
+              className="flex-1 px-3 py-3.5 border border-gray-400 0 max-w-[90%] rounded-md focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-0 text-gray-700 text-3xl"
             />
 
             <button
               type="submit"
-              className="cursor-pointer hover:bg-gray-700 bg-gray-800 text-white px-3 py-6 rounded-lg transition-colors"
+              className="cursor-pointer hover:bg-hover-primary-green bg-primary-green text-white px-3 py-3 rounded-lg transition-colors"
               disabled={!input.trim()}
             >
-              <FiSend className="h-10 w-18" />
+              <FiSend className="h-10 w-10" />
               <span className="sr-only">전송</span>
             </button>
           </form>
@@ -227,26 +227,3 @@ export default function HerbRecommendPage() {
   )
 }
 
-
-
-/**
- *            {message.sender === "bot" && (
-                        <div className="flex items-center ml-2 gap-3">
-                          <button
-                            onClick={() => toggleLike(message.id)}
-                            className="flex items-center gap-1 hover:text-[#05D182] transition-colors"
-                          >
-                            <FiThumbsUp className="w-3 h-3" />
-                            <span>{message.likes || 0}</span>
-                          </button>
-
-                          <button
-                            onClick={() => toggleSave(message.id)}
-                            className={`hover:text-[#05D182] transition-colors ${message.saved ? "text-[#05D182]" : ""}`}
-                          >
-                            <FiBookmark className="w-3 h-3" />
-                          </button>
-                        </div>
-                      )}
- * 
- */

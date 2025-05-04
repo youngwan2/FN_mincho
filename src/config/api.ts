@@ -25,7 +25,8 @@ export const apiRoutes = {
             get: baseUrl + '/users/me/favorite-herbs',
             create: baseUrl + '/users/me/favorite-herbs',
             delete: (favoriteHerbId: number) => baseUrl + `/users/me/favorite-herbs/${favoriteHerbId}`
-        }
+        },
+        loginStatus: baseUrl + '/users/login-status'
     },
     herb: {
         getAll: (page: number, size: number, condition: HerbSearchCondition) => baseUrl + `/herbs?page=${page}&size=${size}&bneNm=${condition.bneNm}&month=${condition.month}&orderBy=${condition.orderBy}&sort=${condition.sort}&cntntsSj=${condition.cntntsSj}`,

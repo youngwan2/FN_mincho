@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'; // 스켈레톤 CSS 추가
-import { IoEye, IoThumbsUp } from "react-icons/io5";
-import { useNavigate, useParams } from "react-router";
-import { usePostDetailGetQuery } from "../../hooks/queries/useQueryPosts";
-import CommunityComment from "./components/comment/CommunityComment";
+
+import { useEffect, useState } from "react";
 import { useTogglePostLikeMutation } from "../../hooks/mutations/useMutationPostLike";
 import { useCommentGetQuery } from "../../hooks/queries/useQueryComments";
-import CommunityEditor from "../CommunityEditor/components/CommunityEditor";
 import { useDeletePostMutation } from "../../hooks/mutations/useMutationPost";
+import { useNavigate, useParams } from "react-router";
+import { usePostDetailGetQuery } from "../../hooks/queries/useQueryPosts";
+
+import Skeleton from 'react-loading-skeleton'
+import Editor from "../CommunityEditor/components/Editor";
+import CommunityComment from "./components/comment/CommunityComment";
+
+import { IoEye, IoThumbsUp } from "react-icons/io5";
 import noProfile from '../../assets/profile.png'
+
 
 const PAGE_SIZE = 10;
 export default function CommunityDetailPage() {
@@ -106,7 +110,8 @@ export default function CommunityDetailPage() {
             <Skeleton count={5} height={20} /> {/* 내용 스켈레톤 */}
           </div>
         ) : (
-          <CommunityEditor post={post} formType={formType} />
+          <Editor formType={formType} post={post} />
+          // <CommunityEditor post={post} formType={formType} />
         )}
 
         {formType === 'detail' && !detailLoading ? (

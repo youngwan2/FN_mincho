@@ -8,7 +8,6 @@ import Notification from "../Notification";
 export default function Header() {
     const isLogin = useAuth();
 
-
     return (
         <>
             {/* 상단 헤더 */}

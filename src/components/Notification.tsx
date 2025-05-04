@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer"
 import { useMarkAsReadMutation } from "../hooks/mutations/useMutationNotification"
 
 import StaticLoadingSpinner from "./spinner/StaticLoadingSpinner"
-import CustomTimeAgo from "./CustomTimeAgo"
+import CustomTimeAgo from "./vender/timeago/CustomTimeAgo"
 
 import { IoClose, IoLeafOutline } from "react-icons/io5"
 import { FaRegComment, FaRegBell } from "react-icons/fa"

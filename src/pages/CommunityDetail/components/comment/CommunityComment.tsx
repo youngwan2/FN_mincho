@@ -10,7 +10,7 @@ import { useCreateCommentMutation, useDeleteCommentMutation, useUpdateCommentMut
 import { FormEvent, useState } from "react";
 
 import { toast } from "react-toastify";
-import CustomTimeAgo from "../../../../components/CustomTimeAgo";
+import CustomTimeAgo from "../../../../components/vender/timeago/CustomTimeAgo";
 
 interface CommunityCommentProps {
   postId: number

@@ -39,6 +39,7 @@ export default function MypagePasswordResetModal({ isOpen, onClose, onSubmit }: 
         onClose();
     };
 
+
     return (
         <div aria-hidden={isOpen ? 'false' : 'true'} className={`${isOpen ? 'visible opacity-100' : 'invisible opacity-0'} fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-50 transition-all`}>
             <div className="bg-white rounded-lg px-8 py-10 w-full  max-w-[768px]">

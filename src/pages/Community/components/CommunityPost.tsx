@@ -3,6 +3,7 @@ import PrimaryButton from "../../../components/button/PrimaryButton";
 import { Post, PostFetchState, PostStatistics } from "../../../types/post.types";
 import { getCategoryName } from "../../../utils/formatter";
 import CommunityPostList from "./CommunityPostList";
+import useAuth from "../../../hooks/useAuth";
 
 
 interface CommunityPostProps {
@@ -19,6 +20,8 @@ export default function CommunityPost({ activeCategory, categoryInfos, posts, po
 
     const navigate = useNavigate();
 
+    const isLogin = useAuth();
+
     return (
         <div className="flex-1  ">
             <div className="flex justify-between items-center p-4 border-b border-gray-200">
@@ -26,9 +29,10 @@ export default function CommunityPost({ activeCategory, categoryInfos, posts, po
                     {getCategoryName(categoryInfos, activeCategory)}
                     <span>{`(${itemCount})`}</span>
                 </h2>
-                <PrimaryButton onClick={() => navigate("/community/write")} type="button" className="bg-[#05D182] text-white px-4 py-2 rounded-md hover:bg-hover-primary-green">
+                {isLogin && <PrimaryButton onClick={() => navigate("/community/write")} type="button" className="bg-[#05D182] text-white px-4 py-2 rounded-md hover:bg-hover-primary-green">
                     글쓰기
-                </PrimaryButton>
+                </PrimaryButton>}
+
             </div>
 
             {/* 게시글 목록 */}

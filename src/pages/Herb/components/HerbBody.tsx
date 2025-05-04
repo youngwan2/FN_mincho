@@ -61,7 +61,7 @@ export default function HerbBody({ herbs, totalCount = 0, isLoading = false, onS
                         return (
                             <HerbItem key={herb.id}>
                                 <Link to={"" + herb.id} className="h-auto">
-                                    <div>
+                                    <div className="w-full h-full max-h-[240px] grayscale-70 hover:grayscale-0 transition overflow-hidden">
                                         {
                                             // 이미지 로드 전 까지 보여줄 플레이스 홀더(스켈레톤)
                                             !loaded[index] && <Skeleton className="h-[240px] rounded-2xl" />
@@ -74,7 +74,7 @@ export default function HerbBody({ herbs, totalCount = 0, isLoading = false, onS
                                                 e.currentTarget.src = noImage;
 
                                             }}
-                                            className={`${!loaded[index] ? 'hidden opacity-0' : 'opacity-100 block'}  w-full h-[250px] rounded-[5px]`}
+                                            className={`${!loaded[index] ? 'hidden opacity-0' : 'opacity-100 block'}  w-full h-[250px] rounded-[5px] hover:scale-105 transition-transform`}
                                             onLoad={() => handleLoaded(index)}
                                             height={250}
                                             width={250}
@@ -87,10 +87,10 @@ export default function HerbBody({ herbs, totalCount = 0, isLoading = false, onS
                                             <strong className="text-3xl">{herb.cntntsSj}
 
                                             </strong>
-                                            <span className="pl-2 text-xl">{herb.hbdcNm}</span>
+                                            <span className="pl-2 text-2xl">{herb.hbdcNm}</span>
                                         </div>
 
-                                        <span className="bg-hover-primary-green text-white text-[14px] rounded-[3px] px-2 mt-2">{herb.bneNm}</span>
+                                        <span className="bg-hover-primary-green text-white text-[15px] rounded-[3px] px-2 mt-2">{herb.bneNm}</span>
                                     </div>
                                 </Link>
                             </HerbItem>
