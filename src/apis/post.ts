@@ -1,6 +1,7 @@
 import axios from "axios"
 import instance from "../config/axios"
 import { PostRequest } from "../types/post.types"
+import { getToken } from "../utils/storage"
 
 
 
@@ -11,7 +12,11 @@ export const getPostsFetch = (url: string) => {
 
 /** 게시글 상세 조회 요청 */
 export const getPostDetailFetch = (url: string) => {
-    return axios.get(url)
+    return axios.get(url, {
+        headers: {
+            "Authorization": getToken()
+        },
+    })
 }
 
 

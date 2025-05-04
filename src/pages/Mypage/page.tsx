@@ -1,14 +1,24 @@
+import { useEffect } from "react";
 import { useUserStatsGetQuery } from "../../hooks/queries/useQueryMypage";
 import MypageAnalytics from "./components/MypageAnalytics";
 import MypageContents from "./components/MypageContents";
 import MypageHeader from "./components/MypageHeader"
 import MypageProfile from "./components/MypageProfile";
 import MypageSettings from "./components/MypageSettings";
+import { getToken } from "../../utils/storage";
+import { useNavigate } from "react-router";
 
 
 export default function Mypage() {
 
     const { stats, isLoading } = useUserStatsGetQuery();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!getToken()) {
+            navigate("/auth/login")
+        }
+    }, [])
 
 
     return (

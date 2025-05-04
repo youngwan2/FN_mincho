@@ -44,14 +44,14 @@ export const logout = async () => {
 }
 
 /**  이메일 인증번호 발송 */
-export const sendVerificationCode = async (email: string) => {
-    const success = await sendVerificationCodeFetch(email);
+export const sendVerificationCode = async (email: string, type: 'register' | 'reset') => {
+    const success = await sendVerificationCodeFetch(email, type);
     return success
 }
 
 /** 이메일 인증번호 검증 */
-export const verificationCodeCheck = async (email: string, code: string) => {
-    const success = await verificationCodeCheckFetch(email, code)
+export const verificationCodeCheck = async (email: string, code: string, type: 'register' | 'reset') => {
+    const success = await verificationCodeCheckFetch(email, code, type)
     return success
 }
 

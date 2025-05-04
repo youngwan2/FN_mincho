@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { passwordConfirmValidator, validator } from '../utils/auth';
 import { emailCheck, register, sendVerificationCode, verificationCodeCheck } from '../service/auth';
 import { PAGE_URLs } from '../config/urls';
+import { showToast } from '../components/toast/CustomToast';
 
 interface FormErrors {
     email: string;
@@ -106,7 +107,7 @@ export const useRegisterForm = () => {
     const handleEmailCheck = async () => {
         const toastId = toast.loading("이메일 중복 확인중..")
         if (errors.email) {
-            toast.info("이메일 유효성 통과 후 요청해주세요.");
+            showToast.info("이메일 유효성 통과 후 요청해주세요.");
             return;
         }
 
@@ -114,7 +115,7 @@ export const useRegisterForm = () => {
 
         if (success) {
             toast.dismiss(toastId)
-            toast.success("사용가능한 이메일입니다.")
+            showToast.success("사용가능한 이메일입니다.")
         } else {
             toast.dismiss(toastId)
         }
@@ -132,12 +133,12 @@ export const useRegisterForm = () => {
             return;
         }
 
-        const success = await verificationCodeCheck(email, verificationCode);
+        const success = await verificationCodeCheck(email, verificationCode, "register");
 
         if (success) {
             setIsValidVerificationCode(true)
             toast.dismiss(toastId)
-            toast.success("인증번호가 일치합니다.")
+            showToast.success("인증번호가 일치합니다.")
         } else {
             setIsValidVerificationCode(false)
             toast.dismiss(toastId)
@@ -156,15 +157,14 @@ export const useRegisterForm = () => {
             }))
             return;
         }
-        const success = await sendVerificationCode(email)
+        const success = await sendVerificationCode(email, "register")
         if (success) {
             setIsValidEmailMx(true)
             toast.dismiss(toastId)
-            toast.success("인증번호가 발송되었습니다.")
+            showToast.success("인증번호가 발송되었습니다.")
         } else {
             setIsValidEmailMx(false)
             toast.dismiss(toastId)
-            toast.error("인증번호 발송에 실패하였습니다.");
         }
     }
 

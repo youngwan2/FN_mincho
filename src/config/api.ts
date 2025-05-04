@@ -10,8 +10,8 @@ export const apiRoutes = {
         logout: baseUrl + '/users/me/logout',
         register: baseUrl + '/users/register',
         checkEmail: baseUrl + '/users/register/duplicate-check',
-        sendVerificationCode: baseUrl + '/users/send-verification-code',
-        checkVerificationCode: baseUrl + '/users/send-verification',
+        sendVerificationCode: (type: 'register' | 'reset') => baseUrl + '/users/send-verification-code?type=' + type,
+        checkVerificationCode: (type: 'register' | 'reset') => baseUrl + '/users/send-verification?type=' + type,
         delete: baseUrl + '/users/me/entire'
     },
     user: {
@@ -20,6 +20,7 @@ export const apiRoutes = {
         getById: baseUrl + '/users/me',
         update: baseUrl + '/users/me',
         delete: baseUrl + '/users/me',
+        updatePassword: baseUrl + '/users/me/password',
         favoriteHerb: {
             get: baseUrl + '/users/me/favorite-herbs',
             create: baseUrl + '/users/me/favorite-herbs',
