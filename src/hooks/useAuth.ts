@@ -5,12 +5,12 @@ export default function useAuth() {
 
         const [isLogin, setIsLogin] = useState(false)
 
-        // 리렌더링 부분 1
+        // 리렌더링 부분
         useEffect(() => {
                 const localToken = getToken();
-                if (localToken) return setIsLogin(true)
+                if (localToken) { return setIsLogin(true) }
                 setIsLogin(false)
-        }, [])
+        }, [isLogin])
 
         return isLogin;
 }

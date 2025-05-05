@@ -5,19 +5,13 @@ import { useEffect, useState } from 'react'
 import StarterKit from '@tiptap/starter-kit'
 import Highlight from '@tiptap/extension-highlight'
 import TextAlign from '@tiptap/extension-text-align'
-import Document from '@tiptap/extension-document'
-import Dropcursor from '@tiptap/extension-dropcursor'
-import Paragraph from '@tiptap/extension-paragraph'
-import Text from '@tiptap/extension-text'
-import Image from '@tiptap/extension-image'
+import ImageResize from 'tiptap-extension-resize-image';
 import { useEditor, EditorContent } from '@tiptap/react'
-import Typography from '@tiptap/extension-typography'
 
 import { CategoryType, PostDetail, PostRequest } from '../../../types/post.types'
-import EditorMenuBar, { EditorBubbleMenuBar } from './EditorMenuBar'
+import EditorMenuBar from './EditorMenuBar'
 import EditorContentHeader from './EditorHeader'
-import useAuth from '../../../hooks/useAuth'
-import { showToast } from '../../../components/toast/CustomToast'
+// import useAuth from '../../../hooks/useAuth'
 
 
 interface EditorProps {
@@ -27,11 +21,11 @@ interface EditorProps {
 
 export default function Editor({ post, formType }: EditorProps) {
 
-    const isLogin = useAuth();
+    // const isLogin = useAuth();
 
     const [title, setTitle] = useState(post?.title ?? "");
     const [contents, setContents] = useState(post?.contents ?? "");
-    const [category, setCategory] = useState(post?.categoryType ?? "");
+    const [category, setCategory] = useState(post?.category ?? "");
 
 
     const { mutate: createPostMutate, isSuccess: createIsSuccess } = useCreatePostMutation();
@@ -42,29 +36,20 @@ export default function Editor({ post, formType }: EditorProps) {
 
     // 에디터 초기화
     const editor = useEditor({
-        editable: formType !== "detail", // update, create 일 때만 수정 활성화
         extensions: [
             StarterKit,
+            ImageResize,
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
             }),
-            Typography,
             Highlight,
-            Document,
-            Paragraph,
-            Text,
-            Image,
-            Dropcursor,
         ],
-        content: `
-        <p>Click the button to upload an image.</p>
-        `,
+        content: post?.contents,
         onUpdate: ({ editor }) => {
             const html = editor.getHTML()
             setContents(html)
-        },
-    })
-
+        }
+    }, [])
 
 
     // 게시글 등록
@@ -89,6 +74,14 @@ export default function Editor({ post, formType }: EditorProps) {
         }
     }
 
+
+    useEffect(() => {
+        if (editor) {
+            editor.setEditable(formType !== 'detail');
+        }
+    }, [formType, editor]);
+
+
     useEffect(() => {
         if (createIsSuccess || updateIsSuccess) {
             navigate("/community");
@@ -96,57 +89,33 @@ export default function Editor({ post, formType }: EditorProps) {
     }, [createIsSuccess, updateIsSuccess]);
 
 
-    useEffect(() => {
-        if ((formType === "create" || formType === "update") && !isLogin) {
-            showToast.info("로그인 후 이용 가능합니다. 로그인 페이지로 이동합니다.")
-
-            const timeId = setTimeout(() => {
-                navigate("/auth/login")
-            }, 2000)
-
-            return () => {
-                clearTimeout(timeId);
-            }
-        }
-    }, [])
-
-
-
-    if (formType === 'detail') {
-        return <section>
-            <h2 className="text-4xl font-bold mb-6">{post?.title}</h2>
-            <EditorContent editor={editor} className='bg-white border border-gray-200 rounded-sm  min-h-[350px]' height={350} />
-        </section>
-    }
+    if (editor == null) return
 
     return (
         <section className='w-full h-full'>
-
             {/* 컨텐츠 헤더 */}
-            <EditorContentHeader title={title} category={category} setTitle={setTitle} setCategory={setCategory} />
-
-            {/* 에디터 툴 - 떠 있는 도구 */}
-            {editor && <EditorBubbleMenuBar editor={editor} />}
-
+            {formType !== 'detail' ? <EditorContentHeader title={title} category={category} setTitle={setTitle} setCategory={setCategory} />
+                : <h2 className='md:text-5xl text-4xl border-b border-gray-100 pb-5 mt-8 font-bold'>
+                    {post?.title}
+                </h2>
+            }
 
             <div>
-                <div className="pb-2 flex justify-between items-center pt-8">
-                    <p>내용</p>
-                    <button
-                        onClick={handleSubmit}
-                        className="cursor-pointer bg-primary-green text-white px-4 py-1 rounded hover:bg-hover-primary-green"
-                    >
-                        저장하기
-                    </button>
-                </div>
+                {formType !== 'detail' &&
+                    <div className="pb-2 flex justify-between items-center pt-8">
+                        <p>내용</p>
+                        <button
+                            onClick={handleSubmit}
+                            className="cursor-pointer bg-primary-green text-white px-4 py-1 rounded hover:bg-hover-primary-green"
+                        >
+                            저장하기
+                        </button>
+                    </div>}
+
 
                 {/* 에디터 툴 - 고정된 도구 */}
-                <EditorMenuBar editor={editor} />
-
-                <EditorContent onClick={() => {
-                    editor?.commands.focus();
-
-                }} editor={editor} className='prose-invert bg-white border border-gray-200 rounded-sm  min-h-[350px]' height={350} />
+                {formType !== 'detail' && <EditorMenuBar editor={editor} />}
+                <EditorContent editor={editor} className={`${formType === 'detail' ? 'border-0' : 'border'} prose-invert bg-white  border-gray-200 rounded-sm  min-h-[350px]`} height={350} />
             </div>
         </section>
     )

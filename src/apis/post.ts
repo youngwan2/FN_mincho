@@ -2,6 +2,7 @@ import axios from "axios"
 import instance from "../config/axios"
 import { PostRequest } from "../types/post.types"
 import { getToken } from "../utils/storage"
+import { apiRoutes } from "../config/api"
 
 
 
@@ -52,4 +53,19 @@ export const updatePostLikeFetch = (url: string) => {
 /** 사용자별 게시글 */
 export const getPostsByUserFetch = (url: string) => {
     return instance.get(url)
+}
+
+/** 이미지 프리사인드 URL 생성 요청 */
+export const generatePresignedUrlFetch = (imageFile: FormData) => {
+    return instance.post(
+        apiRoutes.posts.generatePresignedUrl(),
+        imageFile,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        }
+
+    )
+
 }

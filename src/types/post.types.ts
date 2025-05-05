@@ -75,3 +75,4 @@ export interface MypagePost {
     title: string;
     createdAt: string;
 }
+

@@ -68,7 +68,8 @@ export const apiRoutes = {
         update: (postId: number) => baseUrl + `/community/posts/${postId}`,
         delete: (postId: number) => baseUrl + `/community/posts/${postId}`,
         statistics: () => baseUrl + `/community/statistics/posts`,
-        byUser: (page: number, size: number) => baseUrl + `/users/me/posts?page=${page}&size=${size}`
+        byUser: (page: number, size: number) => baseUrl + `/users/me/posts?page=${page}&size=${size}`,
+        generatePresignedUrl: () => baseUrl + `/community/posts/images/presigned-url`
     },
     postLike: {
         update: (postId: number) => baseUrl + `/community/posts/${postId}/likes`
@@ -90,6 +91,9 @@ export const apiRoutes = {
         getAll: (page: number, size: number) => baseUrl + `/notifications?page=${page}&size=${size}`,
         markAsRead: (id: number) => baseUrl + `/notifications/read/${id}`,
         delete: (ids: number[]) => baseUrl + `/notifications/select?ids=${ids}`
+    },
+    s3: {
+        upload: (url: string) => url
     }
 
 } as const

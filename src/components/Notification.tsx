@@ -92,7 +92,7 @@ export default function Notification() {
                   <li
                     key={notification.id}
                     onClick={() => handleMarkAsRead(notification.id)}
-                    className={`p-4 hover:bg-gray-100 transition-colors ${!notification.isRead ? "bg-gray-50" : "bg-gray-50 opacity-40"}`}
+                    className={`p-4 hover:bg-gray-100 transition-colors ${!notification?.isRead ? "bg-gray-50" : "bg-gray-50 opacity-40"}`}
                   >
                     <Link to={notification.path}>
                       <div className="flex items-start gap-3">

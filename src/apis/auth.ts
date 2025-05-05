@@ -160,11 +160,6 @@ export const logoutFetch = async () => {
     try {
         const response = await instance.delete(
             apiRoutes.auth.logout,
-            {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("accessToken"),
-                }
-            }
         )
 
         if (response?.status && response.status > 399) {
