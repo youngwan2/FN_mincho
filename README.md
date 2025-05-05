@@ -1,5 +1,6 @@
 # 🌿 민초 커뮤니티
-![image](https://github.com/user-attachments/assets/2141f33f-5f07-4603-b7d9-f03d884bf30c)
+![image](https://github.com/user-attachments/assets/76110f28-2ca9-4908-b351-8f9b9fced9b2)
+
 <br><br>    
 
 ## 📌 프로젝트 개요
