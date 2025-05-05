@@ -1,4 +1,5 @@
-import { createPostFetch, deletePostFetch, getPostDetailFetch, getPostsByUserFetch, getPostsFetch, getPostStatisticsFetch, updatePostFetch, updatePostLikeFetch } from "../apis/post";
+import { AxiosError } from "axios";
+import { createPostFetch, deletePostFetch, generatePresignedUrlFetch, getPostDetailFetch, getPostsByUserFetch, getPostsFetch, getPostStatisticsFetch, updatePostFetch, updatePostLikeFetch } from "../apis/post";
 import { apiRoutes } from "../config/api";
 import { PostRequest, PostSearchCondition } from "../types/post.types";
 
@@ -53,4 +54,21 @@ export const updatePostLike = async (postId: number) => {
 export const getPostsByUser = async (page: number, size: number) => {
     const url = apiRoutes.posts.byUser(page, size)
     return await getPostsByUserFetch(url)
+}
+
+/** 이미지 프리사인드 URL 생성 */
+export const generatePresignedUrl = async (formData: FormData) => {
+
+    try {
+        const response = await generatePresignedUrlFetch(formData);
+
+        if (response.status === 200) {
+            return response.data.url
+        } else if (response.status > 399) {
+            throw new AxiosError("프리사인드 URL 생성 실패")
+        }
+    } catch (error) {
+        console.error(error)
+        return null;
+    }
 }

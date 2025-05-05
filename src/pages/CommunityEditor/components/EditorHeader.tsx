@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 
 interface EditorContentHeaderProps {
     title: string
@@ -6,6 +7,16 @@ interface EditorContentHeaderProps {
     setCategory: (value: string) => void
 }
 export default function EditorContentHeader({ title, setTitle, category, setCategory }: EditorContentHeaderProps) {
+
+    const selectRef = useRef<HTMLSelectElement>(null);
+
+    console.log(category)
+
+    useEffect(() => {
+        if (selectRef.current) {
+            selectRef.current.value = category
+        }
+    }, [])
     return (
         <>
             <div>
@@ -20,6 +31,7 @@ export default function EditorContentHeader({ title, setTitle, category, setCate
             <div className="pt-3">
                 <label>카테고리</label>
                 <select
+                    ref={selectRef}
                     value={category}
                     onChange={(e) => setCategory(e.currentTarget.value)}
                     className="w-full p-2 border border-gray-300 rounded"

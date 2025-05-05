@@ -12,7 +12,7 @@ import Editor from "../CommunityEditor/components/Editor";
 import CommunityComment from "./components/comment/CommunityComment";
 
 import { IoEye, IoThumbsUp } from "react-icons/io5";
-import noProfile from '../../assets/profile.png'
+import noProfile from '../../assets/noImage.png'
 
 
 const PAGE_SIZE = 10;
@@ -74,7 +74,7 @@ export default function CommunityDetailPage() {
             <Skeleton circle width={40} height={40} className="mr-3" />
           ) : (
             <div className="w-[40px] h-[40px] mr-2">
-              <img className="w-[40px] h-[40px] object-contain rounded-full border border-gray-300" src={post.author.profileImage} alt="사용자 프로필 이미지" onError={(e) => {
+              <img className="w-[40px] h-[40px] object-contain rounded-full border border-gray-300" src={post.author.profileImage || noProfile} alt="사용자 프로필 이미지" onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src = noProfile
 
@@ -111,7 +111,6 @@ export default function CommunityDetailPage() {
           </div>
         ) : (
           <Editor formType={formType} post={post} />
-          // <CommunityEditor post={post} formType={formType} />
         )}
 
         {formType === 'detail' && !detailLoading ? (
