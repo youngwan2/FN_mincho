@@ -1,5 +1,5 @@
 
-백엔드 README.md : https://github.com/youngwan2/BE_mincho
+백엔드 README.md : https://github.com/youngwan2/BN_mincho
 
 # 🌿 민초 커뮤니티
 ![image](https://github.com/user-attachments/assets/76110f28-2ca9-4908-b351-8f9b9fced9b2)
