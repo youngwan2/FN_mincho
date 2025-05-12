@@ -1,4 +1,3 @@
-"use client"
 import { Link } from "react-router"
 
 import { useEffect, useState } from "react"
@@ -94,7 +93,7 @@ export default function Notification() {
                     onClick={() => handleMarkAsRead(notification.id)}
                     className={`p-4 hover:bg-gray-100 transition-colors ${!notification?.isRead ? "bg-gray-50" : "bg-gray-50 opacity-40"}`}
                   >
-                    <Link to={notification.path}>
+                    <Link to={notification?.path}>
                       <div className="flex items-start gap-3">
                         {/* 아이콘 */}
                         <div className="mt-1 p-2 rounded-full border border-gray-300 text-xl">
