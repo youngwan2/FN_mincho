@@ -1,7 +1,7 @@
 import { HerbSearchCondition } from "../types/herb.types"
 import { PostSearchCondition } from "../types/post.types"
 
-export const baseUrl = import.meta.env.MODE === 'development' ? 'http://localhost:8080/api/v1' : 'https://www.minchoherb.com'
+export const baseUrl = import.meta.env.MODE === 'development' ? 'http://localhost:8080/api/v1' : 'https://www.minchoherb.com/api/v1'
 
 
 export const apiRoutes = {
