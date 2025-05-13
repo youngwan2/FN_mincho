@@ -23,6 +23,7 @@
 ## 🔥 배포
 - 배포 작업 중
 - **배포 과정:** [Notion](https://youngwan2.notion.site/1e568acd779b80ef9cb7f760bc8f6e60)
+![민초 아키텍처](https://github.com/user-attachments/assets/3c6aaa37-1bee-4035-a3b1-e3a40738d59e)
 
 ## ⚙ 구현된 기능
 ### **회원가입 및 로그인 (JWT 인증)**
