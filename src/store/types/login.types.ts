@@ -3,8 +3,8 @@
 import { Profile } from '../../types/user.types';
 
 export interface UserState {
-    profile: Profile
-    setUserState: (userState: Profile) => void
+  profile: Profile
+  setUserState: (userState: Profile) => void
 
 }
 

@@ -11,7 +11,7 @@ export interface AvatarUrl {
 export interface Profile extends AvatarUrl {
     nickname: string;
     introduction: string;
-    isSocial: boolean;
+    isSocial?: boolean;
 }
 
 export interface UserStats {

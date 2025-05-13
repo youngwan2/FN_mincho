@@ -14,7 +14,7 @@ export default function MypageProfileForm({ profileInfo, onFormToggle, profileMu
 
     const [newProfileInfo, setNewProfileInfo] = useState({
         nickname: '',
-        introduction: ''
+        introduction: '',
     })
 
     const [formErrors, setFormErrors] = useState({

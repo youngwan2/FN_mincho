@@ -8,7 +8,8 @@ export const useUserStore = create<UserState>()(
             profile: {
                 avatarUrl: '',
                 introduction: '',
-                nickname: ''
+                nickname: '',
+                isSocial: false
             },
             setUserState: (newProfile) => set(
                 {
