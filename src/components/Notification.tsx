@@ -15,9 +15,6 @@ import { FiBell } from "react-icons/fi"
 
 
 
-
-
-
 const SIZE = 10
 export default function Notification() {
   const { ref, inView } = useInView()
@@ -61,7 +58,7 @@ export default function Notification() {
         aria-label="알림 목록 모달"
         aria-hidden={isToggle ? 'false' : 'true'}
         className={`${isToggle ? "visible opacity-100" : "invisible opacity-0"
-          } transition-all duration-200 top-[8rem] absolute border border-gray-200 shadow-[0_5px_20px_rgba(0,0,0,0.15)] max-w-[380px] max-h-[500px] w-full rounded-xl bg-white z-[1000000] overflow-hidden`}
+          } md:right-1/8 right-[50%] min-w-[270px]  md:translate-x-[none] translate-x-1/2  transition-all duration-200 top-[8rem] absolute border border-gray-200 shadow-[0_5px_20px_rgba(0,0,0,0.15)] md:w-full  max-w-[380px] max-h-[500px] w-auto rounded-xl bg-white z-[1000000] overflow-hidden`}
       >
         {/* 헤더 */}
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">

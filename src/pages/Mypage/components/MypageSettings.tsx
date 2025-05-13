@@ -8,7 +8,10 @@ import { useState } from "react";
 import { UpdatePasswordRequest } from "../../../types/auth.types";
 
 
-export default function MypageSettings() {
+interface MypageSettingProps {
+    isSocial: boolean
+}
+export default function MypageSettings({ isSocial }: MypageSettingProps) {
     const { mutate: deleteUser } = useDeleteUserMutation();
     const { mutate: resetPassword } = useResetPasswordMutation();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,13 +36,15 @@ export default function MypageSettings() {
 
             <div className="space-y-6 mt-4">
                 {/* 비밀번호 재설정 */}
-                <button
-                    className="flex items-center text-gray-700 cursor-pointer border border-green-100 p-2 py-5 rounded-[3px] w-full justify-between hover:bg-green-100"
-                    onClick={handlePasswordResetClick}
-                >
-                    <span className="text-2xl font-medium text-green-600">비밀번호 재설정</span>
-                    <IoLockClosed size={22} className="text-green-600" />
-                </button>
+                {!isSocial ?
+                    <button
+                        className="flex items-center text-gray-700 cursor-pointer border border-green-100 p-2 py-5 rounded-[3px] w-full justify-between hover:bg-green-100"
+                        onClick={handlePasswordResetClick}
+                    >
+                        <span className="text-2xl font-medium text-green-600">비밀번호 재설정</span>
+                        <IoLockClosed size={22} className="text-green-600" />
+                    </button>
+                    : null}
 
                 {/* 회원 탈퇴 */}
                 <button

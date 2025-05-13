@@ -8,7 +8,7 @@ export default function RootLayout() {
     useSSE(); // SSE 연결
 
     return (
-        <div>
+        <div className='w-full'>
             <div className='md:px-10 px-5 max-w-[1240px] mx-auto h-auto font-prentendard' >
                 <CustomToastContainer />
                 <Header />
@@ -19,7 +19,7 @@ export default function RootLayout() {
 
             </div>
 
-            <footer className="bg-[#303740] text-white py-6 mt-30 h-60">
+            <footer className="bg-[#303740] text-white py-6 mt-30 md:h-60 h-[250px]">
                 <div className="container mx-auto text-center pt-15">
                     <p className="text-2xl">
                         &copy; {new Date().getFullYear()} Mincho

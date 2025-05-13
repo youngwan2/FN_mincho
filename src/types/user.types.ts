@@ -11,10 +11,11 @@ export interface AvatarUrl {
 export interface Profile extends AvatarUrl {
     nickname: string;
     introduction: string;
+    isSocial: boolean;
 }
 
 export interface UserStats {
-    bookmarkCount:number
-    commentCount:number
-    postCount:number
+    bookmarkCount: number
+    commentCount: number
+    postCount: number
 }

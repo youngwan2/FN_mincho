@@ -2,6 +2,8 @@ import { useState } from "react"
 import { PostStatistics } from "../../../types/post.types"
 import useResize from "../../../hooks/useResize"
 import { IoListOutline } from "react-icons/io5"
+import CommunityMobileSidebar from "./CommunityMobileSidebar"
+import CommunityDesktopSidebar from "./CommunityDesktopSidebar"
 
 interface CommunitySidebarProps {
     activeCategory: string
@@ -45,44 +47,15 @@ export default function CommunitySidebar({ activeCategory, categoryInfos, onClic
     return (
         <>
             {/* 모바일에서만 보이는 메뉴 토글 */}
-            <button title="메뉴 아이콘" onClick={handleToggle} className={`${mobile ? 'block' : 'hidden'} fixed left-5 top-1/3 bg-white shadow-md p-2 rounded-xl hover:bg-gray-100 cursor-pointer`}><IoListOutline /></button>
+            <button title="메뉴 아이콘" onClick={handleToggle} className={`${mobile ? 'block' : 'hidden'} fixed left-5 top-1/5 bg-white shadow-md p-2 rounded-xl hover:bg-gray-100 cursor-pointer z-[60]`}><IoListOutline /></button>
+
+            {/* 모바일 전용 사이드바 */}
+            <CommunityMobileSidebar onClick={onClick} activeCategory={activeCategory} mergedCategories={mergedCategories} mobile={mobile} active={toggle} />
+
+            {/* 데스크톱 전용 사이드바 */}
+            <CommunityDesktopSidebar onClick={onClick} activeCategory={activeCategory} mergedCategories={mergedCategories} mobile={mobile} />
 
 
-            {/* 사이드바(TODO: 모바일에서는 숨길 것) */}
-            <div className={`${mobile && toggle ? 'hidden' : 'block'} w-64 bg-white rounded-lg shadow-sm overflow-hidden`}>
-                <div className="bg-[#05D182] text-white p-4 font-semibold">
-                    카테고리
-                </div>
-                <ul>
-                    {mergedCategories.map((categoryInfo) => {
-                        const categoryId = categoryInfo.category;
-                        const count = categoryInfo.count;
-                        const categoryName = categoryId === 'info'
-                            ? "정보 공유"
-                            : categoryId === 'notice'
-                                ? "공지사항"
-                                : categoryId === 'free'
-                                    ? "자유게시판"
-                                    : categoryId === 'question'
-                                        ? "질문 & 답변"
-                                        : "전체";
-
-                        return (
-                            <li
-                                key={categoryId}
-                                className={`flex justify-between items-center p-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50
-                              ${activeCategory === categoryId ? 'border-l-4 border-l-[#05D182] font-semibold' : ''}`}
-                                onClick={() => onClick(categoryId)}
-                            >
-                                <span>{categoryName}</span>
-                                <span className={`px-2 py-1 rounded-full text-xl flex items-center justify-center ${activeCategory === categoryId ? 'bg-hover-primary-green text-white' : 'bg-gray-200 text-gray-700'}`}>
-                                    {count}
-                                </span>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
         </>
     )
 

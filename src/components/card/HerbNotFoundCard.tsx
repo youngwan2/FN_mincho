@@ -17,7 +17,7 @@ const HerbNotFoundCard: React.FC<ErrorCardProps> = ({
     onAction
 }) => {
     return (
-        <div className="my-40 max-w-[512px] py-5 w-full mx-auto bg-white rounded-lg overflow-hidden border border-red-100">
+        <div className="my-25 max-w-[512px] py-5 w-full mx-auto bg-transparent rounded-lg overflow-hidden">
             <div className="p-6">
                 <div className="flex items-center justify-center mb-4">
                     {icon ? (
@@ -41,7 +41,7 @@ const HerbNotFoundCard: React.FC<ErrorCardProps> = ({
                         </div>
                     )}
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 text-center mb-2">{title}</h3>
+                <h3 className="text-2xl font-medium text-gray-900 text-center mb-2">{title}</h3>
                 <p className="text-gray-500 text-center mb-6">{message}</p>
                 {onAction && (
                     <div className="flex justify-center">

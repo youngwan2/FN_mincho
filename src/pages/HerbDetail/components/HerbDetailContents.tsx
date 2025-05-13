@@ -12,7 +12,7 @@ interface HerbDetailContentsProps {
 export default function HerbDetailContents({ herb }: HerbDetailContentsProps) {
 
     if (!herb || !herb.prvateTherpy) {
-        return <HerbNotFoundCard />
+        return <HerbNotFoundCard message="데이터 조회에 실패하였습니다. 나중에 재시도 해주세요." />
     }
     return (
         <div className="w-full h-auto mt-10 text-[#333] ">

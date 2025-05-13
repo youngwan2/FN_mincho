@@ -3,6 +3,7 @@ import EmblaCarousel from "../components/carousel/banner/EmblaCarousel";
 import Wave from "./carousel/banner/Wave";
 import LoadingSpinner from "../../../components/spinner/LoadingSpinner";
 import { EmblaOptionsType } from 'embla-carousel'
+import HerbNotFoundCard from "../../../components/card/HerbNotFoundCard";
 
 
 export default function Banner() {
@@ -13,15 +14,15 @@ export default function Banner() {
     const OPTIONS: EmblaOptionsType = { dragFree: true }
 
     return (
-        <div className={`${isError ? 'bg-primary-gray flex justify-center items-center' : 'bg-none'} h-[658px] w-full relative`}>
-            {isLoading ? <LoadingSpinner /> :null}
+        <div className={`${isError ? 'bg-primary-light-gray animate-alternate animate-fade  flex justify-center items-center' : 'bg-none'} h-[658px] w-full relative`}>
+            {isLoading ? <LoadingSpinner /> : null}
             {!isError
                 ?
                 <>
                     <EmblaCarousel slides={herbs} options={OPTIONS} month={month} />
                     <Wave />
                 </>
-                : <p>이달의 개화약초 정보를 불러올 수 없습니다.</p>
+                : <HerbNotFoundCard />
 
 
             }

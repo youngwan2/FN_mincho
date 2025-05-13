@@ -2,16 +2,19 @@ import { useState } from "react";
 import MypageProfileForm from "./MypageProfileForm";
 import PrimaryButton from "../../../components/button/PrimaryButton";
 import MypageTitle from "./MypageTitle";
-import { useProfileGetQuery } from "../../../hooks/queries/useQueryProfile";
 import MypageProfileImage from "./MypageProfileImage";
 import { useUpdateProfileMutation } from "../../../hooks/mutations/useMutationMypage";
 import LoadingSpinner from "../../../components/spinner/LoadingSpinner";
+import { Profile } from "../../../types/user.types";
 
 
-export default function MypageProfile() {
 
-    const { profileInfo, isError, isLoading } = useProfileGetQuery();
-
+interface MypageProfileProps {
+    profileInfo: Profile
+    isLoading: boolean
+    isError: boolean
+}
+export default function MypageProfile({ profileInfo, isLoading, isError }: MypageProfileProps) {
     const { mutate: profileMutate } = useUpdateProfileMutation()
 
     const [isOpen, setIsOpen] = useState(false);

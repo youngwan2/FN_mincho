@@ -7,10 +7,12 @@ import MypageProfile from "./components/MypageProfile";
 import MypageSettings from "./components/MypageSettings";
 import { getToken } from "../../utils/storage";
 import { useNavigate } from "react-router";
+import { useProfileGetQuery } from "../../hooks/queries/useQueryProfile";
 
 
 export default function Mypage() {
 
+    const { profileInfo, isError: isProfileError, isLoading: isProfileLoading } = useProfileGetQuery();
     const { stats, isLoading } = useUserStatsGetQuery();
     const navigate = useNavigate()
 
@@ -28,7 +30,7 @@ export default function Mypage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
                 {/* 프로필 섹션 */}
-                <MypageProfile />
+                <MypageProfile profileInfo={profileInfo} isLoading={isProfileLoading} isError={isProfileError} />
 
                 {/* 활동 통계 및 게시물 섹션 */}
                 <div className="lg:col-span-2 space-y-6">
@@ -39,7 +41,7 @@ export default function Mypage() {
                     <MypageContents stats={stats} />
 
                     {/* 설정 섹션 */}
-                    <MypageSettings />
+                    <MypageSettings isSocial={profileInfo.isSocial || false} />
                 </div>
             </div>
         </div>

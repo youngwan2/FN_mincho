@@ -50,7 +50,7 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                 : isError
                     ? <li><EmptyItemMessageCard /></li>
                     : posts.map((post) => (
-                        <li key={post.id} className="flex items-center p-4 border-b border-gray-100 hover:bg-gray-50">
+                        <li key={post.id} className="relative flex md:flex-row flex-col md:items-center items-start md:gap-0 gap-3 p-4 border-b border-gray-100 hover:bg-gray-50">
 
                             {/* 카테고리 */}
                             <div className={`
@@ -69,7 +69,7 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                                     <div className="font-medium mb-1 hover:text-[#05D182] cursor-pointer">
                                         <span className="p-1 px-2 bg-gray-200 rounded-xl mr-2">{post.id}</span> {post.title}
                                     </div>
-                                    <div className="flex text-xl text-gray-500 pl-15">
+                                    <div className="flex text-xl text-gray-500 md:pl-15 pl-1 md:mt-0 mt-3">
                                         <div className="mr-3">{post.nickname || '익명'}</div>
                                         <div className="mr-3">{post.createdAt ? new Date(post.createdAt).toLocaleString() : null}</div>
                                     </div>
@@ -77,7 +77,7 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                             </div>
 
                             {/* 조회수/추천 */}
-                            <div className="text-center min-w-16">
+                            <div className="text-center min-w-16 md:static absolute right-0 ">
                                 {/* <div className="text-xl text-gray-500">조회 {post.viewCount}</div> */}
                                 <div className="text-xl text-gray-500">추천 {post.likeCount}</div>
                             </div>
