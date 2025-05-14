@@ -4,6 +4,7 @@ import { useHerbMostViewGetQuery } from '../../../hooks/queries/useQueryHerbs';
 import CircleNumberIcon from './CircleNumberIcon';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import HerbNotFoundCard from '../../../components/card/HerbNotFoundCard';
 
 export default function MostViewSection() {
     const { herbs, isError, isLoading } = useHerbMostViewGetQuery();
@@ -18,7 +19,7 @@ export default function MostViewSection() {
             </div>
 
             <div className="md:max-w-[60%] w-full flex relative p-[40px] justify-around">
-                {isError && <p className='text-red-500 p-3'>일시적인 문제로 데이터 조회 실패</p>}
+                {isError && <HerbNotFoundCard />}
                 <ul className="flex flex-col max-w-[60%] flex-wrap">
                     {(isLoading ? Array.from({ length: 5 }) : herbs.slice(0, 5)).map((herb: any, index) => (
                         <li key={index} className="max-w-[150px] w-full flex items-center my-3 transition-all">
