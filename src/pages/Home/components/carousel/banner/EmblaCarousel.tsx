@@ -49,10 +49,10 @@ export default function EmblaCarousel({ slides, options, month }: PropType) {
 
   return (
 
-    <section className="embla md:bg-primary-light-gray bg-black animate-fade">
+    <section className="embla md:bg-primary-light-gray bg-black animate-fade relative">
       {/* 배너의 배경 */}
       <div className='md:block hidden grayscale brightness-50 absolute left-0 top-0 w-full h-full'>
-        <img src={slides[currentSlideIndex]?.imgUrl1} width={innerWidth} height={600} className='w-full h-full transition' />
+        <img src={slides[currentSlideIndex]?.imgUrl1} width={innerWidth} height={600} className='w-full h-full transition-transform ' />
       </div>
       <Link to={`/herbs/${slides[currentSlideIndex]?.id}`} className="w-full" >
 
@@ -60,12 +60,12 @@ export default function EmblaCarousel({ slides, options, month }: PropType) {
         <div className="w-full">
 
           {/* 슬라이드 */}
-          <div className="embla__viewport z-1" ref={emblaRef}>
+          <div className="embla__viewport md:left-[10%] left-1/2 md:translate-0 -translate-x-1/2 z-1  h-[600px]" ref={emblaRef}>
             <div className="embla__container">
-              {slides.map((herb) => (
-                <div className="embla__slide " key={herb?.id}>
-                  <div className="embla__slide__number w-full h-full ">
-                    <img src={herb?.imgUrl1} width={innerWidth} height={600} className='w-full h-full' />
+              {slides.map((herb, index) => (
+                <div className="embla__slide relative h-[600px] w-full" key={herb?.id}>
+                  <div className="w-full h-full top-0 left-0 right-0 bottom-0">
+                    <img src={herb?.imgUrl1} width={innerWidth} height={600} className={`${index === currentSlideIndex ? 'scale-100' : 'scale-75 grayscale-75'} transition-transform duration-1000 w-full h-full`} />
                   </div>
                 </div>
               ))}
@@ -73,10 +73,10 @@ export default function EmblaCarousel({ slides, options, month }: PropType) {
           </div>
 
           {/* 슬라이드 컨텐츠 */}
-          <div className='z-50 absolute right-[15%] top-[10%]'>
+          <div className='z-50 absolute md:right-[15%] right-0 md:left-auto left-0 md:bg-transparent bg-[rgba(0,0,0,0.4)] p-10 py-20   top-[10%]'>
             <span className='p-1 px-2 rounded-2xl bg-[#05D182] text-white'>{month + "에 개화하는 약초"}</span>
-            <h2 className='text-5xl font-bold text-white mt-3'>{slides[currentSlideIndex]?.cntntsSj || ''}
-              <span className='text-3xl ml-1 text-primary-gray'>
+            <h2 className='drop-shadow-sm text-5xl font-bold text-white mt-3'>{slides[currentSlideIndex]?.cntntsSj || ''}
+              <span className='drop-shadow-md text-3xl ml-1 text-primary-gray'>
                 {`${slides[currentSlideIndex]?.hbdcNm || ''}`}
               </span>
             </h2>

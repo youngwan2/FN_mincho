@@ -12,7 +12,7 @@ export default function MostViewSection() {
         <section className="md:p-10 md:flex-row flex-col flex mt-15">
             <div className="flex flex-col max-w-[30%]">
                 <h2 className="text-4xl leading-13">
-                    사람들이 <br /> <strong>많이 찾은 <br /> 약초</strong>
+                    <strong>많은 <br /></strong>사람이 찾고 <br /> 있어요
                 </h2>
                 <img src={map} alt="placeholder" className="md:block hidden" />
             </div>

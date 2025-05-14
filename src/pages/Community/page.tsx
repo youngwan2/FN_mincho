@@ -69,8 +69,8 @@ export default function CommunityPage() {
 
     }
     return (
-        <div className="min-h-screen w-full">
-            <div className="mx-auto px-4 py-6">
+        <section className="min-h-screen w-full">
+            <div className="mx-auto py-6">
                 {/* 헤더 */}
                 <CommunityHeader onSearch={onSearch} onClick={onCategoryHandler} categoryInfos={categoryInfos} activeCategory={activeCategory} totalItemCount={totalItemCount} />
 
@@ -87,7 +87,7 @@ export default function CommunityPage() {
                     </div>
                 </CommunityBody>
             </div>
-        </div>
+        </section>
     )
 }
 

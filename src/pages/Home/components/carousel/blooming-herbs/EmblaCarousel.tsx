@@ -21,7 +21,7 @@ export default function EmblaCarousel({ herbs, options }: PropType) {
     return (
       <div
         key={index}
-        className="md:w-[300px] w-xs ml-10 shrink-0 rounded-xl h-[300px] flex flex-col"
+        className="md:w-[320px] w-[350px] ml-10 shrink-0 rounded-xl h-[300px] flex flex-col"
         style={{ transform: `translateY(${translateY})`, transition: 'transform 0.3s ease' }}
       >
         <Skeleton height={250} className="rounded-xl" />
@@ -38,7 +38,7 @@ export default function EmblaCarousel({ herbs, options }: PropType) {
           ) : (
             herbs.map((herb, index) => (
               <div
-                className={`${index % 2 == 0 ? 'mt-15' : ''} md:w-[300px] w-xs ml-10 shrink-0 rounded-xl h-[300px]`}
+                className={`${index % 2 == 0 ? 'mt-15' : ''} md:w-[320px] w-[350px] ml-10 shrink-0 rounded-xl h-[300px]`}
                 key={herb?.id}
               >
                 <div className="embla__slide__number">
@@ -53,9 +53,9 @@ export default function EmblaCarousel({ herbs, options }: PropType) {
                         className="w-full h-full rounded-[5px] object-cover"
                       />
                     </div>
-                    <div className="flex flex-col items-start p-2 px-3 h-auto absolute top-[50%] w-full z-10 bg-[rgba(0,0,0,0.3)]">
-                      <h3 className="text-[18px] text-white drop-shadow-sm">{herb?.cntntsSj}</h3>
-                      <span className="bg-primary-green text-white text-[12px] rounded-[3px] px-2">
+                    <div className="flex flex-col items-start py-2 px-4 h-auto absolute top-[50%] w-full z-10 bg-[rgba(0,0,0,0.3)]">
+                      <h3 className="text-4xl text-white drop-shadow-sm">{herb?.cntntsSj}</h3>
+                      <span className="bg-primary-green text-white text-2xl rounded-[3px] px-2 py-1 mt-2">
                         {herb?.bneNm}
                       </span>
                     </div>

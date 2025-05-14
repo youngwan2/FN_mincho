@@ -79,8 +79,6 @@ export default function HerbBody({ herbs, totalCount = 0, isLoading = false, onS
                                             height={250}
                                             width={250}
                                         />
-
-
                                     </div>
                                     <div className="flex flex-col items-start p-2 h-auto mt-3">
                                         <div className="flex items-center">

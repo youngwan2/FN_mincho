@@ -8,7 +8,7 @@ export default function RootLayout() {
     useSSE(); // SSE 연결
 
     return (
-        <div className='w-full'>
+        <div className='w-full text-[16px]'>
             <div className='md:px-10 px-5 max-w-[1240px] mx-auto h-auto font-prentendard' >
                 <CustomToastContainer />
                 <Header />

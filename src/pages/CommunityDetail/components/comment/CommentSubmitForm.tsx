@@ -30,7 +30,7 @@ export default function CommentSubmitForm({ onSubmit }: CommentSubmitFormProps) 
                     title="댓글 등록"
                     type="submit"
                 >
-                    <IoAddCircleOutline className="hover:text-blue-500 cursor-pointer w-8 h-8 text-hover-primary-green" />
+                    <IoAddCircleOutline className="hover:text-blue-500 cursor-pointer w-10 h-10 text-hover-primary-green" />
                 </button>
             </div>
         </form >

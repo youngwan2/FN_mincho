@@ -13,6 +13,7 @@ import CommunityComment from "./components/comment/CommunityComment";
 
 import { IoEye, IoThumbsUp } from "react-icons/io5";
 import noProfile from '../../assets/noImage.png'
+import { CommentSkeleton, UserActionSkeleton } from './components/skeleton/Skeleton';
 
 
 const PAGE_SIZE = 10;
@@ -57,16 +58,16 @@ export default function CommunityDetailPage() {
 
   return (
     <div className="w-full mx-auto bg-white min-h-screen">
-      <div className="h-[350px] bg-gray-200 w-full">
+      <div className="h-[350px] bg-gradient-to-b from-gray-300 to-90% to-white w-full rounded-xl">
         {detailLoading ? (
           <Skeleton className="w-full h-full" />
         ) : (
-          <img className="rounded-2xl w-full h-full mix-blend-luminosity" src={`https://picsum.photos/seed/picsum/${window.innerWidth}/350`} alt="" />
+          <h2 className='text-6xl font-bold flex items-center justify-center h-full'>{post.title}</h2>
         )}
       </div>
 
       {/* 포스트 내용 */}
-      <div className="p-4 mt-10">
+      <div className="pt-20 mt-10">
 
         {/* 작성자, 작성일 */}
         <div className="flex items-center mb-4">
@@ -96,6 +97,7 @@ export default function CommunityDetailPage() {
                 </div>
               )}
             </div>
+
             {/* 작성일 */}
             <p className="text-xl text-gray-500">
               {detailLoading ? <Skeleton width={200} /> : new Date(post.createdAt).toLocaleString()}
@@ -103,11 +105,11 @@ export default function CommunityDetailPage() {
           </div>
         </div>
 
-        {/* 제목, 내용 */}
+        {/* 게시글 제목, 내용 */}
         {detailLoading ? (
           <div className="mb-8">
-            <Skeleton height={50} className="mb-4" /> {/* 제목 스켈레톤 */}
-            <Skeleton count={5} height={20} /> {/* 내용 스켈레톤 */}
+            <Skeleton height={50} className="mb-4" />
+            <Skeleton count={5} height={20} />
           </div>
         ) : (
           <Editor formType={formType} post={post} />
@@ -127,60 +129,23 @@ export default function CommunityDetailPage() {
                 </button>
               </div>
             </div>
-            {/* 댓글 */}
-            {commentLoading ? (
-              <div className="mt-8">
-                <Skeleton height={40} className="mb-4" /> {/* 댓글 입력창 스켈레톤 */}
-                <div className="space-y-4">
-                  {Array(3).fill(0).map((_, index) => (
-                    <div key={index} className="flex">
-                      <Skeleton circle width={32} height={32} className="mr-3" />
-                      <div className="flex-1">
-                        <Skeleton width={120} className="mb-2" />
-                        <Skeleton count={2} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <CommunityComment
+
+            {/* 댓글*/}
+            {commentLoading
+              ? <CommentSkeleton />
+              : <CommunityComment
                 postId={Number(postId)}
                 comments={commentInfo?.comments || []}
                 totalCount={commentInfo?.totalCount || 0}
               />
-            )}
+            }
           </>
-          // 댓글 로딩 및 상세 페이지일 때 스켈레톤
+
+          // 상세 페이지 로딩 시 유저액션(좋아요, 조회수), 댓글 스켈레톤
         ) : formType === 'detail' && detailLoading ? (
           <>
-            <div className="flex items-center justify-end py-8 mr-5 mb-4">
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center gap-3 text-gray-600">
-                  <IoEye />
-                  <span className="text-2xl"><Skeleton width={20} /></span>
-                </div>
-                <div className="flex items-center text-gray-600">
-                  <IoThumbsUp className="mr-2 h-7 w-7" />
-                  <span className="text-2xl"><Skeleton width={20} /></span>
-                </div>
-              </div>
-            </div>
-            {/* 댓글 스켈레톤 */}
-            <div className="mt-8">
-              <Skeleton height={40} className="mb-4" /> {/* 댓글 입력창 스켈레톤 */}
-              <div className="space-y-4">
-                {Array(3).fill(0).map((_, index) => (
-                  <div key={index} className="flex">
-                    <Skeleton circle width={32} height={32} className="mr-3" />
-                    <div className="flex-1">
-                      <Skeleton width={120} className="mb-2" />
-                      <Skeleton count={2} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <UserActionSkeleton />
+            <CommentSkeleton />
           </>
         ) : null}
       </div>

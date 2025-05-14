@@ -96,7 +96,7 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
       {/* 헤더 */}
       <div className="flex items-center mb-4">
         <h2 className="text-3xl font-bold flex-grow">댓글 {totalCount}</h2>
-        <button className="cursor-pointer text-2xl text-blue-600 hover:text-blue-400">최신순</button>
+        {/* <button className="cursor-pointer text-2xl text-blue-600 hover:text-blue-400">최신순</button> */}
       </div>
 
       {/* 댓글 입력 폼 */}
