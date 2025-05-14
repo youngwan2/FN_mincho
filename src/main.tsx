@@ -1,32 +1,31 @@
-import { StrictMode } from 'react'
+import { lazy, StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from "react-router";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { BrowserRouter, Route, Routes } from 'react-router'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import '../src/assets/styles/fonts.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 import './index.css'
-import { Route } from 'react-router';
-import { Routes } from 'react-router';
-import HomePage from './pages/Home/page';
-import RootLayout from './components/layout/RootLayout';
-import LoginPage from './pages/Login/page';
-import AuthLayout from './components/layout/AuthLayout';
-import RegisterPage from './pages/Register/page';
-import FindPasswordPage from './pages/FindPassword/page';
-import HerbPage from './pages/Herb/page';
-import HerbDetailPage from './pages/HerbDetail/page';
-import Mypage from './pages/Mypage/page';
-import CommunityPage from './pages/Community/page';
-import ErrorMessageCard from './components/card/ErrorMessageCard';
-import CommunityDetailPage from './pages/CommunityDetail/page';
-import CommunityEditorPage from './pages/CommunityEditor/page';
-import HerbRecommendPage from './pages/HerbRecommend/page';
-import OAuthSuccessPage from './pages/OAuthSuccess/page';
+
+// 레이아웃
+import RootLayout from './components/layout/RootLayout'
+import AuthLayout from './components/layout/AuthLayout'
+import ErrorMessageCard from './components/card/ErrorMessageCard'
+
+// 페이지 Lazy 로드
+const HomePage = lazy(() => import('./pages/Home/page'))
+const LoginPage = lazy(() => import('./pages/Login/page'))
+const RegisterPage = lazy(() => import('./pages/Register/page'))
+const FindPasswordPage = lazy(() => import('./pages/FindPassword/page'))
+const HerbPage = lazy(() => import('./pages/Herb/page'))
+const HerbDetailPage = lazy(() => import('./pages/HerbDetail/page'))
+const Mypage = lazy(() => import('./pages/Mypage/page'))
+const CommunityPage = lazy(() => import('./pages/Community/page'))
+const CommunityDetailPage = lazy(() => import('./pages/CommunityDetail/page'))
+const CommunityEditorPage = lazy(() => import('./pages/CommunityEditor/page'))
+const HerbRecommendPage = lazy(() => import('./pages/HerbRecommend/page'))
+const OAuthSuccessPage = lazy(() => import('./pages/OAuthSuccess/page'))
 
 
 const queryClient = new QueryClient({
@@ -42,28 +41,29 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <Routes>
-
-          <Route path='/' element={<RootLayout />} errorElement={<ErrorMessageCard />}>
-            <Route index element={<HomePage />} />
-            <Route path='/auth/oauth-success' element={<OAuthSuccessPage />} ></Route>
-            <Route path="herbs" element={<HerbPage />} />
-            <Route path="herbs/:herbId" element={<HerbDetailPage />} />
-            <Route path="chat/herbs-recommend" element={<HerbRecommendPage />}></Route>
-            <Route path="users/me" element={<Mypage />} />
-            <Route path="community">
-              <Route index element={<CommunityPage />} />
-              <Route path='write' element={<CommunityEditorPage />} />
+        <Suspense fallback={<div className="p-8 text-center">로딩 중...</div>}>
+          <Routes>
+            <Route path="/" element={<RootLayout />} errorElement={<ErrorMessageCard />}>
+              <Route index element={<HomePage />} />
+              <Route path="/auth/oauth-success" element={<OAuthSuccessPage />} />
+              <Route path="herbs" element={<HerbPage />} />
+              <Route path="herbs/:herbId" element={<HerbDetailPage />} />
+              <Route path="chat/herbs-recommend" element={<HerbRecommendPage />} />
+              <Route path="users/me" element={<Mypage />} />
+              <Route path="community">
+                <Route index element={<CommunityPage />} />
+                <Route path="write" element={<CommunityEditorPage />} />
+              </Route>
+              <Route path="community/:postId" element={<CommunityDetailPage />} />
             </Route>
-            <Route path='community/:postId' element={<CommunityDetailPage />} />
-          </Route>
-          <Route path='/auth' element={<AuthLayout />} errorElement={<ErrorMessageCard />}>
-            <Route path="login" element={<LoginPage />} />
-            <Route path="signup" element={<RegisterPage />} />
-            <Route path="find-password" element={<FindPasswordPage />} />
-          </Route>
 
-        </Routes>
+            <Route path="/auth" element={<AuthLayout />} errorElement={<ErrorMessageCard />}>
+              <Route path="login" element={<LoginPage />} />
+              <Route path="signup" element={<RegisterPage />} />
+              <Route path="find-password" element={<FindPasswordPage />} />
+            </Route>
+          </Routes>
+        </Suspense>
       </QueryClientProvider>
     </BrowserRouter>
   </StrictMode>
