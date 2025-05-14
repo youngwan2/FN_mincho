@@ -24,16 +24,16 @@ export function useMarkAsReadMutation(): UseMutationResult<any, AxiosError, any>
 }
 
 /** 알림 삭제 처리 */
-export function useDeleteMutation(): UseMutationResult<any, AxiosError, any> {
+export function useDeleteMutation() {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: (ids: number[]) => {
-            return deleteNotification(ids)
+        mutationFn: () => {
+            return deleteNotification()
         },
         onSuccess: () => {
             showToast.success("알림을 삭제하였습니다.")
-            queryClient.invalidateQueries({ queryKey: queryKeys.notifications.delete(), exact: false })
+            queryClient.invalidateQueries({ queryKey: queryKeys.notifications.update(), exact: false })
         },
         onError: (error) => {
             handleError(error)

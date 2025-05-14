@@ -1,7 +1,7 @@
-import { useInfiniteQuery } from "@tanstack/react-query"
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getNotifications } from "../../service/notification"
-import { Notification } from "../../types/notification.types"
+import { getNotifications, getUnreadNotification } from "../../service/notification"
+import { Notification, NotificationReadStatus } from "../../types/notification.types"
 
 
 
@@ -43,4 +43,15 @@ export const useNotificationGetQuery = (page: number, size: number) => {
         fetchNextPage,
         hasNextPage,
     }
+}
+
+export const useNotificationReadStatusGetQuery = () => {
+    const {
+        data, error, isError, isLoading,
+    } = useQuery({
+        queryKey: queryKeys.notifications.update(),
+        queryFn: () => getUnreadNotification()
+    })
+    const isAllRead: NotificationReadStatus = data?.isAllRead || false
+    return { isAllRead, error, isError, isLoading }
 }

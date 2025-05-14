@@ -1,9 +1,9 @@
 import { Link } from "react-router"
 
 import { useEffect, useState } from "react"
-import { useNotificationGetQuery } from "../hooks/queries/useQueryNotifications"
+import { useNotificationGetQuery, useNotificationReadStatusGetQuery } from "../hooks/queries/useQueryNotifications"
 import { useInView } from "react-intersection-observer"
-import { useMarkAsReadMutation } from "../hooks/mutations/useMutationNotification"
+import { useDeleteMutation, useMarkAsReadMutation } from "../hooks/mutations/useMutationNotification"
 
 import StaticLoadingSpinner from "./spinner/StaticLoadingSpinner"
 import CustomTimeAgo from "./vender/timeago/CustomTimeAgo"
@@ -28,8 +28,11 @@ export default function Notification() {
 
 
   const { fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, totalCount, notifications, isError } = useNotificationGetQuery(page, SIZE);
+  const { isAllRead } = useNotificationReadStatusGetQuery();
 
   const { mutate: markAsReadMutate } = useMarkAsReadMutation();
+
+  const { mutate: markAsReadDeleteMutate } = useDeleteMutation();
 
 
   // 알림 읽음 처리
@@ -37,6 +40,12 @@ export default function Notification() {
     markAsReadMutate(notificationId)
   }
 
+
+  // 읽음 알림 모두 삭제
+  function handleDeleteAllByRead() {
+    markAsReadDeleteMutate()
+
+  }
   useEffect(() => {
     if (notifications.length <= 9 && totalCount <= notifications.length) {
       return
@@ -50,7 +59,9 @@ export default function Notification() {
     <>
       <button onClick={handleToggle} className="mx-2 hover:text-primary-green text-gray-500 relative">
         <FiBell size={22} />
-        <span className="absolute left-1/2 -bottom-2.5 -translate-1/2  w-4 h-4 bg-green-500 rounded-full inline-block animate-fade animate-alternate animate-infinite"></span>
+        {isAllRead ? null :
+          <span className="absolute left-1/2 -bottom-2.5 -translate-1/2  w-4 h-4 bg-green-500 rounded-full inline-block animate-fade animate-alternate animate-infinite"></span>
+        }
       </button>
 
       {/* 알림 모달 */}
@@ -83,38 +94,43 @@ export default function Notification() {
             </div>
           ) : (
             <ul className="divide-y divide-gray-100">
-              {notifications.map((notification) => {
+              {notifications.map((notification, i) => {
                 return (
                   <li
-                    key={notification.id}
-                    onClick={() => handleMarkAsRead(notification.id)}
+                    key={notification?.id || i}
+                    onClick={() => handleMarkAsRead(notification?.id)}
                     className={`p-4 hover:bg-gray-100 transition-colors ${!notification?.isRead ? "bg-gray-50" : "bg-gray-50 opacity-40"}`}
                   >
                     <Link to={notification?.path}>
                       <div className="flex items-start gap-3">
                         {/* 아이콘 */}
                         <div className="mt-1 p-2 rounded-full border border-gray-300 text-xl">
-                          {getNotificationIcon(notification.type)}
+                          {getNotificationIcon(notification?.type)}
                         </div>
 
                         {/* 내용 */}
                         <div className="flex-1">
                           <div className="flex items-center justify-between mb-1">
                             <h3 className="text-2xl font-medium text-gray-900 flex items-center gap-2">
-                              {typeMapping(notification.type)}
-                              {!notification.isRead && (
+                              {typeMapping(notification?.type)}
+                              {!notification?.isRead && (
                                 <span className="w-2 h-2 bg-green-500 rounded-full inline-block animate-pulse"></span>
                               )}
                             </h3>
-                            <span className="text-[14px] text-gray-500">{<CustomTimeAgo date={notification.createdAt} />}</span>
+                            <span className="text-[14px] text-gray-500">{<CustomTimeAgo date={notification?.createdAt} />}</span>
                           </div>
-                          <p className="text-[14px] text-gray-700 break-words">{notification.message}</p>
+                          <p className="text-[14px] text-gray-700 break-words">{notification?.message}</p>
                         </div>
                       </div>
                     </Link>
                   </li>
                 )
               })}
+
+              <li className="w-full flex items-center justify-center pt-3">
+                <button onClick={handleDeleteAllByRead} className="text-center border px-3 py-1 rounded-sm border-gray-300 hover:bg-gray-100 cursor-pointer">읽은 알림 모두 삭제</button>
+              </li>
+
             </ul>
           )}
 

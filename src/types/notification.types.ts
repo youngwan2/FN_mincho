@@ -8,3 +8,7 @@ export interface Notification {
     path: string
     type: string
 }
+
+export interface NotificationReadStatus {
+    isAllRead: boolean
+}

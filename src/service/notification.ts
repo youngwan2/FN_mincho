@@ -1,4 +1,4 @@
-import { deleteNotificationFetch, getNotificationsFetch, updateMarkAsReadFetch } from "../apis/notificaiton";
+import { deleteNotificationFetch, getNotificationsFetch, getUnreadNotificationFetch, updateMarkAsReadFetch } from "../apis/notificaiton";
 import { apiRoutes } from "../config/api";
 
 
@@ -17,7 +17,13 @@ export const updateMarkAsRead = async (id: number) => {
 }
 
 /** 알림 삭제 처리 */
-export const deleteNotification = async (ids: number[]) => {
-    const { data } = await deleteNotificationFetch(apiRoutes.notifications.delete(ids))
+export const deleteNotification = async () => {
+    const { data } = await deleteNotificationFetch(apiRoutes.notifications.deleteAllByIsRead())
     return data;
+}
+
+/** 읽지 않은 알림이 하나라도 존재하는가? */
+export const getUnreadNotification = async () => {
+    const { data } = await getUnreadNotificationFetch(apiRoutes.notifications.getUnreadStatus())
+    return data
 }

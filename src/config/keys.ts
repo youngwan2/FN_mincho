@@ -58,6 +58,5 @@ export const queryKeys = {
     notifications: {
         getAll: (page: number, size: number) => ["notifications", page, size],
         update: () => ["notifications"],
-        delete: () => ["notifications"]
     }
 }

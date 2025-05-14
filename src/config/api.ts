@@ -90,7 +90,8 @@ export const apiRoutes = {
     notifications: {
         getAll: (page: number, size: number) => baseUrl + `/notifications?page=${page}&size=${size}`,
         markAsRead: (id: number) => baseUrl + `/notifications/read/${id}`,
-        delete: (ids: number[]) => baseUrl + `/notifications/select?ids=${ids}`
+        deleteAllByIsRead: () => baseUrl + `/notifications/reads`,
+        getUnreadStatus: () => baseUrl + `/notifications/unread-status`
     },
     s3: {
         upload: (url: string) => url

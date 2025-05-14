@@ -16,3 +16,8 @@ export const updateMarkAsReadFetch = (url: string) => {
 export const deleteNotificationFetch = (url: string) => {
     return instance.delete(url)
 }
+
+/** 읽지 않은 알림이 존재하는가 */
+export const getUnreadNotificationFetch = (url: string) => {
+    return instance.get(url)
+}
