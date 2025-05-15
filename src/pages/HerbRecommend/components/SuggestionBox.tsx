@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IoArrowDown, IoArrowDownCircle, IoRefreshOutline } from "react-icons/io5";
+import { IoRefreshOutline } from "react-icons/io5";
 
 const allSuggestions = [
   "두통에 좋은 약초",
