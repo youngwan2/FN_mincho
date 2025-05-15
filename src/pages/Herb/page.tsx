@@ -30,15 +30,14 @@ export default function HerbPage() {
         hasNextPage,
     } = useHerbsGetQuery(9, searchCondition);
 
-    // 정렬 조건 변경
-    // sort: 'asc' | 'desc' (오름차순, 내림차순)
-    // orderBy: 'bneNm' | 'cntntsSj' (학명, 한글 이름)
+
+    // 정렬
     const onSort = (sort: string, orderBy: string) => {
 
         setSearchCondition(prev => ({
             ...prev,
             sort: sort,
-            orderBy: orderBy
+            orderBy: orderBy,
         }))
     }
 
@@ -48,11 +47,14 @@ export default function HerbPage() {
         const formData = new FormData(e.currentTarget);
         const bneNm = formData.get("bneNm")?.toString() ?? ''
         const month = formData.get("month")?.toString() ?? ''
+        const keyword = formData.get("keyword")?.toString() ?? ''
 
         setSearchCondition(prev => ({
             ...prev,
             bneNm,
             month,
+            cntntsSj: keyword
+
         }))
 
     }
@@ -73,13 +75,13 @@ export default function HerbPage() {
             <HerbBanner herbs={herbs} isLoading={isLoading} />
             {herbs.length < 1 && !isLoading && <div className="text-center text-2xl mt-10 py-10">검색된 약초가 없습니다.</div>}
 
-            <HerbBody herbs={herbs} isLoading={isLoading} totalCount={totalCount} onSort={onSort} />
+            <HerbBody herbs={herbs} isLoading={isLoading} totalCount={totalCount} onSort={onSort} selectedSort={searchCondition.sort} />
             {herbs.length < 1 && !isLoading && <div className="text-center text-2xl mt-10 py-10">검색된 약초가 없습니다.</div>}
 
             {/* 로딩체크 (임시) */}
             <button className={`border-primary-dark-gray text-primary-dark-gray mx-auto border py-2 px-4 rounded-[3px] flex justify-center mt-10 invisible`} ref={ref} />
             {
-                isFetchingNextPage
+                isFetchingNextPage && !(herbs.length <= 9)
                     ? <LoadingSpinner fixed={true} />
                     : null
             }

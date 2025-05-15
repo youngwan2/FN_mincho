@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { useUserStatsGetQuery } from "../../hooks/queries/useQueryMypage";
+import { useNavigate } from "react-router";
+import { useProfileGetQuery } from "../../hooks/queries/useQueryProfile";
+
 import MypageAnalytics from "./components/MypageAnalytics";
 import MypageContents from "./components/MypageContents";
 import MypageHeader from "./components/MypageHeader"
 import MypageProfile from "./components/MypageProfile";
 import MypageSettings from "./components/MypageSettings";
 import { getToken } from "../../utils/storage";
-import { useNavigate } from "react-router";
-import { useProfileGetQuery } from "../../hooks/queries/useQueryProfile";
+
 
 
 export default function Mypage() {
@@ -24,7 +26,7 @@ export default function Mypage() {
 
 
     return (
-        <div className="bg-white min-h-screen p-6">
+        <div className="bg-white min-h-screen py-6">
             {/* 마이페이지 헤더 */}
             <MypageHeader />
 

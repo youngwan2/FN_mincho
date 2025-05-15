@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IoRefreshOutline } from "react-icons/io5";
+import { IoArrowDown, IoArrowDownCircle, IoRefreshOutline } from "react-icons/io5";
 
 const allSuggestions = [
   "두통에 좋은 약초",
@@ -131,31 +131,38 @@ function getRandomSuggestions(list: string[], count: number) {
 
 export default function SuggestionBox({ setInput }: { setInput: (text: string) => void }) {
   const [suggestions, setSuggestions] = useState(() =>
-    getRandomSuggestions(allSuggestions, 10)
+    getRandomSuggestions(allSuggestions, 5)
   );
 
+  // 새로 불러오기
   const handleRefresh = () => {
-    setSuggestions(getRandomSuggestions(allSuggestions, 10));
+    setSuggestions(getRandomSuggestions(allSuggestions, 5));
   };
 
   return (
-    <div className="p-4 rounded-md w-full ">
-      <div className="flex items-center justify-between w-full mb-5">
-        <h2 className="text-2xl font-semibold">이 주제는 어떤가요?</h2>
-        <button
-          onClick={handleRefresh}
-          className="mt-4 px-4 py-2 bg-primary-green text-white rounded hover:bg-hover-primary-green"
-        >
-          <IoRefreshOutline />
-        </button>
+    <div className="relative">
+      <div className={` px-0 py-7 w-full border-t border-gray-200 flex gap-2 scrollbar-hide mx-auto relative`}>
+        <div className="p-4 rounded-md w-full">
+          <div className="flex items-center justify-between w-full mb-5">
+            <h2 className="text-2xl font-semibold">이 주제는 어떤가요?</h2>
+            <button
+              title="새로 불러오기"
+              aria-label="새로 불러오기"
+              onClick={handleRefresh}
+              className="mt-4 px-4 py-2 bg-primary-green text-white rounded hover:bg-hover-primary-green"
+            >
+              <IoRefreshOutline />
+            </button>
+          </div>
+
+          <ul className="flex pl-5 space-y-1 text-gray-700 gap-2  flex-wrap">
+            {suggestions.map((item, idx) => (
+              <li onClick={() => setInput(item)} className="border border-gray-200 p-1 px-3 rounded-2xl hover:bg-gray-100 cursor-pointer" key={idx}>{item}</li>
+            ))}
+          </ul>
+
+        </div>
       </div>
-
-      <ul className="flex pl-5 space-y-1 text-gray-700 gap-2  flex-wrap">
-        {suggestions.map((item, idx) => (
-          <li onClick={() => setInput(item)} className="border border-gray-200 p-1 px-3 rounded-2xl hover:bg-gray-100 cursor-pointer" key={idx}>{item}</li>
-        ))}
-      </ul>
-
     </div>
   );
 }

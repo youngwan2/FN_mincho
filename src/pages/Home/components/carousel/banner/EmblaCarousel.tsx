@@ -10,7 +10,6 @@ import './base.css'
 import './embla.css'
 import { Herb } from '../../../../../types/herb.types'
 import { Link } from 'react-router'
-import noImage from '../../../../../assets/plant.png'
 
 type PropType = {
   slides: Herb[]
@@ -50,9 +49,9 @@ export default function EmblaCarousel({ slides, options, month }: PropType) {
 
   return (
 
-    <section className="embla md:bg-primary-light-gray animate-fade relative border-none">
+    <section className="embla md:bg-primary-light-gray animate-fade relative border-none md:h-auto h-[512px]">
       {/* 배너의 배경 */}
-      <div className='md:block hidden grayscale brightness-50 absolute left-0 top-0 w-full h-full'>
+      <div className='md:block  grayscale brightness-50 absolute left-0 top-0 w-full h-full'>
         {slides[currentSlideIndex]?.imgUrl1 && <img src={slides[currentSlideIndex].imgUrl1} width={innerWidth} height={600} className='w-full h-full' />}
 
       </div>
@@ -67,7 +66,7 @@ export default function EmblaCarousel({ slides, options, month }: PropType) {
               {slides.map((herb, index) => (
                 <div className="embla__slide relative h-[600px] w-full" key={herb?.id}>
                   <div className="w-full h-full top-0 left-0 right-0 bottom-0 ">
-                    <img src={herb?.imgUrl1} width={innerWidth} height={600} className={`${index === currentSlideIndex ? 'scale-100' : 'scale-75 grayscale-75'} transition-transform duration-1000 w-full h-full`} />
+                    <img src={herb?.imgUrl1} width={innerWidth} height={600} className={` ${index === currentSlideIndex ? 'scale-100' : 'scale-75 grayscale-75'} transition-transform duration-1000 w-full h-full md:object-cover object-contain `} />
                   </div>
                 </div>
               ))}

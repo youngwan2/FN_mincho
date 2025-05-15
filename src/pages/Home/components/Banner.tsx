@@ -14,7 +14,7 @@ export default function Banner() {
     const OPTIONS: EmblaOptionsType = { dragFree: true }
 
     return (
-        <div className={`${isError ? 'bg-primary-light-gray animate-alternate animate-fade  flex justify-center items-center' : 'bg-none'} h-[658px] w-full relative`}>
+        <div className={`${isError ? 'bg-primary-light-gray animate-alternate animate-fade  flex justify-center items-center' : 'bg-none'} md:h-[658px] h-[530px] w-full relative`}>
             {isLoading ? <LoadingSpinner /> : null}
             {!isError
                 ?

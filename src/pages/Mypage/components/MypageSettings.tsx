@@ -1,11 +1,13 @@
-import { IoWalk, IoLockClosed } from "react-icons/io5";
-
-import MypageTitle from "./MypageTitle";
-import MypagePasswordResetModal from "./MypagePasswordResetModal";
+import { IoWalk, IoLockClosed, IoExitOutline } from "react-icons/io5";
 import { useDeleteUserMutation, useResetPasswordMutation } from "../../../hooks/mutations/useMutationMypage";
 import { useState } from "react";
 
+import MypageTitle from "./MypageTitle";
+import MypagePasswordResetModal from "./MypagePasswordResetModal";
+
+
 import { UpdatePasswordRequest } from "../../../types/auth.types";
+import { logout } from "../../../service/auth";
 
 
 interface MypageSettingProps {
@@ -30,11 +32,26 @@ export default function MypageSettings({ isSocial }: MypageSettingProps) {
         resetPassword(passwordData);
     };
 
+
+    const handleLogoutClick = () => {
+        if (confirm("정말로 로그아웃 하시겠습니까?")) {
+            logout()
+        }
+    }
+
     return (
-        <div className="bg-gray-50 rounded-lg p-6">
+        <div className="bg-gray-50 rounded-lg">
             <MypageTitle text="설정/보안" />
 
             <div className="space-y-6 mt-4">
+
+                <button
+                    className="flex items-center text-gray-700 cursor-pointer border border-gray-200 p-2 py-5 rounded-[3px] w-full justify-between hover:bg-gray-200"
+                    onClick={handleLogoutClick}
+                >
+                    <span className="text-2xl font-medium text-gray-700">로그아웃</span>
+                    <IoExitOutline size={22} className="text-black" />
+                </button>
                 {/* 비밀번호 재설정 */}
                 {!isSocial ?
                     <button
