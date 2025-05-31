@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useTogglePostLikeMutation } from "../../hooks/mutations/useMutationPostLike";
 import { useCommentGetQuery } from "../../hooks/queries/useQueryComments";
 import { useDeletePostMutation } from "../../hooks/mutations/useMutationPost";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { usePostDetailGetQuery } from "../../hooks/queries/useQueryPosts";
 
 import Skeleton from 'react-loading-skeleton'
@@ -85,7 +85,9 @@ export default function CommunityDetailPage() {
           <div className="w-full">
             <div className="flex justify-between">
               <h2 className="font-bold text-2xl">
-                {detailLoading ? <Skeleton width={120} /> : post.author?.nickname || '익명'}
+                <Link to={`/users/${post.author?.id}`} className="text-gray-800 hover:text-hover-primary-green">
+                  {detailLoading ? <Skeleton width={120} /> : post.author?.nickname || '익명'}
+                </Link>
               </h2>
               {!detailLoading && post.isMine && (
                 <div className="flex gap-3">

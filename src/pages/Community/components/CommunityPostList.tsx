@@ -54,13 +54,10 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
 
                             {/* 카테고리 */}
                             <div className={`
-                            min-w-24 mr-4 px-3 py-1 rounded-full text-center text-xl text-white
-                            ${post.category === 'notice' ? 'bg-red-500' : ''}
-                            ${post.category === 'info' ? 'bg-[#05D182]' : ''}
-                            ${post.category === 'free' ? 'bg-blue-500' : ''}
-                            ${post.category === 'question' ? 'bg-yellow-500' : ''}
+                                min-w-24 mr-4 px-3 py-1 rounded-full text-center text-xl text-white
+                             ${getCategoryColor(post.category.type) || 'bg-gray-400'}
                             `}>
-                                {post.category}
+                                {post.category.name}
                             </div>
 
                             {/* 타이틀 */}
@@ -87,3 +84,24 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
         </ul>
     )
 }
+
+const getCategoryColor = (type: string) => {
+    switch (type) {
+        case 'DAILY':
+            return 'bg-blue-500';
+        case 'EXPERIENCE':
+            return 'bg-yellow-500';
+        case 'INFO':
+            return 'bg-[#05D182]';
+        case 'CULTIVATION':
+            return 'bg-green-500';
+        case 'CAUTION':
+            return 'bg-red-500';
+        case 'EVENT':
+            return 'bg-indigo-500';
+        case 'ETC':
+            return 'bg-purple-500';
+        default:
+            return '';
+    }
+};

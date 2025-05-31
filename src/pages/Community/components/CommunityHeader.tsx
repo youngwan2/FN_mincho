@@ -1,13 +1,12 @@
 import { FormEventHandler, useState } from 'react'
 import plant from '../../../assets/plant.png'
-import { PostStatistics } from '../../../types/post.types'
+import { Category } from '../../../types/post.types'
 
 interface CommunityHeaderProps {
     onSearch: FormEventHandler<HTMLFormElement>
-    onClick: (categoryId: string) => void
-    activeCategory: string
-    categoryInfos: PostStatistics[]
-    totalItemCount: number
+    onClick: (categoryId: number) => void
+    activeCategoryId: number
+    categoryInfos: Category[]
 
 }
 
@@ -18,14 +17,9 @@ const searchOptions = [
     { label: '작성자', value: 'author' },
 ]
 
-export default function CommunityHeader({ onSearch, categoryInfos, activeCategory, onClick, totalItemCount }: CommunityHeaderProps) {
+export default function CommunityHeader({ onSearch, categoryInfos, activeCategoryId, onClick }: CommunityHeaderProps) {
     const [queryType, setSearchType] = useState('all')
 
-    // "전체" 카테고리 포함
-    const mergedCategories = [
-        { category: 'all', count: totalItemCount },
-        ...categoryInfos
-    ]
 
     return (
         <div className="flex justify-center items-center mb-8 bg-primary-green h-[350px] rounded-xl flex-col relative">
@@ -35,28 +29,17 @@ export default function CommunityHeader({ onSearch, categoryInfos, activeCategor
 
             {/* 카테고리 탭 */}
             <ul className="flex md:justify-normal justify-center flex-wrap gap-2 mt-4 z-10 relative">
-                {mergedCategories.map((categoryInfo) => {
-                    const categoryId = categoryInfo.category;
-                    const categoryName = categoryId === 'info'
-                        ? "정보 공유"
-                        : categoryId === 'notice'
-                            ? "공지사항"
-                            : categoryId === 'free'
-                                ? "자유게시판"
-                                : categoryId === 'question'
-                                    ? "질문 & 답변"
-                                    : "전체";
-
+                {categoryInfos.map((categoryInfo) => {
                     return (
                         <li
-                            key={categoryId || ''}
-                            className={`px-4 py-1 rounded-full cursor-pointer transition-all animate-fade-up ${activeCategory === categoryId
+                            key={categoryInfo.id || ''}
+                            className={`px-4 py-1 rounded-full cursor-pointer transition-all animate-fade-up ${activeCategoryId === categoryInfo.id
                                 ? 'bg-white text-primary-green font-semibold'
                                 : 'bg-[#ffffff44] text-white'
                                 }`}
-                            onClick={() => onClick(categoryId)}
+                            onClick={() => onClick(categoryInfo.id)}
                         >
-                            {categoryName}
+                            {categoryInfo.name}
                         </li>
                     )
                 })}

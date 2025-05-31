@@ -1,9 +1,11 @@
 
 // 타입 정의
 export type Category = {
-    id: string;
+    id: number;
     name: string;
-    count: number;
+    type: string
+    description: string;
+    count?: number;
 };
 
 
@@ -11,7 +13,7 @@ export type Category = {
 export type CategoryType = 'notice' | 'info' | 'free' | 'question'
 // 추가 포스트
 export interface PostRequest {
-    category: CategoryType
+    categoryType: CategoryType
     contents: string
     title: string;
 
@@ -21,12 +23,12 @@ export interface PostRequest {
 // 포스트
 export interface Post {
     id: number;
-    category: string;
-    categoryType: CategoryType
+    category: Category;
     title: string;
     nickname?: string
 
     author: {
+        id: number
         nickname: string
         profileImage: string
     }
@@ -49,14 +51,17 @@ export interface PostSearchCondition {
     sort: string
     queryType?: string
     query?: string | null
-    category: string
+    categoryId: number
 
 }
 
 
 // 카테고리 타입
 export interface PostStatistics {
-    category: string
+    id: number
+    type: string
+    name: string
+    description: string
     count: number
 }
 

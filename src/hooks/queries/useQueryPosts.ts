@@ -34,6 +34,7 @@ export const usePostStatisticsGetQuery = (page: number, size: number) => {
         queryFn: () => getPostStatistics()
     })
     const categoryInfos: PostStatistics[] = data?.data?.data ?? []
+    console.log(categoryInfos)
     return { categoryInfos, isLoading: isPending, isError, status }
 }
 

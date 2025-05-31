@@ -4,6 +4,7 @@ import { useCreateHerbBookmarkMutation, useDeleteHerbBookmarkMutation } from "..
 import { HerbDetail } from "../../../types/herb.types";
 import { useCreateHerbLikeMutation, useDeleteHerbLikeMutation } from "../../../hooks/mutations/useMutationHerbLike";
 import { useCountHerbLikeGetQuery } from "../../../hooks/queries/useQueryHerbLike";
+import ShareModal from "../../../components/modal/ShareModal";
 
 
 interface InteractionPanelProps {
@@ -84,16 +85,13 @@ export default function InteractionPanel({ herb, herbId }: InteractionPanelProps
                 className={`${herbLikeMetadata.isLiked ? 'text-red-400' : 'text-black'} hover:cursor-pointer text-3xl flex items-center mr-2`}>
                 {herbLikeMetadata.isLiked ? <IoHeart /> : <IoHeartOutline />}  <span>{herbLikeMetadata?.count}</span>
             </button>
-
-
-            <button title="공유하기" className="hover:cursor-pointer text-3xl flex items-center mr-2"><IoShareOutline /><span>0</span> </button>
-
             <button
                 onClick={handleBookmark}
                 title="즐겨찾기"
                 className={`${bookmarkMetadata.isBookmarked ? 'text-primary-green' : 'text-black'} hover:cursor-pointer text-3xl flex items-center mr-2`}>
                 <IoBookmarkOutline /><span>{bookmarkMetadata?.count}</span>
             </button>
+
         </div>
     )
 }

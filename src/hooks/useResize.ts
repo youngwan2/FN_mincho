@@ -24,8 +24,11 @@ export default function useResize() {
         return () => {
             window.removeEventListener("resize", handleResize)
         }
-
     }, [mobile])
+
+    useEffect(() => {
+        handleResize() // 초기 로드 시에도 한 번 실행
+    }, [])
 
     return { mobile, setMobile }
 }

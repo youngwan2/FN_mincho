@@ -17,6 +17,7 @@ export const queryKeys = {
     profile: {
         getAll: () => ["profile"],
         get: () => ["profile"],
+        getPublic: (userId: number) => ["profile", userId],
         update: () => ["profile"]
     },
     // 북마크

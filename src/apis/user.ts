@@ -1,6 +1,6 @@
 import { apiRoutes } from "../config/api"
 import instance from "../config/axios"
-import { AxiosError } from "axios"
+import axios, { AxiosError } from "axios"
 import { Profile } from "../types/user.types"
 import { UpdatePasswordRequest } from "../types/auth.types"
 import { showToast } from "../components/toast/CustomToast"
@@ -18,6 +18,20 @@ export const getProfileFetch = async () => {
         if (error instanceof AxiosError) {
             return error.response?.data
 
+        }
+    }
+}
+
+/** 유저 프로필 | 공개 */
+export const getProfilePublicFetch = async (userId: number) => {
+    try {
+        const response = await axios.get(
+            apiRoutes.user.profilePublic(userId)
+        )
+        return response.data
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            return error.response?.data
         }
     }
 }

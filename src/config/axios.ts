@@ -1,6 +1,7 @@
 import axios from "axios";
 import { baseUrl } from "./api";
 import { getToken, removeToken, setToken } from "../utils/storage";
+import { showToast } from "../components/toast/CustomToast";
 
 // axios 인스턴스를 만들 때 구성 기본 값 설정
 const instance = axios.create({
@@ -33,14 +34,16 @@ instance.interceptors.response.use(function (response) {
   // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
   // 응답 오류가 있는 작업 수행
 
-
   if (error.status === 401) {
     console.error(error)
+
+    // 토큰 제거
     removeToken()
+    showToast.error("세션이 만료되었습니다.  다시 로그인 해주세요.");
   }
+
   if (error.status === 403) {
     console.error(error)
-    removeToken()
   }
 
 

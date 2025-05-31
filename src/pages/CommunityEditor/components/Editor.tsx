@@ -11,7 +11,7 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import { CategoryType, PostDetail, PostRequest } from '../../../types/post.types'
 import EditorMenuBar from './EditorMenuBar'
 import EditorContentHeader from './EditorHeader'
-// import useAuth from '../../../hooks/useAuth'
+import { useAuth } from '../../../store/loginState'
 
 
 interface EditorProps {
@@ -21,11 +21,11 @@ interface EditorProps {
 
 export default function Editor({ post, formType }: EditorProps) {
 
-    // const isLogin = useAuth();
+    const { isLogin } = useAuth();
 
     const [title, setTitle] = useState(post?.title ?? "");
     const [contents, setContents] = useState(post?.contents ?? "");
-    const [category, setCategory] = useState(post?.category ?? "");
+    const [category, setCategory] = useState(post?.category.type ?? "");
 
 
     const { mutate: createPostMutate, isSuccess: createIsSuccess } = useCreatePostMutation();
@@ -62,7 +62,7 @@ export default function Editor({ post, formType }: EditorProps) {
         const newPost: PostRequest = {
             title,
             contents,
-            category: category as CategoryType,
+            categoryType: category as CategoryType,
         };
 
         if (formType === "update" && post) {
@@ -120,7 +120,3 @@ export default function Editor({ post, formType }: EditorProps) {
         </section>
     )
 }
-
-
-
-

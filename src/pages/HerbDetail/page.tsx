@@ -10,6 +10,7 @@ import HerbDetailFooter from "./components/HerbDetailFooter";
 import LoadingSpinner from "../../components/spinner/LoadingSpinner";
 import { IoEye } from "react-icons/io5";
 import HerbNotFoundCard from "../../components/card/HerbNotFoundCard";
+import ShareModal from "../../components/modal/ShareModal";
 
 export default function HerbDetailPage() {
 
@@ -39,7 +40,10 @@ export default function HerbDetailPage() {
                                 <HerbDetailImages images={images} />
                                 <div className="flex items-center justify-between relative z-50 ">
                                     <InteractionPanel herb={herb} herbId={herbId} />
-                                    <span title="조회수" className="gap-2 text-3xl flex items-center mr-2"><IoEye />{herb?.viewCount || 0} </span>
+                                    <div className="flex">
+                                        <span title="조회수" className="gap-2 text-3xl flex items-center mr-2"><IoEye />{herb?.viewCount || 0} </span>
+                                        <ShareModal title={herb.cntntsSj} />
+                                    </div>
                                 </div>
                                 <HerbDetailContents herb={herb} />
                             </HerbDetailBody>

@@ -15,6 +15,7 @@ export const apiRoutes = {
         delete: baseUrl + '/users/me/entire'
     },
     user: {
+        profilePublic: (userId: number) => baseUrl + `/users/${userId}`,
         profile: baseUrl + '/users/me',
         profileImage: baseUrl + '/users/me/upload',
         getById: baseUrl + '/users/me',
@@ -29,7 +30,7 @@ export const apiRoutes = {
         loginStatus: baseUrl + '/users/login-status'
     },
     herb: {
-        getAll: (page: number, size: number, condition: HerbSearchCondition) => baseUrl + `/herbs?page=${page}&size=${size}&bneNm=${condition.bneNm}&month=${condition.month}&orderBy=${condition.orderBy}&sort=${condition.sort}&cntntsSj=${condition.cntntsSj}`,
+        getAll: (page: number, size: number, condition: HerbSearchCondition) => baseUrl + `/herbs?page=${page}&size=${size}&bneNm=${condition.bneNm}&month=${condition.month}&order=${condition.orderBy}&sort=${condition.sort}&cntntsSj=${condition.cntntsSj}`,
         getById: (herbId: number) => baseUrl + `/herbs/${herbId}`,
         getRandom: (herbId: number) => baseUrl + `/herbs/${herbId}/random`,
         create: () => baseUrl + '/herbs',
@@ -56,7 +57,7 @@ export const apiRoutes = {
         getAll: (page: number, size: number, condition: PostSearchCondition) => {
             return baseUrl + '/community/posts?page=' + page +
                 '&size=' + size +
-                '&category=' + condition.category +
+                '&categoryId=' + condition.categoryId +
                 '&order=' + condition.order +
                 '&sort=' + condition.sort +
                 '&queryType=' + condition.queryType +
@@ -69,7 +70,10 @@ export const apiRoutes = {
         delete: (postId: number) => baseUrl + `/community/posts/${postId}`,
         statistics: () => baseUrl + `/community/statistics/posts`,
         byUser: (page: number, size: number) => baseUrl + `/users/me/posts?page=${page}&size=${size}`,
-        generatePresignedUrl: () => baseUrl + `/community/posts/images/presigned-url`
+        byUserPublic: (userId: number, page: number, size: number, enabled: boolean) => baseUrl + `/users/${userId}/posts?page=${page}&size=${size}&enabled=${enabled}`,
+        generatePresignedUrl: () => baseUrl + `/community/posts/images/presigned-url`,
+        viewUpdate: (postId: number) => baseUrl + `/community/posts/${postId}/view` // 게시글 조회수 업데이트,
+
     },
     postLike: {
         update: (postId: number) => baseUrl + `/community/posts/${postId}/likes`

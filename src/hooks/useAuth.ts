@@ -3,7 +3,7 @@ import { getToken } from '../utils/storage'
 
 export default function useAuth() {
 
-        const [isLogin, setIsLogin] = useState(false)
+        const [isLogin, setIsLogin] = useState(true)
 
         // 리렌더링 부분
         useEffect(() => {

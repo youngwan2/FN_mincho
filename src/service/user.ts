@@ -1,4 +1,4 @@
-import { getLoginStatusFetch, getProfileFetch, getUserStatsFetch, updatePasswordFetch, updateProfileFetch, updateProfileImageFetch } from "../apis/user";
+import { getLoginStatusFetch, getProfileFetch, getProfilePublicFetch, getUserStatsFetch, updatePasswordFetch, updateProfileFetch, updateProfileImageFetch } from "../apis/user";
 import { UpdatePasswordRequest } from "../types/auth.types";
 import { Profile } from "../types/user.types";
 import { logout } from "./auth";
@@ -8,6 +8,12 @@ import { logout } from "./auth";
 export const getInitialProfile = async () => {
     const data = await getProfileFetch();
 
+    return data
+}
+
+/** 프로필 정보 요청 | 공개 */
+export const getProfilePublic = async (userId: number) => {
+    const data = await getProfilePublicFetch(userId);
     return data
 }
 

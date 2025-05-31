@@ -27,6 +27,7 @@ import CommunityDetailPage from './pages/CommunityDetail/page';
 import CommunityEditorPage from './pages/CommunityEditor/page';
 import HerbRecommendPage from './pages/HerbRecommend/page';
 import OAuthSuccessPage from './pages/OAuthSuccess/page';
+import UserInfoPage from './pages/UserInfo/page';
 
 
 const queryClient = new QueryClient({
@@ -56,7 +57,9 @@ createRoot(document.getElementById('root')!).render(
               <Route path='write' element={<CommunityEditorPage />} />
             </Route>
             <Route path='community/:postId' element={<CommunityDetailPage />} />
+            <Route path='users/:userId' element={<UserInfoPage />} />
           </Route>
+
           <Route path='/auth' element={<AuthLayout />} errorElement={<ErrorMessageCard />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="signup" element={<RegisterPage />} />
