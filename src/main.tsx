@@ -56,7 +56,7 @@ createRoot(document.getElementById('root')!).render(
               <Route index element={<CommunityPage />} />
               <Route path='write' element={<CommunityEditorPage />} />
             </Route>
-            <Route path='community/:postId' element={<CommunityDetailPage />} />
+            <Route path='community/posts/:postId' element={<CommunityDetailPage />} />
             <Route path='users/:userId' element={<UserInfoPage />} />
           </Route>
 

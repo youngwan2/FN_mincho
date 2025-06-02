@@ -1,4 +1,4 @@
-import { deleteUserFetch, emailCheckFetch, loginFetch, logoutFetch, registerFetch, sendVerificationCodeFetch, verificationCodeCheckFetch } from "../apis/auth";
+import { deleteUserFetch, emailCheckFetch, loginFetch, logoutFetch, registerFetch, sendVerificationCodeFetch, verificationCodeCheckFetch } from "../apis/auth.api";
 import { apiRoutes } from "../config/api";
 import { Email, LoginRequest, RegisterRequest } from "../types/auth.types";
 import { removeToken, setToken } from "../utils/storage";

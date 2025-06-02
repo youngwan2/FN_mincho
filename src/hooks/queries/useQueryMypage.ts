@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getUserStats } from "../../service/user"
+import { getUserStats } from "../../service/user.service"
 import { UserStats } from "../../types/user.types"
 
 

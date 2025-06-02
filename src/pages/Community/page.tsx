@@ -6,6 +6,7 @@ import CommunityBody from "./components/CommunityBody";
 import Pagination from "../../components/pagination/Pagination";
 import { usePostsGetQuery, usePostStatisticsGetQuery } from "../../hooks/queries/useQueryPosts";
 import { PostFetchState, PostStatistics } from "../../types/post.types";
+import { usePostPageStore } from "@/store/store";
 
 
 const pageSize = 25
@@ -14,9 +15,9 @@ export default function CommunityPage() {
         type: 'content',
         value: ''
     })
-    const [currentPage, setCurrentPage] = useState(0);
-    // 현재 선택된 카테고리 상태
-    const [activeCategoryId, setActiveCategoryId] = useState(2);
+
+    const { page: currentPage, setPage: setCurrentPage } = usePostPageStore();
+    const [activeCategoryId, setActiveCategoryId] = useState(0);
 
 
     const { categoryInfos } = usePostStatisticsGetQuery(currentPage, pageSize)
@@ -26,9 +27,8 @@ export default function CommunityPage() {
         categoryId: activeCategoryId,
         queryType: query.type,
         query: query.value
-
     }
-    const { posts, isError, isLoading, status } = usePostsGetQuery(currentPage, pageSize, conditions)
+    const { posts, totalCount, isError, isLoading, status } = usePostsGetQuery(currentPage, pageSize, conditions)
 
     const postFetchState: PostFetchState = {
         isError,
@@ -39,9 +39,9 @@ export default function CommunityPage() {
 
     // 페이지네이션 메타데이터
     const itemCount = calculateItemCount(categoryInfos, activeCategoryId)
-    const totalItemCount = calculateTotalItems(categoryInfos)
     const perPage = pageSize;
     const totalPage = Math.ceil(itemCount / perPage) // 카테고리별 토탈 페이지
+
 
     // 카테고리 선택 함수 
     const onCategoryHandler = (categoryId: number) => {
@@ -77,7 +77,7 @@ export default function CommunityPage() {
                 {/* 게시판 컨테이너 */}
                 <CommunityBody>
                     {/* 카테고리 사이드바 */}
-                    <CommunitySidebar activeCategoryId={activeCategoryId} categoryInfos={categoryInfos} totalItemCount={totalItemCount} onClick={onCategoryHandler} />
+                    <CommunitySidebar activeCategoryId={activeCategoryId} categoryInfos={categoryInfos} totalItemCount={totalCount} onClick={onCategoryHandler} />
 
                     <div className="flex flex-col w-full bg-white rounded-lg shadow-sm overflow-hidden py-3 min-h-screen ">
                         {/* 게시판 내용 */}
@@ -100,16 +100,4 @@ function calculateItemCount(categoryInfos: PostStatistics[], activeCategoryId: n
     return filteredCategory[0]?.count
 }
 
-
-// 전체 아이템 개수 계산
-function calculateTotalItems(categoryInfos: PostStatistics[]) {
-    let totalItems = 0;
-
-    categoryInfos.forEach(categoryInfo => {
-        totalItems += categoryInfo.count
-    })
-
-    return totalItems
-
-}
 

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getPostDetail, getPosts, getPostsByUser, getPostStatistics } from "../../service/post"
-import { MypagePost, PostDetail, PostSearchCondition, PostStatistics } from "../../types/post.types"
+import { getPostDetail, getPosts, getPostsByUser, getPostByUserId, getPostStatistics } from "../../service/post.service"
+import { MypagePost, Post, PostDetail, PostSearchCondition, PostStatistics, UserPostInfo } from "../../types/post.types"
 
 
 // 게시글 전체 조회
@@ -9,11 +9,12 @@ export const usePostsGetQuery = (page: number, size: number, condition: PostSear
     const { data, isPending, isError, status } = useQuery({
         queryKey: queryKeys.posts.getAll(page, size, condition),
         queryFn: () => getPosts(page, size, condition),
-
         retry: 0,
     })
-    const posts = data?.data?.posts ?? []
-    return { posts, isLoading: isPending, isError, status }
+    const postInfo = data ?? []
+    const posts: Post[] = postInfo.posts ?? []
+    const totalCount = postInfo.totalCount ?? 0
+    return { posts, totalCount, isLoading: isPending, isError, status }
 }
 
 // 게시글 상세 조회
@@ -27,15 +28,39 @@ export const usePostDetailGetQuery = (postId: number) => {
     return { post, isLoading, isError, status }
 }
 
-// 게시글 통계
+/**
+ * 사용자가 지정한 페이지와 크기에 따라 카테고리별로 게시물 통계를 조회합니다.
+ * 
+ * @param page 페이지 번호
+ * @param size 페이지 크기
+ * @returns 게시물 통계 및 로딩 상태를 포함한 객체
+ */
 export const usePostStatisticsGetQuery = (page: number, size: number) => {
     const { data, isPending, isError, status } = useQuery({
         queryKey: queryKeys.posts.getStatistics(page, size),
         queryFn: () => getPostStatistics()
     })
     const categoryInfos: PostStatistics[] = data?.data?.data ?? []
-    console.log(categoryInfos)
     return { categoryInfos, isLoading: isPending, isError, status }
+}
+
+/**
+ * 사용자별 게시글 조회
+ * 
+ * @param userId 유저 ID
+ * @param page 페이지 번호
+ * @param size 페이징 사이즈
+ * @returns 
+ */
+export const usePostsByUserIdGetQuery = (userId: number, page: number, size: number) => {
+    const { data, isPending, isError, status } = useQuery({
+        queryKey: queryKeys.posts.byUserId(userId, page, size),
+        queryFn: () => getPostByUserId(page, size, userId),
+    })
+    const postInfo: UserPostInfo = data?.data ?? []
+    const posts = postInfo.posts ?? []
+    const totalCount = postInfo.totalCount ?? 0
+    return { posts, totalCount, isLoading: isPending, isError, status }
 }
 
 /** 마이페이지 */

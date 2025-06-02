@@ -1,4 +1,4 @@
-import { createCommentFetch, deleteCommentFetch, getCommentsFetch, updateCommentFetch } from "../apis/comment"
+import { createCommentFetch, deleteCommentFetch, getCommentsFetch, updateCommentFetch } from "../apis/comment.api"
 import { apiRoutes } from "../config/api"
 import { CommentCreateRequest, CommentUpdateRequest } from "../types/comment.types"
 

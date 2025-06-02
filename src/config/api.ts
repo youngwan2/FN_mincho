@@ -15,7 +15,7 @@ export const apiRoutes = {
         delete: baseUrl + '/users/me/entire'
     },
     user: {
-        profilePublic: (userId: number) => baseUrl + `/users/${userId}`,
+        profilePublic: (userId: number) => baseUrl + `/users/${userId}/profile`,
         profile: baseUrl + '/users/me',
         profileImage: baseUrl + '/users/me/upload',
         getById: baseUrl + '/users/me',
@@ -47,7 +47,16 @@ export const apiRoutes = {
         delete: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/herb-bookmarks`,
         countByHerb: (herbId: number) => baseUrl + `/herbs/${herbId}/herb-bookmarks/count`,
         countByUser: () => baseUrl + `/users/me/herbs/herb-bookmarks/count`,
+        byUserId: (userId: number, page: number, size: number) => baseUrl + `/users/${userId}/herbs/herb-bookmarks?page=${page}&size=${size}`
     },
+    postBookmark: {
+        getAll: (page: number, size: number) => baseUrl + `/users/me/posts/post-bookmarks?page=${page}&size=${size}`,
+        create: (postId: number) => baseUrl + `/users/me/posts/${postId}/post-bookmarks`,
+        delete: (postId: number) => baseUrl + `/users/me/posts/${postId}/post-bookmarks`,
+        countByPost: (postId: number) => baseUrl + `/community/posts/${postId}/post-bookmarks/count`,
+        countByUser: () => baseUrl + `/users/me/posts/post-bookmarks/count`,
+    }
+    ,
     herbLike: {
         count: (herbId: number) => baseUrl + `/herbs/${herbId}/likes`,
         create: (herbId: number) => baseUrl + `/users/me/herbs/${herbId}/likes`,
@@ -70,10 +79,15 @@ export const apiRoutes = {
         delete: (postId: number) => baseUrl + `/community/posts/${postId}`,
         statistics: () => baseUrl + `/community/statistics/posts`,
         byUser: (page: number, size: number) => baseUrl + `/users/me/posts?page=${page}&size=${size}`,
-        byUserPublic: (userId: number, page: number, size: number, enabled: boolean) => baseUrl + `/users/${userId}/posts?page=${page}&size=${size}&enabled=${enabled}`,
+        byUserId: (userId: number, page: number, size: number) => baseUrl + `/users/${userId}/posts?page=${page}&size=${size}`,
         generatePresignedUrl: () => baseUrl + `/community/posts/images/presigned-url`,
-        viewUpdate: (postId: number) => baseUrl + `/community/posts/${postId}/view` // 게시글 조회수 업데이트,
 
+
+    },
+    postView: {
+        base: (postId: number) => baseUrl + `/community/posts/${postId}/view`,
+        getById: (postId: number) => apiRoutes.postView.base(postId),
+        viewUpdate: (postId: number) => apiRoutes.postView.base(postId) // 게시글 조회수 업데이트,
     },
     postLike: {
         update: (postId: number) => baseUrl + `/community/posts/${postId}/likes`
@@ -84,6 +98,15 @@ export const apiRoutes = {
         update: (commentId: number) => baseUrl + `/community/comments/${commentId}`,
         delete: (commentId: number) => baseUrl + `/community/comments/${commentId}`,
         byUser: (page: number, size: number) => baseUrl + `/users/me/comments?page=${page}&size=${size}`
+    },
+    qna: {
+        getAll: (page: number, size: number) => baseUrl + `/community/qna?page=${page}&size=${size}`,
+        getById: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
+        create: () => baseUrl + '/community/qna',
+        update: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
+        delete: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
+        byUser: (page: number, size: number) => baseUrl + `/users/me/qna?page=${page}&size=${size}`,
+        byUserId: (userId: number, page: number, size: number) => baseUrl + `/users/${userId}/qnas?page=${page}&size=${size}`
     },
     statistics: {
         getAll: () => baseUrl + '/users/me/stats',

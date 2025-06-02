@@ -1,4 +1,4 @@
-import { createHerbBookmarkFetch, deleteHerbBookmarkFetch, getCountHerbBookmarkFetch, getHerbBookmarkFetch } from "../apis/bookmark"
+import { createHerbBookmarkFetch, deleteHerbBookmarkFetch, getCountHerbBookmarkFetch, getHerbBookmarkFetch } from "../apis/bookmark.api"
 import { apiRoutes } from "../config/api"
 
 
@@ -24,4 +24,10 @@ export const deleteHerbBookmark = async (herbId: number) => {
 export const getCountHerbBookmark = async (herbId: number) => {
     const url = apiRoutes.herbBookmark.countByHerb(herbId)
     return await getCountHerbBookmarkFetch(url)
+}
+
+/** 특정 사용자의 허브 북마크 조회 */
+export const getUserHerbBookmark = async (userId: number, page: number, size: number) => {
+    const url = apiRoutes.herbBookmark.byUserId(userId, page, size)
+    return await getHerbBookmarkFetch(url)
 }

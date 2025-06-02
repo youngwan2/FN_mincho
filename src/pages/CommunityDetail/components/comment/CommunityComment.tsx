@@ -92,10 +92,10 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
   }
 
   return (
-    <div className="mt-15">
+    <div className="mt-15 border border-gray-200 rounded-2xl p-5">
       {/* 헤더 */}
       <div className="flex items-center mb-4">
-        <h2 className="text-3xl font-bold flex-grow">댓글 {totalCount}</h2>
+        <h2 className="text-2xl font-bold flex-grow">총 {totalCount} 개의 댓글이 있습니다.</h2>
         {/* <button className="cursor-pointer text-2xl text-blue-600 hover:text-blue-400">최신순</button> */}
       </div>
 

@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from 'react';
 import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
 import { passwordConfirmValidator, validator } from '../utils/auth';
-import { emailCheck, register, sendVerificationCode, verificationCodeCheck } from '../service/auth';
+import { emailCheck, register, sendVerificationCode, verificationCodeCheck } from '../service/auth.service';
 import { PAGE_URLs } from '../config/urls';
 import { showToast } from '../components/toast/CustomToast';
 

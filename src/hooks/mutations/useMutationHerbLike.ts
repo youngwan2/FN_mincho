@@ -1,5 +1,5 @@
 import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query"
-import { createHerbLike, deleteHerbLike } from "../../service/herb-like"
+import { createHerbLike, deleteHerbLike } from "../../service/herb-like.service"
 import { queryKeys } from "../../config/keys"
 import { showToast } from "../../components/toast/CustomToast"
 import { handleError } from "../../config/error"

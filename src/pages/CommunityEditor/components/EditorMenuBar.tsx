@@ -10,7 +10,7 @@ import { LuHeading1, LuHeading2, LuHeading3 } from "react-icons/lu"
 import { FaBold, FaItalic, FaStrikethrough, FaHighlighter } from "react-icons/fa"
 import { MdImage } from 'react-icons/md'
 import { IoImage } from "react-icons/io5"
-import { generatePresignedUrl } from "../../../service/post"
+import { generatePresignedUrl } from "../../../service/post.service"
 import axios, { AxiosError } from "axios"
 
 

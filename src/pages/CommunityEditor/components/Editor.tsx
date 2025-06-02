@@ -92,7 +92,7 @@ export default function Editor({ post, formType }: EditorProps) {
     if (editor == null) return
 
     return (
-        <section className='w-full h-full'>
+        <section className='w-full h-full '>
             {/* 컨텐츠 헤더 */}
             {formType !== 'detail' ? <EditorContentHeader title={title} category={category} setTitle={setTitle} setCategory={setCategory} />
                 : <h2 className='md:text-5xl text-4xl border-b border-gray-100 pb-5 mt-8 font-bold'>

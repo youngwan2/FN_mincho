@@ -55,6 +55,7 @@ export const getPostsByUserFetch = (url: string) => {
     return instance.get(url)
 }
 
+
 /** 이미지 프리사인드 URL 생성 요청 */
 export const generatePresignedUrlFetch = (imageFile: FormData) => {
     return instance.post(

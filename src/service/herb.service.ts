@@ -1,4 +1,4 @@
-import { getHerbMostViewFetch, getHerbRecommendFetch, getHerbsBloomingFetch, getHerbsFetch, getHerbsRandomFetch } from "../apis/herb"
+import { getHerbMostViewFetch, getHerbRecommendFetch, getHerbsBloomingFetch, getHerbsFetch, getHerbsRandomFetch } from "../apis/herb.api"
 import { apiRoutes } from "../config/api";
 import { HerbSearchCondition } from "../types/herb.types";
 

@@ -1,4 +1,4 @@
-import { deleteNotificationFetch, getNotificationsFetch, getUnreadNotificationFetch, updateMarkAsReadFetch } from "../apis/notificaiton";
+import { deleteNotificationFetch, getNotificationsFetch, getUnreadNotificationFetch, updateMarkAsReadFetch } from "../apis/notificaiton.api";
 import { apiRoutes } from "../config/api";
 
 

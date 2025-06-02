@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router"
 import { HiOutlineMail } from "react-icons/hi";
 import { IoLockOpenOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
-import { login } from "../../../service/auth";
+import { login } from "../../../service/auth.service";
 import Submit from "../../../components/button/Submit";
 import { useUserStore } from "../../../store/loginState";
-import { getInitialProfile } from "../../../service/user";
 import { FcGoogle } from "react-icons/fc";
 import Logo from "../../../components/icon/Logo";
+import { getInitialProfile } from "@/service/profile.service";
 
 
 export default function LoginForm() {

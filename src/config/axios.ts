@@ -35,15 +35,11 @@ instance.interceptors.response.use(function (response) {
   // 응답 오류가 있는 작업 수행
 
   if (error.status === 401) {
-    console.error(error)
-
     // 토큰 제거
     removeToken()
-    showToast.error("세션이 만료되었습니다.  다시 로그인 해주세요.");
   }
 
   if (error.status === 403) {
-    console.error(error)
   }
 
 

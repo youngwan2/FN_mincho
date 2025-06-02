@@ -73,6 +73,19 @@ export interface PostFetchState {
     status: string
 }
 
+// 사용자 포스트 정보
+export interface UserPostInfo {
+    posts: UserPost[]
+    totalCount: number
+}
+
+// 사용자 포스트
+export interface UserPost {
+    id: number
+    title: string;
+    createdAt: string;
+    category: Category;
+}
 
 // 마이페이지 사용자 포스트
 export interface MypagePost {

@@ -2,6 +2,7 @@ import { Link } from "react-router"
 import { EmptyItemMessageCard } from "../../../components/card/ErrorMessageCard"
 import { Post, PostFetchState } from "../../../types/post.types"
 import Skeleton from 'react-loading-skeleton'
+import { getPostCategoryColorByType } from "@/utils/format"
 
 interface CommunityPostListProps {
     posts: Post[]
@@ -55,14 +56,14 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                             {/* 카테고리 */}
                             <div className={`
                                 min-w-24 mr-4 px-3 py-1 rounded-full text-center text-xl text-white
-                             ${getCategoryColor(post.category.type) || 'bg-gray-400'}
+                             ${getPostCategoryColorByType(post.category.type) || 'bg-gray-400'}
                             `}>
                                 {post.category.name}
                             </div>
 
                             {/* 타이틀 */}
                             <div className="flex-1">
-                                <Link to={`/community/${post.id}`}>
+                                <Link to={`/community/posts/${post.id}`}>
                                     <div className="font-medium mb-1 hover:text-[#05D182] cursor-pointer">
                                         <span className="p-1 px-2 bg-gray-200 rounded-xl mr-2">{post.id}</span> {post.title}
                                     </div>
@@ -75,7 +76,7 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
 
                             {/* 조회수/추천 */}
                             <div className="text-center min-w-16 md:static absolute right-0 ">
-                                {/* <div className="text-xl text-gray-500">조회 {post.viewCount}</div> */}
+                                <div className="text-xl text-gray-500">조회 {post.viewCount}</div>
                                 <div className="text-xl text-gray-500">추천 {post.likeCount}</div>
                             </div>
                         </li>
@@ -84,24 +85,3 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
         </ul>
     )
 }
-
-const getCategoryColor = (type: string) => {
-    switch (type) {
-        case 'DAILY':
-            return 'bg-blue-500';
-        case 'EXPERIENCE':
-            return 'bg-yellow-500';
-        case 'INFO':
-            return 'bg-[#05D182]';
-        case 'CULTIVATION':
-            return 'bg-green-500';
-        case 'CAUTION':
-            return 'bg-red-500';
-        case 'EVENT':
-            return 'bg-indigo-500';
-        case 'ETC':
-            return 'bg-purple-500';
-        default:
-            return '';
-    }
-};

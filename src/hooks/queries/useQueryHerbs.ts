@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getHerbBlooming, getHerbDetail, getHerbMostView, getHerbRandom, getHerbRecommend, getHerbs } from "../../service/herb"
+import { getHerbBlooming, getHerbDetail, getHerbMostView, getHerbRandom, getHerbRecommend, getHerbs } from "../../service/herb.service"
 import { HerbDetail, HerbSearchCondition, RecommendHerbResponse } from "../../types/herb.types"
 
 

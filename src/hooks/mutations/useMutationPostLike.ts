@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { queryKeys } from "../../config/keys";
-import { updatePostLike } from "../../service/post";
+import { updatePostLike } from "../../service/post.service";
 
 import { handleError } from "../../config/error";
 

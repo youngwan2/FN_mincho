@@ -1,11 +1,11 @@
-import { createHerbLikeFetch, deleteHerbLikeFetch, getCountHerbLikeFetch } from "../apis/herb-like"
+import { createHerbLikeFetch, deleteHerbLikeFetch, getCountHerbLikeFetch } from "../apis/herb-like.api"
 import { apiRoutes } from "../config/api"
 
 /** 허브 좋아요 조회 */
 export const getCountHerbLike = async (herbId: number) => {
     const url = apiRoutes.herbLike.count(herbId)
     const { data } = await getCountHerbLikeFetch(url);
-    const meta= { count: data.count, isLiked: data.herbLiked }
+    const meta = { count: data.count, isLiked: data.herbLiked }
     return meta
 }
 

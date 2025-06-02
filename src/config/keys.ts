@@ -40,6 +40,7 @@ export const queryKeys = {
         getByPostId: (postId: number) => ["posts", postId],
         getStatistics: (page: number, size: number) => ["posts", "statistics", page, size],
         byUser: (page: number, size: number, enabled: boolean) => ["posts", "user", page, size, enabled],
+        byUserId: (userId: number, page: number, size: number) => ["posts", "user", userId, page, size],
     },
     // 게시글 좋아요
     postLike: {
@@ -59,5 +60,12 @@ export const queryKeys = {
     notifications: {
         getAll: (page: number, size: number) => ["notifications", page, size],
         update: () => ["notifications"],
+    },
+    // QnA
+    qna: {
+        getAll: (page: number, size: number) => ["qna", "list", page, size],
+        getById: (qnaId: number) => ["qna", "detail", qnaId],
+        getMy: (page: number, size: number) => ["qna", "my", page, size],
+        getByUser: (userId: number, page: number, size: number) => ["qna", "user", userId, page, size],
     }
 }

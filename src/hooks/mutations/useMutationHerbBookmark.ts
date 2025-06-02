@@ -1,6 +1,6 @@
 import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../config/keys";
-import { createHerbBookmark, deleteHerbBookmark } from "../../service/bookmark";
+import { createHerbBookmark, deleteHerbBookmark } from "../../service/bookmark.service";
 import { AxiosError } from "axios";
 import { showToast } from "../../components/toast/CustomToast";
 import { handleError } from "../../config/error";
