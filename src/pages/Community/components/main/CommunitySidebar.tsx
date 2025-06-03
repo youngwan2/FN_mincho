@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Category } from "../../../types/post.types"
-import useResize from "../../../hooks/useResize"
+import { Category } from "@/types/post.types"
+import useResize from "@/hooks/useResize"
 import { IoListOutline } from "react-icons/io5"
 import CommunityMobileSidebar from "./CommunityMobileSidebar"
 import CommunityDesktopSidebar from "./CommunityDesktopSidebar"

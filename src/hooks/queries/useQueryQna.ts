@@ -1,38 +1,28 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../config/keys";
 import { getQnaList, getQnaById, getMyQnaList, getUserQnaList } from "../../service/qna.service";
 
 /** QnA 전체 정보(무한 스크롤) */
-export const useQnaListGetQuery = (size: number) => {
+export const useQnaListGetQuery = (page: number, size: number) => {
     const {
-        status,
         data,
-        error,
         isError,
         isLoading,
-        isFetchingNextPage,
-        fetchNextPage,
-        hasNextPage
-    } = useInfiniteQuery({
+    } = useQuery({
         queryKey: queryKeys.qna.getAll(0, size),
-        queryFn: ({ pageParam }) => getQnaList(pageParam, size),
-        initialPageParam: 0,
-        getNextPageParam: (lastData: any) => lastData?.nextPage ?? undefined
+        queryFn: () => getQnaList(page, size),
     });
 
-    const flattedData = data?.pages ? data.pages.map((page) => page.qnas || page.qnaList || page.content).flat() : [];
-    const totalCount: number = data?.pages ? data.pages[0].totalCount || data.pages[0].totalElements || 0 : 0;
+    console.log("QnA 전체 정보", data);
+    const qnas = data?.qnas || [];
+    const totalCount = data?.totalCount || 0;
+
 
     return {
-        status,
-        qnas: flattedData,
+        qnas,
         totalCount,
-        error,
         isError,
         isLoading,
-        isFetchingNextPage,
-        fetchNextPage,
-        hasNextPage,
     };
 };
 

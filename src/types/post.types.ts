@@ -37,6 +37,7 @@ export interface Post {
     isMine?: boolean;
     viewCount: number;
     likeCount: number;
+    newPost: boolean;
 };
 
 // 포스트 상세

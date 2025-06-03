@@ -6,7 +6,7 @@ import { useDeletePostMutation } from "@/hooks/mutations/useMutationPost";
 import { Link, useNavigate, useParams } from "react-router";
 
 import Skeleton from 'react-loading-skeleton'
-import Editor from "@/pages/CommunityEditor/components/Editor";
+import Editor from "@/components/editor/Editor";
 import CommunityComment from "./comment/CommunityComment";
 import { CommentSkeleton, UserActionSkeleton } from "./skeleton/Skeleton";
 

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FaShareAlt } from "react-icons/fa";
-import { BiX } from 'react-icons/bi'
 import {
     FaFacebookSquare,
     FaLink,

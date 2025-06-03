@@ -1,8 +1,9 @@
 import { Link } from "react-router"
-import { EmptyItemMessageCard } from "../../../components/card/ErrorMessageCard"
-import { Post, PostFetchState } from "../../../types/post.types"
+import { EmptyItemMessageCard } from "@/components/card/ErrorMessageCard"
+import { Post, PostFetchState } from "@/types/post.types"
 import Skeleton from 'react-loading-skeleton'
 import { getPostCategoryColorByType } from "@/utils/format"
+import { Badge } from "@/components/ui/badge"
 
 interface CommunityPostListProps {
     posts: Post[]
@@ -64,8 +65,19 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                             {/* 타이틀 */}
                             <div className="flex-1">
                                 <Link to={`/community/posts/${post.id}`}>
-                                    <div className="font-medium mb-1 hover:text-[#05D182] cursor-pointer">
-                                        <span className="p-1 px-2 bg-gray-200 rounded-xl mr-2">{post.id}</span> {post.title}
+                                    <div className="font-medium mb-1 hover:text-[#05D182] cursor-pointer flex">
+                                        <span className="p-1 px-2 bg-gray-200 rounded-xl mr-2 text-xl">{post.id}</span>
+                                        <p>{post.title}</p>
+                                        {post.newPost ?
+                                            <Badge className="bg-green-100 text-green-800 text-xl ml-2 animate-pulse" variant="destructive">
+                                                새글
+                                            </Badge>
+                                            : null}
+                                        {post.isMine ?
+                                            <Badge className="bg-green-100 text-green-800 text-xl ml-2 animate-pulse" variant="destructive">
+                                                내글
+                                            </Badge>
+                                            : null}
                                     </div>
                                     <div className="flex text-xl text-gray-500 md:pl-15 pl-1 md:mt-0 mt-3">
                                         <div className="mr-3">{post.nickname || '익명'}</div>

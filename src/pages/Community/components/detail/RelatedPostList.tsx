@@ -6,6 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import { Post } from "@/types/post.types";
 import { FaRegEye, FaRegThumbsUp } from "react-icons/fa6";
 import { getPostCategoryColorByType } from "@/utils/format";
+import { Badge } from "@/components/ui/badge";
 
 const size = 25;
 export default function RelatedPostList() {
@@ -73,7 +74,7 @@ export default function RelatedPostList() {
                         >
                             <div className="flex flex-row items-center justify-between mb-2">
                                 <div className="flex items-center gap-4">
-                                    <span className={"text-gary-700 font-semibold text-xl p-1 px-1.5 rounded-md " + getPostCategoryColorByType(post.category.type)}>
+                                    <span className={"text-white text-xl p-1 px-1.5 rounded-md " + getPostCategoryColorByType(post.category.type)}>
                                         {post.category?.name ?? '카테고리'}
                                     </span>
 
@@ -81,7 +82,10 @@ export default function RelatedPostList() {
                                         href={`/community/posts/${post.id}`}
                                         className={" text-gray-800 py-1 hover:underline text-2xl "}
                                     >
-                                        {post.title ?? '제목 없음'}
+                                        {post.title ?? '제목 없음'}{post.newPost ?
+                                            <Badge className="bg-green-100 text-green-800 text-xl ml-2 animate-pulse" variant="destructive">
+                                                새글
+                                            </Badge> : null}
                                     </a>
                                     <span className="text-xl text-gray-400 ml-2">by {post.author?.nickname ?? post.nickname ?? '익명'}</span>
                                 </div>
@@ -100,6 +104,6 @@ export default function RelatedPostList() {
             </div>
             {totalCount > size && <Pagination perPage={size} onPageChange={onPageChange} totalPage={Math.ceil(totalCount / size)} />}
 
-        </div>
+        </div >
     )
 }

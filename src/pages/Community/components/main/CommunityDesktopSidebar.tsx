@@ -1,4 +1,4 @@
-import { Category } from "../../../types/post.types"
+import { Category } from "../../../../types/post.types"
 
 interface CommunityDesktopSidebarProps {
     mobile: boolean

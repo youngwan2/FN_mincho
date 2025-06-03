@@ -9,12 +9,13 @@ import MypageHeader from "./components/MypageHeader"
 import MypageProfile from "./components/MypageProfile";
 import MypageSettings from "./components/MypageSettings";
 import { getToken } from "../../utils/storage";
+import useAuth from "@/hooks/useAuth";
 
 
 
 export default function Mypage() {
-
-    const { profileInfo, isError: isProfileError, isLoading: isProfileLoading } = useProfileGetQuery();
+    const isAuth = useAuth();
+    const { profileInfo, isError: isProfileError, isLoading: isProfileLoading } = useProfileGetQuery(isAuth);
     const { stats, isLoading } = useUserStatsGetQuery();
     const navigate = useNavigate()
 

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
-import PrimaryButton from "../../../components/button/PrimaryButton";
-import { Post, PostFetchState, PostStatistics } from "../../../types/post.types";
+import PrimaryButton from "@/components/button/PrimaryButton";
+import { Post, PostFetchState, PostStatistics } from "@/types/post.types";
 import CommunityPostList from "./CommunityPostList";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 
 
 interface CommunityPostProps {

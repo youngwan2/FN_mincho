@@ -11,9 +11,10 @@ const OAuthSuccessPage = () => {
         if (accessToken) {
             setToken(accessToken) // 토큰 저장
             navigate("/"); // 홈 또는 원하는 페이지로 이동
+
             setTimeout(() => {
                 location.reload(); // 페이지 새로고침   
-            }, 2000)
+            }, 1000)
 
         } else {
             // 에러 처리

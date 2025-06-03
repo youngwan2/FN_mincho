@@ -1,6 +1,7 @@
-import { useCreatePostMutation, useUpdatePostMutation } from '../../../hooks/mutations/useMutationPost'
+import { useCreatePostMutation, useUpdatePostMutation } from '../../hooks/mutations/useMutationPost'
 import { useNavigate } from 'react-router'
 import { useEffect, useState } from 'react'
+import useAuth from '@/hooks/useAuth'
 
 import StarterKit from '@tiptap/starter-kit'
 import Highlight from '@tiptap/extension-highlight'
@@ -8,10 +9,11 @@ import TextAlign from '@tiptap/extension-text-align'
 import ImageResize from 'tiptap-extension-resize-image';
 import { useEditor, EditorContent } from '@tiptap/react'
 
-import { CategoryType, PostDetail, PostRequest } from '../../../types/post.types'
+import { CategoryType, PostDetail, PostRequest } from '../../types/post.types'
 import EditorMenuBar from './EditorMenuBar'
 import EditorContentHeader from './EditorHeader'
-import { useAuth } from '../../../store/loginState'
+
+import { postCategories } from '@/config/categories'
 
 
 interface EditorProps {
@@ -21,7 +23,7 @@ interface EditorProps {
 
 export default function Editor({ post, formType }: EditorProps) {
 
-    const { isLogin } = useAuth();
+    const isAuth = useAuth();
 
     const [title, setTitle] = useState(post?.title ?? "");
     const [contents, setContents] = useState(post?.contents ?? "");
@@ -54,6 +56,9 @@ export default function Editor({ post, formType }: EditorProps) {
 
     // 게시글 등록
     function handleSubmit() {
+        if (isAuth === false) {
+            alert("로그인이 필요한 서비스입니다.");
+        }
         if (!category) {
             alert("카테고리를 선택해주세요");
             return;
@@ -94,7 +99,7 @@ export default function Editor({ post, formType }: EditorProps) {
     return (
         <section className='w-full h-full '>
             {/* 컨텐츠 헤더 */}
-            {formType !== 'detail' ? <EditorContentHeader title={title} category={category} setTitle={setTitle} setCategory={setCategory} />
+            {formType !== 'detail' ? <EditorContentHeader title={title} category={category} postCategories={postCategories} setTitle={setTitle} setCategory={setCategory} />
                 : <h2 className='md:text-5xl text-4xl border-b border-gray-100 pb-5 mt-8 font-bold'>
                     {post?.title}
                 </h2>

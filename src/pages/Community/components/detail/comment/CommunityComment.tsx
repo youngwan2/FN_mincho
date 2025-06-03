@@ -5,12 +5,12 @@ import CommentSubmitForm from "./CommentSubmitForm";
 import CommentDropdown from "./CommentDropdown";
 import CommentEditForm from "./CommentEditForm";
 
-import { Comment, CommentCreateRequest, CommentUpdateRequest } from "../../../../types/comment.types";
-import { useCreateCommentMutation, useDeleteCommentMutation, useUpdateCommentMutation } from "../../../../hooks/mutations/useMutationComment";
+import { Comment, CommentCreateRequest, CommentUpdateRequest } from "../../../../../types/comment.types";
+import { useCreateCommentMutation, useDeleteCommentMutation, useUpdateCommentMutation } from "../../../../../hooks/mutations/useMutationComment";
 import { FormEvent, useRef, useState } from "react";
 
 import { toast } from "react-toastify";
-import CustomTimeAgo from "../../../../components/vender/timeago/CustomTimeAgo";
+import CustomTimeAgo from "../../../../../components/vender/timeago/CustomTimeAgo";
 
 interface CommunityCommentProps {
   postId: number

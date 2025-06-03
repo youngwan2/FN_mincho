@@ -1,5 +1,5 @@
-import DetailPost from "./components/DetailPost";
-import RelatedPostList from "./components/RelatedPostList";
+import DetailPost from "./components/detail/DetailPost";
+import RelatedPostList from "./components/detail/RelatedPostList";
 
 export default function CommunityDetailPage() {
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import CommunityHeader from "./components/CommunityHeader";
-import CommunitySidebar from "./components/CommunitySidebar";
-import CommunityPost from "./components/CommunityPost";
-import CommunityBody from "./components/CommunityBody";
+import CommunityHeader from "./components/main/CommunityHeader";
+import CommunitySidebar from "./components/main/CommunitySidebar";
+import CommunityPost from "./components/main/CommunityPost";
+import CommunityBody from "./components/main/CommunityBody";
 import Pagination from "../../components/pagination/Pagination";
 import { usePostsGetQuery, usePostStatisticsGetQuery } from "../../hooks/queries/useQueryPosts";
 import { PostFetchState, PostStatistics } from "../../types/post.types";

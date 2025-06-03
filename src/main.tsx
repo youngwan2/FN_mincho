@@ -21,13 +21,15 @@ import FindPasswordPage from './pages/FindPassword/page';
 import HerbPage from './pages/Herb/page';
 import HerbDetailPage from './pages/HerbDetail/page';
 import Mypage from './pages/Mypage/page';
-import CommunityPage from './pages/Community/page';
+import CommunityPage from './pages/Community/main-page';
 import ErrorMessageCard from './components/card/ErrorMessageCard';
-import CommunityDetailPage from './pages/CommunityDetail/page';
-import CommunityEditorPage from './pages/CommunityEditor/page';
+import CommunityDetailPage from './pages/Community/detail-page';
+import CommunityEditorPage from './pages/Community/editor-page';
 import HerbRecommendPage from './pages/HerbRecommend/page';
 import OAuthSuccessPage from './pages/OAuthSuccess/page';
 import UserInfoPage from './pages/UserInfo/page';
+import PageNotFoundCard from './components/card/PageNotFoundCard';
+import QnAPage from './pages/Qna/main-page';
 
 
 const queryClient = new QueryClient({
@@ -44,7 +46,6 @@ createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <Routes>
-
           <Route path='/' element={<RootLayout />} errorElement={<ErrorMessageCard />}>
             <Route index element={<HomePage />} />
             <Route path='/auth/oauth-success' element={<OAuthSuccessPage />} ></Route>
@@ -53,8 +54,9 @@ createRoot(document.getElementById('root')!).render(
             <Route path="chat/herbs-recommend" element={<HerbRecommendPage />}></Route>
             <Route path="users/me" element={<Mypage />} />
             <Route path="community">
-              <Route index element={<CommunityPage />} />
-              <Route path='write' element={<CommunityEditorPage />} />
+              <Route path='posts' element={<CommunityPage />} />
+              <Route path='post/write' element={<CommunityEditorPage />} />
+              <Route path='qna' element={<QnAPage />} />
             </Route>
             <Route path='community/posts/:postId' element={<CommunityDetailPage />} />
             <Route path='users/:userId' element={<UserInfoPage />} />
@@ -65,8 +67,9 @@ createRoot(document.getElementById('root')!).render(
             <Route path="signup" element={<RegisterPage />} />
             <Route path="find-password" element={<FindPasswordPage />} />
           </Route>
-
+          <Route path='*' element={<PageNotFoundCard />}></Route>
         </Routes>
+
       </QueryClientProvider>
     </BrowserRouter>
   </StrictMode>

@@ -1,6 +1,6 @@
 import { FormEventHandler, useState } from 'react'
-import plant from '../../../assets/plant.png'
-import { Category } from '../../../types/post.types'
+import plant from '@/assets/plant.png'
+import { Category } from '@/types/post.types'
 
 interface CommunityHeaderProps {
     onSearch: FormEventHandler<HTMLFormElement>
