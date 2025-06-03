@@ -3,14 +3,17 @@ import { type Profile } from "../../../types/user.types"
 import DropdownMenu from "./DropdownMenu";
 import { useProfileGetQuery } from "../../../hooks/queries/useQueryProfile";
 import noProfile from '../../../assets/noImage.png'
+import useAuth from "@/hooks/useAuth";
 
 export default function Profile() {
+
+    const isAuth = useAuth()
 
     const dropdownRef = useRef<HTMLDivElement>(null)
     const [isToggle, setIsToggle] = useState(false)
 
 
-    const { profileInfo } = useProfileGetQuery()
+    const { profileInfo } = useProfileGetQuery(isAuth)
 
 
     function handleDropdown() {

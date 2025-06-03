@@ -1,6 +1,6 @@
 import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { deleteNotification, updateMarkAsRead } from "../../service/notification";
+import { deleteNotification, updateMarkAsRead } from "../../service/notification.service";
 import { showToast } from "../../components/toast/CustomToast";
 import { queryKeys } from "../../config/keys";
 import { handleError } from "../../config/error";

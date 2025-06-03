@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getLoginStatus } from '../service/user';
+import { getLoginStatus } from '../service/user.service';
 
 export default function useAuth() {
 

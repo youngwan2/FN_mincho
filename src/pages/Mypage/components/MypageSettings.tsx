@@ -7,7 +7,7 @@ import MypagePasswordResetModal from "./MypagePasswordResetModal";
 
 
 import { UpdatePasswordRequest } from "../../../types/auth.types";
-import { logout } from "../../../service/auth";
+import { logout } from "../../../service/auth.service";
 
 
 interface MypageSettingProps {

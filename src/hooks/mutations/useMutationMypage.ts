@@ -1,13 +1,14 @@
 import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query";
-import { updatePassword, updateProfile } from "../../service/user";
+import { updatePassword } from "../../service/user.service";
 import { Profile } from "../../types/user.types";
 import { queryKeys } from "../../config/keys";
 import { AxiosError } from "axios";
 import { handleError } from "../../config/error";
 import { useNavigate } from "react-router";
-import { deleteUser, logout } from "../../service/auth";
+import { deleteUser, logout } from "../../service/auth.service";
 import { showToast } from "../../components/toast/CustomToast";
 import { UpdatePasswordRequest } from "../../types/auth.types";
+import { updateProfile } from "@/service/profile.service";
 
 
 // 프로필 수정

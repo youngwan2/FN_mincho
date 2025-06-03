@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getComments, getCommentsByUser } from "../../service/comment"
+import { getComments, getCommentsByUser } from "../../service/comment.service"
 import { GetCommentFetchParams, MypageComment } from "../../types/comment.types"
 
 /** 유저 댓글 조회 */

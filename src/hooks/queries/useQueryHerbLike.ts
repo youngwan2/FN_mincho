@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getCountHerbLike } from "../../service/herb-like"
+import { getCountHerbLike } from "../../service/herb-like.service"
 import { HerbLikeMetadata } from "../../types/like.types"
 
 
@@ -12,7 +12,7 @@ export function useCountHerbLikeGetQuery(herbId: number) {
         queryFn: () => getCountHerbLike(herbId)
     })
 
-    const herbLikeMetadata: HerbLikeMetadata = data ??  { count: 0, isLiked: false }
+    const herbLikeMetadata: HerbLikeMetadata = data ?? { count: 0, isLiked: false }
     return { herbLikeMetadata, isLoading, isError, status }
 }
 

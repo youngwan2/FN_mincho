@@ -3,7 +3,7 @@ import StepIndicator from './components/StepIndicator';
 import StepEmailInput from './components/StepEmailInput';
 import StepVerification from './components/StepVerification';
 import StepSuccess from './components/StepSuccess';
-import { sendVerificationCode, verificationCodeCheck } from '../../service/auth';
+import { sendVerificationCode, verificationCodeCheck } from '../../service/auth.service';
 import { Link } from 'react-router';
 import Logo from '../../components/icon/Logo';
 

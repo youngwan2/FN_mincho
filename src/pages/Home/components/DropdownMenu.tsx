@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router"
 import { CiUser } from "react-icons/ci";
 import { IoMdLogOut } from "react-icons/io";
-import { logout } from "../../../service/auth";
+import { logout } from "../../../service/auth.service";
 
 
 interface DropdownMenuProps {

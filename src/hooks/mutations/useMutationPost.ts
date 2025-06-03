@@ -1,7 +1,7 @@
 import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../config/keys";
 import { toast } from "react-toastify";
-import { createPost, deletePost, updatePost } from "../../service/post";
+import { createPost, deletePost, updatePost } from "../../service/post.service";
 import { PostRequest } from "../../types/post.types";
 import { AxiosError } from "axios";
 import { handleError } from "../../config/error";

@@ -1,6 +1,6 @@
 import { UseMutationResult, useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../config/keys";
-import { createComment, deleteComment, updateComment } from "../../service/comment";
+import { createComment, deleteComment, updateComment } from "../../service/comment.service";
 import { toast } from "react-toastify";
 import { CommentCreateRequest, CommentUpdateRequest } from "../../types/comment.types";
 import { AxiosError } from "axios";

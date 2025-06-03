@@ -8,6 +8,10 @@ export interface UserState {
 
 }
 
+export interface UserAuthState {
+  isLogin: boolean
+  setLoginState: (isLogin: boolean) => void
+}
 
 
 

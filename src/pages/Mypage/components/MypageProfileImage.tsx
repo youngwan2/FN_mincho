@@ -1,8 +1,8 @@
 import { FormEvent, useRef, useState } from "react";
 import noImage from '../../../assets/noImage.png'
 import { showToast } from "../../../components/toast/CustomToast";
-import { updateProfileImage } from "../../../service/user";
 import { FaCheckCircle, FaTrash } from "react-icons/fa";
+import { updateProfileImage } from "@/service/profile.service";
 
 interface MypageProfileImageProps {
     profileImage?: string;

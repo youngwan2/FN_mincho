@@ -13,8 +13,8 @@ import { UseMutateFunction } from "@tanstack/react-query";
 export default function MypageProfileForm({ profileInfo, onFormToggle, profileMutate }: MypageProfileFormProps) {
 
     const [newProfileInfo, setNewProfileInfo] = useState({
-        nickname: '',
-        introduction: '',
+        nickname: profileInfo.nickname ?? '',
+        introduction: profileInfo.introduction ?? '',
     })
 
     const [formErrors, setFormErrors] = useState({

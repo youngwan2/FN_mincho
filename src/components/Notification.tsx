@@ -12,11 +12,14 @@ import { IoClose, IoLeafOutline } from "react-icons/io5"
 import { FaRegComment, FaRegBell } from "react-icons/fa"
 import { MdOutlineArticle, MdOutlineNotificationsActive } from "react-icons/md"
 import { FiBell } from "react-icons/fi"
-
+import useAuth from "@/hooks/useAuth"
 
 
 const SIZE = 10
 export default function Notification() {
+
+  const isAuth = useAuth()
+
   const { ref, inView } = useInView()
 
   const [page, _] = useState(0)
@@ -27,7 +30,7 @@ export default function Notification() {
   }
 
 
-  const { fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, totalCount, notifications, isError } = useNotificationGetQuery(page, SIZE);
+  const { fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, totalCount, notifications, isError } = useNotificationGetQuery(isAuth, page, SIZE);
   const { isAllRead } = useNotificationReadStatusGetQuery();
 
   const { mutate: markAsReadMutate } = useMarkAsReadMutation();

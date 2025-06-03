@@ -1,12 +1,12 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { queryKeys } from "../../config/keys"
-import { getNotifications, getUnreadNotification } from "../../service/notification"
+import { getNotifications, getUnreadNotification } from "../../service/notification.service"
 import { Notification, NotificationReadStatus } from "../../types/notification.types"
 
 
 
 /** 알림 목록 조회 */
-export const useNotificationGetQuery = (page: number, size: number) => {
+export const useNotificationGetQuery = (isAuth: boolean, page: number, size: number) => {
     const {
         status,
         data,
@@ -25,7 +25,8 @@ export const useNotificationGetQuery = (page: number, size: number) => {
         // getPreviousPageParam: (firstData: any) => firstData.previousId ?? undefined,
         getNextPageParam: (lastData: any) => {
             return lastData.nextPage ?? undefined
-        }
+        },
+        enabled: isAuth // 로그인 상태일 때만 쿼리 실행
     })
 
 
