@@ -3,9 +3,9 @@ import instance from "../config/axios"
 import axios, { AxiosError } from "axios"
 
 /** QnA 전체 조회 */
-export const getQnaListFetch = async (page: number, size: number) => {
+export const getQnaListFetch = async (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string }) => {
     try {
-        const response = await axios.get(apiRoutes.qna.getAll(page, size));
+        const response = await axios.get(apiRoutes.qna.getAll(page, size, condition));
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError) {

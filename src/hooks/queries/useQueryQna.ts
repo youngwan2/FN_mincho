@@ -1,19 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../config/keys";
 import { getQnaList, getQnaById, getMyQnaList, getUserQnaList } from "../../service/qna.service";
+import { QnaDetail } from "@/types/qna.types";
 
-/** QnA 전체 정보(무한 스크롤) */
-export const useQnaListGetQuery = (page: number, size: number) => {
+/** QnA 전체 정보*/
+export const useQnaListGetQuery = (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string }) => {
     const {
         data,
         isError,
         isLoading,
     } = useQuery({
-        queryKey: queryKeys.qna.getAll(0, size),
-        queryFn: () => getQnaList(page, size),
+        queryKey: queryKeys.qna.getAll(page, size, condition),
+        queryFn: () => getQnaList(page, size, condition),
     });
 
-    console.log("QnA 전체 정보", data);
     const qnas = data?.qnas || [];
     const totalCount = data?.totalCount || 0;
 
@@ -32,7 +32,7 @@ export const useQnaDetailGetQuery = (qnaId: number) => {
         queryKey: queryKeys.qna.getById(qnaId),
         queryFn: () => getQnaById(qnaId)
     });
-    const qna = data?.data ?? {};
+    const qna: QnaDetail = data?.data ?? {};
     return { qna, isLoading: isPending, isError, status };
 };
 

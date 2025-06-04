@@ -1,4 +1,4 @@
-import { TbDatabaseOff, TbHome, TbSearch, TbPlant2, TbSparkles } from 'react-icons/tb';
+import { TbDatabaseOff, TbHome, TbSearch, TbPlant2, TbSparkles, TbQuestionMark } from 'react-icons/tb';
 import { Link } from 'react-router';
 
 export default function PageNotFoundCard() {
@@ -80,6 +80,10 @@ export default function PageNotFoundCard() {
                     <Link to={"/chat/herbs-recommend"} className="p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/40 hover:bg-white/80 transition-all duration-300 cursor-pointer">
                         <TbSearch className="text-emerald-500 mx-auto mb-2" size={24} />
                         <p className="text-xl font-medium text-gray-700">추천약초</p>
+                    </Link>
+                    <Link to={"/community/qnas"} className="p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/40 hover:bg-white/80 transition-all duration-300 cursor-pointer">
+                        <TbQuestionMark className="text-emerald-500 mx-auto mb-2" size={24} />
+                        <p className="text-xl font-medium text-gray-700">QnA</p>
                     </Link>
                 </div>
             </div>
