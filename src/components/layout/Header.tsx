@@ -44,7 +44,7 @@ export default function Header() {
                                                 <Link to="/community/posts" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
                                                     커뮤니티
                                                 </Link>
-                                                <Link to="/community/qna" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
+                                                <Link to="/community/qnas" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
                                                     Q&A
                                                 </Link>
                                             </div>

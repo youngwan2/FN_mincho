@@ -98,15 +98,38 @@ export const apiRoutes = {
         update: (commentId: number) => baseUrl + `/community/comments/${commentId}`,
         delete: (commentId: number) => baseUrl + `/community/comments/${commentId}`,
         byUser: (page: number, size: number) => baseUrl + `/users/me/comments?page=${page}&size=${size}`
-    },
-    qna: {
-        getAll: (page: number, size: number) => baseUrl + `/community/qna?page=${page}&size=${size}`,
+    }, qna: {
+        getAll: (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string }) => {
+            let url = baseUrl + `/community/qna?page=${page}&size=${size}`;
+
+            if (condition) {
+                if (condition.keyword) url += `&keyword=${encodeURIComponent(condition.keyword)}`;
+                if (condition.searchType) url += `&searchType=${encodeURIComponent(condition.searchType)}`;
+                if (condition.fromDate) url += `&fromDate=${condition.fromDate}`;
+                if (condition.toDate) url += `&toDate=${condition.toDate}`;
+            }
+
+            return url;
+        },
         getById: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
         create: () => baseUrl + '/community/qna',
         update: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
         delete: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
         byUser: (page: number, size: number) => baseUrl + `/users/me/qna?page=${page}&size=${size}`,
-        byUserId: (userId: number, page: number, size: number) => baseUrl + `/users/${userId}/qnas?page=${page}&size=${size}`
+        byUserId: (userId: number, page: number, size: number) => baseUrl + `/users/${userId}/qna?page=${page}&size=${size}`, images: {
+            upload: (qnaId: number) => baseUrl + `/community/qna/${qnaId}/images`,
+            delete: (qnaId: number, imageId: number) => baseUrl + `/community/qna/${qnaId}/images/${imageId}`
+        },
+        answer: {
+            create: (qnaId: number) => baseUrl + `/community/qna/${qnaId}/answers`,
+            update: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}`,
+            delete: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}`,
+            adopt: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}/adopt`,
+            images: {
+                upload: (qnaId: number, answerId: number) => baseUrl + `/community/qna/${qnaId}/answers/${answerId}/images`,
+                delete: (answerId: number, imageId: number) => baseUrl + `/community/qna/answers/${answerId}/images/${imageId}`
+            }
+        }
     },
     statistics: {
         getAll: () => baseUrl + '/users/me/stats',
@@ -119,6 +142,11 @@ export const apiRoutes = {
         markAsRead: (id: number) => baseUrl + `/notifications/read/${id}`,
         deleteAllByIsRead: () => baseUrl + `/notifications/reads`,
         getUnreadStatus: () => baseUrl + `/notifications/unread-status`
+    },
+    answerReaction: {
+        add: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}/reactions`,
+        cancel: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}/reactions`,
+        count: (answerId: number, type: string) => baseUrl + `/community/qna/answers/${answerId}/reactions/count?type=${type}`
     },
     s3: {
         upload: (url: string) => url

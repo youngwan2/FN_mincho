@@ -60,12 +60,19 @@ export const queryKeys = {
     notifications: {
         getAll: (page: number, size: number) => ["notifications", page, size],
         update: () => ["notifications"],
-    },
-    // QnA
+    },    // QnA
     qna: {
-        getAll: (page: number, size: number) => ["qna", "list", page, size],
+        getAll: (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string }) =>
+            ["qna", "list", page, size, condition],
         getById: (qnaId: number) => ["qna", "detail", qnaId],
         getMy: (page: number, size: number) => ["qna", "my", page, size],
         getByUser: (userId: number, page: number, size: number) => ["qna", "user", userId, page, size],
+        answer: {
+            getById: (answerId: number) => ["qna", "answer", answerId],
+        }
+    },
+    // 답변 반응 (좋아요/싫어요)
+    answerReaction: {
+        getCount: (answerId: number, type: string) => ["answerReaction", "count", answerId, type],
     }
 }

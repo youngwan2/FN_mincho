@@ -9,8 +9,8 @@ import {
 } from "../apis/qna.api";
 
 /** QnA 전체 조회 */
-export const getQnaList = async (page: number, size: number) => {
-    return await getQnaListFetch(page, size);
+export const getQnaList = async (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string }) => {
+    return await getQnaListFetch(page, size, condition);
 }
 
 /** QnA 단일 조회 */
@@ -19,8 +19,8 @@ export const getQnaById = async (qnaId: number) => {
 }
 
 /** QnA 생성 */
-export const createQna = async (qnaData: any) => {
-    return await createQnaFetch(qnaData);
+export const createQna = async (formData: FormData) => {
+    return await createQnaFetch(formData);
 }
 
 /** QnA 수정 */

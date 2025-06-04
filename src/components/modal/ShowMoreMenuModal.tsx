@@ -29,7 +29,7 @@ export default function ShowMoreMenuModal() {
                         <MenuItem
                             icon={<FiHelpCircle className='h-6 w-6' />}
                             label="Q&A"
-                            onClick={() => handleItemClick('/community/qna')}
+                            onClick={() => handleItemClick('/community/qnas')}
                         />
                         <MenuItem
                             icon={<FiMail className='h-6 w-6' />}

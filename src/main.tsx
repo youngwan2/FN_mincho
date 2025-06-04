@@ -30,6 +30,7 @@ import OAuthSuccessPage from './pages/OAuthSuccess/page';
 import UserInfoPage from './pages/UserInfo/page';
 import PageNotFoundCard from './components/card/PageNotFoundCard';
 import QnAPage from './pages/Qna/main-page';
+import QnaDetailPage from './pages/Qna/detail-page';
 
 
 const queryClient = new QueryClient({
@@ -56,9 +57,10 @@ createRoot(document.getElementById('root')!).render(
             <Route path="community">
               <Route path='posts' element={<CommunityPage />} />
               <Route path='post/write' element={<CommunityEditorPage />} />
-              <Route path='qna' element={<QnAPage />} />
+              <Route path='qnas' element={<QnAPage />} />
             </Route>
             <Route path='community/posts/:postId' element={<CommunityDetailPage />} />
+            <Route path='community/qnas/:qnaId' element={<QnaDetailPage />} />
             <Route path='users/:userId' element={<UserInfoPage />} />
           </Route>
 

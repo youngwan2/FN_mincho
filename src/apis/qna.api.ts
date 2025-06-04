@@ -3,9 +3,9 @@ import instance from "../config/axios"
 import axios, { AxiosError } from "axios"
 
 /** QnA 전체 조회 */
-export const getQnaListFetch = async (page: number, size: number) => {
+export const getQnaListFetch = async (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string }) => {
     try {
-        const response = await axios.get(apiRoutes.qna.getAll(page, size));
+        const response = await axios.get(apiRoutes.qna.getAll(page, size, condition));
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError) {
@@ -17,7 +17,7 @@ export const getQnaListFetch = async (page: number, size: number) => {
 /** QnA 단일 조회 */
 export const getQnaByIdFetch = async (qnaId: number) => {
     try {
-        const response = await axios.get(apiRoutes.qna.getById(qnaId));
+        const response = await instance.get(apiRoutes.qna.getById(qnaId));
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError) {
@@ -27,9 +27,13 @@ export const getQnaByIdFetch = async (qnaId: number) => {
 }
 
 /** QnA 생성 */
-export const createQnaFetch = async (qnaData: any) => {
+export const createQnaFetch = async (formData: FormData) => {
     try {
-        const response = await instance.post(apiRoutes.qna.create(), qnaData);
+        const response = await instance.post(apiRoutes.qna.create(), formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError) {
@@ -41,7 +45,11 @@ export const createQnaFetch = async (qnaData: any) => {
 /** QnA 수정 */
 export const updateQnaFetch = async (qnaId: number, qnaData: any) => {
     try {
-        const response = await instance.patch(apiRoutes.qna.update(qnaId), qnaData);
+        const response = await instance.patch(apiRoutes.qna.update(qnaId), qnaData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError) {

@@ -1,0 +1,148 @@
+import { useState } from 'react';
+import { AnswerDetail } from '@/types/qna.types';
+import { format, parseISO } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import { FiEdit, FiEdit2, FiTrash2 } from 'react-icons/fi';
+import { useDeleteAnswerMutation } from '@/hooks/mutations/useMutationAnswer';
+import ReactionButtons from './ReactionButtons';
+import QnaEditor from '@/components/editor/QnaEditor';
+import QnaImageGallery from './QnaImageGallery';
+
+interface AnswerItemProps {
+    answer: AnswerDetail;
+    onAdoptAnswer?: (answerId: number) => void;
+    isQuestionMine: boolean;
+    isAnswerAdopted: boolean;
+    qnaId: string;  // QnaID 추가 (답변 수정에 필요)
+}
+
+
+export default function AnswerItem({
+    answer,
+    onAdoptAnswer,
+    isQuestionMine,
+    isAnswerAdopted,
+    qnaId
+}: AnswerItemProps) {
+    const [isEditing, setIsEditing] = useState(false);
+    const deleteAnswerMutation = useDeleteAnswerMutation(Number(qnaId));
+
+    const formatDate = (dateString: string) => {
+        if (!dateString) return '';
+        try {
+            return format(parseISO(dateString), 'yyyy.MM.dd HH:mm', { locale: ko });
+        } catch (error) {
+            return dateString;
+        }
+    };
+
+    // 답변 삭제 처리
+    const handleDelete = () => {
+        if (confirm('정말 이 답변을 삭제하시겠습니까?')) {
+            deleteAnswerMutation.mutate(answer.id);
+        }
+    };
+
+    // 답변 수정 완료 처리
+    const handleEditSuccess = () => {
+        setIsEditing(false);
+    };
+
+    return (
+        <div className={`flex gap-4 p-6 rounded-lg border mb-4 ${answer.isAdopted ? 'border-green-500 bg-green-50' : 'bg-white'}`}>
+            <ReactionButtons answerId={answer.id} isMine={answer.isMine} />
+            <div className='w-full'>
+                {/* 답변 채택 마크 */}
+                {answer.isAdopted && (
+                    <div className="flex items-center mb-3">
+                        <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            채택된 답변
+                        </span>
+                    </div>
+                )}
+
+                <div className="flex justify-between mb-3">
+                    {/* 작성자 정보 */}
+                    <div className="flex items-center">
+                        <div className="w-8 h-8 bg-gray-300 rounded-full overflow-hidden mr-3">
+                            {/* 프로필 이미지가 있다면 여기에 표시 */}
+                        </div>
+                        <div>
+                            <p className="font-medium">{answer.writer}</p>
+                            <p className="text-xl text-gray-500">{formatDate(answer.createdAt)}</p>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        {/* 본인 답변일 경우 수정/삭제 버튼 */}
+                        {answer.isMine && !isEditing && (
+                            <>
+                                <button
+                                    onClick={() => setIsEditing(true)}
+                                    className="px-2 py-1 border bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md text-2xl flex items-center gap-1"
+                                    title="수정하기"
+                                >
+                                    수정
+                                </button>
+                                <button
+                                    onClick={handleDelete}
+                                    className="px-2 py-1 border border-red-100 bg-red-50 hover:bg-red-100 text-red-600 rounded-md text-2xl flex items-center gap-1"
+                                    title="삭제하기"
+                                >
+                                    삭제
+                                </button>
+                            </>
+                        )}
+
+                        {/* 채택 버튼 (질문 작성자이고, 아직 채택되지 않은 경우만 표시) */}
+                        {isQuestionMine && !isAnswerAdopted && !answer.isAdopted && onAdoptAnswer && (
+                            <button
+                                onClick={() => onAdoptAnswer(answer.id)}
+                                className="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md text-sm"
+                            >
+                                답변 채택하기
+                            </button>
+                        )}
+                    </div>
+                </div>
+
+                {/* 답변 내용 - 수정 모드가 아닐 때만 표시 */}
+                {!isEditing ? (
+                    <>
+                        <div className="prose max-w-none mb-4">
+                            <div dangerouslySetInnerHTML={{ __html: answer.content }} />
+                        </div>                    {/* 이미지 첨부 - QnaImageGallery 활용 */}
+                        {answer.images && answer.images.length > 0 && (
+                            <QnaImageGallery
+                                images={answer.images}
+                                title="답변 이미지"
+                                className="my-4"
+                            />
+                        )}
+
+                        {/* 반응 버튼 (좋아요/싫어요) */}
+                        {/* <ReactionButtons
+                        answerId={answer.id}
+                        userReacted={answer.userReaction as any}
+                        isMine={answer.isMine}
+                    /> */}
+                    </>
+                ) : (                    /* 답변 수정 폼 */
+                    <div className="mt-4">
+                        <div className="bg-gray-50 p-3 mb-4 rounded-md">
+                            <p className="text-2xl text-gray-800 font-semibold flex items-center gap-2"><FiEdit /> 답변 수정하기</p>
+                        </div>                        <QnaEditor
+                            qnaId={Number(qnaId)}
+                            answerId={answer.id}
+                            type="edit-answer"
+                            initContents={answer.content}
+                            initImageUrls={answer.images || []} // 기존 이미지 URL 목록 전달
+                            onSubmitSuccess={handleEditSuccess}
+                            onClose={() => setIsEditing(false)}
+                        />
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
