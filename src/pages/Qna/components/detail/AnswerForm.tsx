@@ -1,99 +1,57 @@
-import React, { useState } from 'react';
-import { FiSend } from 'react-icons/fi';
+import QnaEditor from '@/components/editor/QnaEditor';
+import { useState } from 'react';
+import { FiEdit } from 'react-icons/fi';
 
 interface AnswerFormProps {
     qnaId: string;
-    onSubmit: (content: string, images: string[]) => void;
-    isPending: boolean;
 }
 
-const AnswerForm: React.FC<AnswerFormProps> = ({ qnaId, onSubmit, isPending }) => {
-    const [content, setContent] = useState('');
-    const [images, setImages] = useState<string[]>([]);
+const AnswerForm: React.FC<AnswerFormProps> = ({ qnaId }) => {
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isEditorVisible, setIsEditorVisible] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!content.trim()) return;
-
-        onSubmit(content, images);
-        setContent('');
-        setImages([]);
+    // 답변 제출 성공 시 호출될 콜백
+    const handleSubmitSuccess = () => {
+        setIsSubmitted(true);
+        setIsEditorVisible(false); // 제출 후 에디터 닫기
+        setTimeout(() => setIsSubmitted(false), 5000);  // 5초 후 메시지 숨김
     };
 
-    // 이미지 업로드 핸들러 (실제 구현은 프로젝트 이미지 업로드 방식에 맞게 수정 필요)
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // 실제 프로젝트의 이미지 업로드 로직으로 구현
-        // 예시: 이미지 URL을 images 배열에 추가하는 형태
-        const files = e.target.files;
-        if (!files) return;
-
-        // 예시 코드 (실제 구현은 파일 업로드 로직에 따라 수정 필요)
-        // const newImages = Array.from(files).map(file => URL.createObjectURL(file));
-        // setImages(prev => [...prev, ...newImages]);
-    };
+    const handleEditorClose = () => {
+        setIsEditorVisible(false);
+        setIsSubmitted(false); // 에디터 닫을 때 제출 상태 초기화
+    }
 
     return (
-        <div className="mt-8 bg-white rounded-lg border p-6">
+        <div className="mt-12 bg-white">
             <h3 className="text-2xl font-bold mb-4">답변 작성</h3>
 
-            <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <textarea
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                        placeholder="답변을 작성해주세요..."
-                        className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[150px]"
-                        disabled={isPending}
-                    />
+            {isSubmitted ? (
+                <div className="bg-green-50 border border-green-200 p-4 rounded-md text-green-800 mb-4">
+                    답변이 성공적으로 등록되었습니다.
                 </div>
+            ) : null}
 
-                {/* 이미지 첨부 영역 */}
-                <div className="mb-4">
-                    <input
-                        type="file"
-                        id="images"
-                        multiple
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                        disabled={isPending}
-                    />
-                    <label
-                        htmlFor="images"
-                        className="inline-block px-4 py-2 border rounded cursor-pointer hover:bg-gray-100"
-                    >
-                        이미지 첨부
-                    </label>
+            {/* 답변 작성 버튼 */}
+            {!isEditorVisible && (
+                <button
+                    onClick={() => setIsEditorVisible(true)}
+                    className="flex items-center justify-center gap-2 w-full py-4 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-50 mb-6"
+                >
+                    <FiEdit size={20} />
+                    <span className="font-medium">답변 작성하기</span>
+                </button>
+            )}
 
-                    {images.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-2">
-                            {images.map((img, idx) => (
-                                <div key={idx} className="relative w-16 h-16">
-                                    <img src={img} alt="첨부" className="w-16 h-16 object-cover rounded" />
-                                    <button
-                                        type="button"
-                                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center"
-                                        onClick={() => setImages(prev => prev.filter((_, i) => i !== idx))}
-                                    >
-                                        ×
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-
-                <div className="flex justify-end">
-                    <button
-                        type="submit"
-                        className="bg-blue-500 text-white px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:bg-gray-400"
-                        disabled={isPending || !content.trim()}
-                    >
-                        <FiSend />
-                        답변 등록
-                    </button>
-                </div>
-            </form>
+            {/* 답변 작성 폼 */}
+            {isEditorVisible && (
+                <QnaEditor
+                    qnaId={Number(qnaId)}
+                    type="answer"
+                    onClose={handleEditorClose}
+                    onSubmitSuccess={handleSubmitSuccess}
+                />
+            )}
         </div>
     );
 };

@@ -20,7 +20,7 @@ const activeStyle = "bg-gray-300"
 
 
 
-export default function EditorMenuBar({ editor }: { editor: EditorType | null }) {
+export default function EditorMenuBar({ editor, type }: { editor: EditorType | null, type?: "qna" | "post" }) {
     if (!editor) return null
     const fileInputRef = useRef<HTMLInputElement | null>(null)
 
@@ -174,26 +174,32 @@ export default function EditorMenuBar({ editor }: { editor: EditorType | null })
             >
                 <CiTextAlignJustify />
             </button>
-            <div>
-                <button
-                    onClick={() => fileInputRef.current?.click()}
-                    className={buttonStyle}
-                    title="이미지 업로드"
-                >
-                    <MdImage />
-                </button>
-                <input
-                    multiple={true}
-                    type="file"
-                    accept="image/*"
-                    ref={fileInputRef}
-                    onChange={handleImageUpload}
-                    className="hidden"
-                />
-            </div>
+            <div className="w-px h-6 bg-gray-300 mx-2" />
 
-            {/* 이미지 */}
-            <button className="flex items-center justify-center flex-col hover:bg-gray-200 p-1 px-2" onClick={addImage}><IoImage /> <span className="text-lg">URL</span> </button>
+            {/* 이미지 업로드1 */}
+            {type !== "qna" && (
+                <div>
+                    <button
+                        onClick={() => fileInputRef.current?.click()}
+                        className={buttonStyle}
+                        title="이미지 업로드"
+                    >
+                        <MdImage />
+                    </button>
+                    <input
+                        multiple={true}
+                        type="file"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        onChange={handleImageUpload}
+                        className="hidden"
+                    />
+                </div>
+            )}
+
+            {/* 이미지 업로드2 */}
+            {type !== "qna" && <button className="flex items-center justify-center flex-col hover:bg-gray-200 p-1 px-2" onClick={addImage}><IoImage /> <span className="text-lg">URL</span> </button>}
+
 
             <BubbleMenu tippyOptions={{ duration: 100 }} editor={editor}>
                 <div className='border border-gray-300 bg-white shadow-md'>

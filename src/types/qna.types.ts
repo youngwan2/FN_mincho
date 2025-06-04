@@ -52,6 +52,7 @@ export interface QnaDetail {
     isPrivate: boolean;
     isMine: boolean;
     writer: string;
+    avatarUrl?: string; // 작성자의 아바타 URL
     imageUrls: string[];
     answers: AnswerDetail[];
     createdAt: string; // ISO 날짜 문자열

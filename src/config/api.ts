@@ -116,12 +116,19 @@ export const apiRoutes = {
         update: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
         delete: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
         byUser: (page: number, size: number) => baseUrl + `/users/me/qna?page=${page}&size=${size}`,
-        byUserId: (userId: number, page: number, size: number) => baseUrl + `/users/${userId}/qna?page=${page}&size=${size}`,
+        byUserId: (userId: number, page: number, size: number) => baseUrl + `/users/${userId}/qna?page=${page}&size=${size}`, images: {
+            upload: (qnaId: number) => baseUrl + `/community/qna/${qnaId}/images`,
+            delete: (qnaId: number, imageId: number) => baseUrl + `/community/qna/${qnaId}/images/${imageId}`
+        },
         answer: {
             create: (qnaId: number) => baseUrl + `/community/qna/${qnaId}/answers`,
             update: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}`,
             delete: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}`,
-            adopt: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}/adopt`
+            adopt: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}/adopt`,
+            images: {
+                upload: (qnaId: number, answerId: number) => baseUrl + `/community/qna/${qnaId}/answers/${answerId}/images`,
+                delete: (answerId: number, imageId: number) => baseUrl + `/community/qna/answers/${answerId}/images/${imageId}`
+            }
         }
     },
     statistics: {

@@ -7,7 +7,7 @@ import { handleError } from "../../config/error";
 export function useCreateQnaMutation() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (qnaData: any) => createQna(qnaData),
+        mutationFn: (formData: FormData) => createQna(formData),
         onSuccess: () => {
             toast.success("QnA가 등록되었습니다.");
             queryClient.invalidateQueries({ queryKey: ["qna"] });

@@ -30,9 +30,10 @@ export const useQnaListGetQuery = (page: number, size: number, condition?: { key
 export const useQnaDetailGetQuery = (qnaId: number) => {
     const { data, isPending, isError, status } = useQuery({
         queryKey: queryKeys.qna.getById(qnaId),
-        queryFn: () => getQnaById(qnaId)
+        queryFn: () => getQnaById(qnaId),
+        enabled: !!qnaId,
     });
-    const qna: QnaDetail = data?.data ?? {};
+    const qna: QnaDetail = data || {};
     return { qna, isLoading: isPending, isError, status };
 };
 

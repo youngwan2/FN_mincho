@@ -6,8 +6,8 @@ import {
 } from "../apis/answer.api";
 
 // 답변 생성
-export const createAnswer = async (qnaId: number, answerData: any) => {
-    return await createAnswerFetch(qnaId, answerData);
+export const createAnswer = async (qnaId: number, formData: FormData) => {
+    return await createAnswerFetch(qnaId, formData);
 };
 
 // 답변 수정

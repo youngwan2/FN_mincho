@@ -7,9 +7,10 @@ import { useAddAnswerReactionMutation } from '@/hooks/mutations/useMutationAnswe
 interface ReactionButtonsProps {
     answerId: number;
     userReacted?: AnswerReactionType | null;
+    isMine: boolean;  // 본인이 작성한 답변인지 여부
 }
 
-const ReactionButtons: React.FC<ReactionButtonsProps> = ({ answerId, userReacted = null }) => {
+const ReactionButtons: React.FC<ReactionButtonsProps> = ({ answerId, userReacted = null, isMine }) => {
     const [currentReaction, setCurrentReaction] = useState<AnswerReactionType | null>(userReacted);
 
     // 좋아요/싫어요 개수 조회
@@ -21,6 +22,12 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ answerId, userReacted
 
     // 반응 토글 처리
     const handleReaction = (type: AnswerReactionType) => {
+        // 본인이 작성한 답변인 경우 경고창 표시
+        if (isMine) {
+            alert('본인이 작성한 답변에는 좋아요/싫어요를 평가할 수 없습니다.');
+            return;
+        }
+
         // 같은 버튼을 다시 누르면 취소, 다른 버튼을 누르면 새로운 반응으로 변경
         const newReaction = currentReaction === type ? null : type;
         setCurrentReaction(newReaction);
@@ -28,19 +35,20 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ answerId, userReacted
         // 서버에 반응 요청
         addReactionMutation.mutate({
             answerId,
-            requestDTO: { type }
+            requestDTO: { reactionType: type }
         });
     };
 
     return (
-        <div className="flex items-center gap-4 mt-2">
+        <div className="flex items-center gap-4 mt-2 flex-col sticky top-0 h-40">
             <button
                 className={`flex items-center gap-1 py-1 px-2 rounded-md ${currentReaction === 'LIKE'
                     ? 'bg-blue-100 text-blue-700'
-                    : 'bg-gray-100 hover:bg-gray-200'
+                    : isMine ? 'bg-gray-100 cursor-not-allowed opacity-60' : 'bg-gray-100 hover:bg-gray-200'
                     }`}
                 onClick={() => handleReaction('LIKE')}
-                disabled={isLikeLoading || addReactionMutation.isPending}
+                disabled={isLikeLoading || addReactionMutation.isPending || isMine}
+                title={isMine ? '본인이 작성한 답변에는 평가할 수 없습니다' : '이 답변 추천하기'}
             >
                 <FiThumbsUp size={16} />
                 <span>{likeCount}</span>
@@ -49,10 +57,11 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ answerId, userReacted
             <button
                 className={`flex items-center gap-1 py-1 px-2 rounded-md ${currentReaction === 'DISLIKE'
                     ? 'bg-red-100 text-red-700'
-                    : 'bg-gray-100 hover:bg-gray-200'
+                    : isMine ? 'bg-gray-100 cursor-not-allowed opacity-60' : 'bg-gray-100 hover:bg-gray-200'
                     }`}
                 onClick={() => handleReaction('DISLIKE')}
-                disabled={isDislikeLoading || addReactionMutation.isPending}
+                disabled={isDislikeLoading || addReactionMutation.isPending || isMine}
+                title={isMine ? '본인이 작성한 답변에는 평가할 수 없습니다' : '이 답변 비추천하기'}
             >
                 <FiThumbsDown size={16} />
                 <span>{dislikeCount}</span>

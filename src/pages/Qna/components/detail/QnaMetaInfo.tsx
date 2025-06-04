@@ -21,8 +21,7 @@ export default function QnaMetaInfo({ writer, createdAt, views }: QnaMetaInfoPro
 
     return (
         <div className="flex justify-between items-center mb-6 pb-4 border-b">
-            <div className="flex items-center">
-                <div className="mr-3 w-10 h-10 bg-gray-300 rounded-full overflow-hidden"></div>
+            <div className="flex items-center" >
                 <div>
                     <p className="font-medium">{writer}</p>
                     <p className="text-xl text-gray-500">{formatDate(createdAt)}</p>

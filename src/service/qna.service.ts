@@ -19,8 +19,8 @@ export const getQnaById = async (qnaId: number) => {
 }
 
 /** QnA 생성 */
-export const createQna = async (qnaData: any) => {
-    return await createQnaFetch(qnaData);
+export const createQna = async (formData: FormData) => {
+    return await createQnaFetch(formData);
 }
 
 /** QnA 수정 */

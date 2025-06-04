@@ -1,7 +1,7 @@
 export type AnswerReactionType = 'LIKE' | 'DISLIKE';
 
 export interface AnswerReactionRequest {
-    type: AnswerReactionType;
+    reactionType: AnswerReactionType;
 }
 
 export interface AnswerReactionResponse {

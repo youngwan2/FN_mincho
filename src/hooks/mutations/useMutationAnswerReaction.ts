@@ -9,14 +9,13 @@ export function useAddAnswerReactionMutation() {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({ answerId, requestDTO }: { answerId: number; requestDTO: AnswerReactionRequest }) =>
-            addAnswerReaction(answerId, requestDTO),
-        onSuccess: (_, variables) => {
-            const reactionType = variables.requestDTO.type === 'LIKE' ? '좋아요' : '싫어요';
-            toast.success(`답변에 ${reactionType} 반응이 추가되었습니다.`);
-            queryClient.invalidateQueries({
-                queryKey: ["answerReaction"]
-            });
-        },
+            addAnswerReaction(answerId, requestDTO), onSuccess: (_, variables) => {
+                const reactionType = variables.requestDTO.reactionType === 'LIKE' ? '좋아요' : '싫어요';
+                toast.success(`답변에 ${reactionType} 반응이 추가되었습니다.`);
+                queryClient.invalidateQueries({
+                    queryKey: ["answerReaction"]
+                });
+            },
         onError: handleError,
     });
 }
