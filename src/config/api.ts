@@ -99,7 +99,7 @@ export const apiRoutes = {
         delete: (commentId: number) => baseUrl + `/community/comments/${commentId}`,
         byUser: (page: number, size: number) => baseUrl + `/users/me/comments?page=${page}&size=${size}`
     }, qna: {
-        getAll: (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string }) => {
+        getAll: (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number }) => {
             let url = baseUrl + `/community/qna?page=${page}&size=${size}`;
 
             if (condition) {
@@ -107,6 +107,7 @@ export const apiRoutes = {
                 if (condition.searchType) url += `&searchType=${encodeURIComponent(condition.searchType)}`;
                 if (condition.fromDate) url += `&fromDate=${condition.fromDate}`;
                 if (condition.toDate) url += `&toDate=${condition.toDate}`;
+                if (condition.categoryId) url += `&categoryId=${condition.categoryId}`;
             }
 
             return url;
@@ -115,6 +116,7 @@ export const apiRoutes = {
         create: () => baseUrl + '/community/qna',
         update: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
         delete: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
+        getCategories: () => baseUrl + '/community/qna/categories',
         byUser: (page: number, size: number) => baseUrl + `/users/me/qna?page=${page}&size=${size}`,
         byUserId: (userId: number, page: number, size: number) => baseUrl + `/users/${userId}/qna?page=${page}&size=${size}`, images: {
             upload: (qnaId: number) => baseUrl + `/community/qna/${qnaId}/images`,

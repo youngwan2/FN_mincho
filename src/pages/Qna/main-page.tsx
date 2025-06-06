@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
-import { useQnaListGetQuery } from '../../hooks/queries/useQueryQna';
+import { useQnaListGetQuery, useQnaCategoriesQuery } from '../../hooks/queries/useQueryQna';
 import { QnaSearchCondition } from '../../types/qna.types';
 import { useQnaPageStore } from '@/store/store';
 import {
@@ -10,6 +10,7 @@ import {
     ErrorComponent,
     Pagination
 } from './components/main';
+import { FaLeaf } from 'react-icons/fa6';
 
 
 const PAGE_SIZE = 10;
@@ -21,32 +22,50 @@ export default function QnAPage() {
     const [searchType, setSearchType] = useState('');
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
+    const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);    // 카테고리 목록 조회
+    const { categories: fetchedCategories = [], isLoading: categoriesLoading } = useQnaCategoriesQuery();
 
-    // 초기값 설정
-    useEffect(() => {
-        if (searchCondition.keyword) {
-            setSearchQuery(searchCondition.keyword);
-        }
-        if (searchCondition.searchType) {
-            setSearchType(searchCondition.searchType);
-        }
-        if (searchCondition.fromDate) {
-            setFromDate(searchCondition.fromDate);
-        }
-        if (searchCondition.toDate) {
-            setToDate(searchCondition.toDate);
-        }
-    }, []);
+
+    const sectionRef = useRef<HTMLElement>(null);
+
+    // 서버에서 가져온 카테고리와 '전체' 옵션을 결합
+    const allCategories = [{ id: 0, name: '전체', description: '모든 카테고리' }, ...fetchedCategories];
+
+    // 카테고리 이름 목록 추출 (카테고리가 로딩 중일 때는 '전체' 옵션만 제공)
+    const categoryNames = categoriesLoading ? ['전체'] : allCategories.map(cat => cat.name);// 초기값 설정
+
 
     // QnA 목록 조회
     const { qnas = [], totalCount = 0, isLoading, isError } = useQnaListGetQuery(page, PAGE_SIZE, searchCondition);
 
-    // 카테고리 목록 (추후 API로 대체 가능)
-    const categories = ['전체', '약초', '레시피', '효능', '부작용', '재배', '기타'];    // 검색 필터링 - 서버에서 처리하도록 수정
     const filteredItems = qnas || [];
 
     // 전체 페이지 수 계산
     const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+
+    // 카테고리 변경 처리
+    const handleCategoryChange = (categoryName: string) => {
+        setSelectedCategory(categoryName);
+        const category = allCategories.find(cat => cat.name === categoryName);
+
+        // categoryId를 설정하고 검색 조건 업데이트
+        if (category) {
+            const categoryId = category.id === 0 ? null : category.id;
+            setSelectedCategoryId(categoryId);
+
+            // 카테고리 변경 시 바로 검색 실행
+            const newCondition: QnaSearchCondition = { ...searchCondition };
+
+            if (categoryId !== null) {
+                newCondition.categoryId = categoryId;
+            } else {
+                delete newCondition.categoryId;
+            }
+
+            setSearchCondition(newCondition);
+            setPage(0); // 카테고리 변경 시 첫 페이지로 이동
+        }
+    };
 
     // 검색 실행
     const handleSearch = () => {
@@ -62,6 +81,11 @@ export default function QnAPage() {
         if (fromDate) newCondition.fromDate = fromDate;
         if (toDate) newCondition.toDate = toDate;
 
+        // 카테고리 필터링
+        if (selectedCategoryId !== null) {
+            newCondition.categoryId = selectedCategoryId;
+        }
+
         setSearchCondition(newCondition);
         setPage(0); // 검색 시 첫 페이지로 이동
     };
@@ -72,6 +96,8 @@ export default function QnAPage() {
         setSearchType('');
         setFromDate('');
         setToDate('');
+        setSelectedCategory('전체');
+        setSelectedCategoryId(null);
         setSearchCondition({});
         setPage(0);
     };
@@ -88,16 +114,60 @@ export default function QnAPage() {
 
     // 새 QnA 작성 페이지로 이동
     const handleCreateQna = () => {
-        navigate('/community/qnas/create');
+        navigate('/community/qna/write');
     };
 
+
+    useEffect(() => {
+        if (searchCondition.keyword) {
+            setSearchQuery(searchCondition.keyword);
+        }
+        if (searchCondition.searchType) {
+            setSearchType(searchCondition.searchType);
+        }
+        if (searchCondition.fromDate) {
+            setFromDate(searchCondition.fromDate);
+        }
+        if (searchCondition.toDate) {
+            setToDate(searchCondition.toDate);
+        }
+    }, [searchCondition]);
+
+    // 카테고리 정보가 로드된 후에만 카테고리 ID로 이름 찾기
+    useEffect(() => {
+        if (searchCondition.categoryId && searchCondition.categoryId > 0 && !categoriesLoading && allCategories.length > 0) {
+            setSelectedCategoryId(searchCondition.categoryId);
+            // 카테고리 이름 설정
+            const category = allCategories.find(cat => cat.id === searchCondition.categoryId);
+            if (category) {
+                setSelectedCategory(category.name);
+            }
+        }
+    }, [searchCondition.categoryId, allCategories, categoriesLoading]);
+
+
+    useEffect(() => {
+        // 페이지가 로드될 때 스크롤을 최상단으로 이동
+        if (sectionRef.current) {
+            sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [])
+
     return (
-        <div className="min-h-screen p-6">
-            <div className="max-w-[1200px] w-full mx-auto">
+        <section ref={sectionRef} className="min-h-screen p-6">
+            <div className="max-w-[1200px] w-full mx-auto ">
                 {/* 헤더 */}
-                <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Q&A 게시판</h1>
-                    <p className="text-gray-600">약초 관련 질문과 답변을 공유하는 공간입니다.</p>
+                <div className='flex justify-between items-center mb-12'>
+                    <div >
+                        <h1 className="flex text-4xl gap-3 font-bold text-gray-900 mb-2"><FaLeaf color='green' /> Q&A 게시판</h1>
+                        <p className="text-gray-600">약초 관련 질문과 답변을 공유하는 공간입니다.</p>
+                    </div>
+                    <button
+                        onClick={handleCreateQna}
+                        className="bg-primary-green text-white px-12 py-4 rounded-2xl shadow-[inset_-2px_-2px_3px_rgba(0,0,0,0.3)] hover:bg-hover-primary-green transition-colors flex items-center gap-2 cursor-pointer"
+                    >
+                        나도 질문하기
+                    </button>
                 </div>
                 <SearchBar
                     searchQuery={searchQuery}
@@ -110,14 +180,14 @@ export default function QnAPage() {
                     setToDate={setToDate}
                     handleSearch={handleSearch}
                     handleResetSearch={handleResetSearch}
-                    handleCreateQna={handleCreateQna}
                 />
 
                 {/* 카테고리 필터 */}
                 <CategoryFilter
-                    categories={categories}
+                    categories={categoryNames}
                     selectedCategory={selectedCategory}
-                    setSelectedCategory={setSelectedCategory}
+                    setSelectedCategory={handleCategoryChange}
+                    isLoading={categoriesLoading}
                 />
 
                 {/* 에러 상태 처리 */}
@@ -125,7 +195,7 @@ export default function QnAPage() {
 
                 {/* Q&A 목록 */}
                 <QnaList
-                    isLoading={isLoading}
+                    isLoading={isLoading || categoriesLoading}
                     items={filteredItems}
                     handleQnaClick={handleQnaClick}
                     handleCreateQna={handleCreateQna}
@@ -140,6 +210,6 @@ export default function QnAPage() {
                     />
                 )}
             </div>
-        </div>
+        </section>
     );
 };

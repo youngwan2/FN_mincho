@@ -29,14 +29,17 @@ export interface QnaSearchCondition {
     searchType?: string;
     fromDate?: string;
     toDate?: string;
+    categoryId?: number;
 }
 
 export interface AnswerDetail {
     id: number;
     content: string;
+    writerId: number; // 작성자의 ID
     writer: string;
     isAdopted: boolean;
     isMine: boolean;
+    avatarUrl?: string; // 작성자의 아바타 URL
     createdAt: string; // ISO 날짜 문자열
     images: string[];
     userReaction?: string | null; // 사용자가 해당 답변에 남긴 반응 (LIKE/DISLIKE/null)
@@ -57,4 +60,11 @@ export interface QnaDetail {
     answers: AnswerDetail[];
     createdAt: string; // ISO 날짜 문자열
     view: number;
+}
+
+// QnA 카테고리 타입 정의
+export interface QnaCategory {
+    id: number;
+    name: string;
+    description: string;
 }

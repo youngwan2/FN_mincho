@@ -21,7 +21,7 @@ export default function QnaListItem({ item, onClick }: QnaListItemProps) {
 
     return (
         <div
-            className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-3xl border hover:shadow-xs transition-shadow cursor-pointer"
             onClick={() => onClick(item.id)}
         >
             <div className="p-6">
@@ -61,12 +61,12 @@ export default function QnaListItem({ item, onClick }: QnaListItemProps) {
 
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1">
-                            <FiEye size={16} />
-                            <span>{item.view || 0}</span>
+                            <FiEye size={20} />
+                            <span className='text-2xl'>{item.view || 0}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <FiMessageCircle size={16} />
-                            <span>{item.answers && item.answers[0].id ? item.answers.length : 0}</span>
+                            <FiMessageCircle size={20} />
+                            <span className='text-2xl'>{item.answers && item.answers[0].id ? item.answers.length : 0}</span>
                         </div>
                     </div>
                 </div>

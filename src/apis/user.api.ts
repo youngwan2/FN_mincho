@@ -56,7 +56,7 @@ export const getLoginStatusFetch = async () => {
 
         // 200~299: 성공
         if (response.status > 199 && response.status < 300) {
-            return response.data
+            return response.data;
         } else {
             return false;
         }

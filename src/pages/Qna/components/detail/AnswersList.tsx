@@ -18,9 +18,9 @@ export default function AnswersList({
 }: AnswersListProps) {
     // 채택된 답변을 먼저 보여줌
     const sortedAnswers = [...answers].sort((a, b) => {
-        if (a.isAdopted) return -1;
+        if (a.isAdopted) return -1; // 채택된 답변이 먼저 오도록
         if (b.isAdopted) return 1;
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(); // 그 외(a와 b 생성일 동일한 경우 포함)에는 최신순으로 정렬
     });
 
     return (

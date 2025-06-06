@@ -1,8 +1,6 @@
-"use client"
-
 import * as React from "react"
 import type { Editor } from "@tiptap/react"
-import { useWindowSize } from "@/hooks/use-window-size"
+import { useWindowSize } from "@/hooks/useWindowSize"
 
 /**
  * Interface defining required parameters for the cursor visibility hook

@@ -20,7 +20,7 @@ export default function QnaMetaInfo({ writer, createdAt, views }: QnaMetaInfoPro
     };
 
     return (
-        <div className="flex justify-between items-center mb-6 pb-4 border-b">
+        <div className="flex justify-between items-center mb-6 pb-4 ">
             <div className="flex items-center" >
                 <div>
                     <p className="font-medium">{writer}</p>

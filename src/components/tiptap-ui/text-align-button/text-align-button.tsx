@@ -2,7 +2,7 @@ import * as React from "react"
 import { type Editor, type ChainedCommands } from "@tiptap/react"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/useTiptapEditor"
 
 // --- Icons ---
 import { AlignCenterIcon } from "@/components/tiptap-icons/align-center-icon"
@@ -75,7 +75,7 @@ export function checkTextAlignExtension(editor: Editor | null): boolean {
   if (!hasExtension) {
     console.warn(
       "TextAlign extension is not available. " +
-        "Make sure it is included in your editor configuration."
+      "Make sure it is included in your editor configuration."
     )
   }
 

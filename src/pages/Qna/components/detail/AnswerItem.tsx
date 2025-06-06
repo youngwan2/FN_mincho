@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { AnswerDetail } from '@/types/qna.types';
 import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import { FiEdit, FiEdit2, FiTrash2 } from 'react-icons/fi';
+import { FiEdit } from 'react-icons/fi';
+import noProfileImage from '@/assets/noImage.png';
 import { useDeleteAnswerMutation } from '@/hooks/mutations/useMutationAnswer';
 import ReactionButtons from './ReactionButtons';
 import QnaEditor from '@/components/editor/QnaEditor';
-import QnaImageGallery from './QnaImageGallery';
+import QnaContent from './QnaContent';
+import { Link } from 'react-router';
 
 interface AnswerItemProps {
     answer: AnswerDetail;
@@ -49,13 +51,17 @@ export default function AnswerItem({
     };
 
     return (
-        <div className={`flex gap-4 p-6 rounded-lg border mb-4 ${answer.isAdopted ? 'border-green-500 bg-green-50' : 'bg-white'}`}>
+        <div className={`flex gap-4 p-6 rounded-lg border mb-4 ${answer.isAdopted ? 'border-green-600 bg-green-50 border-2' : 'bg-white'}`}>
+
+            {/* 좋아요/싫어요  */}
             <ReactionButtons answerId={answer.id} isMine={answer.isMine} />
+
+            {/* 유저 답변 정보 */}
             <div className='w-full'>
                 {/* 답변 채택 마크 */}
                 {answer.isAdopted && (
                     <div className="flex items-center mb-3">
-                        <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xl font-semibold">
                             채택된 답변
                         </span>
                     </div>
@@ -63,15 +69,17 @@ export default function AnswerItem({
 
                 <div className="flex justify-between mb-3">
                     {/* 작성자 정보 */}
-                    <div className="flex items-center">
-                        <div className="w-8 h-8 bg-gray-300 rounded-full overflow-hidden mr-3">
+                    <Link to={`/users/${answer.writerId}`} className="flex items-center">
+                        <div className="w-16 h-16 bg-gray-300 rounded-full overflow-hidden mr-3">
                             {/* 프로필 이미지가 있다면 여기에 표시 */}
+                            <img
+                                src={answer.avatarUrl || noProfileImage} alt='답변자 프로필 이미지' onError={(e) => e.currentTarget.src = noProfileImage} />
                         </div>
                         <div>
-                            <p className="font-medium">{answer.writer}</p>
+                            <p className="font-medium">{answer.writer || '익명'}</p>
                             <p className="text-xl text-gray-500">{formatDate(answer.createdAt)}</p>
                         </div>
-                    </div>
+                    </Link>
 
                     <div className="flex items-center gap-2">
                         {/* 본인 답변일 경우 수정/삭제 버튼 */}
@@ -109,29 +117,17 @@ export default function AnswerItem({
                 {/* 답변 내용 - 수정 모드가 아닐 때만 표시 */}
                 {!isEditing ? (
                     <>
-                        <div className="prose max-w-none mb-4">
-                            <div dangerouslySetInnerHTML={{ __html: answer.content }} />
-                        </div>                    {/* 이미지 첨부 - QnaImageGallery 활용 */}
-                        {answer.images && answer.images.length > 0 && (
-                            <QnaImageGallery
-                                images={answer.images}
-                                title="답변 이미지"
-                                className="my-4"
-                            />
-                        )}
-
-                        {/* 반응 버튼 (좋아요/싫어요) */}
-                        {/* <ReactionButtons
-                        answerId={answer.id}
-                        userReacted={answer.userReaction as any}
-                        isMine={answer.isMine}
-                    /> */}
+                        {/* QnaContent로 콘텐츠와 이미지 표시 */}
+                        <QnaContent content={answer.content} imageUrls={answer.images || []} />
                     </>
-                ) : (                    /* 답변 수정 폼 */
+                ) : (
+
+                    /* 답변 수정 폼 */
                     <div className="mt-4">
                         <div className="bg-gray-50 p-3 mb-4 rounded-md">
                             <p className="text-2xl text-gray-800 font-semibold flex items-center gap-2"><FiEdit /> 답변 수정하기</p>
-                        </div>                        <QnaEditor
+                        </div>
+                        <QnaEditor
                             qnaId={Number(qnaId)}
                             answerId={answer.id}
                             type="edit-answer"
