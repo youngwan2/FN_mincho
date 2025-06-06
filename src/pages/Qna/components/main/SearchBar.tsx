@@ -1,4 +1,4 @@
-import { FiSearch, FiPlus, FiCalendar } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 
 interface SearchBarProps {
     searchQuery: string;
