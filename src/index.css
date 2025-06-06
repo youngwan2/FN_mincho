@@ -34,28 +34,69 @@ table {
 }
 
 /* 에디터  */
-.tiptap{
+.tiptap, .tiptap-content{
   padding: 8px;
-  min-height: 500px;
+  min-height: 300px;
   outline: none;
 }
 
+/* 에디터 컨테이너 스타일 */
+.tiptap-editor-container {
+  position: relative;
+  width: 100%;
+}
+
+/* 에디터 내부 컨테이너 스타일 추가 */
+.tiptap-editor-container .ProseMirror {
+  min-height: 120px;
+  padding: 16px;
+}
+
+/* 플레이스홀더 스타일 - ProseMirror 구조 기반 */
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
+}
+
+/* Tiptap 플레이스홀더 스타일 */
+.ProseMirror.is-editor-empty:not(:focus)::before {
+  content: attr(data-placeholder);
+  color: #adb5bd;
+  float: left;
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
+}
+
+/* 빈 단락의 플레이스홀더 */
+.ProseMirror .is-empty::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
 /* 제목 스타일 */
-.tiptap h1 {
+.tiptap h1, .tiptap-content h1 {
   font-size: 32px;     /* Tailwind의 text-2xl */
   font-weight: 700;
   margin-bottom: 0.75rem;
   margin-top: 1.5rem;
 }
 
-.tiptap h2 {
+.tiptap h2, .tiptap-content h2 {
   font-size: 24px;   /* Tailwind의 text-xl */
   font-weight: 600;
   margin-bottom: 0.5rem;
   margin-top: 1.25rem;
 }
 
-.tiptap h3 {
+.tiptap h3, .tiptap-content h3 {
   font-size: 18.72px;  /* Tailwind의 text-lg */
   font-weight: 600;
   margin-bottom: 0.5rem;

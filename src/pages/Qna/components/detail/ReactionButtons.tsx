@@ -3,6 +3,8 @@ import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi';
 import { AnswerReactionType } from '@/types/answer-reaction.types';
 import { useAnswerReactionCountQuery } from '@/hooks/queries/useQueryAnswerReaction';
 import { useAddAnswerReactionMutation } from '@/hooks/mutations/useMutationAnswerReaction';
+import useAuth from '@/hooks/useAuth';
+import { showToast } from '@/components/toast/CustomToast';
 
 interface ReactionButtonsProps {
     answerId: number;
@@ -12,6 +14,7 @@ interface ReactionButtonsProps {
 
 const ReactionButtons: React.FC<ReactionButtonsProps> = ({ answerId, userReacted = null, isMine }) => {
     const [currentReaction, setCurrentReaction] = useState<AnswerReactionType | null>(userReacted);
+    const isLogin = useAuth(); // 로그인 상태 확인
 
     // 좋아요/싫어요 개수 조회
     const { count: likeCount, isLoading: isLikeLoading } = useAnswerReactionCountQuery(answerId, 'LIKE');
@@ -22,9 +25,15 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ answerId, userReacted
 
     // 반응 토글 처리
     const handleReaction = (type: AnswerReactionType) => {
+        // 로그인하지 않은 경우 로그인 안내
+        if (!isLogin) {
+            showToast.warning('로그인 후 이용 가능한 기능입니다.');
+            return;
+        }
+
         // 본인이 작성한 답변인 경우 경고창 표시
         if (isMine) {
-            alert('본인이 작성한 답변에는 좋아요/싫어요를 평가할 수 없습니다.');
+            showToast.warning('본인이 작성한 답변에는 좋아요/싫어요를 평가할 수 없습니다.');
             return;
         }
 
@@ -37,18 +46,26 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ answerId, userReacted
             answerId,
             requestDTO: { reactionType: type }
         });
-    };
-
-    return (
-        <div className="flex items-center gap-4 mt-2 flex-col sticky top-0 h-40">
+    }; return (
+        <div className="flex items-center gap-4 mt-2 flex-col sticky top-0 h-40 w-32">
             <button
                 className={`flex items-center gap-1 py-1 px-2 rounded-md ${currentReaction === 'LIKE'
                     ? 'bg-blue-100 text-blue-700'
-                    : isMine ? 'bg-gray-100 cursor-not-allowed opacity-60' : 'bg-gray-100 hover:bg-gray-200'
+                    : !isLogin
+                        ? 'bg-gray-100 cursor-not-allowed opacity-60'
+                        : isMine
+                            ? 'bg-gray-100 cursor-not-allowed opacity-60'
+                            : 'bg-gray-100 hover:bg-gray-200'
                     }`}
                 onClick={() => handleReaction('LIKE')}
-                disabled={isLikeLoading || addReactionMutation.isPending || isMine}
-                title={isMine ? '본인이 작성한 답변에는 평가할 수 없습니다' : '이 답변 추천하기'}
+                disabled={isLikeLoading || addReactionMutation.isPending || isMine || !isLogin}
+                title={
+                    !isLogin
+                        ? '로그인 후 이용 가능한 기능입니다'
+                        : isMine
+                            ? '본인이 작성한 답변에는 평가할 수 없습니다'
+                            : '이 답변 추천하기'
+                }
             >
                 <FiThumbsUp size={16} />
                 <span>{likeCount}</span>
@@ -57,11 +74,21 @@ const ReactionButtons: React.FC<ReactionButtonsProps> = ({ answerId, userReacted
             <button
                 className={`flex items-center gap-1 py-1 px-2 rounded-md ${currentReaction === 'DISLIKE'
                     ? 'bg-red-100 text-red-700'
-                    : isMine ? 'bg-gray-100 cursor-not-allowed opacity-60' : 'bg-gray-100 hover:bg-gray-200'
+                    : !isLogin
+                        ? 'bg-gray-100 cursor-not-allowed opacity-60'
+                        : isMine
+                            ? 'bg-gray-100 cursor-not-allowed opacity-60'
+                            : 'bg-gray-100 hover:bg-gray-200'
                     }`}
                 onClick={() => handleReaction('DISLIKE')}
-                disabled={isDislikeLoading || addReactionMutation.isPending || isMine}
-                title={isMine ? '본인이 작성한 답변에는 평가할 수 없습니다' : '이 답변 비추천하기'}
+                disabled={isDislikeLoading || addReactionMutation.isPending || isMine || !isLogin}
+                title={
+                    !isLogin
+                        ? '로그인 후 이용 가능한 기능입니다'
+                        : isMine
+                            ? '본인이 작성한 답변에는 평가할 수 없습니다'
+                            : '이 답변 비추천하기'
+                }
             >
                 <FiThumbsDown size={16} />
                 <span>{dislikeCount}</span>

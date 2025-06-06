@@ -55,18 +55,18 @@ export const queryKeys = {
     // 통계
     statistics: {
         getAll: () => ["comments", "herbBookmark", "posts"],
-    },
-    // 알림
+    },    // 알림
     notifications: {
         getAll: (page: number, size: number) => ["notifications", page, size],
         update: () => ["notifications"],
-    },    // QnA
+    },    // QnA    
     qna: {
-        getAll: (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string }) =>
+        getAll: (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number }) =>
             ["qna", "list", page, size, condition],
         getById: (qnaId: number) => ["qna", "detail", qnaId],
         getMy: (page: number, size: number) => ["qna", "my", page, size],
         getByUser: (userId: number, page: number, size: number) => ["qna", "user", userId, page, size],
+        getCategories: () => ["qna", "categories"],
         answer: {
             getById: (answerId: number) => ["qna", "answer", answerId],
         }

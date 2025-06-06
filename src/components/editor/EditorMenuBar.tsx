@@ -89,7 +89,7 @@ export default function EditorMenuBar({ editor, type }: { editor: EditorType | n
     };
 
     return (
-        <div className="w-full border border-gray-200 rounded-md px-3 py-2 mt-8 flex flex-wrap gap-2 items-center bg-white">
+        <div className="w-full border border-gray-200 rounded-md px-3 py-2  flex flex-wrap gap-2 items-center bg-white">
             <button
                 onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
                 className={`${buttonStyle} ${editor.isActive("heading", { level: 1 }) ? activeStyle : ""}`}

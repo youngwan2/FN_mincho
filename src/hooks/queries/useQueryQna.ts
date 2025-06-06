@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../config/keys";
-import { getQnaList, getQnaById, getMyQnaList, getUserQnaList } from "../../service/qna.service";
-import { QnaDetail } from "@/types/qna.types";
+import { getQnaList, getQnaById, getMyQnaList, getUserQnaList, getQnaCategories } from "../../service/qna.service";
+import { QnaCategory, QnaDetail } from "@/types/qna.types";
 
 /** QnA 전체 정보*/
-export const useQnaListGetQuery = (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string }) => {
+export const useQnaListGetQuery = (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number }) => {
     const {
         data,
         isError,
@@ -58,4 +58,61 @@ export const useUserQnaListGetQuery = (userId: number, page: number, size: numbe
     const qnas = data?.qnas || [];
     const totalCount: number = data?.totalCount || 0;
     return { qnas, totalCount, isLoading, isError, status };
+};
+
+/** QnA 카테고리 목록 조회 */
+export const useQnaCategoriesQuery = () => {
+    const { data, isLoading, isError } = useQuery({
+        queryKey: queryKeys.qna.getCategories(),
+        queryFn: () => getQnaCategories(),
+    });
+
+    const categories: QnaCategory[] = data?.success ? data.data : [];
+
+    console.log(categories)
+
+    // 기본 카테고리 (API 실패 시 폴백)
+    const defaultCategories: QnaCategory[] = [
+        {
+            "id": 1,
+            "name": "약초 활용법",
+            "description": "약초의 다양한 활용 방법에 대한 질문"
+        },
+        {
+            "id": 2,
+            "name": "약초 식별",
+            "description": "약초 종류 식별 및 특성에 관한 질문"
+        },
+        {
+            "id": 3,
+            "name": "약초 재배",
+            "description": "약초 재배 방법 및 환경에 관한 질문"
+        },
+        {
+            "id": 4,
+            "name": "약초 효능",
+            "description": "약초의 효능 및 약리적 특성에 관한 질문"
+        },
+        {
+            "id": 5,
+            "name": "약초 레시피",
+            "description": "약초를 활용한 요리, 차, 팅크 등의 레시피 관련 질문"
+        },
+        {
+            "id": 6,
+            "name": "약초 약용",
+            "description": "약초의 약용 활용에 관한 질문"
+        },
+        {
+            "id": 7,
+            "name": "기타",
+            "description": "기타 약초 관련 질문"
+        }
+    ]
+
+    return {
+        categories: categories.length > 0 ? categories : defaultCategories,
+        isLoading,
+        isError
+    };
 };

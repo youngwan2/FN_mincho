@@ -5,7 +5,7 @@ import { isNodeSelection, type Editor } from "@tiptap/react"
 import type { Node } from "@tiptap/pm/model"
 
 // --- Hooks ---
-import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useTiptapEditor } from "@/hooks/useTiptapEditor"
 
 // --- Lib ---
 import {

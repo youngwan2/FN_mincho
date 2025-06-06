@@ -7,12 +7,14 @@ import {
     QnaStatusBadge,
     QnaMetaInfo,
     QnaContent,
-    QnaImageGallery,
     AnswersList,
     AnswerForm
 } from "./components/detail";
+import { useEffect, useRef } from "react";
 
 export default function QnaDetailPage() {
+
+    const sectionRef = useRef<HTMLElement>(null);
     const { qnaId } = useParams<{ qnaId: string }>();
     const navigate = useNavigate();
 
@@ -50,6 +52,14 @@ export default function QnaDetailPage() {
         }
     };
 
+    useEffect(() => {
+        // 페이지가 로드될 때 스크롤을 최상단으로 이동
+        if (sectionRef.current) {
+            sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [])
+
+
     // 로딩 중 표시
     if (isLoading) {
         return (
@@ -84,7 +94,7 @@ export default function QnaDetailPage() {
             </div>
         );
     } return (
-        <div className="min-h-screen p-6">
+        <section ref={sectionRef} className="min-h-screen p-6">
             <div className="max-w-[1200px] w-full mx-auto">
                 {/* 뒤로가기 및 액션 버튼 */}
                 <QnaHeader
@@ -93,14 +103,7 @@ export default function QnaDetailPage() {
                     onDelete={handleDeleteQna}
                 />
 
-                {/* QnA 제목 및 상태 */}
-                <div className="mb-6">
-                    <QnaStatusBadge
-                        isPrivate={qna.isPrivate}
-                        isAnswerAdopted={isAnswerAdopted}
-                    />
-                    <h1 className="text-4xl font-bold text-gray-900 mb-4">{qna.title}</h1>
-                </div>
+
 
                 {/* 작성자 정보 및 조회수 */}
                 <QnaMetaInfo
@@ -109,18 +112,27 @@ export default function QnaDetailPage() {
                     views={qna.view || 0}
                 />
 
+                {/* QnA 제목 및 상태 */}
+                <div className="mb-6">
+                    <QnaStatusBadge
+                        isPrivate={qna.isPrivate}
+                        isAnswerAdopted={isAnswerAdopted}
+                    />
+                    <h1 className="text-5xl font-bold text-gray-900 mb-4">{qna.title}</h1>
+                </div>
+
                 {/* 질문 내용 */}
-                <QnaContent content={qna.content} />                {/* 이미지 첨부 */}
-                <QnaImageGallery
-                    images={qna.imageUrls || []}
-                    title="첨부 이미지"
-                />{/* 구분선 */}
+                <QnaContent content={qna.content} imageUrls={qna.imageUrls || []} />
+
+                {/* 구분선 */}
                 <hr className="my-8" />
 
                 {/* 답변 작성 폼 (상단에 배치) */}
                 <AnswerForm
                     qnaId={qnaId as string}
-                />                {/* 답변 목록 */}
+                />
+
+                {/* 답변 목록 */}
                 <AnswersList
                     answers={qna.answers || []}
                     isQuestionMine={isQuestionMine}
@@ -129,6 +141,6 @@ export default function QnaDetailPage() {
                     qnaId={qnaId as string}
                 />
             </div>
-        </div>
+        </section>
     );
 }

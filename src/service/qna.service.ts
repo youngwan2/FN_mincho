@@ -5,11 +5,12 @@ import {
     updateQnaFetch,
     deleteQnaFetch,
     getMyQnaListFetch,
-    getUserQnaListFetch
+    getUserQnaListFetch,
+    getQnaCategoriesFetch
 } from "../apis/qna.api";
 
 /** QnA 전체 조회 */
-export const getQnaList = async (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string }) => {
+export const getQnaList = async (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number }) => {
     return await getQnaListFetch(page, size, condition);
 }
 
@@ -41,4 +42,9 @@ export const getMyQnaList = async (page: number, size: number) => {
 /** 특정 유저 QnA 목록 조회 */
 export const getUserQnaList = async (userId: number, page: number, size: number) => {
     return await getUserQnaListFetch(userId, page, size);
+}
+
+/** QnA 카테고리 목록 조회 */
+export const getQnaCategories = async () => {
+    return await getQnaCategoriesFetch();
 }
