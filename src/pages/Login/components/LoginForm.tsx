@@ -64,12 +64,12 @@ export default function LoginForm() {
                     <Logo />
                 </Link>
 
-                <div className="flex items-center flex-col justify-center">
+                <div className="flex items-center flex-col justify-center animate-fade-down">
                     <h2 className="text-4xl font-bold">Welcome! MinCho</h2>
                     <p className="mt-2">민간 약초 커뮤니티, 민초에 오신 것을 환영합니다.</p>
                 </div>
 
-                <div className="flex flex-col justify-center items-center mt-[1.8rem] w-full">
+                <div className="flex flex-col justify-center items-center mt-[1.8rem] w-full  animate-fade-down">
 
                     {/* 로그인 폼 */}
                     <form className="mt-8 w-full max-w-[65%] flex items-center flex-col justify-center " onSubmit={handleSubmit}>

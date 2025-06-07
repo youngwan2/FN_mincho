@@ -24,7 +24,7 @@ import Mypage from './pages/Mypage/page';
 import CommunityPage from './pages/Community/main-page';
 import ErrorMessageCard from './components/card/ErrorMessageCard';
 import CommunityDetailPage from './pages/Community/detail-page';
-import CommunityEditorPage from './pages/Community/editor-page';
+import CommunityEditorPage from './pages/Community/write-page';
 import HerbRecommendPage from './pages/HerbRecommend/page';
 import OAuthSuccessPage from './pages/OAuthSuccess/page';
 import UserInfoPage from './pages/UserInfo/page';

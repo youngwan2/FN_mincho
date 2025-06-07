@@ -1,6 +1,6 @@
 import Editor from "../../components/editor/Editor";
 
-export default function CommunityEditorPage() {
+export default function CommunityWritePage() {
     return (
         <section className="min-h-screen w-full">
             <div className="w-full bg-primary-green text-white p-10 rounded-2xl mb-15">

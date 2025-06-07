@@ -4,9 +4,9 @@ import { ToastContainer } from "react-toastify";
 
 export default function AuthLayout() {
     return (
-        <div className="w-full max-w-full h-[100vh] bg-[#05D182] flex items-center justify-center font-prentendard"> 
-            <ToastContainer/>
-            <Outlet/>
+        <div className="w-full max-w-full h-[100vh] bg-[#14c480] flex items-center justify-center font-prentendard">
+            <ToastContainer />
+            <Outlet />
         </div>
     )
 }

@@ -31,8 +31,8 @@ export default function SignupForm() {
             <Link title="사이트 로고, 클릭 시 홈페이지로" className="absolute left-5 top-10" to={"/"}>
                 <Logo />
             </Link>
-            <h2 className="text-3xl font-bold">회원등록</h2>
-            <form className="mt-13 w-full max-w-[70%]" onSubmit={handleSubmit} >
+            <h2 className="text-3xl font-bold  animate-fade-down">회원등록</h2>
+            <form className="mt-13 w-full max-w-[60%]  animate-fade-down" onSubmit={handleSubmit} >
                 {/* 이메일 */}
                 <div>
                     <div className="flex flex-col  w-full">
@@ -131,7 +131,7 @@ export default function SignupForm() {
             </form>
 
             {/* 로그인 안내 링크 */}
-            <div className="mt-8 text-[14px]" >
+            <div className="mt-8 text-[14px]  animate-fade-down" >
                 <span>회원 이신가요?</span>
                 <Link to="/auth/login" className="ml-2 border-b hover:text-[#05D182]">로그인</Link>
             </div>

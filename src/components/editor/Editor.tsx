@@ -14,6 +14,7 @@ import EditorMenuBar from './EditorMenuBar'
 import EditorContentHeader from './EditorHeader'
 
 import { postCategories } from '@/config/categories'
+import Placeholder from '@tiptap/extension-placeholder'
 
 
 interface EditorProps {
@@ -28,6 +29,7 @@ export default function Editor({ post, formType }: EditorProps) {
     const [title, setTitle] = useState(post?.title ?? "");
     const [contents, setContents] = useState(post?.contents ?? "");
     const [category, setCategory] = useState(post?.category.type ?? "");
+    const [tags, setTags] = useState<string[]>([]);
 
 
     const { mutate: createPostMutate, isSuccess: createIsSuccess } = useCreatePostMutation();
@@ -45,6 +47,10 @@ export default function Editor({ post, formType }: EditorProps) {
                 types: ['heading', 'paragraph'],
             }),
             Highlight,
+            Placeholder.configure({
+                placeholder: '내용을 입력해주세요',
+                showOnlyCurrent: true,
+            })
         ],
         content: post?.contents,
         onUpdate: ({ editor }) => {
@@ -68,6 +74,7 @@ export default function Editor({ post, formType }: EditorProps) {
             title,
             contents,
             categoryType: category as CategoryType,
+            tags
         };
 
         if (formType === "update" && post) {
@@ -89,7 +96,7 @@ export default function Editor({ post, formType }: EditorProps) {
 
     useEffect(() => {
         if (createIsSuccess || updateIsSuccess) {
-            navigate("/community");
+            navigate("/community/posts");
         }
     }, [createIsSuccess, updateIsSuccess]);
 
@@ -99,7 +106,7 @@ export default function Editor({ post, formType }: EditorProps) {
     return (
         <section className='w-full h-full '>
             {/* 컨텐츠 헤더 */}
-            {formType !== 'detail' ? <EditorContentHeader title={title} category={category} postCategories={postCategories} setTitle={setTitle} setCategory={setCategory} />
+            {formType !== 'detail' ? <EditorContentHeader tags={tags} title={title} category={category} postCategories={postCategories} setTags={setTags} setTitle={setTitle} setCategory={setCategory} />
                 : <h2 className='md:text-5xl text-4xl border-b border-gray-100 pb-5 mt-8 font-bold'>
                     {post?.title}
                 </h2>
@@ -108,7 +115,7 @@ export default function Editor({ post, formType }: EditorProps) {
             <div>
                 {formType !== 'detail' &&
                     <div className="pb-2 flex justify-between items-center pt-8">
-                        <p>내용</p>
+                        <p className='font-bold'>내용</p>
                         <button
                             onClick={handleSubmit}
                             className="cursor-pointer bg-primary-green text-white px-4 py-1 rounded hover:bg-hover-primary-green"

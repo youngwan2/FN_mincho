@@ -138,29 +138,36 @@ export default function SuggestionBox({ setInput }: { setInput: (text: string) =
   const handleRefresh = () => {
     setSuggestions(getRandomSuggestions(allSuggestions, 5));
   };
-
   return (
     <div className="relative">
-      <div className={` px-0 py-7 w-full border-t border-gray-200 flex gap-2 scrollbar-hide mx-auto relative`}>
-        <div className="p-4 rounded-md w-full">
+      <div className="px-0 py-5 w-full border-t border-gray-200 flex gap-2 scrollbar-hide mx-auto relative bg-gradient-to-b from-white to-gray-50">
+        <div className="p-5 rounded-lg w-full max-w-4xl mx-auto">
           <div className="flex items-center justify-between w-full mb-5">
-            <h2 className="text-2xl font-semibold">이 주제는 어떤가요?</h2>
+            <h2 className="text-2xl font-semibold text-gray-700 flex items-center gap-2">
+              <span className="bg-[#05D182]/10 p-1.5 rounded-md">💡</span>
+              이 주제는 어떤가요?
+            </h2>
             <button
               title="새로 불러오기"
               aria-label="새로 불러오기"
               onClick={handleRefresh}
-              className="mt-4 px-4 py-2 bg-primary-green text-white rounded hover:bg-hover-primary-green"
+              className="px-3 py-3 bg-white text-[#05D182] rounded-full hover:bg-[#05D182] hover:text-white border border-[#05D182] transition-all duration-300 shadow-sm hover:shadow-md"
             >
-              <IoRefreshOutline />
+              <IoRefreshOutline className="w-5 h-5" />
             </button>
           </div>
 
-          <ul className="flex pl-5 space-y-1 text-gray-700 gap-2  flex-wrap">
+          <ul className="flex gap-2.5 flex-wrap">
             {suggestions.map((item, idx) => (
-              <li onClick={() => setInput(item)} className="border border-gray-200 p-1 px-3 rounded-2xl hover:bg-gray-100 cursor-pointer" key={idx}>{item}</li>
+              <li
+                onClick={() => setInput(item)}
+                key={idx}
+                className="border border-gray-200 py-1.5 px-4 rounded-full hover:bg-[#05D182]/10 hover:border-[#05D182]/30 hover:text-[#05D182] cursor-pointer text-gray-600 transition-all duration-200 shadow-sm bg-white"
+              >
+                {item}
+              </li>
             ))}
           </ul>
-
         </div>
       </div>
     </div>

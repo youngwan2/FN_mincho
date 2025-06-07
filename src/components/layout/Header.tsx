@@ -11,6 +11,7 @@ import { useState } from "react";
 export default function Header() {
     const isLogin = useAuth();
     const [showCommunityDropdown, setShowCommunityDropdown] = useState(false);
+    const [showRecommendDropdown, setShowRecommendDropdown] = useState(false);
 
     return (
         <>
@@ -25,33 +26,59 @@ export default function Header() {
                         </h1>
 
                         {/* 데스크탑 전용 네비게이션 */}
-                        <nav className="ml-8 hidden md:block ">
-                            <ul className="flex">
-                                <li className="mx-3 font-bold text-[15px]"><Link to={"/herbs"}>약초도감</Link></li>
-                                <li className="mx-3 font-bold text-[15px]"><Link to={"/chat/herbs-recommend"}>추천약초</Link></li>
-                                <li className="mx-3 font-bold text-[15px] relative">
-                                    <div
-                                        className="flex items-center cursor-pointer"
-                                        onMouseEnter={() => setShowCommunityDropdown(true)}
-                                        onMouseLeave={() => setShowCommunityDropdown(false)}
-                                    >
-                                        <span>커뮤니티</span>
-                                        <FiChevronDown className="ml-1" size={14} />
+                        <nav className="ml-8 hidden md:block ">                            <ul className="flex">
+                            <li className="mx-3 font-bold text-[15px]"><Link to={"/herbs"}>약초도감</Link></li>
+                            <li className="mx-3 font-bold text-[15px] relative">
+                                <div
+                                    className="flex items-center cursor-pointer"
+                                    onMouseEnter={() => setShowRecommendDropdown(true)}
+                                    onMouseLeave={() => setShowRecommendDropdown(false)}
+                                >
+                                    <span>추천약초</span>
+                                    <FiChevronDown className="ml-1" size={14} />
 
-                                        {/* 드롭다운 메뉴 */}
-                                        {showCommunityDropdown && (
-                                            <div className="absolute top-full left-0 mt-0 w-[102px] bg-white border border-gray-200 rounded-md shadow-lg z-[1001]">
-                                                <Link to="/community/posts" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
-                                                    커뮤니티
-                                                </Link>
-                                                <Link to="/community/qnas" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
-                                                    Q&A
-                                                </Link>
-                                            </div>
-                                        )}
-                                    </div>
-                                </li>
-                            </ul>
+                                    {/* 추천약초 드롭다운 메뉴 */}
+                                    {showRecommendDropdown && (
+                                        <div className="absolute top-full left-0 mt-0 w-[150px] bg-white border border-gray-100 rounded-md shadow-sm z-[1001]">
+                                            <Link to="/chat/herbs-recommend" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                맞춤 추천
+                                            </Link>
+                                            <Link to="/herbs/popular" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                인기 약초
+                                            </Link>
+                                            <Link to="/herbs/seasonal" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                계절별 약초
+                                            </Link>
+                                        </div>
+                                    )}
+                                </div>
+                            </li>
+                            <li className="mx-3 font-bold text-[15px] relative">
+                                <div
+                                    className="flex items-center cursor-pointer"
+                                    onMouseEnter={() => setShowCommunityDropdown(true)}
+                                    onMouseLeave={() => setShowCommunityDropdown(false)}
+                                >
+                                    <span>커뮤니티</span>
+                                    <FiChevronDown className="ml-1" size={14} />
+
+                                    {/* 커뮤니티 드롭다운 메뉴 */}
+                                    {showCommunityDropdown && (
+                                        <div className="absolute top-full left-0 mt-0 w-[150px] bg-white border border-gray-100 rounded-md shadow-sm z-[1001]">
+                                            <Link to="/community/posts" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                커뮤니티
+                                            </Link>
+                                            <Link to="/community/qnas" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                Q&A
+                                            </Link>
+                                            <Link to="/community/qnas" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                약초꿀팁
+                                            </Link>
+                                        </div>
+                                    )}
+                                </div>
+                            </li>
+                        </ul>
                         </nav>
                     </div>
 
@@ -90,16 +117,34 @@ export default function Header() {
             </header>
             <div className="h-35 mb-10"></div>
 
-            {/* 모바일 하단 네비게이션 */}
-            <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md flex justify-around items-center h-25 md:hidden z-50">
+            {/* 모바일 하단 네비게이션 */}            <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md flex justify-around items-center h-25 md:hidden z-50">
                 <Link to="/herbs" className="flex flex-col items-center text-xl gap-2 hover:text-hover-primary-green">
                     <FiBook size={22} />
                     약초도감
                 </Link>
-                <Link to="/chat/herbs-recommend" className="flex flex-col items-center text-xl gap-2 hover:text-hover-primary-green">
-                    <FiHeart size={22} />
-                    추천
-                </Link>
+                {/* 모바일에서 추천약초 드롭다운 */}
+                <div className="relative">
+                    <button
+                        onClick={() => setShowRecommendDropdown(!showRecommendDropdown)}
+                        className="flex flex-col items-center text-xl gap-2 hover:text-hover-primary-green"
+                    >
+                        <FiHeart size={22} />
+                        추천약초
+                    </button>
+                    {showRecommendDropdown && (
+                        <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-[1001]">
+                            <Link to="/chat/herbs-recommend" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
+                                맞춤 추천
+                            </Link>
+                            <Link to="/herbs/popular" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
+                                인기 약초
+                            </Link>
+                            <Link to="/herbs/seasonal" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
+                                계절별 약초
+                            </Link>
+                        </div>
+                    )}
+                </div>
                 {/* 모바일에서도 커뮤니티 터치 시 서브메뉴 표시 */}
                 <div className="relative">
                     <button
@@ -111,10 +156,10 @@ export default function Header() {
                     </button>
                     {showCommunityDropdown && (
                         <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-[1001]">
-                            <Link to="/community/posts" className="block px-4 py-2 text-sm hover:bg-gray-100 transition-colors">
+                            <Link to="/community/posts" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
                                 커뮤니티
                             </Link>
-                            <Link to="/community/qna" className="block px-4 py-2 text-sm hover:bg-gray-100 transition-colors">
+                            <Link to="/community/qnas" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
                                 Q&A
                             </Link>
                         </div>

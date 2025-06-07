@@ -5,6 +5,7 @@ import { createPost, deletePost, updatePost } from "../../service/post.service";
 import { PostRequest } from "../../types/post.types";
 import { AxiosError } from "axios";
 import { handleError } from "../../config/error";
+import { showToast } from "@/components/toast/CustomToast";
 
 
 /** 게시글 추가 */
@@ -16,7 +17,7 @@ export function useCreatePostMutation(): UseMutationResult<any, AxiosError, any>
             return createPost(post);
         },
         onSuccess: () => {
-            toast.info("게시글을 추가하였습니다.")
+            showToast.success("게시글을 추가하였습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.posts.update(), exact: false })
         },
         onError: (error) => {
@@ -34,7 +35,7 @@ export function useUpdatePostMutation() {
             return updatePost(postId, post)
         },
         onSuccess: () => {
-            toast.info("게시글을 수정하였습니다.")
+            showToast.success("게시글을 수정하였습니다.")
             queryClient.invalidateQueries({ queryKey: queryKeys.posts.update(), exact: false })
         },
         onError: (error) => {

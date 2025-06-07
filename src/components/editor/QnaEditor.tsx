@@ -140,7 +140,9 @@ export default function QnaEditor({
         <div>
             {/* only 질문 | 질문일 경우에만 제목과 카테고리 입력 필드 표시 */}
             {(type === 'question' || type === 'edit-question') && (
-                <div className="mb-6 space-y-4">                    {/* 제목 입력 */}
+                <div className="mb-6 space-y-4">
+
+                    {/* 제목 입력 */}
                     <div className="mb-12">
                         <div className="flex justify-between items-center mb-1">
                             <label htmlFor="title" className="block text-2xl font-semibold text-gray-700">
@@ -166,7 +168,9 @@ export default function QnaEditor({
                             maxLength={MAX_TITLE_LENGTH + 10} // 약간의 여유 추가
                             required
                         />
-                    </div>                    {/* 카테고리 선택 */}
+                    </div>
+
+                    {/* 카테고리 선택 */}
                     <div className="mb-12">
                         <label htmlFor="category" className="block text-2xl font-semibold text-gray-700 mb-1">
                             카테고리 <span className="text-red-500">*</span>
@@ -190,7 +194,9 @@ export default function QnaEditor({
                                 ))
                             )}
                         </select>
-                    </div>                    {/* 태그 추가 */}
+                    </div>
+
+                    {/* 태그 추가 */}
                     <div className="mb-12">
                         <label htmlFor="tags" className="block text-2xl font-semibold text-gray-700 mb-1">
                             태그

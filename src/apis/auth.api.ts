@@ -108,9 +108,16 @@ export const sendVerificationCodeFetch = async (email: string, type: 'register' 
                     showToast.error("잘못된 요청입니다. 이메일 형식을 확인 후 다시시도 해주세요.")
                 }
             }
+            if (error.status == 403) {
+                showToast.error("해당 계정은 소셜 로그인 계정이므로 요청 권한이 없습니다.")
+            }
 
+            if (error.status == 404) {
+                showToast.error("등록된 유저가 아닙니다. 이메일을 확인해주세요.")
+            }
 
-        } else {
+        }
+        else {
             showToast.error("서버 측 문제로 요청에 실패하였습니다.")
         }
         return false

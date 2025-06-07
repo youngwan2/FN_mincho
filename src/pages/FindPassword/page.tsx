@@ -24,6 +24,7 @@ export default function FindPasswordPage() {
         try {
             setIsLoading(true);
             const success = await sendVerificationCode(email, "reset");
+            console.log(success)
             if (success) {
                 setStep(2);
             }
@@ -57,13 +58,13 @@ export default function FindPasswordPage() {
             </Link>
 
             {/* 비밀번호 찾기 헤더 */}
-            <div className="sm:mx-auto w-full">
+            <div className="sm:mx-auto w-full  animate-fade-down">
                 <h2 className="mt-6 text-center text-4xl font-extrabold text-gray-900">비밀번호 찾기</h2>
                 <StepIndicator step={step} />
             </div>
 
             {/* 검증 폼 */}
-            <div className="mt-8 sm:mx-auto w-full">
+            <div className="mt-8 sm:mx-auto w-[60%]  animate-fade-down delay-200">
                 <div className="bg-white py-8 px-4 sm:px-10">
                     {/* 이메일 검증 및 인증번호 발송 */}
                     {step === 1 && (

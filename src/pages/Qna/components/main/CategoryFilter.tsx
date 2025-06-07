@@ -9,7 +9,7 @@ interface CategoryFilterProps {
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, selectedCategory, setSelectedCategory, isLoading = false }) => {
     return (
-        <div className="mb-2">
+        <div className="mb-4">
             <div className="flex gap-2 flex-wrap">
                 {isLoading ? (
                     // 로딩 중 스켈레톤 UI
@@ -26,8 +26,8 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, selectedCat
                         <button
                             key={category}
                             onClick={() => setSelectedCategory(category)}
-                            className={`px-4 py-2 rounded-full text-xl font-medium transition-colors ${selectedCategory === category
-                                ? 'bg-gray-900 text-white'
+                            className={`px-4 py-2 cursor-pointer rounded-full text-2xl font-medium transition-colors ${selectedCategory === category
+                                ? 'border-primary-green border text-primary-green hover:bg-gray-100 '
                                 : 'bg-white text-gray-700 hover:bg-gray-100 border'
                                 }`}
                         >

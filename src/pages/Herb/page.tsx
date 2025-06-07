@@ -70,7 +70,7 @@ export default function HerbPage() {
 
     return (
 
-        <div className="h-auto">
+        <section className="px-4 md:px-10 lg:px-12 pb-10">
             <SearchForm onSubmit={onSearchCondition} />
             <HerbBanner herbs={herbs} isLoading={isLoading} />
             {herbs.length < 1 && !isLoading && <div className="text-center text-2xl mt-10 py-10">검색된 약초가 없습니다.</div>}
@@ -85,6 +85,6 @@ export default function HerbPage() {
                     ? <LoadingSpinner fixed={true} />
                     : null
             }
-        </div>
+        </section>
     )
 }

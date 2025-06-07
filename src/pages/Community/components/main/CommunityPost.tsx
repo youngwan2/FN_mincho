@@ -32,7 +32,7 @@ export default function CommunityPost({ activeCategoryId, categoryInfos, posts, 
                     {categoryName || "전체"}
                     <span>{`(${postCount || totalItemCount})`}</span>
                 </h2>
-                {isLogin && <PrimaryButton onClick={() => navigate("/community/write")} type="button" className="bg-[#05D182] text-white px-4 py-2 rounded-md hover:bg-hover-primary-green">
+                {isLogin && <PrimaryButton onClick={() => navigate("/community/post/write")} type="button" className="bg-[#05D182] text-white px-4 py-2 rounded-md hover:bg-hover-primary-green">
                     글쓰기
                 </PrimaryButton>}
 

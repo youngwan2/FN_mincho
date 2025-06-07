@@ -159,14 +159,15 @@ export default function QnAPage() {
                 {/* 헤더 */}
                 <div className='flex justify-between items-center mb-12'>
                     <div >
-                        <h1 className="flex text-4xl gap-3 font-bold text-gray-900 mb-2"><FaLeaf color='green' /> Q&A 게시판</h1>
-                        <p className="text-gray-600">약초 관련 질문과 답변을 공유하는 공간입니다.</p>
+                        <h1 className="flex text-5xl gap-3 font-bold text-gray-900 mb-4">민초 Q&A</h1>
+                        <strong className="text-green-600">자연의 지혜를 나누는 약초 커뮤니티</strong>
+                        <p>약초의 효능, 재배법, 활용법에 대한 궁금증을 해결해요</p>
                     </div>
                     <button
                         onClick={handleCreateQna}
-                        className="bg-primary-green text-white px-12 py-4 rounded-2xl shadow-[inset_-2px_-2px_3px_rgba(0,0,0,0.3)] hover:bg-hover-primary-green transition-colors flex items-center gap-2 cursor-pointer"
+                        className="bg-primary-green ml-3 text-white px-12 py-4 rounded-md shadow-[inset_-2px_-2px_3px_rgba(0,0,0,0.1)] hover:bg-hover-primary-green transition-colors flex items-center gap-2 cursor-pointer"
                     >
-                        나도 질문하기
+                        질문하기
                     </button>
                 </div>
                 <SearchBar

@@ -69,7 +69,7 @@ export default function CommunityPage() {
 
     }
     return (
-        <section className="min-h-screen w-full">
+        <section className="h-auto w-full">
             <div className="mx-auto py-6">
                 {/* 헤더 */}
                 <CommunityHeader onSearch={onSearch} onClick={onCategoryHandler} categoryInfos={categoryInfos} activeCategoryId={activeCategoryId} />
@@ -79,7 +79,7 @@ export default function CommunityPage() {
                     {/* 카테고리 사이드바 */}
                     <CommunitySidebar activeCategoryId={activeCategoryId} categoryInfos={categoryInfos} totalItemCount={totalCount} onClick={onCategoryHandler} />
 
-                    <div className="flex flex-col w-full bg-white rounded-lg shadow-sm overflow-hidden py-3 min-h-screen ">
+                    <div className="flex flex-col w-full bg-white rounded-lg shadow-sm overflow-hidden py-3 h-full ">
                         {/* 게시판 내용 */}
                         <CommunityPost postFetchState={postFetchState} activeCategoryId={activeCategoryId} categoryInfos={categoryInfos} posts={posts} itemCount={itemCount} />
                         {/* 페이지네이션 */}

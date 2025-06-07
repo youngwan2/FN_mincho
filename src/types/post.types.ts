@@ -11,11 +11,14 @@ export type Category = {
 
 // 포스트 카테고리
 export type CategoryType = 'notice' | 'info' | 'free' | 'question'
+
+
 // 추가 포스트
 export interface PostRequest {
     categoryType: CategoryType
     contents: string
     title: string;
+    tags?: string[];
 
 }
 
