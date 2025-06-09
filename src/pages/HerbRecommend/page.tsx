@@ -94,7 +94,7 @@ export default function HerbRecommendPage() {
   }, [showChat])
 
   return (
-    <section className="px-4 md:px-10 lg:px-12 pb-10">
+    <section className="px-4 md:px-10 lg:px-12 pb-10 animate-fade-down">
       {/* 페이지 헤더 */}
       <HerbRecommendHeader
         onStartService={() => setShowChat(true)}

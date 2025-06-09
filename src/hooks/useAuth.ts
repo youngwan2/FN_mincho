@@ -8,7 +8,6 @@ export default function useAuth() {
 
         async function getAuthStatus() {
                 const loginStatus = await getLoginStatus();
-                console.log(loginStatus)
                 setIsLogin(loginStatus);
 
                 if (!loginStatus) {

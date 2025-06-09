@@ -20,7 +20,7 @@ export default function UserInfo() {
     return (
         <div className="min-h-screen">
             {/* 헤더 */}
-            <div className="bg-white/80 backdrop-blur-sm border-b border-green-100">
+            <div className="border px-3 bg-white mt-3 rounded-t-lg">
                 <div className="w-full mx-auto py-6">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-6">
@@ -32,7 +32,7 @@ export default function UserInfo() {
             </div>
 
             {/* 탭 */}
-            <div className="bg-white/60 backdrop-blur-sm border-b border-green-100">
+            <div className="bg-white mt-1 border">
                 <div className="w-full mx-auto">
                     <div className="flex gap-8 px-6 overflow-x-auto">
                         {tabs.map((tab) => (
@@ -52,7 +52,7 @@ export default function UserInfo() {
             </div>
 
             {/* 내용 */}
-            <div className="w-full mx-auto py-6">
+            <div className="w-full mx-auto py-8 bg-white mt-6 border rounded-b-[10px] px-3">
                 {activeTab === "게시물" && <UserPost />}
                 {activeTab === "질문답변" && <UserQna />}
                 {activeTab === "관심약초" && <UserBookmark />}

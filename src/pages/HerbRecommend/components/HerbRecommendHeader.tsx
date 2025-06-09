@@ -24,27 +24,29 @@ export default function HerbRecommendHeader({
             {/* 헤더 */}
             <div className='flex flex-col md:flex-row justify-between items-center mb-12 gap-6'>
                 <div className="text-center md:text-left">
-                    <div className="inline-flex items-center bg-[#0ac17b] px-4 py-1.5 rounded-full mb-4 shadow-[inset_-2px_-2px_5px_rgba(0,0,0,0.05)]">
+                    <div className="inline-flex items-center bg-[#0ac17b] px-4 py-1.5 rounded-full mb-4 shadow-[inset_-2px_-2px_5px_rgba(0,0,0,0.05)] animate-fade-right">
                         <GiMedicinePills className="text-white mr-2" />
                         <span className="bg-[#0ac17b] text-white font-medium">AI 맞춤형 서비스</span>
                     </div>
-                    <h1 className="flex items-center text-5xl md:text-6xl md:justify-start justify-center gap-3 font-bold text-gray-800 mb-5 md:mb-6">
+                    <h1 className="flex items-center text-5xl md:text-6xl md:justify-start justify-center gap-3 font-bold text-gray-800 mb-5 md:mb-6 animate-fade-left">
                         <MdNaturePeople className="text-primary-green hidden md:block" size={48} />
                         <span>증상별 약초추천</span>
                     </h1>
-                    <strong className="text-[#05D182] text-3xl block mb-2">자연의 지혜를 나누는 약초 커뮤니티</strong>
-                    <p className="text-gray-600 text-2xl md:max-w-xl">혹시 본인이 경험하는 증상이나 어려움이 있나요? 민초AI가 여러분에게 맞는 약초를 추천해드립니다.</p>
+                    <div className="animate-fade-down">
+                        <strong className="text-[#05D182] text-3xl block mb-2">자연의 지혜를 나누는 약초 커뮤니티</strong>
+                        <p className="text-gray-600 text-2xl md:max-w-xl">혹시 본인이 경험하는 증상이나 어려움이 있나요? 민초AI가 여러분에게 맞는 약초를 추천해드립니다.</p>
+                    </div>
                 </div>
                 <button
                     onClick={onStartService}
-                    className="bg-gradient-to-r from-[#05D182] to-[#03A77F] text-white px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 cursor-pointer font-medium"
+                    className="bg-gradient-to-r from-[#05D182] to-[#03A77F] text-white px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 cursor-pointer font-medium animate-fade-up"
                 >
                     <GiHerbsBundle className="text-white" size={20} />
                     서비스 이용하기
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 animate-fade-up animate-delay-100">
                 {/* 이용 가이드 */}
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                     <div className="flex items-center gap-2 mb-4">
@@ -115,7 +117,7 @@ export default function HerbRecommendHeader({
             </div>
 
             {/* 주의사항 안내 */}
-            <div className="rounded-xl py-6 px-7 mt-4 text-gray-800 shadow-sm border border-gray-100">
+            <div className="rounded-xl py-6 px-7 mt-4 text-gray-800 shadow-sm border border-gray-100 animate-fade-up animate-delay-200">
                 <div className="flex items-center gap-2 mb-4">
                     <span className="p-1.5 rounded-md flex items-center justify-center">⚠️</span>
                     <h2 className="font-bold text-3xl ">주의사항 안내(필독)</h2>

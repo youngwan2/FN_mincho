@@ -81,20 +81,19 @@ export default function AnswerItem({
                         </div>
                     </Link>
 
-                    <div className="flex items-center gap-2">
-                        {/* 본인 답변일 경우 수정/삭제 버튼 */}
+                    <div className="flex items-center gap-2">                        {/* 본인 답변일 경우 수정/삭제 버튼 */}
                         {answer.isMine && !isEditing && (
                             <>
                                 <button
                                     onClick={() => setIsEditing(true)}
-                                    className="px-2 py-1 border bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md text-2xl flex items-center gap-1"
+                                    className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-1 flex items-center gap-2"
                                     title="수정하기"
                                 >
-                                    수정
+                                    <FiEdit size={16} /> 수정
                                 </button>
                                 <button
                                     onClick={handleDelete}
-                                    className="px-2 py-1 border border-red-100 bg-red-50 hover:bg-red-100 text-red-600 rounded-md text-2xl flex items-center gap-1"
+                                    className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-1 flex items-center gap-2"
                                     title="삭제하기"
                                 >
                                     삭제
@@ -106,7 +105,7 @@ export default function AnswerItem({
                         {isQuestionMine && !isAnswerAdopted && !answer.isAdopted && onAdoptAnswer && (
                             <button
                                 onClick={() => onAdoptAnswer(answer.id)}
-                                className="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md text-sm"
+                                className="px-4 py-2 bg-gradient-to-r from-[#05D182] to-[#03A77F] text-white rounded-lg shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-1"
                             >
                                 답변 채택하기
                             </button>

@@ -66,36 +66,33 @@ export default function MypageProfileImage({ profileImage }: MypageProfileImageP
     // 프로필 영역 클릭 시 파일 선택창 열기
     const handleProfileClick = () => {
         fileInputRef.current?.click();
-    };
-
-    // 업로드 취소
+    };    // 업로드 취소
     const handleCancel = () => {
-
         if (fileInputRef.current) {
             fileInputRef.current.value = ''
             setPreviewImage(undefined)
             setFile('')
         }
-
-
-    }
+    };
 
     return (
-        <form className="w-full flex flex-col items-center" onSubmit={handleSubmit}>
-            <div
-                className="w-64 h-64 bg-gray-200 rounded-full flex items-center justify-center mb-4 overflow-hidden cursor-pointer"
-                onClick={handleProfileClick}
-            >
-                <img
-                    ref={imgRef}
-                    src={profileImage || previewImage || noImage}
-                    onError={(e) => {
-                        e.currentTarget.src = noImage;
-                    }}
-                    alt="프로필 이미지"
-                    className="w-full h-full object-cover"
-                />
+        <form className="w-full flex flex-col items-center" onSubmit={handleSubmit}>            <div
+            className="w-64 h-64 rounded-full flex items-center justify-center mb-4 overflow-hidden cursor-pointer border-2 border-gray-100 relative"
+            onClick={handleProfileClick}
+        >
+            <img
+                ref={imgRef}
+                src={profileImage || previewImage || noImage}
+                onError={(e) => {
+                    e.currentTarget.src = noImage;
+                }}
+                alt="프로필 이미지"
+                className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-10 flex items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-80 rounded-full">
+                <span className="text-white text-2xl font-medium">이미지 변경</span>
             </div>
+        </div>
 
             {/* 실제 파일 업로드 input (숨겨진 상태) */}
             <input
@@ -117,16 +114,15 @@ export default function MypageProfileImage({ profileImage }: MypageProfileImageP
                                 handleCancel();
                                 showToast.info("이미지가 삭제되었습니다.");
                             }
-                        }}
-                        type="button"
-                        className="flex items-center gap-2 px-5 py-2 rounded-xl text-gary-700 border border-gray-300 bg-white transition-colors duration-200 text-xl hover:bg-gray-100 cursor-pointer"
+                        }} type="button"
+                        className="flex items-center gap-2 px-5 py-3 rounded-xl text-gary-700 border border-gray-300 bg-white text-2xl cursor-pointer"
                     >
                         <FaTrash className="text-gray-700" />
                         삭제
                     </button>
                     <button
                         type="submit"
-                        className="flex items-center gap-2 px-5 py-2 rounded-xl text-white bg-gray-700 hover:bg-hover-primary-green transition-colors duration-200 text-xl cursor-pointer"
+                        className="flex items-center gap-2 px-5 py-3 rounded-xl text-white bg-[#05D182] text-2xl cursor-pointer"
                     >
                         <FaCheckCircle />
                         등록

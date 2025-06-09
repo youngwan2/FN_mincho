@@ -1,6 +1,6 @@
 import Skeleton from 'react-loading-skeleton';
 import MypageTitle from "./MypageTitle";
-
+import { FaPen, FaComment, FaLeaf } from 'react-icons/fa';
 
 interface MypageAnalyticsProps {
     isLoading: boolean
@@ -10,26 +10,31 @@ interface MypageAnalyticsProps {
         bookmarkCount: number
     }
 }
+
 export default function MypageAnalytics({ isLoading, stats }: MypageAnalyticsProps) {
 
-    const renderStatBox = (value: number | undefined, label: string) => (
-        <div className="flex flex-col items-center">
-            <span className="text-[16px] font-bold text-green-700">{value}</span>
+    const renderStatBox = (value: number | undefined, label: string, icon: React.ReactNode) => (
+        <div className="flex flex-col items-center bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+            <div className="bg-green-100 rounded-full p-3 mb-3">
+                {icon}
+            </div>
+            <span className="text-4xl font-bold text-green-700 mb-2">{value}</span>
             <span className="text-2xl text-gray-600">{label}</span>
         </div>
     );
 
     const renderSkeletonBox = () => (
-        <div className="flex flex-col items-center">
-            <Skeleton width={40} height={24} />
-            <Skeleton width={80} height={28} style={{ marginTop: 8 }} />
+        <div className="flex flex-col items-center bg-white rounded-2xl p-6 border border-gray-100">
+            <Skeleton circle width={48} height={48} className="mb-3" />
+            <Skeleton width={60} height={40} className="mb-2" />
+            <Skeleton width={100} height={24} />
         </div>
     );
 
     return (
-        <div className="bg-gray-50 rounded-lg p-6">
-            <MypageTitle text="활동 통계" />
-            <div className="grid grid-cols-3 gap-4">
+        <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
+            <MypageTitle text="나의 활동 통계" icon="analytics" />
+            <div className="grid grid-cols-3 gap-6 mt-8">
                 {isLoading ? (
                     <>
                         {renderSkeletonBox()}
@@ -38,9 +43,9 @@ export default function MypageAnalytics({ isLoading, stats }: MypageAnalyticsPro
                     </>
                 ) : (
                     <>
-                        {renderStatBox(stats?.postCount, '작성 게시글')}
-                        {renderStatBox(stats?.commentCount, '작성 댓글')}
-                        {renderStatBox(stats?.bookmarkCount, '관심 허브')}
+                        {renderStatBox(stats?.postCount, '작성 게시글', <FaPen className="text-green-600" size={20} />)}
+                        {renderStatBox(stats?.commentCount, '작성 댓글', <FaComment className="text-green-600" size={20} />)}
+                        {renderStatBox(stats?.bookmarkCount, '관심 약초', <FaLeaf className="text-green-600" size={20} />)}
                     </>
                 )}
             </div>

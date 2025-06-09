@@ -10,7 +10,7 @@ import {
 } from "../apis/qna.api";
 
 /** QnA 전체 조회 */
-export const getQnaList = async (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number }) => {
+export const getQnaList = async (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number, tag?: string }) => {
     return await getQnaListFetch(page, size, condition);
 }
 

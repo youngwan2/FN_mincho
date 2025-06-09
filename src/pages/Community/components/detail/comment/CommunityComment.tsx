@@ -5,12 +5,12 @@ import CommentSubmitForm from "./CommentSubmitForm";
 import CommentDropdown from "./CommentDropdown";
 import CommentEditForm from "./CommentEditForm";
 
-import { Comment, CommentCreateRequest, CommentUpdateRequest } from "../../../../../types/comment.types";
-import { useCreateCommentMutation, useDeleteCommentMutation, useUpdateCommentMutation } from "../../../../../hooks/mutations/useMutationComment";
+import { Comment, CommentCreateRequest, CommentUpdateRequest } from "@/types/comment.types";
+import { useCreateCommentMutation, useDeleteCommentMutation, useUpdateCommentMutation } from "@/hooks/mutations/useMutationComment";
 import { FormEvent, useRef, useState } from "react";
 
 import { toast } from "react-toastify";
-import CustomTimeAgo from "../../../../../components/vender/timeago/CustomTimeAgo";
+import CustomTimeAgo from "@/components/vender/timeago/CustomTimeAgo";
 
 interface CommunityCommentProps {
   postId: number
@@ -52,7 +52,7 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
 
 
   // 댓글 작성
-  function handleSubmitComment(e: FormEvent<HTMLFormElement>) {
+  function handleSubmitComment(e: FormEvent<HTMLFormElement>, type?: 'comment' | 'reply') {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget)
@@ -64,12 +64,13 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
 
     const data: CommentCreateRequest = {
       contents,
-      parentCommentId: selectedCommentIndex || null,
+      parentCommentId: type === 'comment' ? null : selectedCommentIndex || null,
     }
 
     commentCreateMutate({ comment: data })
     return true
   }
+
 
   // 댓글 수정
   function handleUpdateSubmitComment(e: FormEvent<HTMLFormElement>, commentId: number) {
@@ -92,10 +93,10 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
   }
 
   return (
-    <div className="mt-15 border border-gray-200 rounded-2xl p-5">
+    <div className="mt-15">
       {/* 헤더 */}
       <div className="flex items-center mb-4">
-        <h2 className="text-2xl font-bold flex-grow">총 {totalCount} 개의 댓글이 있습니다.</h2>
+        <h2 className="text-3xl font-bold flex-grow text-gray-700">댓글({totalCount})</h2>
         {/* <button className="cursor-pointer text-2xl text-blue-600 hover:text-blue-400">최신순</button> */}
       </div>
 
@@ -107,7 +108,7 @@ export default function CommunityComment({ postId, comments, totalCount }: Commu
         const isCommentEditing = comment.id === selectedCommentIndex && isEdit;
 
         return (
-          <div key={comment.id} className="border-b py-6 border-gray-100">
+          <div key={comment.id} className="border px-5 py-6 bg-white rounded-lg">
             {/* 댓글 상단 (작성자, 시간, 메뉴 버튼) */}
             <div className="flex items-center mb-2">
               <div className="w-8 h-8 bg-gray-200 rounded-full mr-3" />

@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router";
 import { useQnaDetailGetQuery } from "../../hooks/queries/useQueryQna";
 import { useDeleteQnaMutation } from "../../hooks/mutations/useMutationQna";
 import { useAdoptAnswerMutation } from "../../hooks/mutations/useMutationAnswer";
+import { useQnaPageStore } from '@/store/store';
 import {
     QnaHeader,
     QnaStatusBadge,
@@ -10,13 +11,15 @@ import {
     AnswersList,
     AnswerForm
 } from "./components/detail";
-import { useEffect, useRef } from "react";
+import useScrollTo from "@/hooks/useScrollTo";
 
 export default function QnaDetailPage() {
 
-    const sectionRef = useRef<HTMLElement>(null);
     const { qnaId } = useParams<{ qnaId: string }>();
     const navigate = useNavigate();
+
+
+    useScrollTo();
 
     // QnA 상세 정보 조회
     const { qna, isLoading, isError } = useQnaDetailGetQuery(Number(qnaId));
@@ -39,25 +42,25 @@ export default function QnaDetailPage() {
         if (isQuestionMine) {
             adoptAnswerMutation.mutate(answerId);
         }
-    };
-
-    // QnA 삭제 핸들러
+    };    // QnA 삭제 핸들러
     const handleDeleteQna = () => {
         if (window.confirm('정말 이 질문을 삭제하시겠습니까?')) {
             deleteQnaMutation.mutate(Number(qnaId), {
                 onSuccess: () => {
-                    navigate('/community/qna');
+                    navigate('/community/qnas');
                 }
             });
         }
     };
 
-    useEffect(() => {
-        // 페이지가 로드될 때 스크롤을 최상단으로 이동
-        if (sectionRef.current) {
-            sectionRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, [])
+    // 태그 클릭 핸들러
+    const { setSearchCondition, setPage } = useQnaPageStore();
+    const handleTagClick = (tag: string) => {
+        setSearchCondition({ tag });
+        setPage(0);
+        navigate('/community/qnas');
+    };
+
 
 
     // 로딩 중 표시
@@ -81,7 +84,7 @@ export default function QnaDetailPage() {
             <div className="min-h-screen p-6">
                 <div className="max-w-[1000px] w-full mx-auto">
                     <div className="bg-red-50 border border-red-200 p-6 rounded-lg">
-                        <h2 className="text-red-600 text-xl font-bold mb-2">오류가 발생했습니다</h2>
+                        <h2 className="text-red-600 text-3xl font-bold mb-2">오류가 발생했습니다</h2>
                         <p>데이터를 불러오는 중 문제가 발생했습니다. 다시 시도해주세요.</p>
                         <button
                             onClick={() => navigate('/community/qnas')}
@@ -94,7 +97,7 @@ export default function QnaDetailPage() {
             </div>
         );
     } return (
-        <section ref={sectionRef} className="min-h-screen p-6">
+        <section className="min-h-screen p-6">
             <div className="max-w-[1200px] w-full mx-auto">
                 {/* 뒤로가기 및 액션 버튼 */}
                 <QnaHeader
@@ -103,43 +106,75 @@ export default function QnaDetailPage() {
                     onDelete={handleDeleteQna}
                 />
 
+                {qna.isPrivate && !qna.isMine
+                    ? (
+                        <div className="bg-green-50 border border-green-200 p-8 rounded-lg mb-6 text-center">
+                            <p className="text-green-800 text-2xl">
+                                이 질문은 비공개로 설정되어 있습니다. 작성자만 내용을 볼 수 있습니다.
+                            </p>
+                        </div>
+                    )
+                    : (
+                        <>
+                            {/* 작성자 정보 및 조회수 */}
+                            < QnaMetaInfo
+                                writer={qna.writer}
+                                writerId={qna.writerId}
+                                avatarUrl={qna.avatarUrl}
+                                createdAt={qna.createdAt}
+                                views={qna.view || 0}
+                            />
+                            {/* QnA 제목 및 상태 */}
+                            <div className="mb-6">
+                                <QnaStatusBadge
+                                    isPrivate={qna.isPrivate}
+                                    isAnswerAdopted={isAnswerAdopted}
+                                />
+                                <h1 className="text-5xl font-bold text-gray-900 mb-4">{qna.title}</h1>
 
 
-                {/* 작성자 정보 및 조회수 */}
-                <QnaMetaInfo
-                    writer={qna.writer}
-                    createdAt={qna.createdAt}
-                    views={qna.view || 0}
-                />
+                            </div>
 
-                {/* QnA 제목 및 상태 */}
-                <div className="mb-6">
-                    <QnaStatusBadge
-                        isPrivate={qna.isPrivate}
-                        isAnswerAdopted={isAnswerAdopted}
-                    />
-                    <h1 className="text-5xl font-bold text-gray-900 mb-4">{qna.title}</h1>
-                </div>
+                            {/* 질문 내용 */}
+                            <QnaContent content={qna.content} imageUrls={qna.imageUrls || []} />
 
-                {/* 질문 내용 */}
-                <QnaContent content={qna.content} imageUrls={qna.imageUrls || []} />
 
-                {/* 구분선 */}
-                <hr className="my-8" />
+                            {/* 태그 목록 */}
+                            {qna.tags && qna.tags.length > 0 && (
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                    {qna.tags.map((tag, index) => (
+                                        <span
+                                            key={index}
+                                            className="bg-gradient-to-r from-[#e8f5e9] to-[#e3f2fd] text-gray-700 px-3 py-1.5 rounded-full text-2xl flex items-center border border-gray-100 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+                                            onClick={() => handleTagClick(tag)}
+                                        >
+                                            <span className="text-[#05D182] mr-1">#</span>
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
 
-                {/* 답변 작성 폼 (상단에 배치) */}
-                <AnswerForm
-                    qnaId={qnaId as string}
-                />
+                            {/* 구분선 */}
+                            <hr className="my-8" />
 
-                {/* 답변 목록 */}
-                <AnswersList
-                    answers={qna.answers || []}
-                    isQuestionMine={isQuestionMine}
-                    isAnswerAdopted={isAnswerAdopted}
-                    onAdoptAnswer={handleAdoptAnswer}
-                    qnaId={qnaId as string}
-                />
+                            {/* 답변 작성 폼 (상단에 배치) */}
+                            <AnswerForm
+                                qnaId={qnaId as string}
+                            />
+
+                            {/* 답변 목록 */}
+                            <AnswersList
+                                answers={qna.answers || []}
+                                isQuestionMine={isQuestionMine}
+                                isAnswerAdopted={isAnswerAdopted}
+                                onAdoptAnswer={handleAdoptAnswer}
+                                qnaId={qnaId as string}
+                            />
+
+
+                        </>
+                    )}
             </div>
         </section>
     );

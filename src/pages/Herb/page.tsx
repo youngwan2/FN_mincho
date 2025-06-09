@@ -1,11 +1,13 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useHerbsGetQuery } from "../../hooks/queries/useQueryHerbs";
-import { useInView } from 'react-intersection-observer'
+import { useInView } from 'react-intersection-observer';
 import HerbBanner from "./components/HerbBanner";
 import HerbBody from "./components/HerbBody";
 import SearchForm from "./components/SearchForm";
 import LoadingSpinner from "../../components/spinner/LoadingSpinner";
 import { HerbSearchCondition } from "../../types/herb.types";
+import HerbHeader from "./components/HerbHeader";
+import HerbSort from "./components/HerbSort";
 
 export default function HerbPage() {
     const { ref, inView } = useInView()
@@ -19,7 +21,6 @@ export default function HerbPage() {
         cntntsSj: ''
     })
 
-
     const {
         herbs,
         isFetchingNextPage,
@@ -30,10 +31,8 @@ export default function HerbPage() {
         hasNextPage,
     } = useHerbsGetQuery(9, searchCondition);
 
-
     // 정렬
     const onSort = (sort: string, orderBy: string) => {
-
         setSearchCondition(prev => ({
             ...prev,
             sort: sort,
@@ -54,9 +53,7 @@ export default function HerbPage() {
             bneNm,
             month,
             cntntsSj: keyword
-
         }))
-
     }
 
     useEffect(() => {
@@ -69,22 +66,38 @@ export default function HerbPage() {
     }, [fetchNextPage, inView])
 
     return (
+        <section className="min-h-1/3 w-full px-4 md:px-10 lg:px-12 pb-10 animate-fade-down">
+            <div className="mx-auto py-6">
+                {/* 헤더 */}
+                <HerbHeader sort={<HerbSort onSort={onSort} selectedSort={searchCondition.sort} />} />
 
-        <section className="px-4 md:px-10 lg:px-12 pb-10">
-            <SearchForm onSubmit={onSearchCondition} />
-            <HerbBanner herbs={herbs} isLoading={isLoading} />
-            {herbs.length < 1 && !isLoading && <div className="text-center text-2xl mt-10 py-10">검색된 약초가 없습니다.</div>}
+                {/* 검색 폼 */}
+                <div className="mt-8 animate-fade-up animate-delay-100">
+                    <SearchForm onSubmit={onSearchCondition} />
+                </div>
 
-            <HerbBody herbs={herbs} isLoading={isLoading} totalCount={totalCount} onSort={onSort} selectedSort={searchCondition.sort} />
-            {herbs.length < 1 && !isLoading && <div className="text-center text-2xl mt-10 py-10">검색된 약초가 없습니다.</div>}
+                {/* 배너 */}
+                <div className="mt-8 animate-fade-up animate-delay-200">
+                    <HerbBanner herbs={herbs} isLoading={isLoading} />
+                </div>
 
-            {/* 로딩체크 (임시) */}
-            <button className={`border-primary-dark-gray text-primary-dark-gray mx-auto border py-2 px-4 rounded-[3px] flex justify-center mt-10 invisible`} ref={ref} />
-            {
-                isFetchingNextPage && !(herbs.length <= 9)
-                    ? <LoadingSpinner fixed={true} />
-                    : null
-            }
+                {herbs.length < 1 && !isLoading && (
+                    <div className="text-center text-2xl mt-10 py-10 animate-fade">검색된 약초가 없습니다.</div>
+                )}
+
+                {/* 본문 */}
+                <div className="mt-12 animate-fade-up animate-delay-300">
+                    <HerbBody
+                        herbs={herbs}
+                        isLoading={isLoading}
+                        totalCount={totalCount}
+                    />
+                </div>
+
+                {/* 로딩체크 (임시) */}
+                <button className={`border-primary-dark-gray text-primary-dark-gray mx-auto border py-2 px-4 rounded-[3px] flex justify-center mt-10 invisible`} ref={ref} />
+                {isFetchingNextPage && !(herbs.length <= 9) && <LoadingSpinner fixed={true} />}
+            </div>
         </section>
     )
 }

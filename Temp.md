@@ -35,6 +35,12 @@
     grid-area: footer;
 }
 ```
+### 여백 설정
+```html
+<section className="px-4 md:px-10 lg:px-12 pb-10">
+
+</section>
+```
 
 ## 타이포그래피 참고
 ### 글자 크기

@@ -3,7 +3,7 @@ import instance from "../config/axios"
 import axios, { AxiosError } from "axios"
 
 /** QnA 전체 조회 */
-export const getQnaListFetch = async (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number }) => {
+export const getQnaListFetch = async (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number, tag?: string }) => {
     try {
         const response = await axios.get(apiRoutes.qna.getAll(page, size, condition));
         return response.data;
@@ -34,6 +34,9 @@ export const createQnaFetch = async (formData: FormData) => {
                 'Content-Type': 'multipart/form-data'
             }
         });
+        if (response.status > 399) {
+            throw new AxiosError();
+        }
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError) {
@@ -44,6 +47,7 @@ export const createQnaFetch = async (formData: FormData) => {
 
 /** QnA 수정 */
 export const updateQnaFetch = async (qnaId: number, qnaData: any) => {
+    console.log(qnaId, qnaData);
     try {
         const response = await instance.patch(apiRoutes.qna.update(qnaId), qnaData, {
             headers: {

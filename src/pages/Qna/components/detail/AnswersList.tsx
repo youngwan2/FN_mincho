@@ -1,5 +1,6 @@
 import { AnswerDetail } from '../../../../types/qna.types';
 import AnswerItem from './AnswerItem';
+import { MdQuestionAnswer } from 'react-icons/md';
 
 interface AnswersListProps {
     answers: AnswerDetail[];
@@ -24,9 +25,9 @@ export default function AnswersList({
     });
 
     return (
-        <div className="mt-12">
-            <h3 className="text-2xl font-bold mb-4">
-                등록된 답변이 {answers.length}개 있습니다.
+        <div className="mt-16">
+            <h3 className="text-2xl font-bold mb-4 text-gray-700 flex items-center gap-1 bg-gray-100 p-2 py-4 rounded-md">
+                <MdQuestionAnswer className='text-primary-green' size={24} /> 등록된 답변이 {answers.length}개 있습니다.
             </h3>
 
             {sortedAnswers.length > 0 ? (sortedAnswers.map(answer => (

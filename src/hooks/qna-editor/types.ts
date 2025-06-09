@@ -68,7 +68,7 @@ export interface QnaEditorState {
 export interface FormDataContent {
     title?: string;
     content: string;
-    categoryType?: string;
+    category?: string;
     tags?: string[];
     isPrivate?: boolean;
     isAdapted?: boolean;

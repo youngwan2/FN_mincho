@@ -24,7 +24,7 @@ export default function UserPost() {
         return (
             <div className="space-y-6">
                 {Array.from({ length: 5 }).map((_, idx) => (
-                    <div key={idx} className="bg-white/80 backdrop-blur-sm border-green-100 shadow-sm rounded p-6">
+                    <div key={idx} className="border rounded-lg p-3">
                         <div className="flex flex-row items-center justify-between mb-2">
                             <div className="flex items-center gap-4">
                                 <Skeleton width={60} height={28} className="rounded" />
@@ -63,13 +63,13 @@ export default function UserPost() {
             {posts.map((post) => (
                 <Card
                     key={post.id}
-                    className="bg-white/80 backdrop-blur-sm border-green-100 shadow-sm hover:shadow-md transition-shadow"
+                    className="border  "
                 >
                     <CardHeader className="flex flex-row items-center justify-between">
                         <div className="flex items-center gap-4">
                             <div className="flex gap-2 flex-col items-start">
-                                <Badge className={getPostCategoryColorByType(post.category.type) + " text-2xl"} variant="secondary">
-                                    {post.category.name}
+                                <Badge className={getPostCategoryColorByType(post.category?.type) + " text-2xl"} variant="secondary">
+                                    {post.category?.name}
                                 </Badge>
                                 <Link to={"/community/posts/" + post.id} className="font-semibold text-gray-800 py-1">{post.title}</Link>
                                 <span className="text-xl text-gray-400">작성일: {new Date(post.createdAt).toLocaleString()}</span>

@@ -12,7 +12,7 @@ export default function PrimaryButton({ onClick, children, className, type, titl
             title={title}
             type={type}
             onClick={onClick}
-            className={` hover:cursor-pointer rounded px-4 py-2 text-xl ${className} `}>
+            className={`${className.includes('text-2xl') ? null : 'text-xl'} hover:cursor-pointer rounded px-4 py-2 ${className}  `}>
             {children}
         </button>
     )

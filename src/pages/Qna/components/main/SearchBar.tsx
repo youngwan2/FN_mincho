@@ -54,26 +54,26 @@ export default function SearchBar(
                     </select>
 
                 </div>
-                <div className="flex gap-4 md:items-center md:flex-row flex-col items-start">
-                    {/* 날짜 입력창 */}
-                    <div className='flex'>
+                <div className="flex gap-4 md:items-center md:flex-row flex-col items-start w-full">
+                    {/* 날짜 입력창 - 모바일에서 전체 너비 차지하도록 수정 */}
+                    <div className='flex md:w-auto w-full'>
                         <input
                             type="date"
                             value={fromDate}
                             onChange={(e) => setFromDate(e.target.value)}
-                            className="px-2 py-1 border md:w-full w-1/2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="px-2 py-1 border flex-1 border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
-                        <span className="text-gray-400 w-auto">~</span>
+                        <span className="text-gray-400 flex items-center justify-center px-2 border-t border-b">~</span>
                         <input
                             type="date"
                             value={toDate}
                             onChange={(e) => setToDate(e.target.value)}
-                            className="px-2 py-1 border md:w-full w-1/2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="px-2 py-1 border flex-1 border-gray-300 rounded-r-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
                     </div>
 
                     {/* 사용자 액션 */}
-                    <div className='flex gap-2 w-full'>
+                    <div className='flex gap-2 md:w-auto w-full'>
                         <button
                             title='검색 조건 초기화'
                             onClick={handleResetSearch}

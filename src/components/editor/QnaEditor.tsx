@@ -19,6 +19,7 @@ interface QnaEditorProps {
     initCategoryType?: string;
     initContents?: string;
     initImageUrls?: string[]; // 초기 이미지 URL 목록 추가
+    initTags?: string[]; // 초기 태그 목록 추가
     type?: EditorType; // "question" | "edit-question" | "answer" | "edit-answer";
     isPrivate?: boolean;
     onSubmitSuccess?: () => void;
@@ -37,6 +38,7 @@ export default function QnaEditor({
     initCategoryType = "",
     initContents = "",
     initImageUrls = [],
+    initTags = [],
     type = "answer",
     isPrivate = false,
     onSubmitSuccess,
@@ -50,6 +52,7 @@ export default function QnaEditor({
     const { categories, isLoading: isLoadingCategories } = useQnaCategoriesQuery();
 
 
+
     // 커스텀 훅을 사용하여 에디터의 상태와 로직 관리
     const editorState = useQnaEditor({
         qnaId,
@@ -58,6 +61,7 @@ export default function QnaEditor({
         initCategoryType,
         initContents,
         initImageUrls,
+        initTags,
         type,
         isPrivate,
         onSubmitSuccess: () => {
@@ -91,7 +95,10 @@ export default function QnaEditor({
         handleImageUrlDelete,
         handleSubmit,
         isFormValid
-    } = editorState;    // 에디터 초기화
+    } = editorState;
+
+
+    // 에디터 초기화
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -188,7 +195,7 @@ export default function QnaEditor({
                                 <option value="" disabled>카테고리 로딩 중...</option>
                             ) : (
                                 categories.map((cat) => (
-                                    <option key={cat.id} value={cat.id}>
+                                    <option key={cat.id} value={Number(cat.id)}>
                                         {cat.name}{` - ${cat.description}`}
                                     </option>
                                 ))

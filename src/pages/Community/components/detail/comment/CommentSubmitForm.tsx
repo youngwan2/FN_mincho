@@ -2,7 +2,7 @@ import { FormEvent, useRef, useState } from "react"
 import { FiSend } from "react-icons/fi";
 
 interface CommentSubmitFormProps {
-    onSubmit: (e: FormEvent<HTMLFormElement>) => any
+    onSubmit: (e: FormEvent<HTMLFormElement>, type: 'comment' | 'reply') => any
 }
 
 const MAX_LENGTH = 500;
@@ -26,13 +26,13 @@ export default function CommentSubmitForm({ onSubmit }: CommentSubmitFormProps) 
 
     return (
         <form onSubmit={(e) => {
-            if (onSubmit(e) === true) {
+            if (onSubmit(e, 'comment') === true) {
                 if (textAreaRef.current) {
                     textAreaRef.current.value = ''
                     setTextLength(0);
                 }
             }
-        }} className="flex items-stretch mb-4 space-x-3 flex-col " >
+        }} className="flex items-stretch mb-4 flex-col" >
             <div className="flex-grow relative flex flex-col items-end">
                 <textarea
                     ref={textAreaRef}
@@ -40,11 +40,11 @@ export default function CommentSubmitForm({ onSubmit }: CommentSubmitFormProps) 
                     placeholder="댓글을 남겨주세요"
                     maxLength={MAX_LENGTH}
                     onInput={handleInput}
-                    className="h-[80.47px] text-gray-700 w-full border border-gray-300 rounded-2xl px-5 py-1 outline-primary-gray transition-colors "
+                    className="h-[80.47px] text-gray-700 w-full border border-gray-300 rounded-2xl px-5 py-1 outline-primary-gray transition-colors bg-white "
                 />
 
             </div>
-            <div className="w-full flex gap-3 items-center justify-end">
+            <div className="w-full flex gap-3 items-center justify-end mt-1">
                 <span aria-label={`텍스트 길이 제한 ${textLength + "/" + MAX_LENGTH}`} className={`text-xl text-gray-400`}>{isMaxLengthExceeded ? "글자수 제한 초과 (500/500)" : textLength + "/" + MAX_LENGTH} </span>
                 <div className=" flex  items-center gap-2 bg-primary-green hover:bg-hover-primary-green rounded-md p-1 my-2 text-white px-3">
                     <FiSend />

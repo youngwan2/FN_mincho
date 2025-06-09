@@ -14,11 +14,9 @@ interface HerbBodyProps {
     herbs: Herb[];
     totalCount?: number;
     isLoading?: boolean;
-    onSort: (sort: string, orderBy: string) => void;
-    selectedSort: string
 }
 
-export default function HerbBody({ herbs, totalCount = 0, isLoading = false, onSort, selectedSort }: HerbBodyProps) {
+export default function HerbBody({ herbs, totalCount = 0, isLoading = false }: HerbBodyProps) {
 
     const [loaded, setLoaded] = useState<Record<number, boolean>>({}) // 키의 타입이 number 라면 그 값의 타입을 boolean으로 설정한다
 
@@ -51,10 +49,9 @@ export default function HerbBody({ herbs, totalCount = 0, isLoading = false, onS
         <div className="mt-30">
             <HerbHeader
                 title={
-                    <HerbTitle elementName={"h2"} className="text-[#333] text-3xl mb-2 font-black flex items-center">
-                        약초목록({totalCount || 0})
+                    <HerbTitle elementName={"h2"} className="text-[#333] text-3xl mb font-black flex items-center">
+                        총 {totalCount || 0}개의 약초
                     </HerbTitle>}
-                sort={<HerbSort onSort={onSort} selectedSort={selectedSort} />}
             />
             <HerbList>
                 {isLoading ? renderSkeletonItems() :

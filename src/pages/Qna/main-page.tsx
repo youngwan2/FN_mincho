@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useQnaListGetQuery, useQnaCategoriesQuery } from '../../hooks/queries/useQueryQna';
 import { QnaSearchCondition } from '../../types/qna.types';
@@ -10,7 +10,11 @@ import {
     ErrorComponent,
     Pagination
 } from './components/main';
-import { FaLeaf } from 'react-icons/fa6';
+import useScrollTo from '@/hooks/useScrollTo';
+
+import { GiHerbsBundle } from "react-icons/gi";
+import { MdQuestionAnswer } from "react-icons/md";
+import { FaRegQuestionCircle } from "react-icons/fa";
 
 
 const PAGE_SIZE = 10;
@@ -22,11 +26,14 @@ export default function QnAPage() {
     const [searchType, setSearchType] = useState('');
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
-    const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);    // 카테고리 목록 조회
+    const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
+    const [_, setActiveTag] = useState<string | null>(null); // 현재 활성화된 태그 필터
+
+    // 카테고리 목록 조회
     const { categories: fetchedCategories = [], isLoading: categoriesLoading } = useQnaCategoriesQuery();
 
 
-    const sectionRef = useRef<HTMLElement>(null);
+    useScrollTo();
 
     // 서버에서 가져온 카테고리와 '전체' 옵션을 결합
     const allCategories = [{ id: 0, name: '전체', description: '모든 카테고리' }, ...fetchedCategories];
@@ -99,7 +106,26 @@ export default function QnAPage() {
         setSelectedCategory('전체');
         setSelectedCategoryId(null);
         setSearchCondition({});
+        setActiveTag(null);
         setPage(0);
+    };
+
+    // 태그 클릭 핸들러
+    const handleTagClick = (tag: string) => {
+        // 태그 클릭 시 다른 검색 조건은 유지하면서 태그만 변경
+        setSearchCondition({
+            ...searchCondition,
+            tag
+        });
+        setActiveTag(tag);
+        setPage(0);
+    };
+
+    // 태그 필터 제거 핸들러
+    const handleRemoveTagFilter = () => {
+        const { tag, ...restCondition } = searchCondition;
+        setSearchCondition(restCondition);
+        setActiveTag(null);
     };
 
     // 페이지 변경 처리
@@ -118,6 +144,7 @@ export default function QnAPage() {
     };
 
 
+    // 검색 조건 초기화
     useEffect(() => {
         if (searchCondition.keyword) {
             setSearchQuery(searchCondition.keyword);
@@ -130,6 +157,13 @@ export default function QnAPage() {
         }
         if (searchCondition.toDate) {
             setToDate(searchCondition.toDate);
+        }
+
+        // 태그 상태 업데이트
+        if (searchCondition.tag) {
+            setActiveTag(searchCondition.tag);
+        } else {
+            setActiveTag(null);
         }
     }, [searchCondition]);
 
@@ -146,30 +180,36 @@ export default function QnAPage() {
     }, [searchCondition.categoryId, allCategories, categoriesLoading]);
 
 
-    useEffect(() => {
-        // 페이지가 로드될 때 스크롤을 최상단으로 이동
-        if (sectionRef.current) {
-            sectionRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, [])
+
+
 
     return (
-        <section ref={sectionRef} className="min-h-screen p-6">
-            <div className="max-w-[1200px] w-full mx-auto ">
-                {/* 헤더 */}
-                <div className='flex justify-between items-center mb-12'>
-                    <div >
-                        <h1 className="flex text-5xl gap-3 font-bold text-gray-900 mb-4">민초 Q&A</h1>
-                        <strong className="text-green-600">자연의 지혜를 나누는 약초 커뮤니티</strong>
-                        <p>약초의 효능, 재배법, 활용법에 대한 궁금증을 해결해요</p>
+        <section className="min-h-screen p-6">
+            <div className="max-w-[1200px] w-full mx-auto animate-fade-down ">
+                <div className='flex flex-col md:flex-row justify-between items-center mb-12 gap-6'>
+                    <div className="text-center md:text-left">
+                        <div className="inline-flex items-center bg-[#0ac17b] px-4 py-1.5 rounded-full mb-4 shadow-[inset_-2px_-2px_5px_rgba(0,0,0,0.05)] animate-fade-right">
+                            <MdQuestionAnswer className="text-white mr-2" />
+                            <span className="bg-[#0ac17b] text-white font-medium">커뮤니티 서비스</span>
+                        </div>
+                        <h1 className="flex items-center text-5xl md:text-6xl md:justify-start justify-center gap-3 font-bold text-gray-800 mb-5 md:mb-6 animate-fade-left">
+                            <FaRegQuestionCircle className="text-primary-green hidden md:block" size={48} />
+                            <span>민초 Q&A</span>
+                        </h1>
+                        <div className="animate-fade-down">
+                            <strong className="text-[#05D182] text-3xl block mb-2">자연의 지혜를 나누는 약초 커뮤니티</strong>
+                            <p className="text-gray-600 text-2xl md:max-w-xl">약초의 효능, 재배법, 활용법에 대한 궁금증을 해결해요</p>
+                        </div>
                     </div>
                     <button
                         onClick={handleCreateQna}
-                        className="bg-primary-green ml-3 text-white px-12 py-4 rounded-md shadow-[inset_-2px_-2px_3px_rgba(0,0,0,0.1)] hover:bg-hover-primary-green transition-colors flex items-center gap-2 cursor-pointer"
+                        className="bg-gradient-to-r from-[#05D182] to-[#03A77F] text-white px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 cursor-pointer font-medium"
                     >
+                        <GiHerbsBundle className="text-white" size={20} />
                         질문하기
                     </button>
                 </div>
+
                 <SearchBar
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
@@ -191,6 +231,23 @@ export default function QnAPage() {
                     isLoading={categoriesLoading}
                 />
 
+                {/* 태그 필터 표시 */}
+                {searchCondition.tag && (
+                    <div className="mt-4 mb-4 bg-white p-3 rounded-lg border border-gray-200 flex items-center">
+                        <span className="text-2xl mr-2">현재 태그 필터링:</span>
+                        <div className="flex items-center bg-gradient-to-r from-[#e8f5e9] to-[#e3f2fd] text-gray-700 px-3 py-1 rounded-full text-xl border border-gray-100">
+                            <span className="text-[#05D182] mr-1">#</span>
+                            {searchCondition.tag}
+                        </div>
+                        <button
+                            className="ml-2 text-gray-500 hover:text-red-500 text-2xl font-bold"
+                            onClick={handleRemoveTagFilter}
+                        >
+                            ✕
+                        </button>
+                    </div>
+                )}
+
                 {/* 에러 상태 처리 */}
                 {isError && <ErrorComponent />}
 
@@ -200,6 +257,7 @@ export default function QnAPage() {
                     items={filteredItems}
                     handleQnaClick={handleQnaClick}
                     handleCreateQna={handleCreateQna}
+                    handleTagClick={handleTagClick}
                 />
 
                 {/* 페이지네이션 */}

@@ -1,5 +1,5 @@
-import { IoWalk, IoLockClosed, IoExitOutline } from "react-icons/io5";
-import { useDeleteUserMutation, useResetPasswordMutation } from "../../../hooks/mutations/useMutationMypage";
+import { IoLockClosedOutline, IoPersonRemoveOutline, IoLogOut } from "react-icons/io5";
+import { useDeleteUserMutation, useResetPasswordMutation } from "@/hooks/mutations/useMutationMypage";
 import { useState } from "react";
 
 import MypageTitle from "./MypageTitle";
@@ -11,7 +11,7 @@ import { logout } from "../../../service/auth.service";
 
 
 interface MypageSettingProps {
-    isSocial: boolean
+    isSocial: boolean;
 }
 export default function MypageSettings({ isSocial }: MypageSettingProps) {
     const { mutate: deleteUser } = useDeleteUserMutation();
@@ -38,38 +38,46 @@ export default function MypageSettings({ isSocial }: MypageSettingProps) {
             logout()
         }
     }
-
     return (
-        <div className="bg-gray-50 rounded-lg">
-            <MypageTitle text="설정/보안" />
+        <div className="rounded-xl p-8 border border-gray-200">
+            <MypageTitle text="계정 설정" icon="settings" />
 
-            <div className="space-y-6 mt-4">
-
+            <div className="space-y-6 mt-8">
                 <button
-                    className="flex items-center text-gray-700 cursor-pointer border border-gray-200 p-2 py-5 rounded-[3px] w-full justify-between hover:bg-gray-200"
+                    className="flex items-center cursor-pointer p-5 py-6 rounded-xl w-full justify-between border border-gray-200 transition-colors"
                     onClick={handleLogoutClick}
                 >
-                    <span className="text-2xl font-medium text-gray-700">로그아웃</span>
-                    <IoExitOutline size={22} className="text-black" />
+                    <span className="text-2xl font-medium text-gray-700 flex items-center">
+                        <IoLogOut size={32} className="text-gray-600 mr-4" />
+                        로그아웃
+                    </span>
+                    <span className="px-4 py-1 text-2xl text-gray-600">안전하게 로그아웃하기</span>
                 </button>
+
                 {/* 비밀번호 재설정 */}
                 {!isSocial ?
                     <button
-                        className="flex items-center text-gray-700 cursor-pointer border border-green-100 p-2 py-5 rounded-[3px] w-full justify-between hover:bg-green-100"
+                        className="flex items-center cursor-pointer p-5 py-6 rounded-xl w-full justify-between border border-green-200 transition-colors"
                         onClick={handlePasswordResetClick}
                     >
-                        <span className="text-2xl font-medium text-green-600">비밀번호 재설정</span>
-                        <IoLockClosed size={22} className="text-green-600" />
+                        <span className="text-2xl font-medium text-green-700 flex items-center">
+                            <IoLockClosedOutline size={32} className="text-green-600 mr-4" />
+                            비밀번호 재설정
+                        </span>
+                        <span className="px-4 py-1 text-2xl text-green-700">보안 강화하기</span>
                     </button>
                     : null}
 
                 {/* 회원 탈퇴 */}
                 <button
-                    className="flex items-center text-gray-700 cursor-pointer border border-red-100 p-2 py-5 rounded-[3px] w-full justify-between hover:bg-red-100"
+                    className="flex items-center cursor-pointer p-5 py-6 rounded-xl w-full justify-between border border-gray-200 transition-colors"
                     onClick={handleDeleteClick}
                 >
-                    <span className="text-2xl font-medium text-red-400">회원 탈퇴</span>
-                    <IoWalk size={22} className="text-red-400" />
+                    <span className="text-2xl font-medium text-gray-700 flex items-center">
+                        <IoPersonRemoveOutline size={32} className="text-gray-600 mr-4" />
+                        회원 탈퇴
+                    </span>
+                    <span className="px-4 py-1 text-2xl text-gray-600">계정 삭제하기</span>
                 </button>
             </div>
 

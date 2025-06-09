@@ -1,12 +1,15 @@
 import Pagination from "@/components/pagination/Pagination";
 import { usePostsGetQuery } from "@/hooks/queries/useQueryPosts";
 import { usePostPageStore } from "@/store/store";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import Skeleton from "react-loading-skeleton";
 import { Post } from "@/types/post.types";
 import { FaRegEye, FaRegThumbsUp } from "react-icons/fa6";
 import { getPostCategoryColorByType } from "@/utils/format";
 import { Badge } from "@/components/ui/badge";
+import CustomTimeAgo from "@/components/vender/timeago/CustomTimeAgo";
+import { FiVideo } from "react-icons/fi";
+import { MdQuestionAnswer } from "react-icons/md";
 
 const size = 25;
 export default function RelatedPostList() {
@@ -60,49 +63,63 @@ export default function RelatedPostList() {
     }
 
     return (
-        <div className="space-y-6 border rounded-xl p-5 mt-10 ">
-            <h2 className="font-bold mb-10">총 {`${totalCount} 개의 게시글이 있습니다.`}</h2>
-            <div className="mb-10">
-                {posts.map((post: Post) => {
+        <div className="space-y-6 rounded-xl mt-20 animate-fade-up animate-delay-300">
+            <h2 className="font-bold mb-10 text-2xl animate-fade-left text-gray-600 bg-gray-100 rounded-md flex items-center gap-2 px-1 py-3">
+                <MdQuestionAnswer />
+                총 {`${totalCount} 개의 게시글이 있습니다.`}
+            </h2>
+            <div className="mb-10 flex flex-col items-stretch gap-3">
+                {posts.map((post: Post, index: number) => {
                     const isCurrent = String(post.id) === String(postId);
                     return (
                         <div
                             key={post.id}
                             className={
-
-                                `border-gray-300 border-b-1 py-5 ${isCurrent ? 'font-semibold' : ''} transition-colors`}
+                                `border rounded-lg bg-white p-5 ${isCurrent ? 'shadow-[0_0_0_1px_#00C471]' : ''} transition-colors relative animate-fade-up`}
+                            style={{ animationDelay: `${index * 50}ms` }}
                         >
-                            <div className="flex flex-row items-center justify-between mb-2">
-                                <div className="flex items-center gap-4">
-                                    <span className={"text-white text-xl p-1 px-1.5 rounded-md " + getPostCategoryColorByType(post.category.type)}>
+                            {isCurrent && <span className="flex bg-hover-primary-green absolute text-white rounded-full p-2 -left-5 -top-5"><FiVideo /></span>}
+                            <div className="flex flex-col items-stretch gap-4">
+                                <div className="flex justify-between items-center">
+                                    <span className={"border text-xl p-1 px-1.5 rounded-md " + getPostCategoryColorByType(post.category.type)}>
                                         {post.category?.name ?? '카테고리'}
                                     </span>
-
-                                    <a
-                                        href={`/community/posts/${post.id}`}
-                                        className={" text-gray-800 py-1 hover:underline text-2xl "}
-                                    >
-                                        {post.title ?? '제목 없음'}{post.newPost ?
-                                            <Badge className="bg-green-100 text-green-800 text-xl ml-2 animate-pulse" variant="destructive">
-                                                새글
-                                            </Badge> : null}
-                                    </a>
-                                    <span className="text-xl text-gray-400 ml-2">by {post.author?.nickname ?? post.nickname ?? '익명'}</span>
+                                    <span className={"text-xl text-gray-400"}>
+                                        <CustomTimeAgo date={post.createdAt} />
+                                    </span>
                                 </div>
-                                <span className={"text-xl text-gray-400"}>
-                                    {post.createdAt?.slice(0, 10) ?? ''}
-                                </span>
+
+                                <Link
+                                    to={`/community/posts/${post.id}`}
+                                    className={" text-gray-800 py-1 hover:underline text-2xl "}
+                                >
+                                    {post.title ?? '제목 없음'}{post.newPost ?
+                                        <Badge className="bg-green-100 text-green-800 text-xl ml-2 animate-pulse" variant="destructive">
+                                            새글
+                                        </Badge> : null}
+                                </Link>
+
                             </div>
-                            <div className={"text-gray-500 text-xl line-clamp-2 flex gap-6 items-center"}>
+                            <div className={"text-gray-500 text-xl line-clamp-2 flex gap-6 items-center justify-between"}>
+                                <div>
+                                    <span className="text-xl text-gray-400">{post.author?.nickname ?? post.nickname ?? '익명'}</span>
+
+                                </div>
                                 {/* 댓글/조회/좋아요 카운트 */}
-                                <span className="flex items-center gap-1"><FaRegEye className="text-2xl" /> {post.viewCount}</span>
-                                <span className="flex items-center gap-1"><FaRegThumbsUp className="text-2xl" /> {post.likeCount}</span>
+                                <div className="flex gap-2 items-center">
+                                    <span className="flex items-center gap-1"><FaRegEye className="text-2xl" /> {post.viewCount}</span>
+                                    <span className="flex items-center gap-1"><FaRegThumbsUp className="text-2xl" /> {post.likeCount}</span>
+                                </div>
                             </div>
                         </div>
                     );
                 })}
             </div>
-            {totalCount > size && <Pagination perPage={size} onPageChange={onPageChange} totalPage={Math.ceil(totalCount / size)} />}
+            {totalCount > size && (
+                <div className="animate-fade-up animate-delay-300">
+                    <Pagination perPage={size} onPageChange={onPageChange} totalPage={Math.ceil(totalCount / size)} />
+                </div>
+            )}
 
         </div >
     )

@@ -13,6 +13,7 @@ import { CommentSkeleton, UserActionSkeleton } from "./skeleton/Skeleton";
 import noProfile from '@/assets/noImage.png'
 import { increasePostView } from "@/service/post.service";
 import { IoEye, IoThumbsUp } from "react-icons/io5";
+import CustomTimeAgo from "@/components/vender/timeago/CustomTimeAgo";
 
 
 const PAGE_SIZE = 10;
@@ -63,7 +64,7 @@ export default function DetailPost() {
 
     return (
         <>
-            <div className="h-[350px] bg-gradient-to-b from-gray-300 to-90% to-white w-full rounded-xl ">
+            <div className="h-[350px] bg-gradient-to-b from-gray-300 to-90% to-white w-full rounded-xl animate-fade-down">
                 {detailLoading ? (
                     <Skeleton className="w-full h-full" />
                 ) : (
@@ -72,7 +73,7 @@ export default function DetailPost() {
             </div>
 
             {/* 포스트 내용 */}
-            <div className="pt-20 mt-10 border rounded-2xl px-5">
+            <div className="pt-20 mt-10 border rounded-2xl px-5 bg-white animate-fade-up animate-delay-100">
 
                 {/* 작성자, 작성일 */}
                 <div className="flex items-center mb-4">
@@ -106,9 +107,7 @@ export default function DetailPost() {
                         </div>
 
                         {/* 작성일 */}
-                        <p className="text-xl text-gray-500">
-                            {detailLoading ? <Skeleton width={200} /> : new Date(post.createdAt).toLocaleString()}
-                        </p>
+                        {detailLoading ? <Skeleton width={200} /> : <CustomTimeAgo date={post.createdAt} className="text-gray-600 text-2xl" />}
                     </div>
                 </div>
 
@@ -127,11 +126,11 @@ export default function DetailPost() {
                         <div className="flex items-center justify-end py-8 mr-5 mb-4">
                             <div className="flex items-center space-x-4">
                                 <div className="flex items-center gap-3 text-gray-600">
-                                    <IoEye />
+                                    <IoEye className=" h-8 w-8" />
                                     <span className="text-2xl">{post.viewCount || 0}</span>
                                 </div>
                                 <button onClick={handleLikeToggle} className="flex items-center text-gray-600 hover:text-blue-600">
-                                    <IoThumbsUp className="mr-2 h-7 w-7" />
+                                    <IoThumbsUp className="mr-2 h-8 w-8" />
                                     <span className="text-2xl">{post.likeCount || 0}</span>
                                 </button>
                             </div>
@@ -151,10 +150,13 @@ export default function DetailPost() {
             {formType === 'detail' && !detailLoading
                 ? commentLoading
                     ? <CommentSkeleton />
-                    : <CommunityComment
-                        postId={Number(postId)}
-                        comments={commentInfo?.comments || []}
-                        totalCount={commentInfo?.totalCount || 0} />
+                    : <div className="animate-fade-up animate-delay-200">
+                        <CommunityComment
+                            postId={Number(postId)}
+                            comments={commentInfo?.comments || []}
+                            totalCount={commentInfo?.totalCount || 0}
+                        />
+                    </div>
                 : null
             }
         </>

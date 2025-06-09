@@ -10,7 +10,7 @@ export default function MostViewSection() {
     const { herbs, isError, isLoading } = useHerbMostViewGetQuery();
 
     return (
-        <section className="md:p-10 md:flex-row flex-col flex mt-15">
+        <section className="md:p-10 md:flex-row flex-col flex mt-15 px-4 md:px-10 lg:px-12 pb-10">
             <div className="flex flex-col max-w-[30%]">
                 <h2 className="text-4xl leading-13">
                     <strong>많은 <br /></strong>사람이 찾고 <br /> 있어요

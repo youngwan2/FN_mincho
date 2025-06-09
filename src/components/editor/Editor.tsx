@@ -107,7 +107,7 @@ export default function Editor({ post, formType }: EditorProps) {
         <section className='w-full h-full '>
             {/* 컨텐츠 헤더 */}
             {formType !== 'detail' ? <EditorContentHeader tags={tags} title={title} category={category} postCategories={postCategories} setTags={setTags} setTitle={setTitle} setCategory={setCategory} />
-                : <h2 className='md:text-5xl text-4xl border-b border-gray-100 pb-5 mt-8 font-bold'>
+                : <h2 className='md:text-5xl text-4xl border-b border-gray-100 pb-5 mt-8 font-bold text-gray-700'>
                     {post?.title}
                 </h2>
             }
@@ -115,7 +115,9 @@ export default function Editor({ post, formType }: EditorProps) {
             <div>
                 {formType !== 'detail' &&
                     <div className="pb-2 flex justify-between items-center pt-8">
-                        <p className='font-bold'>내용</p>
+                        <p className='font-bold'>내용
+                            <span className="text-red-400">*</span>
+                        </p>
                         <button
                             onClick={handleSubmit}
                             className="cursor-pointer bg-primary-green text-white px-4 py-1 rounded hover:bg-hover-primary-green"
@@ -127,7 +129,7 @@ export default function Editor({ post, formType }: EditorProps) {
 
                 {/* 에디터 툴 - 고정된 도구 */}
                 {formType !== 'detail' && <EditorMenuBar editor={editor} />}
-                <EditorContent editor={editor} className={`${formType === 'detail' ? 'border-0' : 'border'} prose-invert bg-white  border-gray-200 rounded-sm  min-h-[350px]`} height={350} />
+                <EditorContent editor={editor} className={`${formType === 'detail' ? 'border-0' : 'border'} prose-invert bg-white  border-gray-200 rounded-sm  min-h-[350px] text-gray-600`} height={350} />
             </div>
         </section>
     )

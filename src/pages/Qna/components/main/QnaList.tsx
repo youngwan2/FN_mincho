@@ -7,17 +7,22 @@ interface QnaListProps {
     items: QnaSummary[];
     handleQnaClick: (id: number) => void;
     handleCreateQna: () => void;
+    handleTagClick?: (tag: string) => void;
 }
 
-export default function QnaList({ isLoading, items, handleQnaClick, handleCreateQna }: QnaListProps) {
+export default function QnaList({ isLoading, items, handleQnaClick, handleCreateQna, handleTagClick }: QnaListProps) {
     return (
         <div className="space-y-4">
             {isLoading ? (
                 <QnaSkeleton />
-            ) : items.length > 0 ? (
-                items.map((item: QnaSummary) => (
-                    <QnaListItem key={item.id} item={item} onClick={handleQnaClick} />
-                ))
+            ) : items.length > 0 ? (items.map((item: QnaSummary) => (
+                <QnaListItem
+                    key={item.id}
+                    item={item}
+                    onClick={handleQnaClick}
+                    onTagClick={handleTagClick}
+                />
+            ))
             ) : (
                 <div className="bg-gray-50 border border-gray-200 rounded-lg p-16 text-center">
                     <p className="text-gray-600 text-2xl mb-4">등록된 QnA가 없습니다.</p>

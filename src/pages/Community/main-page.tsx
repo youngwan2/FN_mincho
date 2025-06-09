@@ -7,6 +7,7 @@ import Pagination from "../../components/pagination/Pagination";
 import { usePostsGetQuery, usePostStatisticsGetQuery } from "../../hooks/queries/useQueryPosts";
 import { PostFetchState, PostStatistics } from "../../types/post.types";
 import { usePostPageStore } from "@/store/store";
+import SearchForm from "./components/main/SearchForm";
 
 
 const pageSize = 25
@@ -69,21 +70,28 @@ export default function CommunityPage() {
 
     }
     return (
-        <section className="h-auto w-full">
+        <section className="min-h-1/3 w-full px-4 md:px-10 lg:px-12 pb-10 animate-fade-down ">
             <div className="mx-auto py-6">
                 {/* 헤더 */}
-                <CommunityHeader onSearch={onSearch} onClick={onCategoryHandler} categoryInfos={categoryInfos} activeCategoryId={activeCategoryId} />
+                <CommunityHeader />
 
                 {/* 게시판 컨테이너 */}
-                <CommunityBody>
+                <CommunityBody className="mt-12">
                     {/* 카테고리 사이드바 */}
                     <CommunitySidebar activeCategoryId={activeCategoryId} categoryInfos={categoryInfos} totalItemCount={totalCount} onClick={onCategoryHandler} />
 
-                    <div className="flex flex-col w-full bg-white rounded-lg shadow-sm overflow-hidden py-3 h-full ">
+
+                    <div className="flex flex-col w-full gap-4 items-stretch overflow-hidden min-h-1/4 h-full ">
+                        {/* 검색 폼 */}
+                        <SearchForm onSearch={onSearch} />
+
                         {/* 게시판 내용 */}
-                        <CommunityPost postFetchState={postFetchState} activeCategoryId={activeCategoryId} categoryInfos={categoryInfos} posts={posts} itemCount={itemCount} />
+                        <CommunityPost postFetchState={postFetchState} posts={posts} itemCount={itemCount} />
+
                         {/* 페이지네이션 */}
-                        <Pagination perPage={perPage} onPageChange={onPageChange} totalPage={totalPage} />
+                        {itemCount > 0 &&
+                            <Pagination perPage={perPage} onPageChange={onPageChange} totalPage={totalPage} />
+                        }
                     </div>
                 </CommunityBody>
             </div>
@@ -94,6 +102,13 @@ export default function CommunityPage() {
 
 // 선택된 아이템 개수 계산
 function calculateItemCount(categoryInfos: PostStatistics[], activeCategoryId: number) {
+
+    // 전체 카테고리 선택 시 모든 카테고리의 합계 반환
+    if (activeCategoryId === 0) {
+
+        return categoryInfos.reduce((total, categoryInfo) => total + categoryInfo.count, 0);
+    }
+
     const filteredCategory = categoryInfos.filter(categoryInfo => {
         return categoryInfo.id === activeCategoryId
     })

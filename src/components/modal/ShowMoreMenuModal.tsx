@@ -70,7 +70,7 @@ export default function ShowMoreMenuModal() {
                         <MenuItem
                             icon={<FiUser className='h-6 w-6' />}
                             label="프로필"
-                            onClick={() => handleItemClick('프로필')}
+                            onClick={() => handleItemClick('/users/me')}
                         />
                         <MenuItem
                             icon={<FiSettings className='h-6 w-6' />}

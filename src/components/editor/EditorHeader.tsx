@@ -61,21 +61,26 @@ export default function EditorContentHeader({ tags, setTags, title, setTitle, ca
     return (
         <>
             <div className="mb-12">
-                <label className="font-semibold">제목</label>
+                <label className="font-semibold">제목
+                    <span className="text-red-400">*</span>
+                </label>
                 <input
                     type="text"
-                    className="w-full mb-4 px-4 py-4 border border-gray-300 rounded-2xl"
+                    className="bg-white w-full mb-4 px-4 py-4 border border-gray-300 rounded-2xl"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
             </div>
             <div className="mb-12">
-                <label className="font-semibold">카테고리</label>
+                <label className="font-semibold">카테고리
+                    <span className="text-red-400">*</span>
+
+                </label>
                 <select
                     ref={selectRef}
                     value={categoryType ?? postCategories[0].type}
                     onChange={(e) => setCategory(e.currentTarget.value)}
-                    className="w-full mb-4 px-4 py-5 border border-gray-300 rounded-2xl"
+                    className="bg-white w-full mb-4 px-4 py-5 border border-gray-300 rounded-2xl"
                 >
                     <option value="" disabled>카테고리를 선택하세요</option>
                     {postCategories.map(category => {

@@ -16,7 +16,7 @@ export default function Pagination({ totalPage, onPageChange, perPage }: Paginat
             pageCount={totalPage} // 총페이지수
             onPageChange={onPageChange} // 변경된 페이지 핸들 함수
             pageRangeDisplayed={perPage} // 표시되는 페이지 범위
-            containerClassName="flex justify-center gap-2 mt-4"
+            containerClassName="flex justify-center gap-2 bg-white py-3 border rounded-lg"
             activeClassName="text-white bg-gray-600 px-3 py-1 rounded"
             pageClassName="px-4 py-1 border border-[#E4E4E7] rounded cursor-pointer"
             previousClassName="px-4 py-1 border border-[#E4E4E7] rounded-full cursor-pointer flex justify-center items-center"

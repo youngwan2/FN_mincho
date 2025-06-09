@@ -1,20 +1,19 @@
-
 export const getPostCategoryColorByType = (type: string) => {
     switch (type) {
         case 'DAILY':
-            return 'bg-blue-500';
+            return 'text-blue-500 bg-blue-500/10 p-2';
         case 'EXPERIENCE':
-            return 'bg-yellow-500';
+            return 'text-yellow-500 bg-yellow-500/10  p-2';
         case 'INFO':
-            return 'bg-[#05D182] text-white';
+            return 'text-[#05D182] bg-[#05D182]/10  p-2';
         case 'CULTIVATION':
-            return 'bg-green-500';
+            return 'text-green-500 bg-green-500/10  p-2';
         case 'CAUTION':
-            return 'bg-red-500';
+            return 'text-red-500 bg-red-500/10  p-2';
         case 'EVENT':
-            return 'bg-indigo-500';
+            return 'text-indigo-500 bg-indigo-500/10  p-2';
         case 'ETC':
-            return 'bg-purple-500';
+            return 'text-purple-500 bg-purple-500/10  p-2';
         default:
             return '';
     }

@@ -12,14 +12,14 @@ interface CommunityMobileSidebar {
 export default function CommunityMobileSidebar({ mobile, activeCategoryId, categoryInfos, active, onClick }: CommunityMobileSidebar) {
     if (!mobile) return null;
     return (
-        <div className={`${active ? 'block' : 'hidden'} w-64 bg-white rounded-lg shadow-[0_0_25px_1px_rgba(0,0,0,0.2)] overflow-hidden fixed top-1/4 z-50`}>
-            <div className="bg-[#05D182] text-white p-4 font-semibold">
+        <div className={`${active ? 'block' : 'hidden'} w-[250px] bg-white rounded-lg shadow-[0_0_25px_1px_rgba(0,0,0,0.2)] overflow-hidden fixed top-1/4 z-50`}>
+            <div className="p-4 font-semibold">
                 카테고리
             </div>
-            <ul>
+            <ul className="pl-4 space-y-3 overflow-y-auto h-auto">
                 <li
                     className={`flex justify-between items-center p-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50
-                  ${activeCategoryId === 0 ? 'border-l-4 border-l-[#05D182] font-semibold' : ''}`}
+                  ${activeCategoryId === 0 ? 'font-semibold' : ''}`}
                     onClick={() => onClick(0)}
                 >
                     <span>전체</span>
@@ -32,7 +32,7 @@ export default function CommunityMobileSidebar({ mobile, activeCategoryId, categ
                         <li
                             key={categoryInfo.id}
                             className={`flex justify-between items-center p-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50
-                  ${activeCategoryId === categoryInfo.id ? 'border-l-4 border-l-[#05D182] font-semibold' : ''}`}
+                  ${activeCategoryId === categoryInfo.id ? ' font-semibold' : ''}`}
                             onClick={() => onClick(categoryInfo.id)}
                         >
                             <span>{categoryInfo.name}</span>

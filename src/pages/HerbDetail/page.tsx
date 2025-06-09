@@ -22,7 +22,7 @@ export default function HerbDetailPage() {
 
 
     return (
-        <section className="min-h-[100vh]">
+        <section className="min-h-[100vh] px-4 md:px-10 lg:px-12 pb-10">
             {
                 isLoading
                     ? <div className="fixed left-0 top-0 w-full h-full">

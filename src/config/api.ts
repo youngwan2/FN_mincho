@@ -98,9 +98,11 @@ export const apiRoutes = {
         update: (commentId: number) => baseUrl + `/community/comments/${commentId}`,
         delete: (commentId: number) => baseUrl + `/community/comments/${commentId}`,
         byUser: (page: number, size: number) => baseUrl + `/users/me/comments?page=${page}&size=${size}`
-    }, qna: {
-        getAll: (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number }) => {
-            let url = baseUrl + `/community/qna?page=${page}&size=${size}`;
+    },
+
+    qna: {
+        getAll: (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number, tag?: string }) => {
+            let url = baseUrl + `/community/qnas?page=${page}&size=${size}`;
 
             if (condition) {
                 if (condition.keyword) url += `&keyword=${encodeURIComponent(condition.keyword)}`;
@@ -108,28 +110,29 @@ export const apiRoutes = {
                 if (condition.fromDate) url += `&fromDate=${condition.fromDate}`;
                 if (condition.toDate) url += `&toDate=${condition.toDate}`;
                 if (condition.categoryId) url += `&categoryId=${condition.categoryId}`;
+                if (condition.tag) url += `&tag=${encodeURIComponent(condition.tag)}`;
             }
 
             return url;
         },
-        getById: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
-        create: () => baseUrl + '/community/qna',
-        update: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
-        delete: (qnaId: number) => baseUrl + `/community/qna/${qnaId}`,
-        getCategories: () => baseUrl + '/community/qna/categories',
-        byUser: (page: number, size: number) => baseUrl + `/users/me/qna?page=${page}&size=${size}`,
-        byUserId: (userId: number, page: number, size: number) => baseUrl + `/users/${userId}/qna?page=${page}&size=${size}`, images: {
-            upload: (qnaId: number) => baseUrl + `/community/qna/${qnaId}/images`,
-            delete: (qnaId: number, imageId: number) => baseUrl + `/community/qna/${qnaId}/images/${imageId}`
+        getById: (qnaId: number) => baseUrl + `/community/qnas/${qnaId}`,
+        create: () => baseUrl + '/community/qnas',
+        update: (qnaId: number) => baseUrl + `/community/qnas/${qnaId}`,
+        delete: (qnaId: number) => baseUrl + `/community/qnas/${qnaId}`,
+        getCategories: () => baseUrl + '/community/qnas/categories',
+        byUser: (page: number, size: number) => baseUrl + `/users/me/qnas?page=${page}&size=${size}`,
+        byUserId: (userId: number, page: number, size: number) => baseUrl + `/users/${userId}/qnas?page=${page}&size=${size}`, images: {
+            upload: (qnaId: number) => baseUrl + `/community/qnas/${qnaId}/images`,
+            delete: (qnaId: number, imageId: number) => baseUrl + `/community/qnas/${qnaId}/images/${imageId}`
         },
         answer: {
-            create: (qnaId: number) => baseUrl + `/community/qna/${qnaId}/answers`,
-            update: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}`,
-            delete: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}`,
-            adopt: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}/adopt`,
+            create: (qnaId: number) => baseUrl + `/community/qnas/${qnaId}/answers`,
+            update: (answerId: number) => baseUrl + `/community/qnas/answers/${answerId}`,
+            delete: (answerId: number) => baseUrl + `/community/qnas/answers/${answerId}`,
+            adopt: (answerId: number) => baseUrl + `/community/qnas/answers/${answerId}/adopt`,
             images: {
-                upload: (qnaId: number, answerId: number) => baseUrl + `/community/qna/${qnaId}/answers/${answerId}/images`,
-                delete: (answerId: number, imageId: number) => baseUrl + `/community/qna/answers/${answerId}/images/${imageId}`
+                upload: (qnaId: number, answerId: number) => baseUrl + `/community/qnas/${qnaId}/answers/${answerId}/images`,
+                delete: (answerId: number, imageId: number) => baseUrl + `/community/qnas/answers/${answerId}/images/${imageId}`
             }
         }
     },

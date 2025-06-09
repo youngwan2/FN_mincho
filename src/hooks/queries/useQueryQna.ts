@@ -4,7 +4,7 @@ import { getQnaList, getQnaById, getMyQnaList, getUserQnaList, getQnaCategories 
 import { QnaCategory, QnaDetail } from "@/types/qna.types";
 
 /** QnA 전체 정보*/
-export const useQnaListGetQuery = (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number }) => {
+export const useQnaListGetQuery = (page: number, size: number, condition?: { keyword?: string, searchType?: string, fromDate?: string, toDate?: string, categoryId?: number, tag?: string }) => {
     const {
         data,
         isError,
@@ -68,8 +68,6 @@ export const useQnaCategoriesQuery = () => {
     });
 
     const categories: QnaCategory[] = data?.success ? data.data : [];
-
-    console.log(categories)
 
     // 기본 카테고리 (API 실패 시 폴백)
     const defaultCategories: QnaCategory[] = [

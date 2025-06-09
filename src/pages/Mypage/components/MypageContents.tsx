@@ -3,6 +3,7 @@ import MypageNavigation from "./MypageNavigation";
 import MypagePost from "./MypagePost";
 import MypageComment from "./MypageComment";
 import MypageFavoriteHerb from "./MypageFavoriteHerb";
+import MypageTitle from "./MypageTitle";
 
 interface MypageContents {
     stats: {
@@ -27,12 +28,18 @@ export default function MypageContents({ stats }: MypageContents) {
     ];
 
     return (
-        <div className="mt-10 min-h-[200px]">
-            {/* 네비게이션 탭 */}
-            <MypageNavigation onClickTaps={onClickTaps} tabIndex={tapIndex} />
+        <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
+            <MypageTitle text="내 컨텐츠 관리" icon="contents" />
 
-            {/* 선택된 탭에 맞는 콘텐츠 렌더링 */}
-            {tabContents[tapIndex]}
+            <div className="mt-6 min-h-[300px]">
+                {/* 네비게이션 탭 */}
+                <MypageNavigation onClickTaps={onClickTaps} tabIndex={tapIndex} />
+
+                {/* 선택된 탭에 맞는 콘텐츠 렌더링 */}
+                <div className="py-4">
+                    {tabContents[tapIndex]}
+                </div>
+            </div>
         </div>
     );
 }

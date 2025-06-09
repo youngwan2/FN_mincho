@@ -22,7 +22,7 @@ export default function PreviewHerbsSection() {
     const SLIDES = herbs
 
     return (
-        <section className="md:flex-row flex-col flex mt-40 md:p-10 p-0 relative ">
+        <section className="md:flex-row flex-col flex mt-40 md:p-10 p-0 relative px-4 md:px-10 lg:px-12 pb-10 ">
             <div className="md:w-[30%] md:block flex justify-between w-full z-10">
                 <h2 className="text-4xl  leading-13">약초도감 <br /> <strong>미리보기</strong></h2>
                 <MoreButton onClick={() => navigate("/herbs")} />

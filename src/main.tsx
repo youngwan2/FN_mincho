@@ -32,6 +32,7 @@ import PageNotFoundCard from './components/card/PageNotFoundCard';
 import QnAPage from './pages/Qna/main-page';
 import QnaDetailPage from './pages/Qna/detail-page';
 import QnaWritePage from './pages/Qna/write-page';
+import QnaEditPage from './pages/Qna/edit-page';
 
 
 const queryClient = new QueryClient({
@@ -60,6 +61,7 @@ createRoot(document.getElementById('root')!).render(
               <Route path='post/write' element={<CommunityEditorPage />} />
               <Route path='qnas' element={<QnAPage />} />
               <Route path='qna/write' element={<QnaWritePage />} />
+              <Route path='qnas/:qnaId/edit' element={<QnaEditPage />} />
             </Route>
             <Route path='community/posts/:postId' element={<CommunityDetailPage />} />
             <Route path='community/qnas/:qnaId' element={<QnaDetailPage />} />

@@ -1,4 +1,4 @@
-import { Link } from "react-router"; // 오타 수정 반영
+import { Link } from "react-router";
 import { FiBook, FiHeart, FiUsers, FiUser, FiBookmark, FiMenu, FiChevronDown } from "react-icons/fi";
 import useAuth from "../../hooks/useAuth";
 import Profile from "../../pages/Home/components/Profile";
@@ -16,9 +16,9 @@ export default function Header() {
     return (
         <>
             {/* 상단 헤더 */}
-            <header className="bg-transparent flex justify-between h-35 items-center px-4 fixed top-0 left-1/2 -translate-x-1/2 w-full z-[1000] bg-white border-b border-gray-100">
+            <header className="flex justify-between h-35 items-center px-4 fixed top-0 left-1/2 -translate-x-1/2 w-full z-[1000] bg-transparent">
                 <div className="max-w-[1200px] flex justify-between items-center w-full mx-auto">
-                    <div className="flex items-center bg-[rgba(255,255,255,0.7)] rounded-2xl p-2 py-4">
+                    <div className="flex items-center bg-[rgba(255,255,255,0.7)] border border-gray-100  blur-3 rounded-2xl p-2 py-4">
                         <h1 className="font-bold">
                             <Link to={"/"}>
                                 <Logo />
@@ -26,59 +26,60 @@ export default function Header() {
                         </h1>
 
                         {/* 데스크탑 전용 네비게이션 */}
-                        <nav className="ml-8 hidden md:block ">                            <ul className="flex">
-                            <li className="mx-3 font-bold text-[15px]"><Link to={"/herbs"}>약초도감</Link></li>
-                            <li className="mx-3 font-bold text-[15px] relative">
-                                <div
-                                    className="flex items-center cursor-pointer"
-                                    onMouseEnter={() => setShowRecommendDropdown(true)}
-                                    onMouseLeave={() => setShowRecommendDropdown(false)}
-                                >
-                                    <span>추천약초</span>
-                                    <FiChevronDown className="ml-1" size={14} />
+                        <nav className="ml-8 hidden md:block ">
+                            <ul className="flex">
+                                <li className="mx-3 font-bold text-[15px]"><Link to={"/herbs"}>약초도감</Link></li>
+                                <li className="mx-3 font-bold text-[15px] relative">
+                                    <div
+                                        className="flex items-center cursor-pointer"
+                                        onMouseEnter={() => setShowRecommendDropdown(true)}
+                                        onMouseLeave={() => setShowRecommendDropdown(false)}
+                                    >
+                                        <span>추천약초</span>
+                                        <FiChevronDown className="ml-1" size={14} />
 
-                                    {/* 추천약초 드롭다운 메뉴 */}
-                                    {showRecommendDropdown && (
-                                        <div className="absolute top-full left-0 mt-0 w-[150px] bg-white border border-gray-100 rounded-md shadow-sm z-[1001]">
-                                            <Link to="/chat/herbs-recommend" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
-                                                맞춤 추천
-                                            </Link>
-                                            <Link to="/herbs/popular" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
-                                                인기 약초
-                                            </Link>
-                                            <Link to="/herbs/seasonal" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
-                                                계절별 약초
-                                            </Link>
-                                        </div>
-                                    )}
-                                </div>
-                            </li>
-                            <li className="mx-3 font-bold text-[15px] relative">
-                                <div
-                                    className="flex items-center cursor-pointer"
-                                    onMouseEnter={() => setShowCommunityDropdown(true)}
-                                    onMouseLeave={() => setShowCommunityDropdown(false)}
-                                >
-                                    <span>커뮤니티</span>
-                                    <FiChevronDown className="ml-1" size={14} />
+                                        {/* 추천약초 드롭다운 메뉴 */}
+                                        {showRecommendDropdown && (
+                                            <div className="absolute top-full left-0 mt-0 w-[150px] bg-white border border-gray-100 rounded-md shadow-sm z-[1001]">
+                                                <Link to="/chat/herbs-recommend" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                    맞춤 추천
+                                                </Link>
+                                                <Link to="/herbs/popular" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                    인기 약초
+                                                </Link>
+                                                <Link to="/herbs/seasonal" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                    계절별 약초
+                                                </Link>
+                                            </div>
+                                        )}
+                                    </div>
+                                </li>
+                                <li className="mx-3 font-bold text-[15px] relative">
+                                    <div
+                                        className="flex items-center cursor-pointer"
+                                        onMouseEnter={() => setShowCommunityDropdown(true)}
+                                        onMouseLeave={() => setShowCommunityDropdown(false)}
+                                    >
+                                        <span>커뮤니티</span>
+                                        <FiChevronDown className="ml-1" size={14} />
 
-                                    {/* 커뮤니티 드롭다운 메뉴 */}
-                                    {showCommunityDropdown && (
-                                        <div className="absolute top-full left-0 mt-0 w-[150px] bg-white border border-gray-100 rounded-md shadow-sm z-[1001]">
-                                            <Link to="/community/posts" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
-                                                커뮤니티
-                                            </Link>
-                                            <Link to="/community/qnas" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
-                                                Q&A
-                                            </Link>
-                                            <Link to="/community/qnas" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
-                                                약초꿀팁
-                                            </Link>
-                                        </div>
-                                    )}
-                                </div>
-                            </li>
-                        </ul>
+                                        {/* 커뮤니티 드롭다운 메뉴 */}
+                                        {showCommunityDropdown && (
+                                            <div className="absolute top-full left-0 mt-0 w-[150px] bg-white border border-gray-100 rounded-md shadow-sm z-[1001]">
+                                                <Link to="/community/posts" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                    커뮤니티
+                                                </Link>
+                                                <Link to="/community/qnas" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                    Q&A
+                                                </Link>
+                                                <Link to="/community/qnas" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                    약초꿀팁
+                                                </Link>
+                                            </div>
+                                        )}
+                                    </div>
+                                </li>
+                            </ul>
                         </nav>
                     </div>
 
@@ -86,7 +87,7 @@ export default function Header() {
                     <div className="flex items-center gap-2 ">
                         {/* 북마크, 알림 아이콘 */}
                         {isLogin && (
-                            <div className="bg-[rgba(255,255,255,0.7)] rounded-2xl p-4 flex">
+                            <div className="bg-[rgba(255,255,255,0.7)]  border border-gray-100 rounded-2xl p-4 flex">
                                 {/* 북마크 */}
                                 <Link to="/users/me" className="mx-2 hover:text-primary-green text-gray-500">
                                     <FiBookmark size={22} />
@@ -115,9 +116,10 @@ export default function Header() {
                     </div>
                 </div>
             </header>
-            <div className="h-35 mb-10"></div>
+            <div className="h-35 pb-10"></div>
 
-            {/* 모바일 하단 네비게이션 */}            <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md flex justify-around items-center h-25 md:hidden z-50">
+            {/* 모바일 하단 네비게이션 */}
+            <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md flex justify-around items-center h-25 md:hidden z-50">
                 <Link to="/herbs" className="flex flex-col items-center text-xl gap-2 hover:text-hover-primary-green">
                     <FiBook size={22} />
                     약초도감
@@ -145,6 +147,7 @@ export default function Header() {
                         </div>
                     )}
                 </div>
+
                 {/* 모바일에서도 커뮤니티 터치 시 서브메뉴 표시 */}
                 <div className="relative">
                     <button

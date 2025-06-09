@@ -15,6 +15,7 @@ export interface QnaSummary {
     writer: string;
     imageUrls: string[];
     answers: AnswerSummary[];
+    tags: string[]; // 태그 목록
     createdAt: string; // ISO 날짜 문자열
     view: number;
 }
@@ -30,6 +31,7 @@ export interface QnaSearchCondition {
     fromDate?: string;
     toDate?: string;
     categoryId?: number;
+    tag?: string;
 }
 
 export interface AnswerDetail {
@@ -54,11 +56,15 @@ export interface QnaDetail {
     content: string;
     isPrivate: boolean;
     isMine: boolean;
+    writerId: number;
     writer: string;
     avatarUrl?: string; // 작성자의 아바타 URL
     imageUrls: string[];
     answers: AnswerDetail[];
+    tags: string[]; // 태그 목록
     createdAt: string; // ISO 날짜 문자열
+    categoryId: number;
+    categoryName: string;
     view: number;
 }
 

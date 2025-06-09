@@ -49,25 +49,25 @@ export default function MypageProfileForm({ profileInfo, onFormToggle, profileMu
     return (
         <form className="w-full" onSubmit={handleSubmit}>
             <div className="mb-3">
-                <label className="block text-gray-700 text-xl font-semibold mb-1">닉네임</label>
+                <label className="block text-gray-700 text-2xl font-semibold mb-1">닉네임</label>
                 <input
                     type="text"
                     name="nickname"
                     defaultValue={profileInfo.nickname || ''}
                     onChange={handleChange}
-                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-700 text-xl focus:outline-hover-primary-green"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-700 text-2xl focus:outline-hover-primary-green"
                 />
                 {profileInfo.nickname && <p className="text-red-500 text-sm">{formErrors.nickname}</p>}
             </div>
 
             <div className="mb-3 mt-5">
-                <label className="block text-gray-700 text-xl font-semibold mb-1">소개</label>
+                <label className="block text-gray-700 text-2xl font-semibold mb-1">소개</label>
                 <textarea
                     rows={300}
                     name="introduction"
                     defaultValue={profileInfo.introduction || ''}
                     onChange={handleChange}
-                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-700 text-xl resize-none h-[30vh] focus:outline-hover-primary-green"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-700 text-2xl resize-none h-[30vh] focus:outline-hover-primary-green"
                 />
                 {profileInfo.introduction && <p className="text-red-500 text-sm">{formErrors.introduction}</p>}
             </div>
@@ -76,14 +76,14 @@ export default function MypageProfileForm({ profileInfo, onFormToggle, profileMu
                 <PrimaryButton
                     type="button"
                     onClick={onFormToggle}
-                    className=" border border-gray-300 rounded bg-white text-gray-600"
+                    className=" border border-gray-300 rounded bg-white text-gray-600 text-2xl"
                 >
                     취소
                 </PrimaryButton>
 
                 <PrimaryButton
                     type="submit"
-                    className=" bg-primary-green hover:bg-hover-primary-green text-white"
+                    className=" bg-primary-green hover:bg-hover-primary-green text-white text-2xl"
                 >
                     저장
                 </PrimaryButton>

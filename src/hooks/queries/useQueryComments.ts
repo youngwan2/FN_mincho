@@ -11,8 +11,7 @@ export const useCommentGetQuery = ({ page, size, sortby, postId }: GetCommentFet
         queryFn: () => getComments({ page, size, sortby, postId })
     })
 
-    const commentInfo = data?.data?.data ?? []
-
+    const commentInfo = data?.data || []
 
     return { commentInfo, isLoading, isError, status }
 

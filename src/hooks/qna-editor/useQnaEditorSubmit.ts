@@ -61,10 +61,11 @@ export function useQnaEditorSubmit(
 
     // 질문 데이터 생성 함수 (JSON)
     const createQuestionData = (): FormDataContent => {
+
         return {
             title,
             content,
-            categoryType: category,
+            category: category,
             tags,
             isPrivate: isPrivateQuestion
         };
