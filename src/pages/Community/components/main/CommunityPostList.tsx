@@ -4,7 +4,7 @@ import { Post, PostFetchState } from "@/types/post.types"
 import Skeleton from 'react-loading-skeleton'
 import { getPostCategoryColorByType } from "@/utils/format"
 import { Badge } from "@/components/ui/badge"
-import { FiClock, FiEye, FiMessageCircle, FiUser } from "react-icons/fi"
+import { FiClock, FiEye, FiUser } from "react-icons/fi"
 import CustomTimeAgo from "@/components/vender/timeago/CustomTimeAgo"
 import { FaThumbsUp } from "react-icons/fa6"
 

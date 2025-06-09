@@ -1,6 +1,6 @@
 import QnaEditor from '@/components/editor/QnaEditor';
 import { useState } from 'react';
-import { FiEdit, FiPenTool } from 'react-icons/fi';
+import { FiEdit } from 'react-icons/fi';
 
 interface AnswerFormProps {
     qnaId: string;

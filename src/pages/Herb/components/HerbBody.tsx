@@ -3,7 +3,6 @@ import { Herb } from "../../../types/herb.types";
 import HerbHeader from "./HerbHeader";
 import HerbItem from "./HerbItem";
 import HerbList from "./HerbList";
-import HerbSort from "./HerbSort";
 import HerbTitle from "./HerbTitle";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';

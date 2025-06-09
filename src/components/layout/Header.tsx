@@ -44,12 +44,12 @@ export default function Header() {
                                                 <Link to="/chat/herbs-recommend" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
                                                     맞춤 추천
                                                 </Link>
-                                                <Link to="/herbs/popular" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                {/* <Link to="/herbs/popular" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
                                                     인기 약초
                                                 </Link>
                                                 <Link to="/herbs/seasonal" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
                                                     계절별 약초
-                                                </Link>
+                                                </Link> */}
                                             </div>
                                         )}
                                     </div>
@@ -72,9 +72,9 @@ export default function Header() {
                                                 <Link to="/community/qnas" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
                                                     Q&A
                                                 </Link>
-                                                <Link to="/community/qnas" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
+                                                {/* <Link to="/community/qnas" className="block font-thin px-4 py-2 text-2xl hover:bg-gray-100 transition-colors">
                                                     약초꿀팁
-                                                </Link>
+                                                </Link> */}
                                             </div>
                                         )}
                                     </div>
@@ -138,12 +138,12 @@ export default function Header() {
                             <Link to="/chat/herbs-recommend" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
                                 맞춤 추천
                             </Link>
-                            <Link to="/herbs/popular" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
+                            {/* <Link to="/herbs/popular" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
                                 인기 약초
                             </Link>
                             <Link to="/herbs/seasonal" className="block px-4 py-2 text-xl hover:bg-gray-100 transition-colors">
                                 계절별 약초
-                            </Link>
+                            </Link> */}
                         </div>
                     )}
                 </div>
