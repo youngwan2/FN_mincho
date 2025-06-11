@@ -6,7 +6,6 @@ import {
     FiBriefcase,
     FiSettings,
     FiUser,
-    FiClock,
     FiMessageSquare,
 } from 'react-icons/fi';
 import { useNavigate } from 'react-router';
@@ -72,16 +71,7 @@ export default function ShowMoreMenuModal() {
                             label="프로필"
                             onClick={() => handleItemClick('/users/me')}
                         />
-                        <MenuItem
-                            icon={<FiSettings className='h-6 w-6' />}
-                            label="계정 관리"
-                            onClick={() => handleItemClick('계정 관리')}
-                        />
-                        <MenuItem
-                            icon={<FiClock className='h-6 w-6' />}
-                            label="활동내역"
-                            onClick={() => handleItemClick('활동내역')}
-                        />
+
                     </Section>
 
 
@@ -108,37 +98,41 @@ interface MenuItemProps {
     onClick?: () => void;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ icon, label, badge, onClick }) => (
-    <button
-        className="flex items-center justify-between w-full p-4 hover:bg-gray-50 transition-colors"
-        onClick={onClick}
-    >
-        <div className="flex items-center gap-3">
-            <span className="text-gray-600 text-lg">{icon}</span>
-            <span className="text-gray-800 font-medium">{label}</span>
-        </div>
-        {badge && (
-            <span className="bg-pink-500 text-white text-xs px-2 py-1 rounded-full font-medium">
-                {badge}
-            </span>
-        )}
-    </button>
-);
+function MenuItem({ icon, label, badge, onClick }: MenuItemProps) {
+    return (
+        <button
+            className="flex items-center justify-between w-full p-4 hover:bg-gray-50 transition-colors"
+            onClick={onClick}
+        >
+            <div className="flex items-center gap-3">
+                <span className="text-gray-600 text-lg">{icon}</span>
+                <span className="text-gray-800 font-medium">{label}</span>
+            </div>
+            {badge && (
+                <span className="bg-pink-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+                    {badge}
+                </span>
+            )}
+        </button>
+    )
+};
 
 interface SectionProps {
     title?: string;
     children: React.ReactNode;
 }
 
-const Section: React.FC<SectionProps> = ({ title, children }) => (
-    <div className="border-b border-gray-200 last:border-b-0">
-        {title && (
-            <div className="px-4 py-3 bg-gray-50">
-                <h3 className="text-sm font-semibold text-gray-600 uppercase tracking-wide">
-                    {title}
-                </h3>
-            </div>
-        )}
-        <div>{children}</div>
-    </div>
-);
+function Section({ title, children }: SectionProps) {
+    return (
+        <div className="border-b border-gray-200 last:border-b-0">
+            {title && (
+                <div className="px-4 py-3 bg-gray-50">
+                    <h3 className="text-sm font-semibold text-gray-600 uppercase tracking-wide">
+                        {title}
+                    </h3>
+                </div>
+            )}
+            <div>{children}</div>
+        </div>
+    )
+};

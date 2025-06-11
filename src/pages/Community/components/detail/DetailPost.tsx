@@ -51,7 +51,7 @@ export default function DetailPost() {
     // 게시글 삭제 후 리다이렉트
     useEffect(() => {
         if (postDeleteIsSuccess) {
-            navigate("/community")
+            navigate("/community/posts")
         }
     }, [postDeleteIsSuccess])
 

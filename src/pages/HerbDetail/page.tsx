@@ -1,16 +1,13 @@
+import { useEffect } from "react";
 import { useParams } from "react-router";
 import { useHerbDetailGetQuery } from "../../hooks/queries/useQueryHerbs";
-import HerbDetailBanner from "./components/HerbDetailBanner";
-import HerbDetailBody from "./components/HerbDetailBody";
-import HerbDetailHeader from "./components/HerbDetailHeader";
-import HerbDetailImages from "./components/HerbDetailImages";
-import InteractionPanel from "./components/InteractionPanel";
-import HerbDetailContents from "./components/HerbDetailContents";
-import HerbDetailFooter from "./components/HerbDetailFooter";
+
 import LoadingSpinner from "../../components/spinner/LoadingSpinner";
-import { IoEye } from "react-icons/io5";
 import HerbNotFoundCard from "../../components/card/HerbNotFoundCard";
 import ShareModal from "../../components/modal/ShareModal";
+import { PdfPreviewModal } from "./components/pdf";
+import { IoEye } from "react-icons/io5";
+import { HerbDetailBanner, HerbDetailBody, HerbDetailContents, HerbDetailFooter, HerbDetailHeader, HerbDetailImages, InteractionPanel } from "./components";
 
 export default function HerbDetailPage() {
 
@@ -19,6 +16,13 @@ export default function HerbDetailPage() {
 
     const bannerImage = (herb?.imgUrls ?? [])[0]
     const images = (herb?.imgUrls ? herb.imgUrls : [])
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 300,
+            behavior: 'smooth'
+        })
+    }, [herbId])
 
 
     return (
@@ -34,21 +38,26 @@ export default function HerbDetailPage() {
 
                         : <>
                             <HerbDetailBanner image={bannerImage} />
-                            <HerbDetailHeader herb={herb} />
-
-                            <HerbDetailBody>
-                                <HerbDetailImages images={images} />
-                                <div className="flex items-center justify-between relative z-50 ">
-                                    <InteractionPanel herb={herb} herbId={herbId} />
-                                    <div className="flex">
-                                        <span title="조회수" className="gap-2 text-3xl flex items-center mr-2"><IoEye />{herb?.viewCount || 0} </span>
-                                        <ShareModal title={herb.cntntsSj} />
-                                    </div>
+                            <div className="animate-fade-down w-full">
+                                <div className="flex justify-between items-center mb-2">
+                                    <HerbDetailHeader herb={herb} />
+                                    <PdfPreviewModal herb={herb} />
                                 </div>
-                                <HerbDetailContents herb={herb} />
-                            </HerbDetailBody>
 
-                            <HerbDetailFooter herbId={Number(herbId)} />
+                                <HerbDetailBody>
+                                    <HerbDetailImages images={images} />
+                                    <div className="flex items-center justify-between relative z-50 ">
+                                        <InteractionPanel herb={herb} herbId={herbId} />
+                                        <div className="flex">
+                                            <span title="조회수" className="gap-2 text-3xl flex items-center mr-2"><IoEye />{herb?.viewCount || 0} </span>
+                                            <ShareModal title={herb.cntntsSj} />
+                                        </div>
+                                    </div>
+                                    <HerbDetailContents herb={herb} />
+                                </HerbDetailBody>
+
+                                <HerbDetailFooter herbId={Number(herbId)} />
+                            </div>
                         </>
             }
 

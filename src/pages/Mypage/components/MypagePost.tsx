@@ -51,7 +51,7 @@ export default function MypagePost({ totalCount, enabled }: MypagePostProps) {
                         <p className="text-xl text-gray-500">{new Date(post.createdAt).toLocaleString()}</p>
                     </div>
                     {/* 페이지 이동 버튼 */}
-                    <MypageViewButton onNavigate={() => handleNavigate(`/community/${post.id}`)} />
+                    <MypageViewButton onNavigate={() => handleNavigate(`/community/posts/${post.id}`)} />
                 </div>
             ))}
             <Pagination perPage={PAGE_SIZE} totalPage={Math.ceil(totalCount / PAGE_SIZE)} onPageChange={({ selected }: { selected: number }) => setPage(selected)} />

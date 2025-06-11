@@ -1,0 +1,102 @@
+/* PDF Modal 전체 화면 스타일 */
+.portal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}
+
+/* PDF 내용을 위한 스타일 */
+.pdf-text {
+  white-space: pre-line !important;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.pdf-text p {
+  margin-bottom: 0.75rem;
+}
+
+/* 약초 책자 스타일 */
+.pdf-content {
+  font-family: 'Noto Serif KR', serif;
+  background-color: #fffcf5;
+  background-image: linear-gradient(to right, rgba(234, 224, 204, 0.1) 0.5px, transparent 1px),
+                    linear-gradient(to bottom, rgba(234, 224, 204, 0.1) 0.5px, transparent 1px);
+  background-size: 15px 15px;
+  border: 1px solid #e0d5c1;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  color: #333;
+  position: relative;
+}
+
+.pdf-title {
+  font-family: 'Noto Serif KR', serif;
+  color: #265c00;
+  font-size: 2.35rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+  font-weight: 700;
+  z-index: 1;
+}
+
+.pdf-footer {
+  margin-top: 2rem;
+  text-align: right;
+  color: #888;
+  font-size: 0.95rem;
+}
+
+.pdf-section {
+  margin-top: 2.5rem;
+}
+
+.pdf-subtitle {
+  color: #3e6c15;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  border-left: 4px solid #8aad41;
+  padding-left: 0.7rem;
+}
+
+.pdf-image-container {
+  background: #fff;
+  border: 1px solid #e0d5c1;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pdf-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.pdf-data-table th {
+  background: #f4f8eb;
+  color: #265c00;
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+  border: 1px solid #e0d5c1;
+  width: 120px;
+  text-align: left;
+}
+
+.pdf-data-table td {
+  padding: 0.7rem 1rem;
+  border: 1px solid #e0d5c1;
+  background: #fff;
+  font-size: 1.05rem;
+}
