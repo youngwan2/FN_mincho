@@ -60,21 +60,21 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                             {/* 카테고리 */}
                             <div className="flex justify-between items-center">
                                 <span className={`
-                                min-w-24 mr-4 px-3 py-1 rounded-full text-xl font-semibold
+                                min-w-24 mr-4 px-3 py-1 rounded-full text-[14.5px] font-semibold
                              ${getPostCategoryColorByType(post.category.type)}
                             `}>
                                     {post.category.name}
                                 </span>
                                 <div className="flex gap-2 items-center text-gray-500 text-xl">
                                     <FiClock />
-                                    <CustomTimeAgo date={post.createdAt} />
+                                    <CustomTimeAgo date={post.createdAt} className="text-[14.5px]" />
                                 </div>
                             </div>
 
                             {/* 타이틀 */}
                             <div>
                                 <Link to={`/community/posts/${post.id}`}>
-                                    <div className="font-medium mb-1 hover:text-gray-700 cursor-pointer flex mt-3">
+                                    <div className="font-medium mb-1 hover:text-gray-700 cursor-pointer flex mt-2.5">
                                         <strong className="text-3xl">{post.title}</strong>
                                         {post.newPost ?
                                             <Badge className="bg-green-100 text-green-800 text-xl ml-2 animate-pulse" variant="destructive">
@@ -88,7 +88,7 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
                                             : null}
                                     </div>
                                     <div className="flex justify-between mt-3">
-                                        <div className="flex items-center text-2xl text-gray-500 pl-1 md:mt-0 mt-3">
+                                        <div className="flex items-center text-[14.5px] text-gray-500 pl-1 md:mt-0 mt-4">
                                             <FiUser /> <div className="mr-3">{post.author.nickname || '익명'}</div>
                                         </div>
 
@@ -96,12 +96,12 @@ export default function CommunityPostList({ posts, postFetchState }: CommunityPo
 
                                         <div className="flex items-center gap-4 text-gray-500">
                                             <div className="flex items-center gap-1">
-                                                <FiEye size={20} />
-                                                <span className='text-2xl'>{post.viewCount || 0}</span>
+                                                <FiEye size={18} />
+                                                <span className='text-[14.5px]'>{post.viewCount || 0}</span>
                                             </div>
                                             <div className="flex items-center gap-1">
-                                                <FaThumbsUp size={20} />
-                                                <span className='text-2xl'>{post.likeCount}</span>
+                                                <FaThumbsUp size={17} />
+                                                <span className='text-[14.5px]'>{post.likeCount}</span>
                                             </div>
                                         </div>
                                     </div>

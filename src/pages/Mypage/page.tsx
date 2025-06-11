@@ -20,8 +20,8 @@ export default function Mypage() {
 
     if (!isAuth) {
         return (
-            <div className=" min-h-screen flex items-center justify-center">
-                <div className="text-center bg-white p-8 rounded-3xl shadow-sm border border-gray-100 max-w-md mx-4">
+            <div className="min-h-screen w-full">
+                <div className="mx-auto text-center bg-white p-12 rounded-2xl shadow-sm border border-gray-100 max-w-[768px] translate-y-1/2">
                     <div className="inline-flex items-center bg-[#0ac17b] px-4 py-1.5 rounded-full mb-4 shadow-[inset_-2px_-2px_5px_rgba(0,0,0,0.05)]">
                         <FaRegMessage className="text-white mr-2" />
                         <span className="text-white font-medium">민초 마이페이지</span>
@@ -30,7 +30,7 @@ export default function Mypage() {
                     <p className="text-2xl mb-8 text-gray-600">마이페이지는 로그인 후에 이용하실 수 있습니다</p>
                     <button
                         onClick={() => navigate("/auth/login")}
-                        className="px-8 py-4 bg-gradient-to-r from-[#05D182] to-[#03A77F] text-white text-xl rounded-xl shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-1"
+                        className="px-8 py-4 bg-gradient-to-r from-[#05D182] to-[#03A77F] text-white text-2xl rounded-xl shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-1"
                     >
                         로그인하러 가기
                     </button>

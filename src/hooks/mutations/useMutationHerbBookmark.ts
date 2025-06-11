@@ -14,9 +14,9 @@ export function useCreateHerbBookmarkMutation(): UseMutationResult<any, AxiosErr
         mutationFn: ({ bookmark, herbId }: { bookmark: { herbName: string, url: string }, herbId: number }) => {
             return createHerbBookmark(bookmark, herbId)
         },
-        onSuccess: (_data, variables) => {
+        onSuccess: (_data) => {
             showToast.info("관심 약초에 추가하였습니다.")
-            queryClient.invalidateQueries({ queryKey: queryKeys.herbBookmark.update(variables.herbId) })
+            queryClient.invalidateQueries({ queryKey: ["herbBookmark"], exact: false })
             queryClient.invalidateQueries({ queryKey: queryKeys.statistics.getAll(), exact: false })
         },
         onError: (error) => {
