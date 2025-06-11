@@ -19,7 +19,7 @@ import AuthLayout from './components/layout/AuthLayout';
 import RegisterPage from './pages/Register/page';
 import FindPasswordPage from './pages/FindPassword/page';
 import HerbPage from './pages/Herb/page';
-import HerbDetailPage from './pages/HerbDetail/page';
+import HerbDetailPage from './pages/Herb/detail-page';
 import Mypage from './pages/Mypage/page';
 import CommunityPage from './pages/Community/main-page';
 import ErrorMessageCard from './components/card/ErrorMessageCard';

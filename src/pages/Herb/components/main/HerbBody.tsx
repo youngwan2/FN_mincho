@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Herb } from "../../../types/herb.types";
+import { Herb } from "../../../../types/herb.types";
 import HerbHeader from "./HerbHeader";
 import HerbItem from "./HerbItem";
 import HerbList from "./HerbList";
@@ -7,7 +7,7 @@ import HerbTitle from "./HerbTitle";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useState } from "react";
-import noImage from '../../../assets/noImage.png'
+import noImage from '@/assets/noImage.png'
 
 interface HerbBodyProps {
     herbs: Herb[];

@@ -1,7 +1,7 @@
 import React from "react"
-import { HerbDetail } from "../../../types/herb.types"
-import HerbNotFoundCard from "../../../components/card/HerbNotFoundCard"
 import HerbDetailSubTitle from "./HerbDetailSubTitle"
+import { HerbDetail } from "@/types/herb.types"
+import HerbNotFoundCard from "@/components/card/HerbNotFoundCard"
 
 interface HerbDetailContentsProps {
 

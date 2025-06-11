@@ -1,4 +1,4 @@
-import HerbDetailEmblaCarousel from "./carousel/EmblaCarousel";
+import HerbDetailEmblaCarousel from "./carousel/EmblaCarousel"
 
 interface HerbDetailIImagesProps {
     images: string[]

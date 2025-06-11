@@ -5,9 +5,9 @@ import { useHerbDetailGetQuery } from "../../hooks/queries/useQueryHerbs";
 import LoadingSpinner from "../../components/spinner/LoadingSpinner";
 import HerbNotFoundCard from "../../components/card/HerbNotFoundCard";
 import ShareModal from "../../components/modal/ShareModal";
-import { PdfPreviewModal } from "./components/pdf";
 import { IoEye } from "react-icons/io5";
-import { HerbDetailBanner, HerbDetailBody, HerbDetailContents, HerbDetailFooter, HerbDetailHeader, HerbDetailImages, InteractionPanel } from "./components";
+import { HerbDetailBanner, HerbDetailBody, HerbDetailContents, HerbDetailFooter, HerbDetailHeader, HerbDetailImages, InteractionPanel } from "./components/detail";
+import { PdfPreviewModal } from "./components/detail/pdf";
 
 export default function HerbDetailPage() {
 

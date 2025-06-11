@@ -1,7 +1,7 @@
 import { Link } from "react-router";
-import HerbTitle from "./HerbTitle";
-import { Herb } from "../../../types/herb.types";
+import { Herb } from "../../../../types/herb.types";
 import Skeleton from "react-loading-skeleton";
+import HerbTitle from "./HerbTitle";
 
 interface HerbBannerProps {
     herbs: Herb[]

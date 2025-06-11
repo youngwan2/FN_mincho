@@ -1,13 +1,13 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useHerbsGetQuery } from "../../hooks/queries/useQueryHerbs";
 import { useInView } from 'react-intersection-observer';
-import HerbBanner from "./components/HerbBanner";
-import HerbBody from "./components/HerbBody";
-import SearchForm from "./components/SearchForm";
+import HerbBanner from "./components/main/HerbBanner";
+import HerbBody from "./components/main/HerbBody";
+import SearchForm from "./components/main/SearchForm";
 import LoadingSpinner from "../../components/spinner/LoadingSpinner";
 import { HerbSearchCondition } from "../../types/herb.types";
-import HerbHeader from "./components/HerbHeader";
-import HerbSort from "./components/HerbSort";
+import HerbHeader from "./components/main/HerbHeader";
+import HerbSort from "./components/main/HerbSort";
 
 export default function HerbPage() {
     const { ref, inView } = useInView()

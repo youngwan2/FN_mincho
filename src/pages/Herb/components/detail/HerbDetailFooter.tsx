@@ -1,10 +1,10 @@
+import { useHerbRandomGetQuery } from "@/hooks/queries/useQueryHerbs";
 import { Link } from "react-router";
-import { useHerbRandomGetQuery } from "../../../hooks/queries/useQueryHerbs"
-import HerbItem from "../../Herb/components/HerbItem";
-import HerbList from "../../Herb/components/HerbList";
-import { Herb } from "../../../types/herb.types";
-import HerbTitle from "../../Herb/components/HerbTitle";
-import HerbNotFoundCard from "../../../components/card/HerbNotFoundCard";
+import HerbTitle from "../main/HerbTitle";
+import HerbList from "../main/HerbList";
+import { Herb } from "@/types/herb.types";
+import HerbItem from "../main/HerbItem";
+import HerbNotFoundCard from "@/components/card/HerbNotFoundCard";
 
 interface HerbDetailFooterProps {
     herbId: number
@@ -12,7 +12,7 @@ interface HerbDetailFooterProps {
 
 export default function HerbDetailFooter({ herbId }: HerbDetailFooterProps) {
 
-    const { herbs} = useHerbRandomGetQuery(herbId);
+    const { herbs } = useHerbRandomGetQuery(herbId);
 
     return (
         <div className="mt-15">
@@ -41,7 +41,7 @@ export default function HerbDetailFooter({ herbId }: HerbDetailFooterProps) {
                         )
                     })}
                 </HerbList>
-                : <HerbNotFoundCard/>
+                : <HerbNotFoundCard />
             }
 
         </div>

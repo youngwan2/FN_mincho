@@ -1,6 +1,6 @@
 import { FormEventHandler } from "react";
-import Submit from "../../../components/button/Submit";
-import { herbCategories, monthCategories } from "../../../config/categories";
+import Submit from "../../../../components/button/Submit";
+import { herbCategories, monthCategories } from "../../../../config/categories";
 import { IoCalendarOutline, IoFolderOpenOutline, IoRefresh, IoSearch } from "react-icons/io5";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';

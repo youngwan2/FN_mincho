@@ -1,12 +1,12 @@
 import { useState, useRef } from "react";
 import { MdClose, MdFileDownload, MdPictureAsPdf } from "react-icons/md";
-import { HerbDetail } from "../../../../types/herb.types";
+import { HerbDetail } from "../../../../../types/herb.types";
 import html2canvas from "html2canvas-pro";
 import jsPDF from "jspdf";
 import "./modal.css";
 import DOMPurify from "dompurify";
 import noImage from '@/assets/noImage.png'
-import Portal from "./Portal";
+import Portal from "../../../../../components/Portal";
 
 interface PdfPreviewModalProps {
     herb: HerbDetail;

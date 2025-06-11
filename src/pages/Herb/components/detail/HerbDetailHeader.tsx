@@ -1,5 +1,5 @@
-import { HerbDetail } from "../../../types/herb.types"
-import HerbTitle from "../../Herb/components/HerbTitle"
+import { HerbDetail } from "@/types/herb.types"
+import HerbTitle from "../main/HerbTitle"
 
 interface HerbDetailHeaderProps {
     herb: HerbDetail
