@@ -193,7 +193,7 @@ export default function PdfPreviewModal({ herb }: PdfPreviewModalProps) {
 
             {isOpen && (
                 <Portal>
-                    <div className="fixed inset-0 flex items-center justify-center z-50 bg-[rgba(0,0,0,0.7)] p-4">
+                    <div className="fixed inset-0 flex items-center justify-center z-[100000000000000000000000] bg-[rgba(0,0,0,0.7)] p-4">
                         <div className="bg-white rounded-lg w-full h-[90vh] flex flex-col">
                             <div className="flex justify-between items-center p-4 border-b">
                                 <h3 className="text-xl font-bold">약초 PDF 미리보기</h3>
@@ -250,6 +250,7 @@ export default function PdfPreviewModal({ herb }: PdfPreviewModalProps) {
                                 <img
                                     src={herb.imgUrls && herb.imgUrls.length > 0 ? herb.imgUrls[0] : noImage}
                                     alt={herb.cntntsSj}
+                                    crossOrigin="anonymous"
                                     className="w-full object-contain max-h-[300px]"
                                     onError={(e) => {
                                         console.log("이미지 로딩 실패, 기본 이미지로 대체");
@@ -287,25 +288,25 @@ export default function PdfPreviewModal({ herb }: PdfPreviewModalProps) {
                                     {herb.flowering && (
                                         <tr>
                                             <th>개화기</th>
-                                            <td className="pdf-text">{sanitizeAndFormatText(herb.flowering)}</td>
+                                            <td className="pdf-text text-2xl">{sanitizeAndFormatText(herb.flowering)}</td>
                                         </tr>
                                     )}
                                     {herb.growthForm && (
                                         <tr>
                                             <th>생장 형태</th>
-                                            <td className="pdf-text">{sanitizeAndFormatText(herb.growthForm)}</td>
+                                            <td className="pdf-text text-2xl">{sanitizeAndFormatText(herb.growthForm)}</td>
                                         </tr>
                                     )}
                                     {herb.habitat && (
                                         <tr>
                                             <th>분포 및 환경</th>
-                                            <td className="pdf-text">{sanitizeAndFormatText(herb.habitat)}</td>
+                                            <td className="pdf-text text-2xl">{sanitizeAndFormatText(herb.habitat)}</td>
                                         </tr>
                                     )}
                                     {herb.useeRegn && (
                                         <tr>
                                             <th>사용 부위</th>
-                                            <td className="pdf-text">{sanitizeAndFormatText(herb.useeRegn)}</td>
+                                            <td className="pdf-text text-2xl">{sanitizeAndFormatText(herb.useeRegn)}</td>
                                         </tr>
                                     )}
                                 </tbody>

@@ -12,6 +12,7 @@
 .pdf-text {
   white-space: pre-line !important;
   line-height: 1.8;
+  font-size: 1.3rem;
   color: #333;
   margin-bottom: 1rem;
 }
