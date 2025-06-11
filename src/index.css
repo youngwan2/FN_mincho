@@ -5,6 +5,53 @@
 /* ---break---  */
 @custom-variant dark (&:is(.dark *));
 
+/* 채택된 답변 테두리 애니메이션 */
+@keyframes borderPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(5, 209, 130, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(5, 209, 130, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(5, 209, 130, 0);
+  }
+}
+
+@keyframes gradientBorder {
+  0% {
+    border-color: #05D182;
+  }
+  50% {
+    border-color: #03A77F;
+  }
+  100% {
+    border-color: #05D182;
+  }
+}
+
+.adopted-answer-animation {
+  animation: borderPulse 2s infinite, gradientBorder 3s infinite;
+  transition: all 0.3s ease;
+}
+
+.adopted-badge-animation {
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 0 rgba(5, 209, 130, 0.4);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(3.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .ql-container {
   border: none !important;
   .ql-editor {

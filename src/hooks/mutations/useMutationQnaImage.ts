@@ -45,7 +45,7 @@ export function useDeleteAnswerImageMutation(qnaId: number) {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({ answerId, imageId }: { answerId: number; imageId: number }) =>
-            deleteAnswerImage(answerId, imageId),
+            deleteAnswerImage(qnaId, answerId, imageId),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: queryKeys.qna.getById(qnaId) });
         },

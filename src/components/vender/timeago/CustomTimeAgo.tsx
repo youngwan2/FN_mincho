@@ -12,9 +12,9 @@ const intlFormatter = makeIntlFormatter({
 
 export default function CustomTimeAgo({ date, className }: { date: string, className?: string }) {
   return (
-    <div className={className}>
+    <span className={className}>
       <TimeAgo date={date} formatter={intlFormatter} />
-    </div>
+    </span>
 
   )
 }

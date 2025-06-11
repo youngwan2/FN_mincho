@@ -4,8 +4,13 @@ import { Link, useParams } from "react-router";
 
 import Skeleton from "react-loading-skeleton";
 import Pagination from "@/components/pagination/Pagination";
+import CustomTimeAgo from "@/components/vender/timeago/CustomTimeAgo";
 
 import { Card, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import DOMPurify from 'dompurify';
+import { FaClock } from "react-icons/fa";
+import { QnaSummary } from "@/types/qna.types";
 
 
 const size = 20;
@@ -14,15 +19,17 @@ export default function UserQna() {
     const { userId } = useParams();
     const { qnas, totalCount, isLoading, isError } = useUserQnaListGetQuery(Number(userId) || -999, page, size);
 
-    console.log(qnas, totalCount)
-
     if (isLoading) {
         return (
             <div className="space-y-6">
                 {Array.from({ length: 5 }).map((_, idx) => (
-                    <div key={idx} className="bg-white/80 backdrop-blur-sm border-green-100 shadow-sm rounded p-6">
+                    <div key={idx} className="border rounded-lg p-3">
                         <div className="flex flex-row items-center justify-between mb-2">
-                            <Skeleton width={120} height={28} className="rounded mb-2" />
+                            <div className="flex items-center gap-4">
+                                <Skeleton width={60} height={28} className="rounded" />
+                                <Skeleton width={180} height={24} />
+                            </div>
+                            <Skeleton width={24} height={24} circle />
                         </div>
                         <Skeleton count={2} height={18} className="mb-2" />
                     </div>
@@ -49,15 +56,30 @@ export default function UserQna() {
 
     return (
         <div className="space-y-6">
-            {qnas.map((qna: any) => (
-                <Card key={qna.id} className="bg-white/80 backdrop-blur-sm border-green-100 shadow-sm hover:shadow-md transition-shadow">
-                    <CardHeader className="flex flex-row items-center justify-between">
-                        <div className="flex flex-col gap-2">
-                            <Link to={`/community/qna/${qna.id}`} className="font-semibold text-gray-800 py-1 text-lg">
-                                {qna.title || qna.subject || "제목 없음"}
-                            </Link>
-                            <div className="text-gray-500 text-sm line-clamp-2">
-                                {qna.content || qna.body || "내용 없음"}
+            <p className="text-gray-700 bg-gray-100 rounded-lg p-1 pl-3">총 {totalCount} 개의 질문이 있습니다.</p>
+            {qnas.map((qna: QnaSummary) => (
+                <Card key={qna.id} className="border">
+                    <CardHeader className="w-full relative ">
+                        <div className="flex items-center gap-4 w-full">
+                            <div className="flex gap-2 flex-col items-start space-y-2">
+                                <div className="flex items-center justify-between w-full">
+                                    <Badge className="bg-green-100 text-green-700 text-2xl" variant="secondary">
+                                        QnA
+                                    </Badge>
+                                    <div className="flex items-center gap-1 text-gray-400 absolute right-5 text-2xl">
+                                        <FaClock className="text-gray-400" />
+                                        <CustomTimeAgo className="text-gray-500" date={qna.createdAt} />
+                                    </div>
+                                </div>
+                                <Link to={`/community/qnas/${qna.id}`} className="py-1  space-y-3">
+                                    <h3 className="text-gray-700 text-3xl font-semibold">{qna.title}</h3>
+                                    <p className="w-full mt-2 text-gray-600 h-auto text-2xl" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(qna.content) }}>
+
+                                    </p>
+                                </Link>
+
+
+
                             </div>
                         </div>
                     </CardHeader>

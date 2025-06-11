@@ -7,21 +7,22 @@ import useAuth from '@/hooks/useAuth';
 import { showToast } from '@/components/toast/CustomToast';
 
 interface ReactionButtonsProps {
+    qnaId: number;  // QnA ID
     answerId: number;
     userReacted?: AnswerReactionType | null;
     isMine: boolean;  // 본인이 작성한 답변인지 여부
 }
 
-const ReactionButtons: React.FC<ReactionButtonsProps> = ({ answerId, userReacted = null, isMine }) => {
+const ReactionButtons: React.FC<ReactionButtonsProps> = ({ qnaId, answerId, userReacted = null, isMine }) => {
     const [currentReaction, setCurrentReaction] = useState<AnswerReactionType | null>(userReacted);
     const isLogin = useAuth(); // 로그인 상태 확인
 
     // 좋아요/싫어요 개수 조회
-    const { count: likeCount, isLoading: isLikeLoading } = useAnswerReactionCountQuery(answerId, 'LIKE');
-    const { count: dislikeCount, isLoading: isDislikeLoading } = useAnswerReactionCountQuery(answerId, 'DISLIKE');
+    const { count: likeCount, isLoading: isLikeLoading } = useAnswerReactionCountQuery(qnaId, answerId, 'LIKE');
+    const { count: dislikeCount, isLoading: isDislikeLoading } = useAnswerReactionCountQuery(qnaId, answerId, 'DISLIKE');
 
     // 좋아요/싫어요 추가 뮤테이션
-    const addReactionMutation = useAddAnswerReactionMutation();
+    const addReactionMutation = useAddAnswerReactionMutation(qnaId);
 
     // 반응 토글 처리
     const handleReaction = (type: AnswerReactionType) => {

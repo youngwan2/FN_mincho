@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router";
 import Skeleton from "react-loading-skeleton";
-import { FaSeedling } from "react-icons/fa";
+import { FaSeedling, FaClock, FaBookmark } from "react-icons/fa";
 
 import Pagination from "@/components/pagination/Pagination";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import CustomTimeAgo from "@/components/vender/timeago/CustomTimeAgo";
 
 import { useUserHerbBookmarkGetQuery } from "@/hooks/queries/useQueryHerbBookmark";
 import { Bookmark } from "@/types/bookmark.types";
@@ -25,7 +26,7 @@ export default function UserBookmark() {
         return (
             <div className="space-y-6">
                 {Array.from({ length: 5 }).map((_, idx) => (
-                    <div key={idx} className="bg-white/80 backdrop-blur-sm border-green-100 shadow-sm rounded p-6">
+                    <div key={idx} className="border rounded-lg p-3">
                         <div className="flex flex-row items-center justify-between mb-2">
                             <div className="flex items-center gap-4">
                                 <Skeleton width={60} height={28} className="rounded" />
@@ -61,33 +62,43 @@ export default function UserBookmark() {
     // 정상 렌더링 + 페이지네이션
     return (
         <div className="space-y-6">
+            <p className="text-gray-700 bg-gray-100 rounded-lg p-1 pl-3">총 {totalCount} 개의 북마크가 있습니다.</p>
             {bookmarks.map((bookmark: Bookmark) => (
                 <Card
                     key={bookmark.id}
-                    className="bg-white/80 backdrop-blur-sm border-green-100 shadow-sm hover:shadow-md transition-shadow"
+                    className="border"
                 >
-                    <CardHeader className="flex flex-row items-center justify-between">
-                        <div className="flex items-center gap-4">
-                            <div className="flex gap-2 flex-col items-start">
-                                <Badge className="bg-green-100 text-green-800 text-2xl" variant="secondary">
-                                    <FaSeedling className="mr-1" /> {bookmark.bneNm || '식물'}
-                                </Badge>
-                                <Link to={bookmark.url || "#"} className="font-semibold text-gray-800 py-1 hover:underline">
-                                    {bookmark.cntntsSj || bookmark.hbdcNm || '북마크 항목'}
+                    <CardHeader className="w-full relative">
+                        <div className="flex items-center gap-4 w-full">
+                            <div className="flex gap-2 flex-col items-start space-y-2 flex-grow">
+                                <div className="flex items-center justify-between w-full">
+                                    <Badge className="bg-green-100 text-green-800 text-2xl flex items-center gap-1" variant="secondary">
+                                        <FaSeedling /> {bookmark.bneNm || '식물'}
+                                    </Badge>
+                                    <div className="flex items-center gap-1 text-gray-400 absolute right-5 text-2xl">
+                                        <FaClock className="text-gray-400" />
+                                        <CustomTimeAgo className="text-gray-500" date={bookmark.createdAt} />
+                                    </div>
+                                </div>
+
+                                <Link to={bookmark.url || "#"} className="py-1 space-y-3">
+                                    <h3 className="text-gray-700 text-3xl font-semibold">
+                                        {bookmark.cntntsSj || bookmark.hbdcNm || '북마크 항목'}
+                                    </h3>
                                 </Link>
-                                <span className="text-xl text-gray-400">
-                                    저장일: {new Date(bookmark.createdAt).toLocaleDateString()}
-                                </span>
+
+                                <div className="flex justify-end w-full">
+                                    <Button
+                                        variant="outline"
+                                        size="lg"
+                                        className="text-green-600 border-green-200 hover:bg-green-50 text-2xl flex items-center gap-2"
+                                        onClick={() => window.open(bookmark.url, '_blank')}
+                                    >
+                                        <FaBookmark className="text-green-600" /> 바로가기
+                                    </Button>
+                                </div>
                             </div>
                         </div>
-                        <Button
-                            variant="outline"
-                            size="lg"
-                            className="text-green-600 border-green-200 hover:bg-green-50 text-xl"
-                            onClick={() => window.open(bookmark.url, '_blank')}
-                        >
-                            바로가기
-                        </Button>
                     </CardHeader>
                 </Card>
             ))}

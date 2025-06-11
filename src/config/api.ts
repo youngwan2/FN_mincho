@@ -127,12 +127,12 @@ export const apiRoutes = {
         },
         answer: {
             create: (qnaId: number) => baseUrl + `/community/qnas/${qnaId}/answers`,
-            update: (answerId: number) => baseUrl + `/community/qnas/answers/${answerId}`,
-            delete: (answerId: number) => baseUrl + `/community/qnas/answers/${answerId}`,
-            adopt: (answerId: number) => baseUrl + `/community/qnas/answers/${answerId}/adopt`,
+            update: (qnaId: number, answerId: number) => baseUrl + `/community/qnas/${qnaId}/answers/${answerId}`,
+            delete: (qnaId: number, answerId: number) => baseUrl + `/community/qnas/${qnaId}/answers/${answerId}`,
+            adopt: (qnaId: number, answerId: number) => baseUrl + `/community/qnas/${qnaId}/answers/${answerId}/adopt`,
             images: {
                 upload: (qnaId: number, answerId: number) => baseUrl + `/community/qnas/${qnaId}/answers/${answerId}/images`,
-                delete: (answerId: number, imageId: number) => baseUrl + `/community/qnas/answers/${answerId}/images/${imageId}`
+                delete: (qnaId: number, answerId: number, imageId: number) => baseUrl + `/community/qnas/${qnaId}/answers/${answerId}/images/${imageId}`
             }
         }
     },
@@ -149,9 +149,9 @@ export const apiRoutes = {
         getUnreadStatus: () => baseUrl + `/notifications/unread-status`
     },
     answerReaction: {
-        add: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}/reactions`,
-        cancel: (answerId: number) => baseUrl + `/community/qna/answers/${answerId}/reactions`,
-        count: (answerId: number, type: string) => baseUrl + `/community/qna/answers/${answerId}/reactions/count?type=${type}`
+        add: (qnaId: number, answerId: number) => baseUrl + `/community/qnas/${qnaId}/answers/${answerId}/reactions`,
+        cancel: (qnaId: number, answerId: number) => baseUrl + `/community/qnas/${qnaId}/answers/${answerId}/reactions`,
+        count: (qnaId: number, answerId: number, type: string) => baseUrl + `/community/qnas/${qnaId}/answers/${answerId}/reactions/count?type=${type}`
     },
     s3: {
         upload: (url: string) => url

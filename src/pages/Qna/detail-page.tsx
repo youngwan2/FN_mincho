@@ -33,7 +33,7 @@ export default function QnaDetailPage() {
     const adoptAnswerMutation = useAdoptAnswerMutation(Number(qnaId));
 
     // QnA 삭제 mutation
-    const deleteQnaMutation = useDeleteQnaMutation();    // 날짜 포맷팅 함수는 QnaMetaInfo 컴포넌트로 이동했습니다    // 답변 등록 핸들러
+    const deleteQnaMutation = useDeleteQnaMutation();    // 날짜 포맷팅 함수는 QnaMetaInfo 컴포넌트로 이동했습니다   
 
 
     // 답변 채택 핸들러
@@ -42,7 +42,9 @@ export default function QnaDetailPage() {
         if (isQuestionMine) {
             adoptAnswerMutation.mutate(answerId);
         }
-    };    // QnA 삭제 핸들러
+    };
+
+    // QnA 삭제 핸들러
     const handleDeleteQna = () => {
         if (window.confirm('정말 이 질문을 삭제하시겠습니까?')) {
             deleteQnaMutation.mutate(Number(qnaId), {
@@ -124,13 +126,14 @@ export default function QnaDetailPage() {
                                 createdAt={qna.createdAt}
                                 views={qna.view || 0}
                             />
+
                             {/* QnA 제목 및 상태 */}
                             <div className="mb-6">
                                 <QnaStatusBadge
                                     isPrivate={qna.isPrivate}
                                     isAnswerAdopted={isAnswerAdopted}
                                 />
-                                <h1 className="text-5xl font-bold text-gray-900 mb-4">{qna.title}</h1>
+                                <h1 className="text-5xl font-bold text-gray-700 mb-4 mt-5">{qna.title}</h1>
 
 
                             </div>
@@ -160,6 +163,7 @@ export default function QnaDetailPage() {
 
                             {/* 답변 작성 폼 (상단에 배치) */}
                             <AnswerForm
+                                isQuestionMine={isQuestionMine}
                                 qnaId={qnaId as string}
                             />
 

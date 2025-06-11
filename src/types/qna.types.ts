@@ -12,6 +12,7 @@ export interface QnaSummary {
     content: string;
     isPrivate: boolean;
     isMine: boolean;
+    hasAdoptedAnswer: boolean; // 채택된 답변이 있는지 여부
     writer: string;
     imageUrls: string[];
     answers: AnswerSummary[];

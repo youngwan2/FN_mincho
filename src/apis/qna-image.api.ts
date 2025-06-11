@@ -28,7 +28,7 @@ export const deleteQnaImageFetch = async (qnaId: number, imageId: number) => {
 };
 
 // 답변 이미지 삭제
-export const deleteAnswerImageFetch = async (answerId: number, imageId: number) => {
-    const response = await axios.delete(apiRoutes.qna.answer.images.delete(answerId, imageId));
+export const deleteAnswerImageFetch = async (qnaId: number, answerId: number, imageId: number) => {
+    const response = await axios.delete(apiRoutes.qna.answer.images.delete(qnaId, answerId, imageId));
     return response.data;
 };

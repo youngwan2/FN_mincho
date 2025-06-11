@@ -7,7 +7,8 @@ import { Card, CardHeader } from "@/components/ui/card";
 
 import Skeleton from "react-loading-skeleton";
 import Pagination from "@/components/pagination/Pagination";
-
+import CustomTimeAgo from "@/components/vender/timeago/CustomTimeAgo";
+import { FaClock } from "react-icons/fa";
 
 import { getPostCategoryColorByType } from "@/utils/format";
 
@@ -60,22 +61,29 @@ export default function UserPost() {
     // 정상 렌더링 + 페이지네이션
     return (
         <div className="space-y-6">
+            <p className="text-gray-700 bg-gray-100 rounded-lg p-1 pl-3">총 {totalCount} 개의 게시글이 있습니다.</p>
             {posts.map((post) => (
                 <Card
                     key={post.id}
-                    className="border  "
+                    className="border"
                 >
-                    <CardHeader className="flex flex-row items-center justify-between">
-                        <div className="flex items-center gap-4">
-                            <div className="flex gap-2 flex-col items-start">
-                                <Badge className={getPostCategoryColorByType(post.category?.type) + " text-2xl"} variant="secondary">
-                                    {post.category?.name}
-                                </Badge>
-                                <Link to={"/community/posts/" + post.id} className="font-semibold text-gray-800 py-1">{post.title}</Link>
-                                <span className="text-xl text-gray-400">작성일: {new Date(post.createdAt).toLocaleString()}</span>
+                    <CardHeader className="w-full relative">
+                        <div className="flex items-center gap-4 w-full">
+                            <div className="flex gap-2 flex-col items-start space-y-2">
+                                <div className="flex items-center justify-between w-full">
+                                    <Badge className={getPostCategoryColorByType(post.category?.type) + " text-2xl"} variant="secondary">
+                                        {post.category?.name || "카테고리 없음"}
+                                    </Badge>
+                                    <div className="flex items-center gap-1 text-gray-400 absolute right-5 text-2xl">
+                                        <FaClock className="text-gray-400" />
+                                        <CustomTimeAgo className="text-gray-500" date={post.createdAt} />
+                                    </div>
+                                </div>
+                                <Link to={"/community/posts/" + post.id} className="py-1 space-y-3">
+                                    <h3 className="text-gray-700 text-3xl font-semibold">{post.title}</h3>
+                                </Link>
                             </div>
                         </div>
-
                     </CardHeader>
                 </Card>
             ))}

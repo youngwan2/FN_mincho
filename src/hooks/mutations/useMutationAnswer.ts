@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { createAnswer, updateAnswer, deleteAnswer, adoptAnswer } from "../../service/answer.service";
-import { handleError } from "../../config/error";
-import { queryKeys } from "../../config/keys";
+import { createAnswer, updateAnswer, deleteAnswer, adoptAnswer } from "@/service/answer.service";
+import { handleError } from "@/config/error";
+import { queryKeys } from "@/config/keys";
 
 // 답변 생성 mutation
 
@@ -26,7 +26,7 @@ export function useUpdateAnswerMutation(qnaId: number) {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: ({ answerId, answerData }: { answerId: number; answerData: any }) =>
-            updateAnswer(answerId, answerData),
+            updateAnswer(qnaId, answerId, answerData),
         onSuccess: () => {
             toast.success("답변이 수정되었습니다.");
             queryClient.invalidateQueries({
@@ -41,7 +41,7 @@ export function useUpdateAnswerMutation(qnaId: number) {
 export function useDeleteAnswerMutation(qnaId: number) {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (answerId: number) => deleteAnswer(answerId),
+        mutationFn: (answerId: number) => deleteAnswer(qnaId, answerId),
         onSuccess: () => {
             toast.success("답변이 삭제되었습니다.");
             queryClient.invalidateQueries({
@@ -56,7 +56,7 @@ export function useDeleteAnswerMutation(qnaId: number) {
 export function useAdoptAnswerMutation(qnaId: number) {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (answerId: number) => adoptAnswer(answerId),
+        mutationFn: (answerId: number) => adoptAnswer(qnaId, answerId),
         onSuccess: () => {
             toast.success("답변이 채택되었습니다.");
             queryClient.invalidateQueries({

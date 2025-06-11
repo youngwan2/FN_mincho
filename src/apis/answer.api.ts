@@ -12,8 +12,8 @@ export const createAnswerFetch = async (qnaId: number, formData: FormData) => {
 };
 
 // 답변 수정
-export const updateAnswerFetch = async (answerId: number, answerData: any) => {
-    const response = await instance.patch(apiRoutes.qna.answer.update(answerId), answerData, {
+export const updateAnswerFetch = async (qnaId: number, answerId: number, answerData: any) => {
+    const response = await instance.patch(apiRoutes.qna.answer.update(qnaId, answerId), answerData, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -22,13 +22,13 @@ export const updateAnswerFetch = async (answerId: number, answerData: any) => {
 };
 
 // 답변 삭제
-export const deleteAnswerFetch = async (answerId: number) => {
-    const response = await instance.delete(apiRoutes.qna.answer.delete(answerId));
+export const deleteAnswerFetch = async (qnaId: number, answerId: number) => {
+    const response = await instance.delete(apiRoutes.qna.answer.delete(qnaId, answerId));
     return response.data;
 };
 
 // 답변 채택
-export const adoptAnswerFetch = async (answerId: number) => {
-    const response = await instance.post(apiRoutes.qna.answer.adopt(answerId));
+export const adoptAnswerFetch = async (qnaId: number, answerId: number) => {
+    const response = await instance.patch(apiRoutes.qna.answer.adopt(qnaId, answerId));
     return response.data;
 };

@@ -3,6 +3,7 @@ import { AnswerDetail } from '@/types/qna.types';
 import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { FiEdit } from 'react-icons/fi';
+import { FaTrophy, FaCheck, FaStar } from 'react-icons/fa';
 import noProfileImage from '@/assets/noImage.png';
 import { useDeleteAnswerMutation } from '@/hooks/mutations/useMutationAnswer';
 import ReactionButtons from './ReactionButtons';
@@ -51,17 +52,32 @@ export default function AnswerItem({
     };
 
     return (
-        <div className={`flex gap-4 p-6 rounded-lg border mb-4 ${answer.isAdopted ? 'border-green-600 bg-green-50 border-2' : 'bg-white'}`}>
+        <div className={`flex gap-4 p-6 rounded-lg border mb-4 relative ${answer.isAdopted
+            ? 'border-green-600 bg-green-50 border-1 adopted-answer-animation'
+            : 'bg-white'
+            }`}>
+            {/* 채택된 답변 배경 장식 */}
+            {answer.isAdopted && (
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute top-0 right-0 opacity-10">
+                        <FaTrophy className="text-green-700" size={120} />
+                    </div>
+                    <div className="absolute bottom-0 left-0 opacity-10">
+                        <FaStar className="text-green-700" size={80} />
+                    </div>
+                </div>
+            )}
 
             {/* 좋아요/싫어요  */}
-            <ReactionButtons answerId={answer.id} isMine={answer.isMine} />
+            <ReactionButtons qnaId={Number(qnaId || -999)} answerId={answer.id} isMine={answer.isMine} />
 
             {/* 유저 답변 정보 */}
             <div className='w-full'>
                 {/* 답변 채택 마크 */}
                 {answer.isAdopted && (
                     <div className="flex items-center mb-3">
-                        <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xl font-semibold">
+                        <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xl flex items-center gap-2 adopted-badge-animation">
+                            <FaCheck className="animate-pulse" />
                             채택된 답변
                         </span>
                     </div>
@@ -81,7 +97,8 @@ export default function AnswerItem({
                         </div>
                     </Link>
 
-                    <div className="flex items-center gap-2">                        {/* 본인 답변일 경우 수정/삭제 버튼 */}
+                    <div className="flex items-center gap-2">
+                        {/* 본인 답변일 경우 수정/삭제 버튼 */}
                         {answer.isMine && !isEditing && (
                             <>
                                 <button

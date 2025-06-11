@@ -21,6 +21,6 @@ export const deleteQnaImage = async (qnaId: number, imageId: number) => {
 }
 
 /** 답변 이미지 삭제 */
-export const deleteAnswerImage = async (answerId: number, imageId: number) => {
-    return await deleteAnswerImageFetch(answerId, imageId);
+export const deleteAnswerImage = async (qnaId: number, answerId: number, imageId: number) => {
+    return await deleteAnswerImageFetch(qnaId, answerId, imageId);
 }

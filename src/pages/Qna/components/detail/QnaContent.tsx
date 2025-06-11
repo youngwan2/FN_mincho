@@ -142,7 +142,7 @@ export default function QnaContent({ content, imageUrls = [] }: QnaContentProps)
         <div className="qna-content-wrapper">
             {/* 컨텐츠 표시 영역 */}
             <div ref={contentRef} className="prose max-w-none mb-6 mt-6">
-                <div className="tiptap-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} />
+                <div className="tiptap-content text-gray-600" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} />
             </div>
 
             {/* 첨부된 이미지가 있는 경우 별도 표시 */}
