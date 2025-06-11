@@ -70,6 +70,12 @@
 #### **사용자 증상 기반 약초 추천 클러스터링**
   - 비고: 백엔드 구현 완료, 프론트엔드 구현전
 
+### 기타
+#### 약초 PDF
+  - 사용자가 수집하기를 원하는 약초 정보를 PDF로 미리보기 및 다운로드/출력할 수 있는 기능
+    - html2canvas-pro, jsPdf 라이브러리 적용
+    ![pdf](https://github.com/user-attachments/assets/b1d6f057-7194-4a44-802f-dfb22e97bbbb)
+
 
 <br><br>    
 ## 🧰 기술 스택
