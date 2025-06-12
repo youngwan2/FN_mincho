@@ -8,8 +8,8 @@ export default function RootLayout() {
     useSSE(); // SSE 연결
 
     return (
-        <div className='w-full text-[16px] bg-[#fcfcfc69]'>
-            <div className='max-w-[1240px] mx-auto h-auto font-prentendard' >
+        <div className='w-full bg-[#fcfcfc69]'>
+            <div className='max-w-[1240px] mx-auto h-auto ' >
                 <CustomToastContainer />
                 <Header />
 
@@ -19,7 +19,7 @@ export default function RootLayout() {
 
             </div>
 
-            <footer className="bg-[#303740] text-white py-6 mt-30 md:h-auto h-auto">
+            <footer className="bg-[#303740] text-white py-6 mt-30 -auto">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8">
                         {/* 회사 정보 */}

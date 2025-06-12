@@ -10,9 +10,11 @@
   0% {
     box-shadow: 0 0 0 0 rgba(5, 209, 130, 0.2);
   }
+
   70% {
     box-shadow: 0 0 0 15px rgba(5, 209, 130, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(5, 209, 130, 0);
   }
@@ -22,9 +24,11 @@
   0% {
     border-color: #05D182;
   }
+
   50% {
     border-color: #03A77F;
   }
+
   100% {
     border-color: #05D182;
   }
@@ -44,9 +48,11 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(3.05);
   }
+
   100% {
     transform: scale(1);
   }
@@ -54,6 +60,7 @@
 
 .ql-container {
   border: none !important;
+
   .ql-editor {
     line-height: 1.6;
   }
@@ -80,8 +87,15 @@ table {
   --color-primary-dark-gray: #d3d3d3;
 }
 
+html,
+body {
+  font-family: 'Pretendard-Regular', 'Pretendard-Bold', -apple-system, BlinkMacSystemFont, 'Segoe UI';
+  font-size: 16px;
+}
+
 /* 에디터  */
-.tiptap, .tiptap-content{
+.tiptap,
+.tiptap-content {
   padding: 8px;
   min-height: 300px;
   outline: none;
@@ -129,34 +143,33 @@ table {
 }
 
 /* 제목 스타일 */
-.tiptap h1, .tiptap-content h1 {
-  font-size: 32px;     /* Tailwind의 text-2xl */
+.tiptap h1,
+.tiptap-content h1 {
+  font-size: 32px;
+  /* Tailwind의 text-2xl */
   font-weight: 700;
   margin-bottom: 0.75rem;
   margin-top: 1.5rem;
 }
 
-.tiptap h2, .tiptap-content h2 {
-  font-size: 24px;   /* Tailwind의 text-xl */
+.tiptap h2,
+.tiptap-content h2 {
+  font-size: 24px;
+  /* Tailwind의 text-xl */
   font-weight: 600;
   margin-bottom: 0.5rem;
   margin-top: 1.25rem;
 }
 
-.tiptap h3, .tiptap-content h3 {
-  font-size: 18.72px;  /* Tailwind의 text-lg */
+.tiptap h3,
+.tiptap-content h3 {
+  font-size: 18.72px;
+  /* Tailwind의 text-lg */
   font-weight: 600;
   margin-bottom: 0.5rem;
   margin-top: 1rem;
 }
 
-html {
-  font-size: 16px; /* 또는 100% */
-  
-}
-body {
-  font-size: 1rem;
-}
 /* ---break---  */
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -195,6 +208,7 @@ body {
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
+
 /* ---break---  */
 :root {
   --radius: 0.625rem;
@@ -230,6 +244,7 @@ body {
   --sidebar-border: oklch(0.928 0.006 264.531);
   --sidebar-ring: oklch(0.707 0.022 261.325);
 }
+
 /* ---break---  */
 .dark {
   --background: oklch(0.13 0.028 261.692);
@@ -264,11 +279,13 @@ body {
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
+
 /* ---break---  */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

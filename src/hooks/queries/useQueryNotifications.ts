@@ -6,7 +6,7 @@ import { Notification, NotificationReadStatus } from "../../types/notification.t
 
 
 /** 알림 목록 조회 */
-export const useNotificationGetQuery = (isAuth: boolean, page: number, size: number) => {
+export const useNotificationGetQuery = (isAuth: boolean = false, page: number, size: number) => {
     const {
         status,
         data,

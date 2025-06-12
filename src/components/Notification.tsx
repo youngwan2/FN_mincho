@@ -30,7 +30,7 @@ export default function Notification() {
   }
 
 
-  const { fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, totalCount, notifications, isError } = useNotificationGetQuery(isAuth, page, SIZE);
+  const { fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, totalCount, notifications, isError } = useNotificationGetQuery(isAuth || false, page, SIZE);
   const { isAllRead } = useNotificationReadStatusGetQuery();
 
   const { mutate: markAsReadMutate } = useMarkAsReadMutation();

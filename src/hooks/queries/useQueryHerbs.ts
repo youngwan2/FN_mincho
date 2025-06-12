@@ -82,7 +82,7 @@ export const useHerbBloomingGetQuery = (month: string) => {
 }
 
 /** 약초 추천 */
-export const useHerbRecommendGetQuery = (message: string) => {
+export const useHerbRecommendGetQuery = (message: string = '') => {
 
     const { data, isLoading, isError, status, isSuccess } = useQuery({
         queryKey: queryKeys.herbs.getRecommend(message),

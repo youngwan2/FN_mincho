@@ -8,7 +8,7 @@ export default function useAuth() {
 
         async function getAuthStatus() {
                 const loginStatus = await getLoginStatus();
-                setIsLogin(loginStatus);
+                setIsLogin(loginStatus || false);
 
                 if (!loginStatus) {
                         removeToken();
