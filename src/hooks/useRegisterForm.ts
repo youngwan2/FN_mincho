@@ -18,6 +18,10 @@ interface RegisterRequest {
     email: string;
     password: string;
     passwordConfirm?: string;
+    essentialInfoConsent: boolean;
+    optionalInfoConsent: boolean;
+    automaticInfoConsent: boolean;
+    marketingConsent: boolean;
 }
 
 const AUTH_CODE_LENGTH = 5
@@ -178,7 +182,14 @@ export const useRegisterForm = () => {
         const registerRequest: RegisterRequest = {
             email: formData.get('email') as string,
             password: formData.get('password') as string,
+            essentialInfoConsent: formData.get('essentialInfoConsent') === 'on',
+            optionalInfoConsent: formData.get('optionalInfoConsent') === 'on',
+            automaticInfoConsent: formData.get('automaticInfoConsent') === 'on',
+            marketingConsent: formData.get('marketingConsent') === 'on',
         };
+
+
+        console.log(registerRequest)
 
         const data = await register(registerRequest);
         setIsLoading(false)

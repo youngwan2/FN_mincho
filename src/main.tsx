@@ -33,6 +33,9 @@ import QnAPage from './pages/Qna/main-page';
 import QnaDetailPage from './pages/Qna/detail-page';
 import QnaWritePage from './pages/Qna/write-page';
 import QnaEditPage from './pages/Qna/edit-page';
+import LegalPage from './pages/Legal/page';
+import FAQPage from './pages/FAQ/page';
+import ContactPage from './pages/Contact/page';
 
 
 const queryClient = new QueryClient({
@@ -48,25 +51,26 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <Routes>
-          <Route path='/' element={<RootLayout />} errorElement={<ErrorMessageCard />}>
-            <Route index element={<HomePage />} />
-            <Route path='/auth/oauth-success' element={<OAuthSuccessPage />} ></Route>
-            <Route path="herbs" element={<HerbPage />} />
-            <Route path="herbs/:herbId" element={<HerbDetailPage />} />
-            <Route path="chat/herbs-recommend" element={<HerbRecommendPage />}></Route>
-            <Route path="users/me" element={<Mypage />} />
-            <Route path="community">
-              <Route path='posts' element={<CommunityPage />} />
-              <Route path='post/write' element={<CommunityEditorPage />} />
-              <Route path='qnas' element={<QnAPage />} />
-              <Route path='qna/write' element={<QnaWritePage />} />
-              <Route path='qnas/:qnaId/edit' element={<QnaEditPage />} />
-            </Route>
-            <Route path='community/posts/:postId' element={<CommunityDetailPage />} />
-            <Route path='community/qnas/:qnaId' element={<QnaDetailPage />} />
-            <Route path='users/:userId' element={<UserInfoPage />} />
-          </Route>
+        <Routes>          <Route path='/' element={<RootLayout />} errorElement={<ErrorMessageCard />}>
+          <Route index element={<HomePage />} />
+          <Route path='/auth/oauth-success' element={<OAuthSuccessPage />} ></Route>
+          <Route path="herbs" element={<HerbPage />} />
+          <Route path="herbs/:herbId" element={<HerbDetailPage />} />
+          <Route path="chat/herbs-recommend" element={<HerbRecommendPage />}></Route>
+          <Route path="users/me" element={<Mypage />} />
+          <Route path="community">
+            <Route path='posts' element={<CommunityPage />} />
+            <Route path='post/write' element={<CommunityEditorPage />} />
+            <Route path='qnas' element={<QnAPage />} />
+            <Route path='qna/write' element={<QnaWritePage />} />
+            <Route path='qnas/:qnaId/edit' element={<QnaEditPage />} />
+          </Route>          <Route path='community/posts/:postId' element={<CommunityDetailPage />} />
+          <Route path='community/qnas/:qnaId' element={<QnaDetailPage />} />
+          <Route path='users/:userId' element={<UserInfoPage />} />
+          <Route path='legal' element={<LegalPage />} />
+          <Route path='faq' element={<FAQPage />} />
+          <Route path='contact' element={<ContactPage />} />
+        </Route>
 
           <Route path='/auth' element={<AuthLayout />} errorElement={<ErrorMessageCard />}>
             <Route path="login" element={<LoginPage />} />

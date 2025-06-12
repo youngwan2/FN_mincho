@@ -14,7 +14,7 @@ export default function HerbRecommendPreview() {
                     transition={{ duration: 1 }}
                     className="text-center animate-fade-down">
                     <GiHerbsBundle className="mx-auto h-16 w-16 text-[#05D182]" />
-                    <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    <h2 className="mt-2 text-4xl font-extrabold text-gray-900">
                         약초 추천 서비스
                     </h2>
                     <p className="mt-4 max-w-2xl mx-auto text-2xl text-gray-500">

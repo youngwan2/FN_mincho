@@ -10,7 +10,12 @@ export const registerFetch = async (registerRequest: RegisterRequest) => {
 
     const body = {
         email: registerRequest.email,
-        password: registerRequest.password
+        password: registerRequest.password,
+        essentialInfoConsent: registerRequest.essentialInfoConsent,
+        optionalInfoConsent: registerRequest.optionalInfoConsent,
+        automaticInfoConsent: registerRequest.automaticInfoConsent,
+        marketingConsent: registerRequest.marketingConsent
+
     }
 
     try {

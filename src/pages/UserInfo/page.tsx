@@ -1,7 +1,9 @@
 import UserProfile from "./components/UserInfo";
+import useScrollTo from "@/hooks/useScrollTo";
 
 export default function UserInfoPage() {
 
+    useScrollTo();
 
 
     return (

@@ -9,8 +9,12 @@ type ValidateMessages = {
 export interface RegisterRequest {
     email: string
     password: string
-    passwordConfirm?: string,
+    passwordConfirm?: string
     messages?: ValidateMessages
+    essentialInfoConsent: boolean
+    optionalInfoConsent: boolean
+    automaticInfoConsent: boolean
+    marketingConsent: boolean
 }
 
 export type Email = {
