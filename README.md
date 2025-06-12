@@ -47,10 +47,13 @@
     ![image](https://github.com/user-attachments/assets/58331e6a-ba91-4d20-be74-c4ab8ee4561a)
 
 #### **커뮤니티 기능과 S3 Presigned 이미지 업로드**
-  - **기본적인 CRUD**: tiptap 기반으로 제작된 커뮤니티 게시판으로 백엔드(Spring Boot)로 부터 **accessToken** 기반으로 인증된 유저만 글을 작성할 수 있게 구현.
-  - **이미지 업로드 기능**: 객체 기반의 스토로지 서비스인 **AWS S3**의 기능 중 하나인 **presigned URL**(파일에 대한 임시 접근 권한을 활성화하는 보안 URL)을 적용하여, 업로드와 동시에 S3에 이미지를 업로드.
-    - 구현 이후 게시글이 삭제되거나 수정될 때 이미지가 제거 되면, S3 버킷에서도 변경내역이 반영되도록 동기화 처리.
-   ![post](https://github.com/user-attachments/assets/c03cc2bb-a8c3-46a6-ba78-7da91377002d)
+  - **커뮤니티(만남의장)**: tiptap 기반으로 제작된 커뮤니티 게시판
+    - **이미지 업로드 기능**: 객체 기반의 스토로지 서비스인 **AWS S3**의 기능 중 하나인 **presigned URL**(파일에 대한 임시 접근 권한을 활성화하는 보안 URL)을 적용하여, 업로드와 동시에 S3에 이미지를 업로드.
+    ![post](https://github.com/user-attachments/assets/c03cc2bb-a8c3-46a6-ba78-7da91377002d)
+<br></br>
+  - **커뮤니티(민초Q&A)**: tiptap 기반으로 제작된 커뮤니티 Q&A 게시판으로 질문 작성, 답변 작성, 채택, 질문 태깅, 시기별 필터링 등의 기본적인 전용 기능 제공
+    - 만남의장 게시판과는 달리 presigned URL 을 적용하지 않고, 프론트엔드에서는 createObjectURL 을 사용하여 미리보기를 구현하고, 실제 질문이나 답변 업로드 시 동기적으로 게시글 등록 -> 이미지 등록이 이루어지도록 구현됨
+    ![qna](https://github.com/user-attachments/assets/170663c3-80c5-4b61-acb0-9b2f972c7496)
     
     
 <br><br>
@@ -59,12 +62,12 @@
 #### **사용자 증상기반 약초 추천 기능**
   - 사용자가 입력한 증상이나 관심사를 바탕으로 적절한 약초 추천
     - 개화기, 증상, 사용부위 등의 정보가 임베딩 처리되어, 증상 기반뿐만 아니라 사용자의 다른 관심사를 기반으로도 약초를 추천받을 수 있도록 처리 됨.
-  - PostgreSQL의 PGVector를 통해 코사인 유사도 검색을 수행하고, RAG 기반으로 DB에 저장된 신뢰성 있는 약초 정보를 기반으로 정확한 정보를 사용자에게 제공토록 구현
-
-    ![ezgif-320a5956510b55](https://github.com/user-attachments/assets/bb1f0602-6ee1-4f4d-ac08-070246aed4bf)
+    - PostgreSQL의 PGVector를 통해 코사인 유사도 검색을 수행하고, 약초DB 기반으로 신뢰성과 정확성을 높인 정보 제공
+      ![ai](https://github.com/user-attachments/assets/ddec1248-14fd-4cac-aa00-a792fa133ca7)
 
 <br><br>
   - 백엔드 단에서 프롬프트 처리를 고도화하여 사용자의 증상에 가장 적합한 약초부터 우선순위를 부여하여 추천하도록 구현
+
     ![image](https://github.com/user-attachments/assets/01f59936-a80a-4160-b9f7-5f1062f74fc6)
 
 #### **사용자 증상 기반 약초 추천 클러스터링**
