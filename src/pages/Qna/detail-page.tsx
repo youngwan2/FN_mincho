@@ -144,7 +144,7 @@ export default function QnaDetailPage() {
 
                             {/* 태그 목록 */}
                             {qna.tags && qna.tags.length > 0 && (
-                                <div className="flex flex-wrap gap-2 mb-4">
+                                <div className="flex flex-wrap gap-2 mb-4 mt-4">
                                     {qna.tags.map((tag, index) => (
                                         <span
                                             key={index}

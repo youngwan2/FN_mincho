@@ -21,7 +21,7 @@ const ConsentCheckboxGroup: React.FC<ConsentCheckboxGroupProps> = ({
     onOpenModal,
 }) => {
     return (
-        <div className="mt-10 mb-6 bg-gray-50 rounded-lg p-6 border border-gray-100">
+        <div className="mt-10 mb-6 bg-gray-50 rounded-lg p-2 border border-gray-100 text-gray-700">
             <h3 className="text-2xl font-bold mb-4">개인정보 수집 및 이용 동의</h3>
             <div className="flex flex-col gap-3">
                 {/* 필수 정보 수집 동의 */}
@@ -36,13 +36,13 @@ const ConsentCheckboxGroup: React.FC<ConsentCheckboxGroupProps> = ({
                     />
                     <span className="font-semibold text-[#05D182]">[필수]</span>&nbsp;
                     <span
-                        className="underline cursor-pointer hover:text-[#05D182]"
+                        className=" cursor-pointer hover:text-[#05D182]"
                         onClick={e => { e.preventDefault(); onOpenModal('privacy-consent'); }}
                         tabIndex={0}
                         role="button"
                         aria-label="이용약관 보기"
                     >
-                        이메일, 비밀번호, 닉네임 등 필수 정보 수집 및 이용에 동의합니다.
+                        이메일, 비밀번호 등 필수 정보 수집 및 이용에 동의합니다.
                     </span>
                 </label>
                 {consentError && (
@@ -59,7 +59,7 @@ const ConsentCheckboxGroup: React.FC<ConsentCheckboxGroupProps> = ({
                     />
                     <span className="font-semibold">[선택]</span>&nbsp;
                     <span
-                        className="underline cursor-pointer hover:text-[#05D182]"
+                        className=" cursor-pointer hover:text-[#05D182]"
                         onClick={e => { e.preventDefault(); onOpenModal('privacy-consent'); }}
                         tabIndex={0}
                         role="button"
@@ -79,7 +79,7 @@ const ConsentCheckboxGroup: React.FC<ConsentCheckboxGroupProps> = ({
                     />
                     <span className="font-semibold">[선택]</span>&nbsp;
                     <span
-                        className="underline cursor-pointer hover:text-[#05D182]"
+                        className=" cursor-pointer hover:text-[#05D182]"
                         onClick={e => { e.preventDefault(); onOpenModal('privacy-consent'); }}
                         tabIndex={0}
                         role="button"
@@ -99,7 +99,7 @@ const ConsentCheckboxGroup: React.FC<ConsentCheckboxGroupProps> = ({
                     />
                     <span className="font-semibold">[선택]</span>&nbsp;
                     <span
-                        className="underline cursor-pointer hover:text-[#05D182]"
+                        className=" cursor-pointer hover:text-[#05D182]"
                         onClick={e => { e.preventDefault(); onOpenModal('marketing-consent'); }}
                         tabIndex={0}
                         role="button"

@@ -10,6 +10,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import 'react-loading-skeleton/dist/skeleton.css'
 import './index.css'
 import { routes } from './config/router';
+import { HelmetProvider } from 'react-helmet-async';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,15 +26,17 @@ function AppRoutes() {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <Suspense fallback={null
+    <HelmetProvider>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <Suspense fallback={null
 
-        }>
-          <AppRoutes />
-        </Suspense>
-      </QueryClientProvider>
-    </BrowserRouter>
+          }>
+            <AppRoutes />
+          </Suspense>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   </StrictMode>
 )
